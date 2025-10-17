@@ -4,7 +4,7 @@ class_name Pan
 
 	
 func addProgress(s:Enum.TaskType, delta:float) -> bool:
-	if(recipe == Enum.RecipeNames.CutSte):
+	if(recipe == Enum.RecipeNames.PanCutSte):
 		if(currentProgress.has(s)):
 			currentProgress[s] -= delta
 			if(currentProgress[s] <= 0):
@@ -14,15 +14,19 @@ func addProgress(s:Enum.TaskType, delta:float) -> bool:
 	return false
 
 func canEmpty()->bool:
-	return recipe == Enum.RecipeNames.CookCutSte
+	return recipe == Enum.RecipeNames.PanCookCutSte
 
 func store(i:Ingredient):
 	i.parent.objectInHand = null
 	if(recipe == emptyName):
-		recipe = i.recipe
-		remove_from_group(groupName)
-		i.queue_free()
-		UpdateAppearance()
+		recipe = Recipes.recipesPot(i.recipe)
+	else:
+		recipe = Recipes.recipesMix(recipe, i.recipe)
+		if(recipe == Enum.RecipeNames.PotCutTomCutTomCutTom):
+			remove_from_group(groupName)
+	i.queue_free()
+	UpdateAppearance()
+
 
 func mix(i:Ingredient): 
 	store(i)

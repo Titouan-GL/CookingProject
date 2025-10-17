@@ -5,7 +5,7 @@
 
 [node name="generator" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_rc4kf")
-recipeType = 14
+recipeType = 15
 storePoint = NodePath("Node3D")
 
 [node name="Node3D" type="Node3D" parent="."]

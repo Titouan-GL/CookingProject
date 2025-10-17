@@ -1,13 +1,13 @@
 [gd_scene load_steps=21 format=3 uid="uid://crmjnlgorvsy"]
 
 [ext_resource type="PackedScene" uid="uid://b67m5mnbrjcmo" path="res://scenes/agent.tscn" id="1_noarx"]
-[ext_resource type="PackedScene" uid="uid://dkskqpmoo36vm" path="res://scenes/IntCUT.tscn" id="2_pm7iv"]
+[ext_resource type="PackedScene" uid="uid://bb80rjlejrxap" path="res://scenes/IntCUT.tscn" id="2_pm7iv"]
 [ext_resource type="Script" uid="uid://dg83vouhqgm2u" path="res://scripts/TaskHierarchy.gd" id="3_a0tk4"]
-[ext_resource type="PackedScene" uid="uid://dfimlpnmuynno" path="res://scenes/IntCOOK.tscn" id="3_v6ncs"]
+[ext_resource type="PackedScene" uid="uid://cn2qe58h31hii" path="res://scenes/IntCOOK.tscn" id="3_v6ncs"]
 [ext_resource type="PackedScene" uid="uid://bl820p48kbd85" path="res://scenes/IntGENERATEtomato.tscn" id="4_pm7iv"]
-[ext_resource type="PackedScene" uid="uid://cqf2q04iycy0a" path="res://scenes/IntSTORE.tscn" id="5_v6ncs"]
+[ext_resource type="PackedScene" uid="uid://df4nudau2nmxb" path="res://scenes/IntSTORE.tscn" id="5_v6ncs"]
 [ext_resource type="PackedScene" uid="uid://dr1ea0arqcnag" path="res://scenes/Pot.tscn" id="6_i5arm"]
-[ext_resource type="PackedScene" uid="uid://ua5aml5hiri3" path="res://scenes/IntSERVE.tscn" id="8_rimyp"]
+[ext_resource type="PackedScene" uid="uid://tb2i6yfxk7nb" path="res://scenes/IntSERVE.tscn" id="8_rimyp"]
 [ext_resource type="PackedScene" uid="uid://l0m7ct2x4m62" path="res://scenes/IntGENERATEsteak.tscn" id="9_2l6mp"]
 [ext_resource type="PackedScene" uid="uid://81p0llkphiwe" path="res://scenes/Pan.tscn" id="9_v6ncs"]
 [ext_resource type="PackedScene" uid="uid://d0i43sn0urp0u" path="res://scenes/IntGENERATESalad.tscn" id="10_27nlg"]
@@ -140,6 +140,9 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -4.8
 [node name="Stove" parent="Environnement/NavigationRegion3D/Interactible" instance=ExtResource("3_v6ncs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.856659, 0.065362394, -1.4214823)
 
+[node name="Stove3" parent="Environnement/NavigationRegion3D/Interactible" instance=ExtResource("3_v6ncs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.902788, 0.065362394, -0.42705894)
+
 [node name="Stove2" parent="Environnement/NavigationRegion3D/Interactible" instance=ExtResource("3_v6ncs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.912907, 0.065362394, -2.4380057)
 
@@ -182,6 +185,9 @@ skeleton = NodePath("../../../..")
 [node name="Pot" parent="Environnement" instance=ExtResource("6_i5arm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.099593, -0.016765118, -0.82927996)
 
+[node name="Pot2" parent="Environnement" instance=ExtResource("6_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.030609, -0.016765118, 1.1354651)
+
 [node name="Hierarchy" type="Node3D" parent="."]
 script = ExtResource("3_a0tk4")
 
@@ -189,10 +195,13 @@ script = ExtResource("3_a0tk4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.501096, 1.000558, 3.2795)
 
 [node name="agent2" parent="." instance=ExtResource("1_noarx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5511446, 1.000558, -0.07054877)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.708343, 1.000558, 0.16749811)
 
 [node name="agent3" parent="." instance=ExtResource("1_noarx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.482617, 1.000558, -1.3756261)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.201253, 1.000558, 1.56638)
 
 [node name="Pan" parent="." instance=ExtResource("9_v6ncs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.927086, 0.7278156, -4.05013)
+
+[node name="Pan2" parent="." instance=ExtResource("9_v6ncs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.251287, 0.7278156, -2.6832304)
