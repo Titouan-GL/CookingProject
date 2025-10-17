@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dr1ea0arqcnag"]
+
+[ext_resource type="Script" uid="uid://cgmr5wih6wj4d" path="res://scripts/Pot.gd" id="1_a4utd"]
+[ext_resource type="PackedScene" uid="uid://bis3ebm0h626q" path="res://assets/blender/Cooking_pan.blend" id="2_gpnl5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_noarx"]
+rough = true
+absorbent = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
+size = Vector3(1, 0.8086548, 1)
+
+[node name="Pot" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_noarx")
+script = ExtResource("1_a4utd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0018615723, 0.40528482, 0)
+shape = SubResource("BoxShape3D_noarx")
+
+[node name="Cooking_pan" parent="." instance=ExtResource("2_gpnl5")]

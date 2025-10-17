@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://df4nudau2nmxb"]
+
+[ext_resource type="Script" uid="uid://cd7mawawvwplk" path="res://scripts/IntStore.gd" id="1_0ohqm"]
+[ext_resource type="PackedScene" uid="uid://bikr1fnup2pog" path="res://assets/blender/StoreTable.blend" id="2_bcjnr"]
+
+[node name="counter" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
+script = ExtResource("1_0ohqm")
+storePoint = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0028037, 0)
+
+[node name="StoreTable" parent="." instance=ExtResource("2_bcjnr")]

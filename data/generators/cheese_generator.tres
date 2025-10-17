@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Generator" load_steps=3 format=3 uid="uid://ddjpjjrl3m4k0"]
+
+[ext_resource type="Resource" uid="uid://d23tedgj1gui" path="res://data/items/salad.tres" id="1_ajkys"]
+[ext_resource type="Script" uid="uid://w83faej1kh8g" path="res://scripts/generator.gd" id="2_w2wvr"]
+
+[resource]
+script = ExtResource("2_w2wvr")
+output = ExtResource("1_ajkys")
+metadata/_custom_type_script = "uid://w83faej1kh8g"

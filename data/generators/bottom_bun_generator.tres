@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Generator" load_steps=3 format=3 uid="uid://67cgsayn852n"]
+
+[ext_resource type="Resource" uid="uid://jhwm4r30qalv" path="res://data/items/top_bun.tres" id="1_y8fuk"]
+[ext_resource type="Script" uid="uid://w83faej1kh8g" path="res://scripts/generator.gd" id="2_ls4gq"]
+
+[resource]
+script = ExtResource("2_ls4gq")
+output = ExtResource("1_y8fuk")
+metadata/_custom_type_script = "uid://w83faej1kh8g"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=7 format=3 uid="uid://hc7cl4h24htu"]
+
+[ext_resource type="Script" uid="uid://d4bn1n2be8b0u" path="res://scripts/item.gd" id="1_088po"]
+[ext_resource type="Resource" uid="uid://b7fnp74epyuvl" path="res://data/items/steak_n_fries.tres" id="1_fiqk2"]
+[ext_resource type="Script" uid="uid://b2s0060leuoh8" path="res://scripts/recipe.gd" id="2_fmmbi"]
+[ext_resource type="Resource" uid="uid://poynwhjhdhah" path="res://data/items/cooked_steak.tres" id="3_s05io"]
+[ext_resource type="Resource" uid="uid://db7lamj5sj3kn" path="res://data/items/fries.tres" id="4_skwbx"]
+[ext_resource type="Resource" uid="uid://cqopxm6k70vb0" path="res://data/stands/assemble_table.tres" id="6_flvs4"]
+
+[resource]
+script = ExtResource("2_fmmbi")
+name = ExtResource("1_fiqk2")
+recipeNeeded = Array[ExtResource("1_088po")]([ExtResource("3_s05io"), ExtResource("4_skwbx")])
+standNeeded = ExtResource("6_flvs4")
+metadata/_custom_type_script = "uid://b2s0060leuoh8"

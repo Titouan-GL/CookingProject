@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Stand" load_steps=2 format=3 uid="uid://nck3audjdpqf"]
+
+[ext_resource type="Script" uid="uid://bxw0x3ys5w261" path="res://scripts/stand.gd" id="1_bwkth"]
+
+[resource]
+script = ExtResource("1_bwkth")
+movable = true
+metadata/_custom_type_script = "uid://bxw0x3ys5w261"

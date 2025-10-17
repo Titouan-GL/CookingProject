@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=6 format=3 uid="uid://n50sdoe15gc1"]
+
+[ext_resource type="Script" uid="uid://d4bn1n2be8b0u" path="res://scripts/item.gd" id="1_3yqrh"]
+[ext_resource type="Resource" uid="uid://db7lamj5sj3kn" path="res://data/items/fries.tres" id="1_vyrda"]
+[ext_resource type="Script" uid="uid://b2s0060leuoh8" path="res://scripts/recipe.gd" id="2_bic1j"]
+[ext_resource type="Resource" uid="uid://y0u3ahu80dwr" path="res://data/items/cut_potato.tres" id="3_4ysbq"]
+[ext_resource type="Resource" uid="uid://dc5pwejwshops" path="res://data/stands/deep_fryer.tres" id="5_mcv3n"]
+
+[resource]
+script = ExtResource("2_bic1j")
+name = ExtResource("1_vyrda")
+recipeNeeded = Array[ExtResource("1_3yqrh")]([ExtResource("3_4ysbq")])
+standNeeded = ExtResource("5_mcv3n")
+metadata/_custom_type_script = "uid://b2s0060leuoh8"

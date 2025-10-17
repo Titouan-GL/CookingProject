@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=6 format=3 uid="uid://de472r02kv7qy"]
+
+[ext_resource type="Resource" uid="uid://cq2v8nkcj8wtr" path="res://data/items/cooked_bottom_bun.tres" id="1_e3m0k"]
+[ext_resource type="Script" uid="uid://d4bn1n2be8b0u" path="res://scripts/item.gd" id="2_01jit"]
+[ext_resource type="Resource" uid="uid://chx0spva8euhx" path="res://data/items/bottom_bun.tres" id="3_01jit"]
+[ext_resource type="Script" uid="uid://b2s0060leuoh8" path="res://scripts/recipe.gd" id="4_ppceh"]
+[ext_resource type="Resource" uid="uid://2cxdrdrta1ui" path="res://data/stands/stove.tres" id="5_nw43q"]
+
+[resource]
+script = ExtResource("4_ppceh")
+name = ExtResource("1_e3m0k")
+recipeNeeded = Array[ExtResource("2_01jit")]([ExtResource("3_01jit")])
+standNeeded = ExtResource("5_nw43q")
+metadata/_custom_type_script = "uid://b2s0060leuoh8"

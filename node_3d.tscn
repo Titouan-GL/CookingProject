@@ -1,0 +1,150 @@
+[gd_scene load_steps=18 format=3 uid="uid://de5eyiad3ai7j"]
+
+[ext_resource type="Script" uid="uid://dtnxd4krtryr3" path="res://player.gd" id="1_a202f"]
+[ext_resource type="Script" uid="uid://dur60hwhqrq1l" path="res://scripts/gameManager.gd" id="1_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://dkyhgvqc3qgun" path="res://ingredient.tscn" id="2_a0tk4"]
+[ext_resource type="Script" uid="uid://b2o1lof1pnjrj" path="res://scripts/GUIController.gd" id="3_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://dlkmx4eeiu86o" path="res://order.tscn" id="5_jka67"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4xowi"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_a202f"]
+sky_material = SubResource("ProceduralSkyMaterial_4xowi")
+
+[sub_resource type="Environment" id="Environment_noarx"]
+background_mode = 2
+sky = SubResource("Sky_a202f")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a202f"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noarx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_a202f"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_a202f"]
+vertices = PackedVector3Array(-9.2459545, 0.45224994, -4.5006695, -6.9959545, 0.45224994, -4.5006695, -6.4959545, 0.45224994, -6.0006695, -9.2459545, 0.45224994, -9.2506695, 6.5040455, 0.45224994, -6.0006695, 7.0040455, 0.45224994, -4.5006695, 9.2540455, 0.45224994, -4.5006695, 9.2540455, 0.45224994, -9.2506695, 6.5040455, 0.45224994, -3.2506695, 9.2540455, 0.45224994, 9.2493305, -6.4959545, 0.45224994, -3.2506695, -9.2459545, 0.45224994, 9.2493305)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(2, 3, 4), PackedInt32Array(4, 3, 7), PackedInt32Array(5, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(1, 10, 0), PackedInt32Array(0, 10, 11), PackedInt32Array(8, 9, 10), PackedInt32Array(10, 9, 11)]
+agent_radius = 0.7
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a0tk4"]
+size = Vector2(20, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4xowi"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_noarx"]
+size = Vector3(12.205, 1.455, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a0tk4"]
+size = Vector3(12.212952, 1.2055664, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a0tk4"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_r3fl7")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_noarx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="agent" type="CharacterBody3D" parent="." node_paths=PackedStringArray("nav_agent", "grabPoint", "ingredient", "cuttingtable")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0810473, 0)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_a202f")
+nav_agent = NodePath("feet/NavigationAgent3D")
+grabPoint = NodePath("grabPoint")
+ingredient = NodePath("../ingredient")
+cuttingtable = NodePath("../Environnement/NavigationRegion3D/Interactible/cuttingtable")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="agent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9955079, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_a202f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="agent"]
+shape = SubResource("CapsuleShape3D_noarx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="agent"]
+transform = Transform3D(0.57043463, 0, 0, 0, 0.4053194, 0, 0, 0, 0.47510722, 0.011181414, 0.35344958, 0.40844452)
+mesh = SubResource("BoxMesh_a202f")
+
+[node name="grabPoint" type="Node3D" parent="agent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08992624, 1.037932)
+
+[node name="feet" type="Node3D" parent="agent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0173227, 0)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="agent/feet"]
+path_desired_distance = 1.3
+target_desired_distance = 1.3
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.47734284, 0.8787172, 0, -0.8787172, 0.47734284, 0, 7.7349076, 5.1763563)
+
+[node name="ingredient" parent="." instance=ExtResource("2_a0tk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0467203, -2.6026392)
+
+[node name="ingredient2" parent="." instance=ExtResource("2_a0tk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1435716, 1.0467203, 3.9609585)
+
+[node name="ingredient3" parent="." instance=ExtResource("2_a0tk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.449749, 1.0467207, 1.9467545)
+
+[node name="Environnement" type="Node3D" parent="."]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Environnement"]
+navigation_mesh = SubResource("NavigationMesh_a202f")
+
+[node name="Decor" type="Node3D" parent="Environnement/NavigationRegion3D"]
+
+[node name="Ground" type="MeshInstance3D" parent="Environnement/NavigationRegion3D/Decor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0040456057, 0, -0.000669539)
+mesh = SubResource("PlaneMesh_a0tk4")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environnement/NavigationRegion3D/Decor/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0040456057, 0, 0.000669539)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/NavigationRegion3D/Decor/Ground/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0040456057, 0, -0.000669539)
+shape = SubResource("ConcavePolygonShape3D_4xowi")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Environnement/NavigationRegion3D/Decor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42974997, -4.53938)
+mesh = SubResource("BoxMesh_noarx")
+skeleton = NodePath("../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environnement/NavigationRegion3D/Decor/MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/NavigationRegion3D/Decor/MeshInstance3D3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0018615723, 0.1027832, 0)
+shape = SubResource("BoxShape3D_a0tk4")
+
+[node name="Interactible" type="Node3D" parent="Environnement/NavigationRegion3D"]
+
+[node name="cuttingtable" type="MeshInstance3D" parent="Environnement/NavigationRegion3D/Interactible"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3653636, 0.4291575, 5.654046)
+mesh = SubResource("BoxMesh_a0tk4")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_a0tk4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 5
+
+[node name="Order" parent="Control" instance=ExtResource("5_jka67")]
+layout_mode = 1

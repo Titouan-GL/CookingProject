@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://b67m5mnbrjcmo"]
+
+[ext_resource type="Script" uid="uid://dtnxd4krtryr3" path="res://scripts/agent.gd" id="1_b2pv0"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a202f"]
+radius = 0.4
+height = 1.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noarx"]
+radius = 0.3876953
+height = 1.5112305
+
+[sub_resource type="BoxMesh" id="BoxMesh_a202f"]
+
+[node name="agent" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "storePoint")]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_b2pv0")
+nav_agent = NodePath("feet/NavigationAgent3D")
+storePoint = NodePath("grabPoint")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9955079, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_a202f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_noarx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.38745958, 0, 0, 0, 0.10604009, 0, 0, 0, 0.30934826, 0.011181414, 0.35344958, 0.3462031)
+mesh = SubResource("BoxMesh_a202f")
+
+[node name="grabPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.081581414, 0.77023816)
+
+[node name="feet" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0173227, 0)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="feet"]
+path_desired_distance = 1.3
+target_desired_distance = 2.0
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, -0.012048334, 0)
+shape = SubResource("CapsuleShape3D_noarx")

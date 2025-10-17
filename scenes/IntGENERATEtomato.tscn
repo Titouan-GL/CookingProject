@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl820p48kbd85"]
+
+[ext_resource type="Script" uid="uid://cj6wye16kflcp" path="res://scripts/IntGenerator.gd" id="1_lhwrv"]
+[ext_resource type="PackedScene" uid="uid://cqcdn4qv0o5i0" path="res://assets/blender/TomatoGenerator.blend" id="2_50c6b"]
+
+[node name="generator" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
+script = ExtResource("1_lhwrv")
+recipeType = 3
+storePoint = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7103729, 0)
+
+[node name="TomatoGenerator" parent="." instance=ExtResource("2_50c6b")]
