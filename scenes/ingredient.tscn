@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b61tgd4qbr8h3"]
+[gd_scene load_steps=6 format=3 uid="uid://b61tgd4qbr8h3"]
 
 [ext_resource type="Script" uid="uid://cqxbq00n0ntk6" path="res://scripts/ingredient.gd" id="1_11e83"]
+[ext_resource type="PackedScene" uid="uid://cytd1w5m4iwdk" path="res://scenes/UI/ProgressBar.tscn" id="2_ssx0k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_noarx"]
 rough = true
@@ -8,13 +9,20 @@ absorbent = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 
-[node name="Ingredient" type="RigidBody3D" node_paths=PackedStringArray("mesh")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_de0p5"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Ingredient" type="RigidBody3D" node_paths=PackedStringArray("progressBar")]
 collision_layer = 4
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_noarx")
 script = ExtResource("1_11e83")
-mesh = NodePath("")
+progressBar = NodePath("ProgressBar/SubViewport/Panel/ProgressBar")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_noarx")
+
+[node name="ProgressBar" parent="." instance=ExtResource("2_ssx0k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1082611, 0)
+viewPort = SubResource("ViewportTexture_de0p5")

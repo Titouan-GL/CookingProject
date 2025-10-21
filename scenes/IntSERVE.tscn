@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://tb2i6yfxk7nb"]
 
 [ext_resource type="Script" uid="uid://dwyxvdi05cpek" path="res://scripts/IntServe.gd" id="1_gg8kl"]
-[ext_resource type="PackedScene" uid="uid://da2cfkrbslk1i" path="res://assets/blender/ServePoint.blend" id="2_vad65"]
+[ext_resource type="PackedScene" uid="uid://da2cfkrbslk1i" path="res://assets/blender/Interactibles/ServePoint.blend" id="2_vad65"]
 
 [node name="ServePoint" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_gg8kl")

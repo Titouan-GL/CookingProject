@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://cytd1w5m4iwdk"]
+
+[ext_resource type="Script" uid="uid://cxsiyxf5asncl" path="res://scripts/progress_bar.gd" id="1_xbb2e"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xbb2e"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7lutx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lutx"]
+bg_color = Color(0.23529412, 0.23529412, 0.23529412, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbb2e"]
+bg_color = Color(0.85337317, 0.2534156, 1.92523e-07, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+anti_aliasing_size = 4.195
+
+[node name="ProgressBar" type="Node3D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_xbb2e")
+viewPort = SubResource("ViewportTexture_xbb2e")
+sprite = NodePath("Sprite3D")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(100, 20)
+
+[node name="Panel" type="Panel" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7lutx")
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport/Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.99763566, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_7lutx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xbb2e")
+max_value = 1.0
+step = 0.001
+show_percentage = false
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1

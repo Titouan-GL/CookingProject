@@ -58,6 +58,8 @@ func setAgentTarget(agent:Agent, task:Task, destination:Node3D, order:Enum.Order
 	if(agent and task and destination):
 		task.start(destination, agent)
 		agent.order = order
+		agent.executeTask()
+		#print(agent.name + " " + Enum.TaskType.keys()[task.type])
 		return true
 	return false
 
@@ -133,14 +135,19 @@ func validOperation(obj:Movable, recipe:Enum.RecipeNames):
 				return true
 	return false
 
-func TestRecipeDoable(recipe:Enum.RecipeNames, calledByMixed:bool = false, foundIngredients:Array[Movable] = []): #return missing ingredients
-	var ingleft = Recipes.getNeeded(recipe).size()
-	var neededIngredient:Array[Movable];
-
+func recipeExists(recipe:Enum.RecipeNames):
 	for m in MovableList:
 		if(m.recipe == recipe):
 			MovableList.erase(m)
 			return m
+
+func TestRecipeDoable(recipe:Enum.RecipeNames, calledByMixed:bool = false, foundIngredients:Array[Movable] = []): #return missing ingredients
+	var ingleft = Recipes.getNeeded(recipe).size()
+	var neededIngredient:Array[Movable];
+
+	var exists = recipeExists(recipe)
+	if(exists) : return exists
+	
 	for i in Recipes.getNeeded(recipe):
 		if i:
 			var ing = TestRecipeDoable(i, Recipes.getTaskType(recipe) == Enum.TaskType.MIX, foundIngredients)
@@ -175,22 +182,27 @@ func initiateProcess():
 		if not i.storedObject:
 			i.occupied = false
 
+func recipeServed(recipe:Enum.RecipeNames):
+		recipeToPrepare.erase(recipe)
+
 func _process(_delta):
 	initiateProcess()
-	if recipeToPrepare.size() < 2:
-		recipeToPrepare.append([Enum.RecipeNames.TomatoSoup].pick_random())
+	if recipeToPrepare.size() < 3:
+		recipeToPrepare.append([Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.Burger].pick_random())
 	for r in recipeToPrepare:
-		var res = TestRecipeDoable(r)
-		if res and res.recipe == r:
-			createTask(Enum.TaskType.EMPTY, [res])
-			recipeToPrepare.erase(res.recipe)
+		var recipeFinished = recipeExists(r)
+		if(recipeFinished):
+			createTask(Enum.TaskType.EMPTY, [recipeFinished])
+		else:
+			TestRecipeDoable(r)
 
 
 	for a in AgentList:
-		if a.task == null and a.objectInHand:
-			dropToNearestCounter(a)
-		elif a.task and a.objectInHand and a.objectInHand != a.task.object:
-			dropToNearestCounter(a)
+		if a.objectInHand:
+			if not a.task:
+				dropToNearestCounter(a)
+			elif a.task and a.objectInHand != a.task.object:
+				dropToNearestCounter(a)
 
 
 func _enter_tree():

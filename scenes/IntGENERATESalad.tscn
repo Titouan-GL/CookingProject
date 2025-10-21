@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d0i43sn0urp0u"]
 
 [ext_resource type="Script" uid="uid://cj6wye16kflcp" path="res://scripts/IntGenerator.gd" id="1_i42dv"]
-[ext_resource type="PackedScene" uid="uid://42cwobm5wgfg" path="res://assets/blender/SaladGenerator.blend" id="2_i42dv"]
+[ext_resource type="PackedScene" uid="uid://42cwobm5wgfg" path="res://assets/blender/Interactibles/SaladGenerator.blend" id="2_i42dv"]
 
 [node name="generator" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_i42dv")

@@ -1,16 +1,76 @@
-[gd_scene load_steps=5 format=3 uid="uid://b67m5mnbrjcmo"]
+[gd_scene load_steps=20 format=3 uid="uid://b67m5mnbrjcmo"]
 
 [ext_resource type="Script" uid="uid://dtnxd4krtryr3" path="res://scripts/agent.gd" id="1_b2pv0"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_a202f"]
-radius = 0.4
-height = 1.6
+[ext_resource type="PackedScene" uid="uid://bjpcpftxbnhw3" path="res://assets/blender/Animated/Skeleton.blend" id="2_umeaf"]
+[ext_resource type="Script" uid="uid://dls0esx18alxy" path="res://scripts/AgentAnimation.gd" id="3_yc63n"]
+[ext_resource type="PackedScene" uid="uid://1iydcxqvs7te" path="res://assets/blender/Div/Knife.blend" id="4_dg1j7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noarx"]
 radius = 0.3876953
 height = 1.5112305
 
-[sub_resource type="BoxMesh" id="BoxMesh_a202f"]
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_nkfwj"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lug0u"]
+animation = &"Running"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dg1j7"]
+animation = &"RunningWithFood"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qeyy3"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nkfwj"]
+advance_mode = 2
+advance_expression = "objectInHand != null"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iuhnp"]
+advance_mode = 2
+advance_expression = "objectInHand == null"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_q3gef"]
+states/Running/node = SubResource("AnimationNodeAnimation_lug0u")
+states/Running/position = Vector2(564, 46)
+states/RunningWithFood/node = SubResource("AnimationNodeAnimation_dg1j7")
+states/RunningWithFood/position = Vector2(584, 126)
+states/Start/position = Vector2(157, 83)
+transitions = ["Start", "Running", SubResource("AnimationNodeStateMachineTransition_qeyy3"), "Running", "RunningWithFood", SubResource("AnimationNodeStateMachineTransition_nkfwj"), "RunningWithFood", "Running", SubResource("AnimationNodeStateMachineTransition_iuhnp")]
+graph_offset = Vector2(-47, 18)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_52ahs"]
+animation = &"Cut"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y08pw"]
+animation = &"PureIdle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q3gef"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f14ir"]
+advance_mode = 2
+advance_expression = "isCutting"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tduqk"]
+advance_mode = 2
+advance_expression = "not isCutting"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tduqk"]
+states/Cut/node = SubResource("AnimationNodeAnimation_52ahs")
+states/Cut/position = Vector2(660, 152)
+states/PureIdle/node = SubResource("AnimationNodeAnimation_y08pw")
+states/PureIdle/position = Vector2(628, 49)
+states/Start/position = Vector2(179, 85)
+transitions = ["Start", "PureIdle", SubResource("AnimationNodeStateMachineTransition_q3gef"), "PureIdle", "Cut", SubResource("AnimationNodeStateMachineTransition_f14ir"), "Cut", "PureIdle", SubResource("AnimationNodeStateMachineTransition_tduqk")]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nkfwj"]
+graph_offset = Vector2(-671.70966, 47.10446)
+nodes/StaticStateMachine/node = SubResource("AnimationNodeStateMachine_tduqk")
+nodes/StaticStateMachine/position = Vector2(-540, -40)
+nodes/RunningStateMachine/node = SubResource("AnimationNodeStateMachine_q3gef")
+nodes/RunningStateMachine/position = Vector2(-580, 180)
+nodes/Running/node = SubResource("AnimationNodeBlend2_nkfwj")
+nodes/Running/position = Vector2(-120, 80)
+node_connections = [&"output", 0, &"Running", &"Running", 0, &"StaticStateMachine", &"Running", 1, &"RunningStateMachine"]
 
 [node name="agent" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "storePoint")]
 collision_layer = 2
@@ -19,22 +79,14 @@ script = ExtResource("1_b2pv0")
 nav_agent = NodePath("feet/NavigationAgent3D")
 storePoint = NodePath("grabPoint")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9955079, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_a202f")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_noarx")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.38745958, 0, 0, 0, 0.10604009, 0, 0, 0, 0.30934826, 0.011181414, 0.35344958, 0.3462031)
-mesh = SubResource("BoxMesh_a202f")
-
 [node name="grabPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.081581414, 0.77023816)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.704)
 
 [node name="feet" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0173227, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="feet"]
 path_desired_distance = 1.3
@@ -43,5 +95,29 @@ target_desired_distance = 2.0
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, -0.012048334, 0)
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, -0.030419052, 0)
 shape = SubResource("CapsuleShape3D_noarx")
+
+[node name="Skeleton" parent="." node_paths=PackedStringArray("agent", "animationTree", "knife") instance=ExtResource("2_umeaf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.74930227, 0)
+script = ExtResource("3_yc63n")
+agent = NodePath("..")
+animationTree = NodePath("../AnimationTree")
+knife = NodePath("Armature/Skeleton3D/RightHandAttachment/Knife2")
+
+[node name="RightHandAttachment" type="BoneAttachment3D" parent="Skeleton/Armature/Skeleton3D" index="1"]
+transform = Transform3D(-0.9998348, -0.018178578, 2.2991335e-07, 0.018178578, -0.9998346, -7.400457e-08, 2.3122047e-07, -6.981279e-08, 0.99999994, -0.35051513, 0.4259155, -0.038830347)
+bone_name = "Hand.R"
+bone_idx = 6
+
+[node name="Knife2" parent="Skeleton/Armature/Skeleton3D/RightHandAttachment" instance=ExtResource("4_dg1j7")]
+transform = Transform3D(-0.02236478, -0.99726385, -0.07048476, -0.9921898, 0.013485901, 0.124014825, -0.12272516, 0.0727076, -0.9897748, -0.052975416, 0.096066475, -0.014490679)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Skeleton")
+tree_root = SubResource("AnimationNodeBlendTree_nkfwj")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../Skeleton/AnimationPlayer")
+parameters/Running/blend_amount = 1.0
+
+[editable path="Skeleton"]

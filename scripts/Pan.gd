@@ -1,13 +1,13 @@
 extends MovableCooker
 class_name Pan
-@export var mesh:MeshInstance3D
 
 	
 func addProgress(s:Enum.TaskType, delta:float) -> bool:
 	if(recipe == Enum.RecipeNames.PanCutSte):
-		if(currentProgress.has(s)):
-			currentProgress[s] -= delta
-			if(currentProgress[s] <= 0):
+		if(progress.has(s)):
+			progress[s] -= delta
+			progressBar.value = 1-(progress[s]/progressMaxValues[s])
+			if(progress[s] <= 0):
 				if(s == Enum.TaskType.COOK):
 					cook()
 				return true
@@ -34,5 +34,5 @@ func mix(i:Ingredient):
 func _enter_tree():
 	groupName = "PanEMPTY"
 	emptyName = Enum.RecipeNames.EmptyPan
-	progressMaxValues = {Enum.TaskType.COOK:1}
+	progressMaxValues = {Enum.TaskType.COOK:3}
 	super._enter_tree()

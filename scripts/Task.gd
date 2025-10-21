@@ -64,7 +64,6 @@ func complete(n:Node3D):
 		n.occupied = true
 		nextTask.previousTaskComplete(self, n)
 		
-	hierarchy.TaskList.erase(self)
 	#if(destination): print("task complete : " + Enum.TaskType.keys()[type] + " to " + destination.name + " by " + agent.name)
 	#else: print("task complete : " + Enum.TaskType.keys()[type] + " by " + agent.name)
 

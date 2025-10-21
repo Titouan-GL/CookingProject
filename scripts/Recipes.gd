@@ -1,22 +1,22 @@
 class_name Recipes
 
 const meshes:Dictionary = {
-	Enum.RecipeNames.Tom : preload("res://assets/blender/Tomato.blend"),
-	Enum.RecipeNames.CutTom : preload("res://assets/blender/CutTomato.blend"),
-	Enum.RecipeNames.PotCutTom : preload("res://assets/blender/TomSoup1.blend"),
-	Enum.RecipeNames.PotCutTomCutTom : preload("res://assets/blender/TomSoup2.blend"),
-	Enum.RecipeNames.PotCutTomCutTomCutTom : preload("res://assets/blender/TomSoup3.blend"),
-	Enum.RecipeNames.TomatoSoup : preload("res://assets/blender/TomSoup.blend"),
-	Enum.RecipeNames.Ste: preload("res://assets/blender/Raw_steack.blend"), 
-	Enum.RecipeNames.CutSte: preload("res://assets/blender/CutSteak.blend"), 
-	Enum.RecipeNames.PanCutSte: preload("res://assets/blender/CutSteak.blend"), 
-	Enum.RecipeNames.PanCookCutSte: preload("res://assets/blender/CookCutSteak.blend"), 
-	Enum.RecipeNames.Sal: preload("res://assets/blender/Salad.blend"), 
-	Enum.RecipeNames.CutSal: preload("res://assets/blender/CutSalad.blend"), 
-	Enum.RecipeNames.Bur: preload("res://assets/blender/BurgerBread.blend"), 
-	Enum.RecipeNames.BurSal: preload("res://assets/blender/BurgSal.blend"), 
-	Enum.RecipeNames.BurSte: preload("res://assets/blender/BurgSte.blend"), 
-	Enum.RecipeNames.Burger: preload("res://assets/blender/BurgSalSte.blend")
+	Enum.RecipeNames.Tom : preload("res://assets/blender/Recipes/Tomato.blend"),
+	Enum.RecipeNames.CutTom : preload("res://assets/blender/Recipes/CutTomato.blend"),
+	Enum.RecipeNames.PotCutTom : preload("res://assets/blender/Recipes/TomSoup1.blend"),
+	Enum.RecipeNames.PotCutTomCutTom : preload("res://assets/blender/Recipes/TomSoup2.blend"),
+	Enum.RecipeNames.PotCutTomCutTomCutTom : preload("res://assets/blender/Recipes/TomSoup3.blend"),
+	Enum.RecipeNames.TomatoSoup : preload("res://assets/blender/Recipes/TomSoup.blend"),
+	Enum.RecipeNames.Ste: preload("res://assets/blender/Recipes/Raw_steack.blend"), 
+	Enum.RecipeNames.CutSte: preload("res://assets/blender/Recipes/CutSteak.blend"), 
+	Enum.RecipeNames.PanCutSte: preload("res://assets/blender/Recipes/CutSteak.blend"), 
+	Enum.RecipeNames.PanCookCutSte: preload("res://assets/blender/Recipes/CookCutSteak.blend"), 
+	Enum.RecipeNames.Sal: preload("res://assets/blender/Recipes/Salad.blend"), 
+	Enum.RecipeNames.CutSal: preload("res://assets/blender/Recipes/CutSalad.blend"), 
+	Enum.RecipeNames.Bur: preload("res://assets/blender/Recipes/BurgerBread.blend"), 
+	Enum.RecipeNames.BurSal: preload("res://assets/blender/Recipes/BurgSal.blend"), 
+	Enum.RecipeNames.BurSte: preload("res://assets/blender/Recipes/BurgSte.blend"), 
+	Enum.RecipeNames.Burger: preload("res://assets/blender/Recipes/BurgSalSte.blend")
 }
 
 const recipes:Dictionary[Enum.RecipeNames, Array] = { #array where 0 is the tasktype and 1 is an array of recipes

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bb80rjlejrxap"]
 
 [ext_resource type="Script" uid="uid://kdkf7dr12rdv" path="res://scripts/IntCutter.gd" id="1_pwcq3"]
-[ext_resource type="PackedScene" uid="uid://d07r3x3nsjtot" path="res://assets/blender/CuttingTable.blend" id="2_lwlp7"]
+[ext_resource type="PackedScene" uid="uid://d07r3x3nsjtot" path="res://assets/blender/Interactibles/CuttingTable.blend" id="2_lwlp7"]
 
 [node name="cuttingtable" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_pwcq3")

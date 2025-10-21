@@ -5,9 +5,10 @@ class_name Pot
 	
 func addProgress(s:Enum.TaskType, delta:float) -> bool:
 	if(recipe == Enum.RecipeNames.PotCutTomCutTomCutTom):
-		if(currentProgress.has(s)):
-			currentProgress[s] -= delta
-			if(currentProgress[s] <= 0):
+		if(progress.has(s)):
+			progressBar.value = 1-(progress[s]/progressMaxValues[s])
+			progress[s] -= delta
+			if(progress[s] <= 0):
 				if(s == Enum.TaskType.COOK):
 					cook()
 				return true
@@ -33,5 +34,5 @@ func mix(i:Ingredient):
 func _enter_tree():
 	groupName = "PotEMPTY"
 	emptyName = Enum.RecipeNames.EmptyPot
-	progressMaxValues = {Enum.TaskType.COOK:1}
+	progressMaxValues = {Enum.TaskType.COOK:3}
 	super._enter_tree()

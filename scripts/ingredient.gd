@@ -2,7 +2,7 @@ extends Movable
 class_name Ingredient
 @export var mesh:MeshInstance3D
 
-var progress = {Enum.TaskType.CUT:1}
+
 
 
 func UpdateRecipe(newRecipe:Enum.RecipeNames):
@@ -11,10 +11,11 @@ func UpdateRecipe(newRecipe:Enum.RecipeNames):
 	add_to_group(Enum.RecipeNames.keys()[recipe])
 	UpdateAppearance()
 
-	
+
 func addProgress(s:Enum.TaskType, delta:float) -> bool:
 	if(progress.has(s)):
 		progress[s] -= delta
+		progressBar.value = 1-(progress[s]/progressMaxValues[s])
 		if(progress[s] <= 0):
 			if(s == Enum.TaskType.CUT):
 				cut()
@@ -35,6 +36,9 @@ func mixRecipe(ingRecipe:Enum.RecipeNames):
 
 func _enter_tree():
 	super._enter_tree()
+	progressMaxValues = {Enum.TaskType.CUT:3}
+	progress = progressMaxValues.duplicate()
+	prevProgress = progress.duplicate()
 	add_to_group(Enum.RecipeNames.keys()[recipe])
 	UpdateAppearance()
 

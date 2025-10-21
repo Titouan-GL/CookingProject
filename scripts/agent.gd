@@ -2,7 +2,7 @@ extends CharacterBody3D
 class_name Agent
 @export var nav_agent: NavigationAgent3D
 @export var storePoint: Node3D  
-const SPEED = 6
+const SPEED = 5
 var objectInHand:Movable
 var order: Enum.Order
 var hierarchy:Hierarchy
@@ -10,6 +10,7 @@ var task:Task
 var addedVelocity:Vector3 = Vector3.ZERO
 var friction:float = 40
 var bumpStrength:float = 7
+var isCutting:bool = false #used for animation
 
 func pickUp(obj:Movable):
 	if(objectInHand):
@@ -48,14 +49,10 @@ func executeTask():
 							elif(task.object is MovableCooker):
 								task.destination.mixRecipe(task.object.empty())
 								task.complete(task.destination)
-			elif objectInHand and objectInHand != task.object:
-				hierarchy.dropToNearestCounter(self)
-			else:
+			elif task.object:
 				nav_agent.set_target_position(task.object.global_position)
 				if(nav_agent.is_navigation_finished()):
 					pickUp(task.object)
-	elif(objectInHand):
-		hierarchy.dropToNearestCounter(self)
 
 func dropObject():
 	objectInHand.dropped()
@@ -97,6 +94,6 @@ func _ready():
 	
 func _enter_tree():
 	add_to_group("freeAgent")
-
-func _process(_delta):
-	executeTask()
+#
+#func _process(_delta):
+	#executeTask()
