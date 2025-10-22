@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://l0m7ct2x4m62"]
+[gd_scene load_steps=4 format=3 uid="uid://l0m7ct2x4m62"]
 
 [ext_resource type="Script" uid="uid://cj6wye16kflcp" path="res://scripts/IntGenerator.gd" id="1_htlyb"]
 [ext_resource type="PackedScene" uid="uid://baaqcaoyk8ykb" path="res://assets/blender/Interactibles/SteakGenerator.blend" id="2_htlyb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_htlyb"]
 
 [node name="generator" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_htlyb")
@@ -12,3 +14,9 @@ storePoint = NodePath("Node3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7103729, 0)
 
 [node name="SteakGenerator" parent="." instance=ExtResource("2_htlyb")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5010861, 0)
+shape = SubResource("BoxShape3D_htlyb")

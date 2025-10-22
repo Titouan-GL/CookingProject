@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://tb2i6yfxk7nb"]
+[gd_scene load_steps=4 format=3 uid="uid://tb2i6yfxk7nb"]
 
 [ext_resource type="Script" uid="uid://dwyxvdi05cpek" path="res://scripts/IntServe.gd" id="1_gg8kl"]
 [ext_resource type="PackedScene" uid="uid://da2cfkrbslk1i" path="res://assets/blender/Interactibles/ServePoint.blend" id="2_vad65"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vad65"]
 
 [node name="ServePoint" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_gg8kl")
@@ -11,3 +13,9 @@ storePoint = NodePath("Node3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7103729, 0)
 
 [node name="ServePoint" parent="." instance=ExtResource("2_vad65")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5010861, 0)
+shape = SubResource("BoxShape3D_vad65")

@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Config="*res://scripts/config.gd"
 
+[display]
+
+window/size/mode=2
+
 [input]
 
 move_left={

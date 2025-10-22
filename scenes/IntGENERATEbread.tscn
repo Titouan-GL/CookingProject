@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4i5gr3lt5fbq"]
+[gd_scene load_steps=4 format=3 uid="uid://c4i5gr3lt5fbq"]
 
 [ext_resource type="Script" uid="uid://cj6wye16kflcp" path="res://scripts/IntGenerator.gd" id="1_rc4kf"]
 [ext_resource type="PackedScene" uid="uid://ds30fces7yath" path="res://assets/blender/Interactibles/BreadGenerator.blend" id="2_rc4kf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rc4kf"]
 
 [node name="generator" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_rc4kf")
@@ -12,3 +14,9 @@ storePoint = NodePath("Node3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7103729, 0)
 
 [node name="BreadGenerator" parent="." instance=ExtResource("2_rc4kf")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5010861, 0)
+shape = SubResource("BoxShape3D_rc4kf")

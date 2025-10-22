@@ -63,7 +63,7 @@ states/Start/position = Vector2(179, 85)
 transitions = ["Start", "PureIdle", SubResource("AnimationNodeStateMachineTransition_q3gef"), "PureIdle", "Cut", SubResource("AnimationNodeStateMachineTransition_f14ir"), "Cut", "PureIdle", SubResource("AnimationNodeStateMachineTransition_tduqk")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nkfwj"]
-graph_offset = Vector2(-671.70966, 47.10446)
+graph_offset = Vector2(-731.59784, -5.0854645)
 nodes/StaticStateMachine/node = SubResource("AnimationNodeStateMachine_tduqk")
 nodes/StaticStateMachine/position = Vector2(-540, -40)
 nodes/RunningStateMachine/node = SubResource("AnimationNodeStateMachine_q3gef")
@@ -105,8 +105,30 @@ agent = NodePath("..")
 animationTree = NodePath("../AnimationTree")
 knife = NodePath("Armature/Skeleton3D/RightHandAttachment/Knife2")
 
+[node name="Skeleton3D" parent="Skeleton/Armature" index="0"]
+bones/0/position = Vector3(-1.7625289e-15, 0.3810462, -0.051285226)
+bones/0/rotation = Quaternion(-2.9802326e-08, 1.1920928e-07, -2.5243543e-29, 1)
+bones/1/position = Vector3(1.3974065e-09, 0.16516575, -0.0058611557)
+bones/1/rotation = Quaternion(-3.5527137e-15, -1.19209275e-07, 1.0097419e-28, 1)
+bones/2/position = Vector3(-6.2008954e-23, 0.38677543, -3.7252903e-09)
+bones/2/rotation = Quaternion(-1.5300025e-10, -0.050632488, -3.0179312e-09, 0.99871737)
+bones/3/position = Vector3(4.438915e-10, 0.31650287, 5.702572e-10)
+bones/3/rotation = Quaternion(3.609644e-16, 1.17346644e-07, 1.514914e-16, 1)
+bones/4/rotation = Quaternion(2.5737066e-07, -3.3205728e-07, 0.75885683, 0.65125746)
+bones/5/rotation = Quaternion(2.6964145e-07, 2.2388423e-07, 0.6451419, 0.7640628)
+bones/6/rotation = Quaternion(4.6060116e-09, -1.2731961e-07, -0.0010584729, 0.99999946)
+bones/7/rotation = Quaternion(2.5737066e-07, 3.3205728e-07, -0.75885683, 0.65125746)
+bones/8/rotation = Quaternion(2.6964145e-07, -2.2388423e-07, -0.6451419, 0.7640628)
+bones/9/rotation = Quaternion(4.6060116e-09, 1.273196e-07, 0.0010584729, 0.99999946)
+bones/10/position = Vector3(-0.17379601, 0.017536279, -0.020514134)
+bones/10/rotation = Quaternion(-0.095714524, -0.00056450407, 0.99539137, 0.0058742454)
+bones/11/rotation = Quaternion(0.6897524, -0.0005094288, -3.5572026e-05, 0.72404516)
+bones/12/position = Vector3(0.17379601, 0.017536279, -0.020514058)
+bones/12/rotation = Quaternion(0.08237847, -0.0004858002, 0.9965837, -0.0058812764)
+bones/13/rotation = Quaternion(0.6897524, 0.00050942594, 3.5574547e-05, 0.72404516)
+
 [node name="RightHandAttachment" type="BoneAttachment3D" parent="Skeleton/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.9998348, -0.018178578, 2.2991335e-07, 0.018178578, -0.9998346, -7.400457e-08, 2.3122047e-07, -6.981279e-08, 0.99999994, -0.35051513, 0.4259155, -0.038830347)
+transform = Transform3D(-0.9998348, -0.01817858, 2.2991321e-07, 0.018178595, -0.99983466, -7.400446e-08, 2.3122047e-07, -6.981279e-08, 0.99999994, -0.35051513, 0.42591548, -0.038830355)
 bone_name = "Hand.R"
 bone_idx = 6
 
@@ -118,6 +140,6 @@ root_node = NodePath("../Skeleton")
 tree_root = SubResource("AnimationNodeBlendTree_nkfwj")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../Skeleton/AnimationPlayer")
-parameters/Running/blend_amount = 1.0
+parameters/Running/blend_amount = 0.0
 
 [editable path="Skeleton"]
