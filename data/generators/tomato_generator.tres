@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Generator" load_steps=3 format=3 uid="uid://bpx7gqt15sdam"]
-
-[ext_resource type="Script" uid="uid://w83faej1kh8g" path="res://scripts/generator.gd" id="1_2oc5e"]
-[ext_resource type="Resource" uid="uid://bmhth7m8o2q4u" path="res://data/items/tomato.tres" id="1_a8etq"]
-
-[resource]
-script = ExtResource("1_2oc5e")
-output = ExtResource("1_a8etq")
-metadata/_custom_type_script = "uid://w83faej1kh8g"

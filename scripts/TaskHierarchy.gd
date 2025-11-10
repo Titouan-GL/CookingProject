@@ -145,7 +145,8 @@ func TestRecipeDoable(recipe:Enum.RecipeNames, calledByMixed:bool = false, found
 	var neededIngredient:Array[Movable];
 
 	var exists = recipeExists(recipe)
-	if(exists) : return exists
+	if(exists) : 
+		return exists
 	
 	for i in Recipes.getNeeded(recipe):
 		if i:
@@ -184,13 +185,14 @@ func initiateProcess():
 func _process(_delta):
 	initiateProcess()
 	for p in servePoints:
-		var recipeFinished = recipeExists(p.recipeWanted)
-		if(recipeFinished):
-			var agent = findAgentClosestToObj(recipeFinished)
-			var task = Task.new(self, Enum.TaskType.EMPTY, recipeFinished, p)
-			setAgentTarget(agent, task, p, Enum.Order.STORE)
-		else:
-			TestRecipeDoable(p.recipeWanted)
+		if(p.recipeWanted != Enum.RecipeNames.Empty):
+			var recipeFinished = recipeExists(p.recipeWanted)
+			if(recipeFinished):
+				var agent = findAgentClosestToObj(recipeFinished)
+				var task = Task.new(self, Enum.TaskType.EMPTY, recipeFinished, p)
+				setAgentTarget(agent, task, p, Enum.Order.STORE)
+			else:
+				TestRecipeDoable(p.recipeWanted)
 
 
 	for a in AgentList:

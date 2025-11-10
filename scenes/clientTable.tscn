@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dob2epewnhjov"]
+
+[ext_resource type="PackedScene" uid="uid://b7mhw0fjso5k6" path="res://assets/blender/Interactibles/ClientTable.blend" id="4_twgb7"]
+[ext_resource type="PackedScene" uid="uid://b18gckgpqlena" path="res://scenes/servePoint.tscn" id="5_2tdio"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vad65"]
+
+[node name="ClientTable" type="MeshInstance3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7103729, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5010861, 0)
+shape = SubResource("BoxShape3D_vad65")
+
+[node name="ClientTable" parent="." instance=ExtResource("4_twgb7")]
+
+[node name="servePoint1" parent="." instance=ExtResource("5_2tdio")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1, 0)
+
+[node name="servePoint2" parent="." instance=ExtResource("5_2tdio")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.25, 1, 0)
+
+[node name="servePoint3" parent="." instance=ExtResource("5_2tdio")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 1, 0.25)
+available = true
+
+[node name="servePoint4" parent="." instance=ExtResource("5_2tdio")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1, -0.25)

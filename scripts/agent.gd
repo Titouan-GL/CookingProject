@@ -1,6 +1,6 @@
 extends CharacterBody3D
 class_name Agent
-@export var nav_agent: NavigationAgent3D
+@export var nav_agent: NavAgent
 @export var storePoint: Node3D  
 const SPEED = 5
 var objectInHand:Movable
@@ -23,8 +23,10 @@ func executeTask():
 		var delta = get_process_delta_time()
 		var target = task.destination
 		if(target):
-			if((target is Interactible and target.storedObject == task.object and not target is IntGenerator) or objectInHand == task.object):
-				nav_agent.set_target_position(target.global_position)
+			if((target is Interactible and target.storedObject == task.object and not target is IntGenerator) or objectInHand == task.object):	
+				var nav_map = get_world_3d().navigation_map
+				var nearest_point = NavigationServer3D.map_get_closest_point(nav_map, target.global_position)
+				nav_agent.set_target_position(nearest_point)
 				if(nav_agent.is_navigation_finished()):
 					match order:
 						Enum.Order.USE:

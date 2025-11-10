@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://b18gckgpqlena"]
+
+[ext_resource type="Script" uid="uid://dwyxvdi05cpek" path="res://scripts/IntServe.gd" id="1_hcvgp"]
+[ext_resource type="PackedScene" uid="uid://c5jewike8l5y6" path="res://scenes/UI/IngredientIcon.tscn" id="2_hcvgp"]
+[ext_resource type="PackedScene" uid="uid://cytd1w5m4iwdk" path="res://scenes/UI/ProgressBar.tscn" id="3_j20ak"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xfah1"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rexnx"]
+viewport_path = NodePath("SubViewport")
+
+[node name="servePoint" type="Node3D" node_paths=PackedStringArray("icon", "progressBar", "destinationPoint", "storePoint")]
+script = ExtResource("1_hcvgp")
+icon = NodePath("DestinationPoint/IngredientIcon")
+progressBar = NodePath("DestinationPoint/ProgressBar/SubViewport/Panel/ProgressBar")
+destinationPoint = NodePath("DestinationPoint")
+storePoint = NodePath(".")
+
+[node name="DestinationPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7411835, 0, 0)
+
+[node name="IngredientIcon" parent="DestinationPoint" instance=ExtResource("2_hcvgp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4911609, 0)
+viewPort = SubResource("ViewportTexture_xfah1")
+
+[node name="ProgressBar" parent="DestinationPoint" instance=ExtResource("3_j20ak")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6661609, 0)
+viewPort = SubResource("ViewportTexture_rexnx")

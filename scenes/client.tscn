@@ -1,0 +1,109 @@
+[gd_scene load_steps=19 format=3 uid="uid://c13jhhr13jjrl"]
+
+[ext_resource type="Script" uid="uid://uqp0n1go46pa" path="res://scripts/client.gd" id="1_1t5vp"]
+[ext_resource type="PackedScene" uid="uid://ekx2v3o8sjmk" path="res://assets/blender/Animated/Client.blend" id="2_1t5vp"]
+[ext_resource type="Script" uid="uid://bkvhnqh6vp1la" path="res://scripts/ClientAnimation.gd" id="3_4tr0r"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noarx"]
+radius = 0.3876953
+height = 1.5112305
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_nkfwj"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lug0u"]
+animation = &"Running"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dg1j7"]
+animation = &"RunningWithFood"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qeyy3"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nkfwj"]
+advance_mode = 2
+advance_expression = "objectInHand != null"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iuhnp"]
+advance_mode = 2
+advance_expression = "objectInHand == null"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_q3gef"]
+states/Running/node = SubResource("AnimationNodeAnimation_lug0u")
+states/Running/position = Vector2(564, 46)
+states/RunningWithFood/node = SubResource("AnimationNodeAnimation_dg1j7")
+states/RunningWithFood/position = Vector2(584, 126)
+states/Start/position = Vector2(157, 83)
+transitions = ["Start", "Running", SubResource("AnimationNodeStateMachineTransition_qeyy3"), "Running", "RunningWithFood", SubResource("AnimationNodeStateMachineTransition_nkfwj"), "RunningWithFood", "Running", SubResource("AnimationNodeStateMachineTransition_iuhnp")]
+graph_offset = Vector2(-47, 18)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_52ahs"]
+animation = &"Cut"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y08pw"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q3gef"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f14ir"]
+advance_mode = 2
+advance_expression = "isCutting"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tduqk"]
+advance_mode = 2
+advance_expression = "not isCutting"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tduqk"]
+states/Cut/node = SubResource("AnimationNodeAnimation_52ahs")
+states/Cut/position = Vector2(660, 152)
+states/PureIdle/node = SubResource("AnimationNodeAnimation_y08pw")
+states/PureIdle/position = Vector2(628, 49)
+states/Start/position = Vector2(179, 85)
+transitions = ["Start", "PureIdle", SubResource("AnimationNodeStateMachineTransition_q3gef"), "PureIdle", "Cut", SubResource("AnimationNodeStateMachineTransition_f14ir"), "Cut", "PureIdle", SubResource("AnimationNodeStateMachineTransition_tduqk")]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nkfwj"]
+nodes/StaticStateMachine/node = SubResource("AnimationNodeStateMachine_tduqk")
+nodes/StaticStateMachine/position = Vector2(-540, -40)
+nodes/RunningStateMachine/node = SubResource("AnimationNodeStateMachine_q3gef")
+nodes/RunningStateMachine/position = Vector2(-580, 180)
+nodes/Running/node = SubResource("AnimationNodeBlend2_nkfwj")
+nodes/Running/position = Vector2(-120, 80)
+node_connections = [&"output", 0, &"Running", &"Running", 0, &"StaticStateMachine", &"Running", 1, &"RunningStateMachine"]
+
+[node name="client" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_1t5vp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_noarx")
+
+[node name="grabPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.704)
+
+[node name="feet" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="feet"]
+target_desired_distance = 0.3
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, -0.030419052, 0)
+shape = SubResource("CapsuleShape3D_noarx")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Client")
+tree_root = SubResource("AnimationNodeBlendTree_nkfwj")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../Client/AnimationPlayer")
+parameters/Running/blend_amount = 0.0
+
+[node name="Client" parent="." node_paths=PackedStringArray("client", "animationTree") instance=ExtResource("2_1t5vp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.749, 0)
+script = ExtResource("3_4tr0r")
+client = NodePath("..")
+animationTree = NodePath("../AnimationTree")
+
+[editable path="Client"]
