@@ -4,8 +4,7 @@ class_name Hierarchy
 var AgentList:Array[Agent]
 var MovableList:Array[Movable]
 var RecipeNeededList:Array[Enum.RecipeNames]
-var availableAgent:int
-var recipeToPrepare:Array[Enum.RecipeNames] = []
+var servePoints:Array = []
 
 func findAgentClosestToObj(obj:Node3D) -> Agent:
 	var bestDistance:float = INF
@@ -182,19 +181,16 @@ func initiateProcess():
 		if not i.storedObject:
 			i.occupied = false
 
-func recipeServed(recipe:Enum.RecipeNames):
-		recipeToPrepare.erase(recipe)
-
 func _process(_delta):
 	initiateProcess()
-	if recipeToPrepare.size() < 3:
-		recipeToPrepare.append([Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.Burger].pick_random())
-	for r in recipeToPrepare:
-		var recipeFinished = recipeExists(r)
+	for p in servePoints:
+		var recipeFinished = recipeExists(p.recipeWanted)
 		if(recipeFinished):
-			createTask(Enum.TaskType.EMPTY, [recipeFinished])
+			var agent = findAgentClosestToObj(recipeFinished)
+			var task = Task.new(self, Enum.TaskType.EMPTY, recipeFinished, p)
+			setAgentTarget(agent, task, p, Enum.Order.STORE)
 		else:
-			TestRecipeDoable(r)
+			TestRecipeDoable(p.recipeWanted)
 
 
 	for a in AgentList:
@@ -207,5 +203,3 @@ func _process(_delta):
 
 func _enter_tree():
 	add_to_group("Hierarchy")
-
-	

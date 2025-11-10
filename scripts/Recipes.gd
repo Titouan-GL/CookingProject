@@ -19,6 +19,11 @@ const meshes:Dictionary = {
 	Enum.RecipeNames.Burger: preload("res://assets/blender/Recipes/BurgSalSte.blend")
 }
 
+const textures:Dictionary = {
+	Enum.RecipeNames.TomatoSoup : preload("res://assets/textures/TomatoSoupIcon.png"),
+	Enum.RecipeNames.Burger: preload("res://assets/textures/burgerIcon.png")
+}
+
 const recipes:Dictionary[Enum.RecipeNames, Array] = { #array where 0 is the tasktype and 1 is an array of recipes
 	Enum.RecipeNames.EmptyPot: [Enum.TaskType.INITAL_MIXER, []],
 	Enum.RecipeNames.Tom: [Enum.TaskType.GENERATE_TOMATO, []],
@@ -54,6 +59,10 @@ static func getTaskType(recipe:Enum.RecipeNames) -> Enum.TaskType:
 
 static func recipeToMesh(recipe:Enum.RecipeNames) -> PackedScene:
 	if(meshes.has(recipe)): return meshes[recipe]
+	return null
+
+static func recipeToTexture(recipe:Enum.RecipeNames) -> CompressedTexture2D:
+	if(textures.has(recipe)): return textures[recipe]
 	return null
 
 static func recipesMix(recipe:Enum.RecipeNames, ingredient:Enum.RecipeNames, first:bool = true) -> Enum.RecipeNames:

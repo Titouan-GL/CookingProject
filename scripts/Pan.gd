@@ -20,11 +20,10 @@ func store(i:Ingredient):
 	i.parent.objectInHand = null
 	if(recipe == emptyName):
 		recipe = Recipes.recipesPot(i.recipe)
+		i.queue_free()
 	else:
-		recipe = Recipes.recipesMix(recipe, i.recipe)
-		if(recipe == Enum.RecipeNames.PotCutTomCutTomCutTom):
-			remove_from_group(groupName)
-	i.queue_free()
+		i.recipe = Recipes.recipesMix(recipe, i.recipe)
+		empty()
 	UpdateAppearance()
 
 

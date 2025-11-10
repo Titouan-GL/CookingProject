@@ -299,7 +299,7 @@ transform = Transform3D(1.083613, 0, 0.71818006, 0, 1.3, 0, -0.71818006, 0, 1.08
 transform = Transform3D(0.984835, 0, 0.17349342, 0, 1, 0, -0.17349342, 0, 0.984835, -6.59816, -0.13413012, 3.12999)
 
 [node name="Pumpkin3" parent="Environnement/Decorative" instance=ExtResource("15_1hx7k")]
-transform = Transform3D(-0.66899216, 0, -1.3425533, 0, 1.5, 0, 1.3425533, 0, -0.66899216, 0.8040328, -0.13413012, -3.0409503)
+transform = Transform3D(-0.66899216, 0, -1.3425533, 0, 1.5, 0, 1.3425533, 0, -0.66899216, 1.240952, -0.13413012, -3.1641984)
 
 [node name="Pumpkin8" parent="Environnement/Decorative" instance=ExtResource("15_1hx7k")]
 transform = Transform3D(1.2734575, 0, -0.7926575, 0.13506779, 1.4780629, 0.21699548, 0.78106505, -0.255598, 1.2548335, -3.5082483, 1.5827981, -6.24768)

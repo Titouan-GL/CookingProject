@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5jewike8l5y6"]
+
+[ext_resource type="Script" uid="uid://yuwcc733oxsa" path="res://scripts/IngredientIcon.gd" id="1_xy0do"]
+[ext_resource type="Texture2D" uid="uid://cnrk1bhiyocvc" path="res://assets/textures/burgerIcon.png" id="2_oilkw"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xy0do"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lku72"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 250
+corner_radius_top_right = 250
+corner_radius_bottom_right = 250
+corner_radius_bottom_left = 250
+corner_detail = 10
+shadow_color = Color(1, 1, 1, 0.5686275)
+shadow_size = 40
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_oilkw"]
+viewport_path = NodePath("SubViewport")
+
+[node name="IngredientIcon" type="Node3D" node_paths=PackedStringArray("sprite3D", "sprite2D")]
+script = ExtResource("1_xy0do")
+viewPort = SubResource("ViewportTexture_xy0do")
+sprite3D = NodePath("Sprite3D")
+sprite2D = NodePath("SubViewport/Panel/Sprite2D")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(400, 400)
+
+[node name="Panel" type="Panel" parent="SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lku72")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/Panel"]
+position = Vector2(60, 60)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_oilkw")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_oilkw")
