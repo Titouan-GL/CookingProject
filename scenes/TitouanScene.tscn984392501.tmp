@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://crmjnlgorvsy"]
+[gd_scene load_steps=29 format=3 uid="uid://crmjnlgorvsy"]
 
 [ext_resource type="PackedScene" uid="uid://b67m5mnbrjcmo" path="res://scenes/agent.tscn" id="1_noarx"]
 [ext_resource type="Texture2D" uid="uid://bhajo2s0i6gjk" path="res://assets/textures/05366bde9747af98448947536d59196f.jpg" id="1_tp51g"]
@@ -15,11 +15,13 @@
 [ext_resource type="PackedScene" uid="uid://d0i43sn0urp0u" path="res://scenes/IntGENERATESalad.tscn" id="10_27nlg"]
 [ext_resource type="PackedScene" uid="uid://b0ooessic4rg8" path="res://assets/blender/Deco/LandScape.blend" id="10_ow0or"]
 [ext_resource type="PackedScene" uid="uid://c5oj2lrpy8m1f" path="res://assets/blender/Deco/SpookyLantern.blend" id="11_giltd"]
+[ext_resource type="PackedScene" uid="uid://qk5wk11gkvtb" path="res://assets/blender/Interactibles/Door.blend" id="11_m6b66"]
 [ext_resource type="PackedScene" uid="uid://c4i5gr3lt5fbq" path="res://scenes/IntGENERATEbread.tscn" id="11_tp51g"]
 [ext_resource type="PackedScene" uid="uid://dob2epewnhjov" path="res://scenes/clientTable.tscn" id="11_vknjm"]
+[ext_resource type="Script" uid="uid://t3tw2xm47k4b" path="res://assets/blender/Interactibles/IntDoor.gd" id="12_8ujqh"]
 [ext_resource type="PackedScene" uid="uid://bd1dt0jxhqgkm" path="res://assets/blender/Deco/Pumpkin.blend" id="15_1hx7k"]
 [ext_resource type="PackedScene" uid="uid://cbowkrh8v3tix" path="res://assets/blender/Deco/Candles.blend" id="16_xlpor"]
-[ext_resource type="PackedScene" uid="uid://bwgsl7tn345w6" path="res://scenes/Door.tscn" id="20_n0o6x"]
+[ext_resource type="PackedScene" uid="uid://c13jhhr13jjrl" path="res://scenes/client.tscn" id="20_n0o6x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4xowi"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -100,7 +102,7 @@ transform = Transform3D(1.083613, 0, 0.71818006, 0, 1.3, 0, -0.71818006, 0, 1.08
 transform = Transform3D(0.984835, 0, 0.17349342, 0, 1, 0, -0.17349342, 0, 0.984835, -6.59816, -0.13413012, 3.12999)
 
 [node name="Pumpkin3" parent="Environnement/Decorative" instance=ExtResource("15_1hx7k")]
-transform = Transform3D(-0.66899216, 0, -1.3425533, 0, 1.5, 0, 1.3425533, 0, -0.66899216, 2.915528, -0.134, -3.164)
+transform = Transform3D(-0.66899216, 0, -1.3425533, 0, 1.5, 0, 1.3425533, 0, -0.66899216, 1.240952, -0.13413012, -3.1641984)
 
 [node name="Pumpkin8" parent="Environnement/Decorative" instance=ExtResource("15_1hx7k")]
 transform = Transform3D(1.2734575, 0, -0.7926575, 0.13506779, 1.4780629, 0.21699548, 0.78106505, -0.255598, 1.2548335, -3.5082483, 1.5827981, -6.24768)
@@ -355,12 +357,16 @@ skeleton = NodePath("../../..")
 [node name="LandScape" parent="Environnement/Interactible" instance=ExtResource("10_ow0or")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.41184497, 0.5)
 
+[node name="Door" parent="Environnement/Interactible" node_paths=PackedStringArray("storePoint") instance=ExtResource("11_m6b66")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4, 0, -4)
+script = ExtResource("12_8ujqh")
+storePoint = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="Environnement/Interactible/Door"]
+
 [node name="ClientTable" parent="Environnement/Interactible" instance=ExtResource("11_vknjm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.836102, 0, 0)
 skeleton = NodePath("../../..")
-
-[node name="Door" parent="Environnement/Interactible" instance=ExtResource("20_n0o6x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
 
 [node name="Hierarchy" type="Node3D" parent="."]
 script = ExtResource("3_a0tk4")
@@ -376,6 +382,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.771089, 0.7105738, 0.4582
 
 [node name="agent4" parent="." instance=ExtResource("1_noarx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.677567, 0.7105738, 1.052696)
+
+[node name="client" parent="." instance=ExtResource("20_n0o6x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2249756, 0.7832354, 2.3164344)
+
+[node name="client4" parent="." instance=ExtResource("20_n0o6x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6253283, 0.7832354, 1.8680422)
+
+[node name="client3" parent="." instance=ExtResource("20_n0o6x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.517197, 0.7832354, 3.3019702)
+
+[node name="client2" parent="." instance=ExtResource("20_n0o6x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.313423, 0.7832349, -2.0829382)
 
 [node name="Pan" parent="." instance=ExtResource("9_v6ncs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.133906, 1.3014183, -2.089312)

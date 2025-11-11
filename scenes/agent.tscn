@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://1iydcxqvs7te" path="res://assets/blender/Div/Knife.blend" id="4_dg1j7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noarx"]
-radius = 0.3876953
+radius = 0.35
 height = 1.5112305
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_nkfwj"]
@@ -113,17 +113,17 @@ knife = NodePath("Armature/Skeleton3D/RightHandAttachment/Knife2")
 bones/0/position = Vector3(-1.7625289e-15, 0.3810462, -0.051285226)
 bones/0/rotation = Quaternion(-2.9802326e-08, 1.1920928e-07, -2.5243543e-29, 1)
 bones/1/position = Vector3(1.3974065e-09, 0.16516575, -0.0058611557)
-bones/1/rotation = Quaternion(-3.5527137e-15, -1.19209275e-07, 1.0097419e-28, 1)
+bones/1/rotation = Quaternion(-5.3033917e-05, -9.431408e-05, 2.6535197e-05, 1)
 bones/2/position = Vector3(-6.2008954e-23, 0.38677543, -3.7252903e-09)
-bones/2/rotation = Quaternion(-1.5300104e-10, -0.0506461, -3.017929e-09, 0.99871665)
+bones/2/rotation = Quaternion(-0.14972161, -0.003027713, -2.8886974e-05, 0.98872364)
 bones/3/position = Vector3(-2.1758904e-11, 0.316503, 5.7030736e-10)
-bones/3/rotation = Quaternion(-4.9713685e-15, 1.1920929e-07, 2.8799163e-16, 1)
-bones/4/rotation = Quaternion(2.5737066e-07, -3.3205728e-07, 0.75885683, 0.65125746)
-bones/5/rotation = Quaternion(2.6964145e-07, 2.2388423e-07, 0.6451419, 0.7640628)
-bones/6/rotation = Quaternion(4.6060116e-09, -1.2731961e-07, -0.0010584729, 0.99999946)
-bones/7/rotation = Quaternion(2.5737066e-07, 3.3205728e-07, -0.75885683, 0.65125746)
-bones/8/rotation = Quaternion(2.6964145e-07, -2.2388423e-07, -0.6451419, 0.7640628)
-bones/9/rotation = Quaternion(4.6060116e-09, 1.273196e-07, 0.0010584729, 0.99999946)
+bones/3/rotation = Quaternion(0.015292624, -3.1021166e-06, -3.3866476e-05, 0.99988306)
+bones/4/rotation = Quaternion(-0.26002702, 0.44199926, 0.4662613, 0.72084886)
+bones/5/rotation = Quaternion(0.23584118, 0.79313993, 0.5242406, 0.20119591)
+bones/6/rotation = Quaternion(-0.017510545, -0.015236933, 0.49137002, 0.87064165)
+bones/7/rotation = Quaternion(6.270143e-05, -1.7723158e-05, -0.7586476, 0.6515012)
+bones/8/rotation = Quaternion(-0.0011660553, 0.0024167087, -0.6321739, 0.774822)
+bones/9/rotation = Quaternion(4.6060067e-09, 1.2731958e-07, 0.001058473, 0.99999946)
 bones/10/position = Vector3(-0.17379601, 0.017536279, -0.020514134)
 bones/10/rotation = Quaternion(-0.095714524, -0.00056450407, 0.99539137, 0.0058742454)
 bones/11/rotation = Quaternion(0.6897524, -0.0005094288, -3.5572026e-05, 0.72404516)
@@ -132,7 +132,7 @@ bones/12/rotation = Quaternion(0.08237847, -0.0004858002, 0.9965837, -0.00588127
 bones/13/rotation = Quaternion(0.6897524, 0.00050942594, 3.5574547e-05, 0.72404516)
 
 [node name="RightHandAttachment" type="BoneAttachment3D" parent="Skeleton/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.9998348, -0.01817858, 2.2991321e-07, 0.018178595, -0.99983466, -7.400446e-08, 2.3122047e-07, -6.981279e-08, 0.99999994, -0.35051513, 0.42591548, -0.038830355)
+transform = Transform3D(-0.2913312, 0.67406267, -0.67879707, 0.7296823, 0.6154437, 0.29798076, 0.6186193, -0.40849513, -0.67114955, -0.28392527, 1.4424508, 0.10988544)
 bone_name = "Hand.R"
 bone_idx = 6
 

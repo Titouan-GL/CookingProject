@@ -3,24 +3,26 @@ class_name Client
 const SPEED = 3
 var addedVelocity:Vector3 = Vector3.ZERO
 var friction:float = 40
-var bumpStrength:float = 3
+var bumpStrength:float = 2
 var target:Node3D = null
 var eatingState = 0 #1 if currently eating, 2 if already eaten
-var navmesh:Navigation
-var next_path_position
+@export var navAgent:NavAgent
 
 
 func executeTask():
 	if eatingState == 0 :
 		if target == null:
 			target = get_tree().get_nodes_in_group("freeServePoint").pick_random()
-		elif next_path_position == null and target.recipeWanted == Enum.RecipeNames.Empty :
+			navAgent.set_target_position(target.destinationPoint.global_position)
+			target.reserved(self)
+		elif navAgent.is_navigation_finished() and target.recipeWanted == Enum.RecipeNames.Empty :
 			target.newRecipe()
-			target.clientSat(self)
+			target.clientSat()
 	if eatingState == 2:
 		if target == null:
 			target = get_tree().get_nodes_in_group("IntDOOR").pick_random()
-		elif next_path_position == null:
+			navAgent.set_target_position(target.global_position)
+		elif navAgent.is_navigation_finished():
 			queue_free()
 
 func changeState(v):
@@ -28,7 +30,8 @@ func changeState(v):
 	eatingState = v
 
 func bumpedInto(dir:Vector3):
-	addedVelocity = dir*bumpStrength
+	var orthogonal = Vector3(dir.z , 0, -dir.x ).normalized()/2
+	addedVelocity = (orthogonal + Vector3(dir.x, 0, dir.z))*bumpStrength
 
 func _physics_process(delta):
 	if(addedVelocity.length() > 0):
@@ -39,11 +42,9 @@ func _physics_process(delta):
 	
 	var direction:Vector3 = Vector3.ZERO
 	var target_angle:float = rotation.y
-	next_path_position = null
-	if(target is IntServe): next_path_position = navmesh.getNextPosition(self, target.destinationPoint)
-	elif(target is IntDoor): next_path_position = navmesh.getNextPosition(self, target)
-	if(next_path_position != null):
-		direction = (next_path_position - global_position).normalized()
+	var next_path_position = navAgent.get_next_path_position()
+	if(not navAgent.is_navigation_finished()):
+		direction = Vector3(next_path_position.x - global_position.x, 0, next_path_position.z-global_position.z).normalized()
 		target_angle = atan2(direction.x, direction.z)
 	elif target:
 		var objDirection = (target.global_position - global_position).normalized()
@@ -51,12 +52,17 @@ func _physics_process(delta):
 	target_angle = lerpf(target_angle, atan2(-addedVelocity.x, -addedVelocity.z), addedVelocity.length()/50)
 	var new_angle = lerp_angle(rotation.y, target_angle, delta *15)
 	rotation.y = new_angle
-	velocity = (direction+ addedVelocity).normalized() * SPEED 
+	velocity = Vector3(0, -1, 0) + (direction+ addedVelocity).normalized() * SPEED
+	 
+	var collision = move_and_collide(velocity * delta, true)
+	if(collision and (collision.get_collider() is Agent or collision.get_collider() is Client)):
+		var dir:Vector3 = (collision.get_collider().global_position-global_position).normalized()
+		collision.get_collider().bumpedInto(dir * 1.3)
+		addedVelocity = dir*-bumpStrength
 	move_and_slide()
 
 #
 func _process(_delta):
 	executeTask()
-
 func _ready():
-	navmesh = get_tree().get_first_node_in_group("navmesh")
+	navAgent.isClient = true

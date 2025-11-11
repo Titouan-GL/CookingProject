@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwgsl7tn345w6"]
+
+[ext_resource type="PackedScene" uid="uid://qk5wk11gkvtb" path="res://assets/blender/Interactibles/Door.blend" id="1_eyv6f"]
+[ext_resource type="Script" uid="uid://t3tw2xm47k4b" path="res://scripts/IntDoor.gd" id="2_mg2as"]
+
+[node name="Door" type="Node3D" node_paths=PackedStringArray("storePoint")]
+script = ExtResource("2_mg2as")
+storePoint = NodePath("Door/Node3D")
+
+[node name="Door" parent="." instance=ExtResource("1_eyv6f")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="Door"]

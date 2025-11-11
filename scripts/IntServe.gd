@@ -9,9 +9,10 @@ var recipeWanted:Enum.RecipeNames = Enum.RecipeNames.Empty
 @export var available:bool
 var gameManager:GameManager
 var client:Client = null
+var navmesh:Navigation
 
 var timeLeft = 0
-var initialTime = 15
+var initialTime = 30
 
 func _enter_tree():
 	super._enter_tree()
@@ -24,17 +25,25 @@ func _init():
 	obstacle = false
 
 func newRecipe():
-	recipeWanted = [Enum.RecipeNames.Burger].pick_random()
+	recipeWanted = [Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.CutTomCutSal].pick_random()
+	recipeWanted = Enum.RecipeNames.BurSteSalTom
 	timeLeft = initialTime
 	icon.UpdateAppearance(recipeWanted)
 
-func clientSat(c:Client):
+func reserved(c:Client):
 	remove_from_group("freeServePoint")
 	client = c
 
+func clientSat():
+	navmesh.addObstacle(destinationPoint, true)
+
+
+func clientLeft():
+	navmesh.removeObstacle(destinationPoint)
+
 
 func _ready():
-	var navmesh = get_tree().get_first_node_in_group("navmesh")
+	navmesh = get_tree().get_first_node_in_group("navmesh")
 	navmesh.addObstacle(self)
 	super._ready()
 	hierarchy = get_tree().get_nodes_in_group("Hierarchy")[0]
@@ -53,6 +62,7 @@ func serve(success:bool):
 		gameManager.changeScore(-200)
 	client.changeState(2) 
 	client = null
+	clientLeft()
 	
 
 func store(i:Movable) -> bool:

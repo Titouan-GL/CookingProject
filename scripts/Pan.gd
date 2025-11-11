@@ -23,6 +23,7 @@ func store(i:Ingredient):
 		i.queue_free()
 	else:
 		i.recipe = Recipes.recipesMix(recipe, i.recipe)
+		i.UpdateAppearance()
 		empty()
 	UpdateAppearance()
 
