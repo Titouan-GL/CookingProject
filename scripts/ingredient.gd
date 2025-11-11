@@ -22,7 +22,7 @@ func addProgress(s:Enum.TaskType, delta:float) -> bool:
 			return true
 	return false
 
-func mix(ing:Ingredient): #destroy the ingredients it's beeing mixed with
+func mix(ing:Ingredient): #destroy the ingredient it's beeing mixed with
 	var newRecipe:Enum.RecipeNames = Recipes.recipesMix(recipe, ing.recipe)
 	if(newRecipe != Enum.RecipeNames.Empty):
 		ing.parent.objectInHand = null

@@ -26,7 +26,7 @@ func _init():
 
 func newRecipe():
 	recipeWanted = [Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.CutTomCutSal].pick_random()
-	recipeWanted = Enum.RecipeNames.BurSteSalTom
+	recipeWanted = Enum.RecipeNames.BurSalTom
 	timeLeft = initialTime
 	icon.UpdateAppearance(recipeWanted)
 

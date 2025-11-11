@@ -5,7 +5,7 @@ var AgentList:Array[Agent]
 var MovableList:Array[Movable]
 var RecipeNeededList:Array[Enum.RecipeNames]
 var servePoints:Array = []
-var printNewFrame = false
+var printNewFrame = true
 
 func findAgentClosestToObj(obj:Node3D) -> Agent:
 	var bestDistance:float = INF
@@ -123,17 +123,11 @@ func createTask(taskType:Enum.TaskType, needed:Array) -> bool:
 			return setAgentTarget(agent, task, dest, Enum.Order.STORE)
 	return false
 
-func validOperation(obj:Movable, recipe:Enum.RecipeNames):
-	if obj.recipe == recipe:
-		return true
-	if Recipes.getTaskType(recipe) == Enum.TaskType.MIX:
-		var needed = Recipes.getNeeded(recipe)
-		for i in range(2):
-			var task = Recipes.getTaskType(needed[i]);
-			if(task == Enum.TaskType.MIX || task == Enum.TaskType.INITAL_MIXER):
-				if validOperation(obj, needed[i]):
-					return true
-	return false
+func presentOnMap(obj:Movable, recipe:Enum.RecipeNames):
+	return obj.recipe == recipe
+
+func primaryIngredientsPresentOnMap(obj:Movable, recipe:Enum.RecipeNames):
+	return Recipes.dict_contains_keys(Recipes.getRecipePrimaryIngredients(recipe), Recipes.getRecipePrimaryIngredients(obj.recipe))
 
 func recipeExists(recipe:Enum.RecipeNames):
 	for m in MovableList:
@@ -141,33 +135,56 @@ func recipeExists(recipe:Enum.RecipeNames):
 			MovableList.erase(m)
 			return m
 
-func TestRecipeDoable(recipe:Enum.RecipeNames, calledByMixed:bool = false, foundIngredients:Array[Movable] = []): #return missing ingredients
-	var needed = Recipes.getNeeded(recipe)
-	var ingleft = needed.size()
+func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] = []): #return missing ingredients
+	var needed = Recipes.getNeeded(recipe).duplicate()
 	var neededIngredient:Array[Movable];
-
-	var exists = recipeExists(recipe)
+	var exists = recipeExists(recipe) #we test if the recipe is already present in the world, and return it if so
 	if(exists) : 
 		return exists
-	for i in needed:
-		if i:
-			var ing = TestRecipeDoable(i, Recipes.getTaskType(recipe) == Enum.TaskType.MIX, foundIngredients)
+
+	print(recipe, " " , needed)
+	if(Recipes.getTaskType(recipe) == Enum.TaskType.MIX):
+		for m in MovableList:
+			print(m.recipe, " " , Recipes.getRecipePrimaryIngredients(m.recipe))
+			if Recipes.dict_contains_keys(needed, Recipes.getRecipePrimaryIngredients(m.recipe)):
+				needed = Recipes.subtract_dictionary(needed, Recipes.getRecipePrimaryIngredients(m.recipe))
+				neededIngredient.append(m)
+				MovableList.erase(m)
+
+	print(recipe, " " , needed)
+	for i in needed.keys():#if not we try recursively to find if every ingredient needed is present
+		for j in needed[i]:
+			var ing = TestRecipeDoable(i, foundIngredients)
 			if(ing):
 				foundIngredients.append(ing)
 
-	for i in needed:
-		var foundIndex = foundIngredients.find_custom(validOperation.bind(i))
-		if foundIndex != -1:
-			neededIngredient.append(foundIngredients[foundIndex])
-			ingleft -= 1
 
-	if(ingleft == 0):
+
+	for i in needed.keys():#then we try to assemble the recipe with all the foundIngredients not used by the children
+		for j in range(needed[i]):
+			var foundIndex = -1
+			if(Recipes.getTaskType(recipe) == Enum.TaskType.MIX):
+				foundIndex = foundIngredients.find_custom(primaryIngredientsPresentOnMap.bind(i))
+				if foundIndex != -1:
+					neededIngredient.append(foundIngredients[foundIndex])
+					needed = Recipes.subtract_dictionary(needed, Recipes.getRecipePrimaryIngredients(i))
+			else:
+				foundIndex = foundIngredients.find_custom(presentOnMap.bind(i))
+				if foundIndex != -1:
+					neededIngredient.append(foundIngredients[foundIndex])
+					needed = Recipes.subtract_dictionary(needed, {i:1})
+					
+	if Recipes.getTaskType(recipe) == Enum.TaskType.MIX:
+		for i in range(1, neededIngredient.size(), 1):
+			if(createTask(Enum.TaskType.MIX, [neededIngredient[0], neededIngredient[i]])):
+				MovableList.erase(neededIngredient[i])
+				foundIngredients.erase(neededIngredient[i])
+	
+	elif(needed == {}):
 		if(createTask(Recipes.getTaskType(recipe), neededIngredient)):
 			for m2 in neededIngredient:
 				MovableList.erase(m2)
 				foundIngredients.erase(m2)
-			if calledByMixed and Recipes.getTaskType(recipe) == Enum.TaskType.MIX:
-				return neededIngredient[1]
 		return null
 	return null
 
@@ -195,7 +212,6 @@ func _process(_delta):
 			else:
 				TestRecipeDoable(p.recipeWanted)
 
-
 	for a in AgentList:
 		if a.objectInHand:
 			if not a.task:
@@ -207,6 +223,5 @@ func _process(_delta):
 func _enter_tree():
 	add_to_group("Hierarchy")
 
-func _ready():
-	print(Enum.RecipeNames.BurSteSalTom)
-	Recipes.packed_bytes_to_binary(Recipes.getRecipeBinary(Enum.RecipeNames.BurSteSalTom))
+#func _ready():
+	#print(Recipes.subtract_dictionary(Recipes.getRecipePrimaryIngredients(Enum.RecipeNames.PotCutTomCutTomCutTom), Recipes.getRecipePrimaryIngredients(Enum.RecipeNames.CutTom)))
