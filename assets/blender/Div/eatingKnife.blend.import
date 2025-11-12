@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ekx2v3o8sjmk"
-path="res://.godot/imported/Client.blend-492d568aaa0e33d76821e4c4384a0db8.scn"
+uid="uid://djkr3jadx2lqp"
+path="res://.godot/imported/eatingKnife.blend-46c4a32f53949790631bcabcc33b8271.scn"
 
 [deps]
 
-source_file="res://assets/blender/Animated/Client.blend"
-dest_files=["res://.godot/imported/Client.blend-492d568aaa0e33d76821e4c4384a0db8.scn"]
+source_file="res://assets/blender/Div/eatingKnife.blend"
+dest_files=["res://.godot/imported/eatingKnife.blend-46c4a32f53949790631bcabcc33b8271.scn"]
 
 [params]
 
@@ -37,14 +37,7 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={
-"nodes": {
-"PATH:Armature/Skeleton3D": {
-"retarget/bone_map": Object(BoneMap,"resource_local_to_scene":false,"resource_name":"","profile":Resource("uid://c3heley774tvx", "res://assets/blender/Animated/default_skeleton_profile.tres"),"bonemap":null,"bone_map/Hat":&"Hat","bone_map/Head":&"head","bone_map/Spine1":&"Spine1","bone_map/Spine":&"Spine","bone_map/Leg.R":&"Leg.R","bone_map/foot.R":&"foot.R","bone_map/Leg.L":&"Leg.L","bone_map/foot.L":&"foot.L","bone_map/Shoulder.R":&"Shoulder.R","bone_map/Arm.R":&"Arm.R","bone_map/Hand.R":&"Hand.R","bone_map/Shoulder.L":&"Shoulder.L","bone_map/Arm.L":&"Arm.L","bone_map/Hand.L":&"Hand.L","script":null)
-
-}
-}
-}
+_subresources={}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

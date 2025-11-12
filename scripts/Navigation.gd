@@ -146,19 +146,34 @@ func getNextPosition(startNode, endNode, isClient = false):
 	var endPos2D = find_reachable(astarUsed, posToGrid(endPos3D))
 	if(endPos2D):
 		endPos3D = gridToPos(endPos2D, endPos3D)
-		if(endPos2D):
-			var path = astarUsed.get_point_path(startPos2D, endPos2D)
-			if(path.size() > 1):
-				var i:int = 0
-				while i+1 < path.size() and line_is_clear(astarUsed, xyzTOxz(startPos3D), path[i+1]) and i < 10:
-					i += 1
-				return gridToPos(path[i], startPos3D)
-			elif xyzTOxz(startPos3D - endPos3D).length() > 0.1:
-				return Vector3(endPos3D.x, startPos3D.y, endPos3D.z)
+		var path = astarUsed.get_point_path(startPos2D, endPos2D)
+		if(path.size() > 1):
+			var i:int = 0
+			while i+1 < path.size() and line_is_clear(astarUsed, xyzTOxz(startPos3D), path[i+1]) and i < 10:
+				i += 1
+			return gridToPos(path[i], startPos3D)
+		elif xyzTOxz(startPos3D - endPos3D).length() > 0.1:
+			return Vector3(endPos3D.x, startPos3D.y, endPos3D.z)
 	else:
 		return null
 
-
+func get_full_path(startNode, endNode, isClient = false):
+	if(not startNode or not endNode):
+		return
+	var startPos3D
+	if startNode is Node3D : startPos3D = startNode.global_position
+	if startNode is Vector3 : startPos3D = startNode
+	var endPos3D
+	if endNode is Node3D : endPos3D = endNode.global_position
+	if endNode is Vector3 : endPos3D = endNode
+	var startPos2D = posToGrid(startPos3D)
+	var astarUsed = astarClient if isClient else astarCooks
+	var endPos2D = find_reachable(astarUsed, posToGrid(endPos3D))
+	if(endPos2D):
+		return astarUsed.get_point_path(startPos2D, endPos2D)
+	else:
+		return null
+	
 
 func find_reachable(astar:AStarGrid2D, current:Vector2i):
 	if(not astar.is_point_solid(current)):
@@ -176,7 +191,21 @@ func find_reachable(astar:AStarGrid2D, current:Vector2i):
 			current.x+x >= 0 and current.x <= gridSize.x+x and\
 			not astar.is_point_solid(current + Vector2i(x, y)):
 				return current+Vector2i(x, y)
-		
+
+#func find_reachable(astar:AStarGrid2D, current:Vector2, origin:Vector2):
+	#if(not astar.is_point_solid(current)):
+		#return current
+	#
+	#var closest = current + Vector2(-1, 0)
+	#for x in range(-1, 1, 2):
+		#for y in range(-1, 1, 2):
+			#if current.y+y >= 0 and current.y <= gridSize.y+y and \
+			#current.x+x >= 0 and current.x <= gridSize.x+x and\
+			#not astar.is_point_solid(current + Vector2(x, y)):
+				#if (closest-origin).length() <  (origin-(current+Vector2(x, y))).length():
+					#closest = current+Vector2(x, y)
+	#if not astar.is_point_solid(closest):
+		#return closest
 
 func printGrid():
 	for y in gridSize.y:

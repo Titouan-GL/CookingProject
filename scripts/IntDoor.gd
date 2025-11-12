@@ -18,5 +18,5 @@ func _process(_delta):
 	if(get_tree().get_nodes_in_group("freeServePoint")):
 		timer -= _delta
 		if(timer < 0):
-			timer = 30
+			timer = 5
 			generateClient()

@@ -16,7 +16,9 @@ var initialTime = 30
 
 func _enter_tree():
 	super._enter_tree()
-	if(available) : add_to_group("freeServePoint")
+	if(available) : 
+		add_to_group("freeServePoint")
+	destinationPoint.visible = available
 
 func _init():
 	taskType = Enum.TaskType.EMPTY
@@ -26,7 +28,7 @@ func _init():
 
 func newRecipe():
 	recipeWanted = [Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.CutTomCutSal].pick_random()
-	recipeWanted = Enum.RecipeNames.BurSalTom
+	#recipeWanted = Enum.RecipeNames.BurSteSalTom
 	timeLeft = initialTime
 	icon.UpdateAppearance(recipeWanted)
 
@@ -36,7 +38,6 @@ func reserved(c:Client):
 
 func clientSat():
 	navmesh.addObstacle(destinationPoint, true)
-
 
 func clientLeft():
 	navmesh.removeObstacle(destinationPoint)
@@ -53,6 +54,8 @@ func _ready():
 
 func serve(success:bool):
 	recipeWanted = Enum.RecipeNames.Empty
+	client.changeState(1) 
+	await get_tree().create_timer(3.0).timeout
 	add_to_group("freeServePoint")
 	hierarchy.servePoints.erase(self)
 	hierarchy.servePoints.append(self)

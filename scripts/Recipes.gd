@@ -119,6 +119,8 @@ static func recipesMix(recipe:Enum.RecipeNames, ingredient:Enum.RecipeNames, fir
 					return Enum.RecipeNames.BurTom
 				Enum.RecipeNames.PanCookCutSte:
 					return Enum.RecipeNames.BurSte
+				Enum.RecipeNames.CutTomCutSal:
+					return Enum.RecipeNames.BurSalTom
 		Enum.RecipeNames.BurSte:
 			match ingredient:
 				Enum.RecipeNames.CutSal:
@@ -148,7 +150,6 @@ static func recipesMix(recipe:Enum.RecipeNames, ingredient:Enum.RecipeNames, fir
 		Enum.RecipeNames.Empty:
 			return ingredient
 		Enum.RecipeNames.CutTom:
-			print(Enum.RecipeNames.keys()[ingredient])
 			match ingredient:
 				Enum.RecipeNames.CutSal:
 					return Enum.RecipeNames.CutTomCutSal
@@ -156,7 +157,11 @@ static func recipesMix(recipe:Enum.RecipeNames, ingredient:Enum.RecipeNames, fir
 					return Enum.RecipeNames.BurSteSalTom
 				Enum.RecipeNames.BurSal:
 					return Enum.RecipeNames.BurSalTom
-	if(first):
+		Enum.RecipeNames.BurSalTom:
+			match ingredient:
+				Enum.RecipeNames.PanCookCutSte:
+					return Enum.RecipeNames.BurSteSalTom
+	if(first): #on explore dans l'autre sens
 		return recipesMix(ingredient, recipe, false)
 	return Enum.RecipeNames.Empty
 

@@ -11,6 +11,8 @@ var addedVelocity:Vector3 = Vector3.ZERO
 var friction:float = 40
 var bumpStrength:float = 7
 var isCutting:bool = false #used for animation
+var grabTime = 0
+var maxGrabTime = 0.1
 
 func pickUp(obj:Movable):
 	if(objectInHand):
@@ -18,13 +20,18 @@ func pickUp(obj:Movable):
 	obj.pickUp(self)
 	objectInHand = obj
 
+func act():
+	grabTime = maxGrabTime
+
 func executeTask():
-	if(task):
+	if(task and grabTime <= 0):
 		var delta = get_process_delta_time()
 		var target = task.destination
 		if(target):
-			if((target is Interactible and target.storedObject == task.object and not target is IntGenerator) or objectInHand == task.object):	
+			#if target is IntServe : print(objectInHand, " " , task.object)
+			if((target is Interactible and target.storedObject == task.object and not target is IntGenerator) or objectInHand == task.object):
 				nav_agent.set_target_position(target.global_position)
+				#if target is IntServe : print("ok c'est valide")
 				if(nav_agent.is_navigation_finished()):
 					match order:
 						Enum.Order.USE:
@@ -33,16 +40,20 @@ func executeTask():
 							if target.use(delta):
 								task.complete(target.storedObject)
 						Enum.Order.STORE:
+							act()
 							target.store(objectInHand) 
 							task.complete(task.object)
 						Enum.Order.UNSTORE:
+							act()
 							var obj = target.unstore()
 							pickUp(obj)
 							task.complete(obj)
 						Enum.Order.PICKUP:
+							act()
 							pickUp(task.object)
 							task.complete(objectInHand)
 						Enum.Order.MIX:
+							act()
 							if(task.object is Ingredient):
 								task.destination.mix(task.object)
 								task.complete(task.destination)
@@ -52,6 +63,7 @@ func executeTask():
 			elif task.object:
 				nav_agent.set_target_position(task.object.global_position)
 				if(nav_agent.is_navigation_finished()):
+					act()
 					pickUp(task.object)
 
 func dropObject():
@@ -97,5 +109,7 @@ func _ready():
 func _enter_tree():
 	add_to_group("freeAgent")
 #
-#func _process(_delta):
+func _process(_delta):
+	if grabTime > 0:
+		grabTime -= _delta
 	#executeTask()

@@ -7,6 +7,9 @@ var bumpStrength:float = 2
 var target:Node3D = null
 var eatingState = 0 #1 if currently eating, 2 if already eaten
 @export var navAgent:NavAgent
+var sat:bool = false
+@export var fork:Node3D
+@export var knife:Node3D
 
 
 func executeTask():
@@ -16,10 +19,12 @@ func executeTask():
 			navAgent.set_target_position(target.destinationPoint.global_position)
 			target.reserved(self)
 		elif navAgent.is_navigation_finished() and target.recipeWanted == Enum.RecipeNames.Empty :
+			sat = true
 			target.newRecipe()
 			target.clientSat()
 	if eatingState == 2:
 		if target == null:
+			sat = false
 			target = get_tree().get_nodes_in_group("IntDOOR").pick_random()
 			navAgent.set_target_position(target.global_position)
 		elif navAgent.is_navigation_finished():
@@ -64,5 +69,8 @@ func _physics_process(delta):
 #
 func _process(_delta):
 	executeTask()
+	fork.visible = eatingState == 1
+	knife.visible = eatingState == 1
+	
 func _ready():
 	navAgent.isClient = true

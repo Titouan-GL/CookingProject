@@ -5,7 +5,7 @@ var AgentList:Array[Agent]
 var MovableList:Array[Movable]
 var RecipeNeededList:Array[Enum.RecipeNames]
 var servePoints:Array = []
-var printNewFrame = true
+var printNewFrame = false
 
 func findAgentClosestToObj(obj:Node3D) -> Agent:
 	var bestDistance:float = INF
@@ -142,23 +142,23 @@ func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] =
 	if(exists) : 
 		return exists
 
-	print(recipe, " " , needed)
+	#print(recipe, " " , needed)
 	if(Recipes.getTaskType(recipe) == Enum.TaskType.MIX):
-		for m in MovableList:
-			print(m.recipe, " " , Recipes.getRecipePrimaryIngredients(m.recipe))
-			if Recipes.dict_contains_keys(needed, Recipes.getRecipePrimaryIngredients(m.recipe)):
-				needed = Recipes.subtract_dictionary(needed, Recipes.getRecipePrimaryIngredients(m.recipe))
-				neededIngredient.append(m)
-				MovableList.erase(m)
+		var i = 0
+		while i < MovableList.size():
+			if Recipes.dict_contains_keys(needed, Recipes.getRecipePrimaryIngredients(MovableList[i].recipe)):
+				needed = Recipes.subtract_dictionary(needed, Recipes.getRecipePrimaryIngredients(MovableList[i].recipe))
+				neededIngredient.append(MovableList[i])
+				MovableList.erase(MovableList[i])
+			else:
+				i += 1
 
-	print(recipe, " " , needed)
+	#print(recipe, " " , needed)
 	for i in needed.keys():#if not we try recursively to find if every ingredient needed is present
 		for j in needed[i]:
 			var ing = TestRecipeDoable(i, foundIngredients)
 			if(ing):
 				foundIngredients.append(ing)
-
-
 
 	for i in needed.keys():#then we try to assemble the recipe with all the foundIngredients not used by the children
 		for j in range(needed[i]):
@@ -173,10 +173,10 @@ func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] =
 				if foundIndex != -1:
 					neededIngredient.append(foundIngredients[foundIndex])
 					needed = Recipes.subtract_dictionary(needed, {i:1})
-					
-	if Recipes.getTaskType(recipe) == Enum.TaskType.MIX:
+
+	if Recipes.getTaskType(recipe) == Enum.TaskType.MIX and neededIngredient.size() > 1:
 		for i in range(1, neededIngredient.size(), 1):
-			if(createTask(Enum.TaskType.MIX, [neededIngredient[0], neededIngredient[i]])):
+			if(createTask(Enum.TaskType.MIX, [neededIngredient[i], neededIngredient[0]])):
 				MovableList.erase(neededIngredient[i])
 				foundIngredients.erase(neededIngredient[i])
 	

@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://b67m5mnbrjcmo"]
+[gd_scene load_steps=22 format=3 uid="uid://b67m5mnbrjcmo"]
 
 [ext_resource type="Script" uid="uid://dtnxd4krtryr3" path="res://scripts/agent.gd" id="1_b2pv0"]
 [ext_resource type="Script" uid="uid://ddsrukse8lcsu" path="res://scripts/navAgent.gd" id="2_dg1j7"]
 [ext_resource type="PackedScene" uid="uid://bjpcpftxbnhw3" path="res://assets/blender/Animated/Skeleton.blend" id="2_umeaf"]
 [ext_resource type="Script" uid="uid://dls0esx18alxy" path="res://scripts/AgentAnimation.gd" id="3_yc63n"]
 [ext_resource type="PackedScene" uid="uid://1iydcxqvs7te" path="res://assets/blender/Div/Knife.blend" id="4_dg1j7"]
+[ext_resource type="AnimationLibrary" uid="uid://irlbgne2lxkd" path="res://assets/blender/Animations/SkeletonAnimations.res" id="6_qeyy3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noarx"]
 radius = 0.35
@@ -75,7 +76,7 @@ node_connections = [&"output", 0, &"Running", &"Running", 0, &"StaticStateMachin
 
 [node name="agent" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "storePoint")]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 11
 script = ExtResource("1_b2pv0")
 nav_agent = NodePath("feet/NavigationAgent")
 storePoint = NodePath("grabPoint")
@@ -107,37 +108,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.74930227, 0)
 script = ExtResource("3_yc63n")
 agent = NodePath("..")
 animationTree = NodePath("../AnimationTree")
-knife = NodePath("Armature/Skeleton3D/RightHandAttachment/Knife2")
+knife = NodePath("Armature/GeneralSkeleton/RightHandAttachment/Knife2")
 
-[node name="Skeleton3D" parent="Skeleton/Armature" index="0"]
-bones/0/position = Vector3(-1.7625289e-15, 0.3810462, -0.051285226)
-bones/0/rotation = Quaternion(-2.9802326e-08, 1.1920928e-07, -2.5243543e-29, 1)
-bones/1/position = Vector3(1.3974065e-09, 0.16516575, -0.0058611557)
-bones/1/rotation = Quaternion(-5.3033917e-05, -9.431408e-05, 2.6535197e-05, 1)
-bones/2/position = Vector3(-6.2008954e-23, 0.38677543, -3.7252903e-09)
-bones/2/rotation = Quaternion(-0.14972161, -0.003027713, -2.8886974e-05, 0.98872364)
-bones/3/position = Vector3(-2.1758904e-11, 0.316503, 5.7030736e-10)
-bones/3/rotation = Quaternion(0.015292624, -3.1021166e-06, -3.3866476e-05, 0.99988306)
-bones/4/rotation = Quaternion(-0.26002702, 0.44199926, 0.4662613, 0.72084886)
-bones/5/rotation = Quaternion(0.23584118, 0.79313993, 0.5242406, 0.20119591)
-bones/6/rotation = Quaternion(-0.017510545, -0.015236933, 0.49137002, 0.87064165)
-bones/7/rotation = Quaternion(6.270143e-05, -1.7723158e-05, -0.7586476, 0.6515012)
-bones/8/rotation = Quaternion(-0.0011660553, 0.0024167087, -0.6321739, 0.774822)
-bones/9/rotation = Quaternion(4.6060067e-09, 1.2731958e-07, 0.001058473, 0.99999946)
-bones/10/position = Vector3(-0.17379601, 0.017536279, -0.020514134)
-bones/10/rotation = Quaternion(-0.095714524, -0.00056450407, 0.99539137, 0.0058742454)
-bones/11/rotation = Quaternion(0.6897524, -0.0005094288, -3.5572026e-05, 0.72404516)
-bones/12/position = Vector3(0.17379601, 0.017536279, -0.020514058)
-bones/12/rotation = Quaternion(0.08237847, -0.0004858002, 0.9965837, -0.0058812764)
-bones/13/rotation = Quaternion(0.6897524, 0.00050942594, 3.5574547e-05, 0.72404516)
+[node name="GeneralSkeleton" parent="Skeleton/Armature" index="0"]
+bones/0/position = Vector3(-1.7625289e-15, 0.42640123, -0.051285226)
+bones/0/rotation = Quaternion(0.073279284, 2.6034024e-16, -1.7668053e-15, 0.9973115)
+bones/1/rotation = Quaternion(-0.058160637, -0.0012418065, -0.01399654, 0.99820834)
+bones/2/rotation = Quaternion(-0.039817434, 0.00020405874, -0.02137652, 0.99897826)
+bones/3/rotation = Quaternion(-1.4300633e-09, 0.00021951857, -0.004441645, 0.9999901)
+bones/4/rotation = Quaternion(-0.03679963, 0.004996073, -0.19790037, 0.9795184)
+bones/5/rotation = Quaternion(-0.7616667, -0.16204658, 0.2593428, 0.5712671)
+bones/6/rotation = Quaternion(-1.1224811e-08, -2.590376e-09, 5.5879354e-09, 1)
+bones/7/rotation = Quaternion(4.5505638e-10, -1.2879652e-10, 1.1920927e-07, 1)
+bones/8/rotation = Quaternion(1.0471836e-09, 0.001182593, 0.039028462, 0.9992374)
+bones/9/rotation = Quaternion(4.393641e-10, -5.0207838e-11, 1.8626451e-09, 1)
+bones/10/rotation = Quaternion(-0.082728945, -0.095345706, 0.007951712, 0.9919687)
+bones/11/rotation = Quaternion(0.2196722, 3.958121e-09, -0.042622555, 0.9746422)
+bones/12/rotation = Quaternion(-0.082828, 0.08205575, -0.006843345, 0.99315643)
+bones/13/rotation = Quaternion(0.25069475, -1.7811544e-08, 0.041710105, 0.96716726)
 
-[node name="RightHandAttachment" type="BoneAttachment3D" parent="Skeleton/Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.2913312, 0.67406267, -0.67879707, 0.7296823, 0.6154437, 0.29798076, 0.6186193, -0.40849513, -0.67114955, -0.28392527, 1.4424508, 0.10988544)
+[node name="RightHandAttachment" type="BoneAttachment3D" parent="Skeleton/Armature/GeneralSkeleton" index="1"]
+transform = Transform3D(0.95909005, -0.19108519, -0.20888443, 0.14941569, -0.28504547, 0.9467968, -0.24046041, -0.9392739, -0.24483313, -0.24693467, 1.1512966, 0.42975834)
 bone_name = "Hand.R"
 bone_idx = 6
 
-[node name="Knife2" parent="Skeleton/Armature/Skeleton3D/RightHandAttachment" instance=ExtResource("4_dg1j7")]
-transform = Transform3D(-0.02236478, -0.99726385, -0.07048476, -0.9921898, 0.013485901, 0.124014825, -0.12272516, 0.0727076, -0.9897748, -0.052975416, 0.096066475, -0.014490679)
+[node name="Knife2" parent="Skeleton/Armature/GeneralSkeleton/RightHandAttachment" instance=ExtResource("4_dg1j7")]
+transform = Transform3D(0.036159188, 0.99892133, -0.029170584, 0.994415, -0.03306912, 0.10023168, 0.09915814, -0.032632105, -0.9945374, 0.05468826, -0.069840014, 0.0029979944)
+
+[node name="AnimationPlayer" parent="Skeleton" index="1"]
+libraries = {
+&"": ExtResource("6_qeyy3")
+}
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../Skeleton")
