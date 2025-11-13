@@ -7,6 +7,7 @@ const meshes:Dictionary = {
 	Enum.RecipeNames.PotCutTomCutTom : preload("res://assets/blender/Recipes/TomSoup2.blend"),
 	Enum.RecipeNames.PotCutTomCutTomCutTom : preload("res://assets/blender/Recipes/TomSoup3.blend"),
 	Enum.RecipeNames.TomatoSoup : preload("res://assets/blender/Recipes/TomSoup.blend"),
+	Enum.RecipeNames.PlateTomatoSoup: preload("res://assets/blender/Recipes/TomSoupPlate.blend"),
 	Enum.RecipeNames.Ste: preload("res://assets/blender/Recipes/Raw_steack.blend"), 
 	Enum.RecipeNames.CutSte: preload("res://assets/blender/Recipes/CutSteak.blend"), 
 	Enum.RecipeNames.PanCutSte: preload("res://assets/blender/Recipes/CutSteak.blend"), 
@@ -16,7 +17,7 @@ const meshes:Dictionary = {
 	Enum.RecipeNames.Bur: preload("res://assets/blender/Recipes/BurgerBread.blend"), 
 	Enum.RecipeNames.BurSal: preload("res://assets/blender/Recipes/BurgSal.blend"), 
 	Enum.RecipeNames.BurSte: preload("res://assets/blender/Recipes/BurgSte.blend"), 
-	Enum.RecipeNames.Burger: preload("res://assets/blender/Recipes/BurgSalSte.blend")
+	Enum.RecipeNames.Burger: preload("res://assets/blender/Recipes/BurgSalSte.blend"),
 }
 
 const recipes:Dictionary[Enum.RecipeNames, Array] = { #array where 0 is the tasktype and 1 is an array of recipes

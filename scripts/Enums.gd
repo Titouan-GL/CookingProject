@@ -8,4 +8,5 @@ INITAL_MIXER}
 
 enum RecipeNames {Empty, EmptyPot, EmptyPan,
 Tom, CutTom, PotCutTom, PotCutTomCutTom, PotCutTomCutTomCutTom, TomatoSoup,
-Ste, CutSte, PanCutSte, PanCookCutSte, Sal, CutSal, Bur, BurSal, BurSte, Burger}
+Ste, CutSte, PanCutSte, PanCookCutSte, Sal, CutSal, Bur, BurSal, BurSte, Burger,
+PlateTomatoSoup, EmptyPlate, DirtyPlate}
