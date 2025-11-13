@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bo35ilxky1xkt"
-path="res://.godot/imported/Plate4.blend-d395369f4fd707998033a9e9e89ed145.scn"
+uid="uid://eqbcowyedfsq"
+path="res://.godot/imported/SteSalTom.blend-7a3f625427b192f08988b737b59282c1.scn"
 
 [deps]
 
-source_file="res://assets/blender/Div/Plate4.blend"
-dest_files=["res://.godot/imported/Plate4.blend-d395369f4fd707998033a9e9e89ed145.scn"]
+source_file="res://assets/blender/Recipes/SteSalTom.blend"
+dest_files=["res://.godot/imported/SteSalTom.blend-7a3f625427b192f08988b737b59282c1.scn"]
 
 [params]
 

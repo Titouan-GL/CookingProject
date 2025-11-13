@@ -15,7 +15,8 @@ var parentOffset:Vector3
 
 func UpdateAppearance():
 	var newMesh = Recipes.recipeToMesh(recipe)
-	if(visibleMesh) : visibleMesh.queue_free()
+	if(visibleMesh) : 
+		visibleMesh.queue_free()
 	if(newMesh):
 		visibleMesh = newMesh.instantiate()
 		add_child(visibleMesh)
@@ -23,7 +24,7 @@ func UpdateAppearance():
 		
 func pickUp(p:Node3D):
 	if(parent is Interactible):
-		parent.unStore()
+		parent.unstore()
 	if(parent is Agent):
 		parent.objectInHand = null
 	parent = p
@@ -36,7 +37,6 @@ func dropped():
 	parent = null
 
 func _process(_delta):
-	UpdateAppearance()
 	if(progressBar): 
 		if(progress != prevProgress):
 			progressBar.visible = true

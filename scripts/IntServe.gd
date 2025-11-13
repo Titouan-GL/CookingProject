@@ -10,6 +10,7 @@ var recipeWanted:Enum.RecipeNames = Enum.RecipeNames.Empty
 var gameManager:GameManager
 var client:Client = null
 var navmesh:Navigation
+@export var recipesOption:Array[Enum.RecipeNames]
 
 var timeLeft = 0
 var initialTime = 30
@@ -27,8 +28,8 @@ func _init():
 	obstacle = false
 
 func newRecipe():
-	recipeWanted = [Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.CutTomCutSal].pick_random()
-	recipeWanted = Enum.RecipeNames.EmptyPlate
+	recipeWanted = recipesOption.pick_random()
+	#recipeWanted = Enum.RecipeNames.TomatoSoup
 	timeLeft = initialTime
 	icon.UpdateAppearance(recipeWanted)
 
@@ -54,31 +55,31 @@ func _ready():
 
 func serve(success:bool):
 	recipeWanted = Enum.RecipeNames.Empty
-	client.changeState(1) 
-	await get_tree().create_timer(3.0).timeout
+	if(success):
+		gameManager.changeScore(200)
+		client.changeState(1)
+		await get_tree().create_timer(3.0).timeout
+		if storedObject is Plate:
+			storedObject.mealFinished()
+	else:
+		gameManager.changeScore(-200)
+		
 	add_to_group("freeServePoint")
 	hierarchy.servePoints.erase(self)
 	hierarchy.servePoints.append(self)
-	if(success):
-		gameManager.changeScore(200)
-	else:
-		gameManager.changeScore(-200)
 	client.changeState(2) 
 	client = null
 	clientLeft()
-	
+
 
 func store(i:Movable) -> bool:
-	if(i is MovableStorage):
-		i.empty()
-		serve(true)
-		return true
-	elif(i is Ingredient):
-		i.parent.objectInHand = null
-		i.queue_free()
-		serve(true)
-		return true
-	return false
+	if i is Plate:
+		i.served()
+	i.parent.objectInHand = null
+	i.parent = self
+	storedObject = i
+	serve(true)
+	return true
 
 func _process(_delta):
 	if(recipeWanted == Enum.RecipeNames.Empty):

@@ -32,7 +32,7 @@ func store(i:Movable) -> bool:
 		return true
 	return false
 
-func unStore() ->Movable:
+func unstore() ->Movable:
 	var temp = storedObject
 	storedObject = null
 	storedIngredient = null

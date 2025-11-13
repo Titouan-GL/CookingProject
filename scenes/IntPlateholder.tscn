@@ -10,7 +10,7 @@ script = ExtResource("1_urugd")
 storePoint = NodePath("storePoint")
 
 [node name="storePoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0241657, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90513813, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

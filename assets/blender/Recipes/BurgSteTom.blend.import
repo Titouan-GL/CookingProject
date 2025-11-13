@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cxbcckvrvkrh8"
-path="res://.godot/imported/Plate2.blend-095eb505e105bc88b12f074a645ec958.scn"
+uid="uid://dbonlk651sld2"
+path="res://.godot/imported/BurgSteTom.blend-b32700672af03f873d2c0630dae799e3.scn"
 
 [deps]
 
-source_file="res://assets/blender/Div/Plate2.blend"
-dest_files=["res://.godot/imported/Plate2.blend-095eb505e105bc88b12f074a645ec958.scn"]
+source_file="res://assets/blender/Recipes/BurgSteTom.blend"
+dest_files=["res://.godot/imported/BurgSteTom.blend-b32700672af03f873d2c0630dae799e3.scn"]
 
 [params]
 

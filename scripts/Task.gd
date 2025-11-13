@@ -10,7 +10,6 @@ var previousTasks:Array[Task]
 var nextTask:Task
 var hierarchy:Hierarchy
 var assignedAgent:Agent
-var giveDestinationTo:Array
 
 func _init(h:Hierarchy, t:Enum.TaskType, newObject:Node3D = null, newDestination:Node3D = null):
 	hierarchy = h
@@ -51,18 +50,11 @@ func previousTaskComplete(t:Task, n:Node3D):
 		object.assignedToTask(self)
 	previousTasks.erase(t)
 
-func complete(n:Node3D):
+func complete():
 	#print("task : "+ str(Enum.TaskType.keys()[type])  + " " + str(self) +  " completed by " + assignedAgent.name + " to " + destination.name)
 	assignedAgent.add_to_group("freeAgent")
 	assignedAgent.task = null 
 	assignedAgent.order = Enum.Order.NONE
-	
-	for t in giveDestinationTo:
-		t.destination = n
-	
-	if(nextTask):
-		n.occupied = true
-		nextTask.previousTaskComplete(self, n)
 		
 	#if(destination): print("task complete : " + Enum.TaskType.keys()[type] + " to " + destination.name + " by " + agent.name)
 	#else: print("task complete : " + Enum.TaskType.keys()[type] + " by " + agent.name)

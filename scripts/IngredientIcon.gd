@@ -13,3 +13,5 @@ func UpdateAppearance(recipe):
 	var newTex = Recipes.recipeToTexture(recipe)
 	if(newTex):
 		sprite2D.texture = newTex
+	else:
+		sprite2D.texture = null

@@ -17,17 +17,6 @@ func addProgress(s:Enum.TaskType, delta:float) -> bool:
 func canEmpty()->bool:
 	return recipe == Enum.RecipeNames.TomatoSoup
 
-func store(i:Ingredient):
-	i.parent.objectInHand = null
-	if(recipe == emptyName):
-		recipe = Recipes.recipesPot(i.recipe)
-	else:
-		recipe = Recipes.recipesMix(recipe, i.recipe)
-	i.queue_free()
-	UpdateAppearance()
-
-func mix(i:Ingredient): 
-	store(i)
 
 func _enter_tree():
 	groupName = "PotEMPTY"

@@ -3,19 +3,24 @@ class_name Hierarchy
 
 var AgentList:Array[Agent]
 var MovableList:Array[Movable]
+var DirtyPlateList:Array[Movable]
 var RecipeNeededList:Array[Enum.RecipeNames]
 var servePoints:Array = []
-var printNewFrame = false
+var printNewFrame = true
 
 func findAgentClosestToObj(obj:Node3D) -> Agent:
-	var bestDistance:float = INF
-	var bestAgent:Agent = null
-	for agent in AgentList:
-		var distance:float = agent.storePoint.global_position.distance_to(obj.global_position)
-		if(agent.task == null and distance < bestDistance):
-			bestDistance = distance
-			bestAgent = agent;
-	return bestAgent
+	if(obj):
+		var bestDistance:float = INF
+		var bestAgent:Agent = null
+		for agent in AgentList:
+			if(agent.objectInHand == obj):
+				return agent
+			var distance:float = agent.storePoint.global_position.distance_to(obj.global_position)
+			if(agent.objectInHand == null and agent.task == null and distance < bestDistance):
+				bestDistance = distance
+				bestAgent = agent;
+		return bestAgent
+	return null
 	
 func find_closest_interactible(agent:Node3D, object:Node3D, s:String) -> Interactible:
 	var bestDistance:float = INF
@@ -39,24 +44,44 @@ func find_free_interactible(s:String) -> Interactible:
 
 func find_free_plateHolder() -> Interactible:
 	for obj in get_tree().get_nodes_in_group("GeneratorEmptyPlate"):
-		if(obj.plateList > 0):
+		if(obj.plateList.size() > 0):
 			return obj
 	return null
 
+func find_closest_plateHolder(agent:Node3D) -> Interactible:
+	var bestDistance:float = INF
+	var bestInt:Interactible = null
+	for obj in get_tree().get_nodes_in_group("GeneratorEmptyPlate"):
+		var distance:float = obj.global_position.distance_to(agent.global_position)
+		if(not obj.occupied and not obj.storedObject and distance < bestDistance and obj.plateList.size() < 4):
+			bestDistance = distance
+			bestInt = obj;
+			
+	return bestInt
+
 func dropToNearestCounter(agent:Agent):
-	if(agent.objectInHand is MovableStorage and not agent.objectInHand is Plate): #permet de reposer les pan ou pot sur les stove
-		var nearestCooker = find_closest_interactible(agent, agent.objectInHand, "IntCOOK")
+	var obj = agent.objectInHand
+	if(obj is Plate and not obj.needed): 
+		var nearestPlateholder = find_closest_plateHolder(agent)
+		if(nearestPlateholder):
+			if(agent.task):
+				agent.task.abandon()
+			setAgentTarget(agent, Task.new(self, Enum.TaskType.STORE, obj), nearestPlateholder, Enum.Order.STORE)
+			return
+			
+	if(obj is MovableStorage and not obj is Plate): #permet de reposer les pan ou pot sur les stove
+		var nearestCooker = find_closest_interactible(agent, obj, "IntCOOK")
 		if(nearestCooker):
 			if(agent.task):
 				agent.task.abandon()
-			setAgentTarget(agent, Task.new(self, Enum.TaskType.STORE, agent.objectInHand), nearestCooker, Enum.Order.STORE)
+			setAgentTarget(agent, Task.new(self, Enum.TaskType.STORE, obj), nearestCooker, Enum.Order.STORE)
 			return
 	
-	var nearestCounter = find_closest_interactible(agent, agent.objectInHand, "IntSTORE")
+	var nearestCounter = find_closest_interactible(agent, obj, "IntSTORE")
 	if(nearestCounter):
 		if(agent.task):
 			agent.task.abandon()
-		setAgentTarget(agent, Task.new(self, Enum.TaskType.STORE, agent.objectInHand), nearestCounter, Enum.Order.STORE)
+		setAgentTarget(agent, Task.new(self, Enum.TaskType.STORE, obj), nearestCounter, Enum.Order.STORE)
 	else:
 		agent.dropObject()
 
@@ -101,8 +126,9 @@ func createTask(taskType:Enum.TaskType, needed:Array) -> bool:
 		Enum.TaskType.GENERATE_PLATE:
 			var dest = find_free_plateHolder()
 			var agent = findAgentClosestToObj(dest)
-			var task = Task.new(self, taskType, null, dest)
-			return setAgentTarget(agent, task, dest, Enum.Order.UNSTORE)
+			if(agent):
+				var task = Task.new(self, taskType, null, dest)
+				return setAgentTarget(agent, task, dest, Enum.Order.UNSTORE)
 		Enum.TaskType.CUT:
 			var obj = needed[0]
 			var agent = findAgentClosestToObj(obj)
@@ -147,6 +173,26 @@ func recipeExists(recipe:Enum.RecipeNames):
 			MovableList.erase(m)
 			return m
 
+func dict_value_sum(d: Dictionary) -> int:
+	var total := 0
+	for v in d.values():
+		total += v
+	return total
+
+
+func insert_sorted_dict(arr: Array, elem: Movable) -> void:
+	var target := dict_value_sum(Recipes.getRecipePrimaryIngredients(elem.recipe))
+	var low := 0
+	var high := arr.size()
+	while low < high:
+		var mid := (low + high) >> 1 
+		var mid_sum := dict_value_sum(Recipes.getRecipePrimaryIngredients(arr[mid].recipe))
+		if mid_sum < target:
+			high = mid 
+		else:
+			low = mid + 1 
+	arr.insert(low, elem)
+
 func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] = []): #return missing ingredients
 	var needed = Recipes.getNeeded(recipe).duplicate()
 	var neededIngredient:Array[Movable];
@@ -154,20 +200,25 @@ func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] =
 	if(exists) : 
 		return exists
 
-	#print(recipe, " " , needed)
+	if(recipe == 18 or recipe == 19 or recipe == 23) : print(recipe, " " , needed.keys().map(func(x):return Enum.RecipeNames.keys()[x]))
 	if(Recipes.getTaskType(recipe) == Enum.TaskType.MIX):
-		var i = 0
-		while i < MovableList.size():
-			if Recipes.dict_contains_keys(needed, Recipes.getRecipePrimaryIngredients(MovableList[i].recipe)):
-				needed = Recipes.subtract_dictionary(needed, Recipes.getRecipePrimaryIngredients(MovableList[i].recipe))
-				neededIngredient.append(MovableList[i])
-				MovableList.erase(MovableList[i])
-			else:
-				i += 1
-
-	#print(recipe, " " , needed)
+		var foundPlate = false
+		var arr:Array[Movable]
+		for i in MovableList:
+			if Recipes.dict_contains_keys(needed, Recipes.getRecipePrimaryIngredients(i.recipe)):
+				insert_sorted_dict(arr, i)#we order them to check the biggest first (this avoid most conflicts)
+		for i in arr:
+			if Recipes.dict_contains_keys(needed, Recipes.getRecipePrimaryIngredients(i.recipe)) and not (foundPlate and i is Plate):
+				needed = Recipes.subtract_dictionary(needed, Recipes.getRecipePrimaryIngredients(i.recipe))
+				neededIngredient.append(i)
+				if(i is Plate):
+					needed = Recipes.subtract_dictionary(needed, {Enum.RecipeNames.EmptyPlate:1})
+					foundPlate = true
+				MovableList.erase(i)
+	if(recipe == 18 or recipe == 19 or recipe == 23) : print(recipe, " " , needed.keys().map(func(x):return Enum.RecipeNames.keys()[x]))
+		
 	for i in needed.keys():#if not we try recursively to find if every ingredient needed is present
-		for j in needed[i]:
+		for j in range(needed[i]):
 			var ing = TestRecipeDoable(i, foundIngredients)
 			if(ing):
 				foundIngredients.append(ing)
@@ -187,10 +238,14 @@ func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] =
 					needed = Recipes.subtract_dictionary(needed, {i:1})
 
 	if Recipes.getTaskType(recipe) == Enum.TaskType.MIX and neededIngredient.size() > 1:
-		for i in range(1, neededIngredient.size(), 1):
-			if(createTask(Enum.TaskType.MIX, [neededIngredient[i], neededIngredient[0]])):
-				MovableList.erase(neededIngredient[i])
-				foundIngredients.erase(neededIngredient[i])
+		var k = 0
+		while k < neededIngredient.size()-1 and not neededIngredient[k] is MovableStorage:
+			k += 1
+		if neededIngredient[k] is MovableStorage:
+			for i in range(0, neededIngredient.size(), 1):
+				if(i != k and createTask(Enum.TaskType.MIX, [neededIngredient[i], neededIngredient[k]])):
+					MovableList.erase(neededIngredient[i])
+					foundIngredients.erase(neededIngredient[i])
 	
 	elif(needed == {}):
 		if(createTask(Recipes.getTaskType(recipe), neededIngredient)):
@@ -203,8 +258,13 @@ func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] =
 func initiateProcess():
 	MovableList = []
 	RecipeNeededList = []
+	DirtyPlateList = []
+	for plate in get_tree().get_nodes_in_group("dirtyPlate"):
+		DirtyPlateList.append(plate)
 	for movable in get_tree().get_nodes_in_group("movable"):
 		MovableList.append(movable)
+		if movable is Plate:
+			movable.setNeeded(true)
 	for a in AgentList:
 		a.task = null
 	for i in get_tree().get_nodes_in_group("interactible"):
@@ -214,6 +274,13 @@ func initiateProcess():
 func _process(_delta):
 	if(printNewFrame) : print("\n\nnewFrame")
 	initiateProcess()
+	for p in DirtyPlateList:
+		var agent = findAgentClosestToObj(p)
+		if(agent):
+			var dest = find_closest_interactible(agent, p, "IntCLEAN")
+			var task = Task.new(self, Enum.TaskType.CLEAN, p, dest)
+			setAgentTarget(agent, task, dest, Enum.Order.USE)
+
 	for p in servePoints:
 		if(p.recipeWanted != Enum.RecipeNames.Empty):
 			var recipeFinished = recipeExists(p.recipeWanted)
@@ -224,6 +291,14 @@ func _process(_delta):
 			else:
 				TestRecipeDoable(p.recipeWanted)
 
+####
+# remettre l'ordre de service dans le bon ordre (le moins de temps restant en premier)
+# tester le comportement des assiettes quand des clients s'en vont avant d'avoir mangé
+
+	for p in MovableList:
+		if p is Plate:
+			p.setNeeded(false)
+	
 	for a in AgentList:
 		if a.objectInHand:
 			if not a.task:

@@ -12,6 +12,23 @@ func _enter_tree():
 	progress = progressMaxValues.duplicate()
 	recipe = emptyName
 
+func store(i:Ingredient):
+	var newRecipe = Recipes.recipesMix(recipe, i.recipe)
+	if(newRecipe == Enum.RecipeNames.Empty):
+		recipe = i.recipe
+	else:
+		recipe = newRecipe
+	i.parent.objectInHand = null
+	i.queue_free()
+	UpdateAppearance()
+
+func mix(i:Ingredient): 
+	store(i)
+
+func mixRecipe(r:Enum.RecipeNames):
+	recipe = Recipes.recipesMix(recipe, r)
+	UpdateAppearance()
+	
 func empty() -> Enum.RecipeNames:
 	var prevRecipe = recipe
 	occupied = false

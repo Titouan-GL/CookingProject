@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://crmjnlgorvsy"]
+[gd_scene load_steps=29 format=3 uid="uid://crmjnlgorvsy"]
 
 [ext_resource type="PackedScene" uid="uid://b67m5mnbrjcmo" path="res://scenes/agent.tscn" id="1_noarx"]
 [ext_resource type="Texture2D" uid="uid://bhajo2s0i6gjk" path="res://assets/textures/05366bde9747af98448947536d59196f.jpg" id="1_tp51g"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dob2epewnhjov" path="res://scenes/clientTable.tscn" id="11_vknjm"]
 [ext_resource type="PackedScene" uid="uid://bd1dt0jxhqgkm" path="res://assets/blender/Deco/Pumpkin.blend" id="15_1hx7k"]
 [ext_resource type="PackedScene" uid="uid://cbowkrh8v3tix" path="res://assets/blender/Deco/Candles.blend" id="16_xlpor"]
+[ext_resource type="PackedScene" uid="uid://dc2dvh5ueasee" path="res://scenes/IntSink.tscn" id="19_rugfo"]
 [ext_resource type="PackedScene" uid="uid://bwgsl7tn345w6" path="res://scenes/Door.tscn" id="20_n0o6x"]
 [ext_resource type="PackedScene" uid="uid://pvmuoik2fi2n" path="res://scenes/IntPlateholder.tscn" id="21_8ujqh"]
 
@@ -45,7 +46,7 @@ uv1_scale = Vector3(0.3, 0.3, 0.3)
 uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i5arm"]
-size = Vector3(40, 1, 40)
+size = Vector3(19.56543, 1, 12.80648)
 
 [node name="Node3D" type="Node3D" node_paths=PackedStringArray("scoreLabel")]
 script = ExtResource("1_vknjm")
@@ -174,7 +175,7 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0040456057, 0, 0.000669539)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/Decor/invisiblewalls/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0040456057, 0, -0.000669539)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.000005, 13.390162, 0.5746796)
 shape = SubResource("BoxShape3D_i5arm")
 
 [node name="invisiblewalls2" type="MeshInstance3D" parent="Environnement/Decor"]
@@ -185,7 +186,7 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0040456057, 0, 0.000669539)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/Decor/invisiblewalls2/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004049301, 2.934721, -7.8265896)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.520592, 17.441612, -7.71574)
 shape = SubResource("BoxShape3D_i5arm")
 
 [node name="invisiblewalls3" type="MeshInstance3D" parent="Environnement/Decor"]
@@ -196,7 +197,7 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0040456057, 0, 0.000669539)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/Decor/invisiblewalls3/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0040456057, 0, -0.000669539)
+transform = Transform3D(1, 3.3407487e-22, 0, 3.3407487e-22, 1, 0, 0, 0, 1, -10.046461, 11.250268, -0.00067052245)
 shape = SubResource("BoxShape3D_i5arm")
 
 [node name="invisiblewalls4" type="MeshInstance3D" parent="Environnement/Decor"]
@@ -207,7 +208,7 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0040456057, 0, 0.000669539)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/Decor/invisiblewalls4/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004049301, 2.934721, -7.8265896)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.016226, 16.143173, -6.143934)
 shape = SubResource("BoxShape3D_i5arm")
 
 [node name="Interactible" type="Node3D" parent="Environnement"]
@@ -315,9 +316,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 0, 5)
 [node name="counter25" parent="Environnement/Interactible" instance=ExtResource("5_v6ncs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0000005, 0, 5)
 
-[node name="counter27" parent="Environnement/Interactible" instance=ExtResource("5_v6ncs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0000005, 0, 5)
-
 [node name="counter4" parent="Environnement/Interactible" instance=ExtResource("5_v6ncs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 5)
 
@@ -362,6 +360,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
 
 [node name="generator5" parent="Environnement/Interactible" instance=ExtResource("21_8ujqh")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -4, 0, 5)
+skeleton = NodePath("../../..")
+
+[node name="counter26" parent="Environnement/Interactible" instance=ExtResource("19_rugfo")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3, 0, 5)
 skeleton = NodePath("../../..")
 
 [node name="Hierarchy" type="Node3D" parent="."]

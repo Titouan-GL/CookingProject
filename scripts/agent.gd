@@ -38,28 +38,41 @@ func executeTask():
 							if(objectInHand):
 								target.store(objectInHand) 
 							if target.use(delta):
-								task.complete(target.storedObject)
+								if(task.type == Enum.TaskType.CLEAN):
+									act()
+									var obj = target.unstore()
+									pickUp(obj)
+								task.complete()
+									
 						Enum.Order.STORE:
 							act()
 							target.store(objectInHand) 
-							task.complete(task.object)
+							task.complete()
 						Enum.Order.UNSTORE:
 							act()
 							var obj = target.unstore()
 							pickUp(obj)
-							task.complete(obj)
+							task.complete()
 						Enum.Order.PICKUP:
 							act()
 							pickUp(task.object)
-							task.complete(objectInHand)
+							task.complete()
 						Enum.Order.MIX:
 							act()
-							if(task.object is Ingredient):
+							if(task.object is Ingredient): 
 								task.destination.mix(task.object)
-								task.complete(task.destination)
-							elif(task.object is MovableStorage):
-								task.destination.mixRecipe(task.object.empty())
-								task.complete(task.destination)
+							elif(task.destination is Ingredient):
+								task.object.mix(task.destination)
+							else: #both are movablestorage
+								if Recipes.getTaskType(task.object.recipe) == Enum.TaskType.INITAL_MIXER and Recipes.recipesMix(task.object.recipe, task.destination.recipe):
+									task.destination.mixRecipe(task.object.empty())
+								elif Recipes.getTaskType(task.destination.recipe) == Enum.TaskType.INITAL_MIXER and Recipes.recipesMix(task.object.recipe, task.destination.recipe):
+									task.object.mixRecipe(task.destination.empty())
+								elif task.object is Plate:
+									task.object.mixRecipe(task.destination.empty())
+								else:
+									task.destination.mixRecipe(task.object.empty())
+							task.complete()
 			elif task.object:
 				nav_agent.set_target_position(task.object.global_position)
 				if(nav_agent.is_navigation_finished()):

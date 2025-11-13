@@ -18,7 +18,7 @@ func canEmpty()->bool:
 
 func store(i:Ingredient):
 	if(recipe == emptyName): #if pan is empty, we merge with it
-		recipe = Recipes.recipesPot(i.recipe)
+		recipe = Recipes.recipesMix(recipe, i.recipe)
 		i.queue_free()
 		i.parent.objectInHand = null
 	else: #if not we merge what is in the pan with the other ingredient

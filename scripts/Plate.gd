@@ -1,31 +1,69 @@
 extends MovableStorage
 class_name Plate
 
+var eatenOn = false
+var needed = false
+@export var dirt:Node3D
 
 func UpdateAppearance():
+	if(visibleMesh):
+		visibleMesh.queue_free()
 	if(recipe != Enum.RecipeNames.EmptyPlate):
 		var newMesh = Recipes.recipeToPlateMesh(recipe)
-		if(visibleMesh) : visibleMesh.queue_free()
 		if(newMesh):
 			visibleMesh = newMesh.instantiate()
 			add_child(visibleMesh)
 			visibleMesh.set_position(Vector3.ZERO)
 
-func addProgress(_s:Enum.TaskType, _delta:float) -> bool:
+func addProgress(s:Enum.TaskType, delta:float) -> bool:
+	if(progress.has(s)):
+		progress[s] -= delta
+		progressBar.value = 1-(progress[s]/progressMaxValues[s])
+		if(progress[s] <= 0):
+			if(s == Enum.TaskType.CLEAN):
+				cleaned()
+			return true
 	return false
 
-
-func store(i:Ingredient):
-	recipe = i.recipe
-	i.queue_free()
-	i.parent.objectInHand = null
+func served():
+	remove_from_group("movable")
+	remove_from_group(groupName)
+	eatenOn = true
+	
+func mealFinished():
+	recipe = emptyName
+	eatenOn = false
+	dirt.visible = true
+	add_to_group("dirtyPlate")
 	UpdateAppearance()
 
+func cleaned():
+	dirt.visible = false
+	remove_from_group("dirtyPlate")
+	add_to_group("movable")
+	add_to_group(groupName)
+	progress = progressMaxValues.duplicate()
 
-func mix(i:Ingredient):
-	store(i)
+func stored():
+	remove_from_group("movable")
+	remove_from_group(groupName)
+	
+func unstored():
+	add_to_group("movable")
+	add_to_group(groupName)
+
+
+func setNeeded(v:bool):
+	needed = v
+
+func _process(_delta):
+	super._process(_delta)
+	#print(get_groups(), " " , needed)
 
 func _enter_tree():
 	groupName = "EmptyPlate"
 	emptyName = Enum.RecipeNames.EmptyPlate
+	progressMaxValues = {Enum.TaskType.CLEAN:3}
 	super._enter_tree()
+	remove_from_group("movable")
+	remove_from_group(groupName)

@@ -20,18 +20,23 @@ func _enter_tree():
 		plateList.append(inst)
 
 func store(i:Movable) -> bool:
-	if(plateList < 4 and i is Plate):
+	if(plateList.size() < 4 and i is Plate):
 		i.parent.objectInHand = null
 		i.pickUp(self)
 		i.parentOffset = Vector3(0, plateList.size() * 0.1, 0)
+		i.stored()
 		plateList.append(i)
 	return false
 	
 func unstore() -> Movable:
-	var inst = plateList[plateList.size()-1]
-	plateList.erase(inst)
-	inst.parentOffset = Vector3.ZERO
-	return inst
+	if(plateList.size() > 0):
+		var inst = plateList[plateList.size()-1]
+		plateList.erase(inst)
+		inst.parentOffset = Vector3.ZERO
+		inst.unstored()
+		inst.parent = null
+		return inst
+	return null
 
 func _process(_delta):
 	super._process(_delta)

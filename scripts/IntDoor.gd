@@ -15,8 +15,10 @@ func generateClient():
 	inst.global_transform = global_transform
 
 func _process(_delta):
-	if(get_tree().get_nodes_in_group("freeServePoint")):
-		timer -= _delta
-		if(timer < 0):
-			timer = 5
+	timer -= _delta
+	if(timer < 0):
+		timer = 7
+		if(get_tree().get_nodes_in_group("freeServePoint")):
+			generateClient()
+		if(get_tree().get_nodes_in_group("freeServePoint")):
 			generateClient()

@@ -16,8 +16,9 @@ func executeTask():
 	if eatingState == 0 :
 		if target == null:
 			target = get_tree().get_nodes_in_group("freeServePoint").pick_random()
-			navAgent.set_target_position(target.destinationPoint.global_position)
-			target.reserved(self)
+			if(target):
+				navAgent.set_target_position(target.destinationPoint.global_position)
+				target.reserved(self)
 		elif navAgent.is_navigation_finished() and target.recipeWanted == Enum.RecipeNames.Empty :
 			sat = true
 			target.newRecipe()
@@ -58,7 +59,7 @@ func _physics_process(delta):
 	var new_angle = lerp_angle(rotation.y, target_angle, delta *15)
 	rotation.y = new_angle
 	velocity = Vector3(0, -1, 0) + (direction+ addedVelocity).normalized() * SPEED
-	 
+
 	var collision = move_and_collide(velocity * delta, true)
 	if(collision and (collision.get_collider() is Agent or collision.get_collider() is Client)):
 		var dir:Vector3 = (collision.get_collider().global_position-global_position).normalized()
