@@ -9,6 +9,7 @@ var progressSpeed:float = 1
 var passive:bool
 var occupied:bool = false
 var canBeOccupied:bool = true
+var obstacle = true
 
 func _enter_tree():
 	add_to_group("Int"+Enum.TaskType.keys()[taskType])
@@ -43,5 +44,8 @@ func _process(_delta):
 		use(_delta)
 
 func _ready():
+	if(obstacle):
+		var navmesh = get_tree().get_first_node_in_group("navmesh")
+		navmesh.addObstacle(self)
 	if(storedObject):
 		storedObject.pickUp(self)

@@ -55,7 +55,6 @@ size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_7lutx")
 
 [node name="ProgressBar" type="ProgressBar" parent="SubViewport/Panel"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

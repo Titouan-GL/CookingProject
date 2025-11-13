@@ -1,0 +1,163 @@
+[gd_scene load_steps=23 format=3 uid="uid://c13jhhr13jjrl"]
+
+[ext_resource type="Script" uid="uid://uqp0n1go46pa" path="res://scripts/client.gd" id="1_1t5vp"]
+[ext_resource type="PackedScene" uid="uid://ekx2v3o8sjmk" path="res://assets/blender/Animated/Client.blend" id="2_1t5vp"]
+[ext_resource type="Script" uid="uid://ddsrukse8lcsu" path="res://scripts/navAgent.gd" id="2_r26j7"]
+[ext_resource type="Script" uid="uid://bkvhnqh6vp1la" path="res://scripts/ClientAnimation.gd" id="3_4tr0r"]
+[ext_resource type="PackedScene" uid="uid://djkr3jadx2lqp" path="res://assets/blender/Div/eatingKnife.blend" id="5_dipmf"]
+[ext_resource type="AnimationLibrary" uid="uid://irlbgne2lxkd" path="res://assets/blender/Animations/SkeletonAnimations.res" id="5_t0ykn"]
+[ext_resource type="PackedScene" uid="uid://d4j1smub7rsjq" path="res://assets/blender/Div/eatingFork.blend" id="6_5q6u5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noarx"]
+radius = 0.35
+height = 1.5112305
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_nkfwj"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lug0u"]
+animation = &"SkeletonAnimations/Running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qeyy3"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_q3gef"]
+states/Running/node = SubResource("AnimationNodeAnimation_lug0u")
+states/Running/position = Vector2(564, 46)
+states/Start/position = Vector2(157, 83)
+transitions = ["Start", "Running", SubResource("AnimationNodeStateMachineTransition_qeyy3")]
+graph_offset = Vector2(-47, 18)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y08pw"]
+animation = &"SkeletonAnimations/Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_da3od"]
+animation = &"SkeletonAnimations/Eating"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t0ykn"]
+animation = &"SkeletonAnimations/Sit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q3gef"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_da3od"]
+xfade_time = 0.3
+advance_mode = 2
+advance_expression = "sat"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dipmf"]
+xfade_time = 0.3
+advance_mode = 2
+advance_expression = "not sat"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5q6u5"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "eatingState == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_umycy"]
+xfade_time = 0.3
+advance_mode = 2
+advance_expression = "not sat"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tduqk"]
+states/PureIdle/node = SubResource("AnimationNodeAnimation_y08pw")
+states/PureIdle/position = Vector2(628, 49)
+states/SkeletonAnimations_Eating/node = SubResource("AnimationNodeAnimation_da3od")
+states/SkeletonAnimations_Eating/position = Vector2(711, 134)
+states/SkeletonAnimations_Sit/node = SubResource("AnimationNodeAnimation_t0ykn")
+states/SkeletonAnimations_Sit/position = Vector2(421, 142)
+states/Start/position = Vector2(179, 85)
+transitions = ["Start", "PureIdle", SubResource("AnimationNodeStateMachineTransition_q3gef"), "PureIdle", "SkeletonAnimations_Sit", SubResource("AnimationNodeStateMachineTransition_da3od"), "SkeletonAnimations_Sit", "PureIdle", SubResource("AnimationNodeStateMachineTransition_dipmf"), "SkeletonAnimations_Sit", "SkeletonAnimations_Eating", SubResource("AnimationNodeStateMachineTransition_5q6u5"), "SkeletonAnimations_Eating", "PureIdle", SubResource("AnimationNodeStateMachineTransition_umycy")]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nkfwj"]
+graph_offset = Vector2(-302.72202, -114.09122)
+nodes/StaticStateMachine/node = SubResource("AnimationNodeStateMachine_tduqk")
+nodes/StaticStateMachine/position = Vector2(-580, -60)
+nodes/RunningStateMachine/node = SubResource("AnimationNodeStateMachine_q3gef")
+nodes/RunningStateMachine/position = Vector2(-580, 180)
+nodes/Running/node = SubResource("AnimationNodeBlend2_nkfwj")
+nodes/Running/position = Vector2(-120, 80)
+node_connections = [&"output", 0, &"Running", &"Running", 0, &"StaticStateMachine", &"Running", 1, &"RunningStateMachine"]
+
+[node name="client" type="CharacterBody3D" node_paths=PackedStringArray("navAgent", "fork", "knife")]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_1t5vp")
+navAgent = NodePath("feet")
+fork = NodePath("Client/Armature/GeneralSkeleton/LhandAttachement2/eatingFork")
+knife = NodePath("Client/Armature/GeneralSkeleton/RhandAttachement/eatingKnife")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_noarx")
+
+[node name="grabPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.704)
+
+[node name="feet" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+script = ExtResource("2_r26j7")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="feet"]
+target_desired_distance = 0.3
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, -0.030419052, 0)
+shape = SubResource("CapsuleShape3D_noarx")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Client")
+tree_root = SubResource("AnimationNodeBlendTree_nkfwj")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Running/blend_amount = 0.0
+
+[node name="Client" parent="." node_paths=PackedStringArray("client", "animationTree") instance=ExtResource("2_1t5vp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.749, 0)
+script = ExtResource("3_4tr0r")
+client = NodePath("..")
+animationTree = NodePath("../AnimationTree")
+
+[node name="GeneralSkeleton" parent="Client/Armature" index="0"]
+bones/0/position = Vector3(-1.7625289e-15, 0.42870262, -0.051285226)
+bones/0/rotation = Quaternion(5.0487068e-29, 7.1054274e-15, 4.2351647e-22, 1)
+bones/1/rotation = Quaternion(5.8548624e-11, -4.479967e-09, 0.026811732, 0.9996406)
+bones/2/rotation = Quaternion(0.0009929423, -0.043330282, 0.016757594, 0.9989197)
+bones/3/rotation = Quaternion(0.0029705572, 3.9141566e-09, 0.025002481, 0.999683)
+bones/4/rotation = Quaternion(2.4868992e-14, 1.7763567e-14, -1.19209275e-07, 1)
+bones/5/rotation = Quaternion(-0.6816162, -0.04918536, -0.05254408, 0.7281617)
+bones/6/rotation = Quaternion(1.1622689e-08, -1.1428147e-09, 4.656613e-09, 1)
+bones/7/rotation = Quaternion(2.4868992e-14, -3.197442e-14, 1.1920927e-07, 1)
+bones/8/rotation = Quaternion(-0.79311466, 0.057231173, 0.04364273, 0.60480505)
+bones/9/rotation = Quaternion(3.047468e-09, -1.1089218e-09, 9.313225e-10, 1)
+bones/10/rotation = Quaternion(-0.7047058, -0.05822362, 0.058223605, 0.7047055)
+bones/11/rotation = Quaternion(-8.226715e-08, 4.1836756e-09, 9.280688e-10, 1)
+bones/12/rotation = Quaternion(-0.7038629, 0.06765367, -0.06765365, 0.70386297)
+bones/13/rotation = Quaternion(-7.9689116e-08, -4.3801265e-09, 3.1519752e-12, 1)
+
+[node name="RhandAttachement" type="BoneAttachment3D" parent="Client/Armature/GeneralSkeleton" index="1"]
+transform = Transform3D(0.98872465, 0.13986671, -0.05348722, 0.043592125, 0.072879255, 0.9963877, 0.14325956, -0.9874847, 0.06596043, -0.4317274, 0.8772073, 0.41048428)
+bone_name = "Hand.R"
+bone_idx = 6
+
+[node name="eatingKnife" parent="Client/Armature/GeneralSkeleton/RhandAttachement" instance=ExtResource("5_dipmf")]
+transform = Transform3D(-0.19936794, 0.9799247, -8.742278e-08, 0.9799247, 0.19936794, 0, 1.7429299e-08, -8.5667736e-08, -1, 0.005, 0, 0)
+visible = false
+
+[node name="LhandAttachement2" type="BoneAttachment3D" parent="Client/Armature/GeneralSkeleton" index="2"]
+transform = Transform3D(0.9902535, -0.12932858, -0.051693656, 0.015112617, -0.2691905, 0.96296835, -0.13845475, -0.9543639, -0.26461232, 0.39093453, 1.0704386, 0.39541405)
+bone_name = "Hand.L"
+bone_idx = 9
+
+[node name="eatingFork" parent="Client/Armature/GeneralSkeleton/LhandAttachement2" instance=ExtResource("6_5q6u5")]
+transform = Transform3D(0.21643965, -0.976296, 0, 0.976296, 0.21643965, 0, 0, 0, 1, -0.05, 0, 0)
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Client")
+libraries = {
+&"SkeletonAnimations": ExtResource("5_t0ykn")
+}
+
+[editable path="Client"]

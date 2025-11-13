@@ -35,6 +35,7 @@ func dropped():
 	parent = null
 
 func _process(_delta):
+	UpdateAppearance()
 	if(progressBar): 
 		if(progress != prevProgress):
 			progressBar.visible = true

@@ -23,8 +23,6 @@ func store(i:Ingredient):
 		recipe = Recipes.recipesPot(i.recipe)
 	else:
 		recipe = Recipes.recipesMix(recipe, i.recipe)
-		if(recipe == Enum.RecipeNames.PotCutTomCutTomCutTom):
-			remove_from_group(groupName)
 	i.queue_free()
 	UpdateAppearance()
 

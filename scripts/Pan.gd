@@ -1,7 +1,7 @@
 extends MovableCooker
 class_name Pan
 
-	
+
 func addProgress(s:Enum.TaskType, delta:float) -> bool:
 	if(recipe == Enum.RecipeNames.PanCutSte):
 		if(progress.has(s)):
@@ -17,18 +17,17 @@ func canEmpty()->bool:
 	return recipe == Enum.RecipeNames.PanCookCutSte
 
 func store(i:Ingredient):
-	i.parent.objectInHand = null
-	if(recipe == emptyName):
+	if(recipe == emptyName): #if pan is empty, we merge with it
 		recipe = Recipes.recipesPot(i.recipe)
-	else:
-		recipe = Recipes.recipesMix(recipe, i.recipe)
-		if(recipe == Enum.RecipeNames.PotCutTomCutTomCutTom):
-			remove_from_group(groupName)
-	i.queue_free()
+		i.queue_free()
+		i.parent.objectInHand = null
+	else: #if not we merge what is in the pan with the other ingredient
+		i.mixRecipe(recipe)
+		empty()
 	UpdateAppearance()
 
 
-func mix(i:Ingredient): 
+func mix(i:Ingredient):
 	store(i)
 
 func _enter_tree():
