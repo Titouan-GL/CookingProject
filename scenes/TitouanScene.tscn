@@ -1,8 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://crmjnlgorvsy"]
+[gd_scene load_steps=28 format=3 uid="uid://crmjnlgorvsy"]
 
 [ext_resource type="PackedScene" uid="uid://b67m5mnbrjcmo" path="res://scenes/agent.tscn" id="1_noarx"]
 [ext_resource type="Texture2D" uid="uid://bhajo2s0i6gjk" path="res://assets/textures/05366bde9747af98448947536d59196f.jpg" id="1_tp51g"]
-[ext_resource type="Script" uid="uid://dur60hwhqrq1l" path="res://scripts/GameManager.gd" id="1_vknjm"]
+[ext_resource type="Script" uid="uid://dur60hwhqrq1l" path="res://scripts/gameManager.gd" id="1_vknjm"]
 [ext_resource type="PackedScene" uid="uid://bb80rjlejrxap" path="res://scenes/IntCUT.tscn" id="2_pm7iv"]
 [ext_resource type="Script" uid="uid://pltmis4ddkxu" path="res://scripts/Navigation.gd" id="2_rugfo"]
 [ext_resource type="Script" uid="uid://dg83vouhqgm2u" path="res://scripts/TaskHierarchy.gd" id="3_a0tk4"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bd1dt0jxhqgkm" path="res://assets/blender/Deco/Pumpkin.blend" id="15_1hx7k"]
 [ext_resource type="PackedScene" uid="uid://cbowkrh8v3tix" path="res://assets/blender/Deco/Candles.blend" id="16_xlpor"]
 [ext_resource type="PackedScene" uid="uid://bwgsl7tn345w6" path="res://scenes/Door.tscn" id="20_n0o6x"]
+[ext_resource type="PackedScene" uid="uid://pvmuoik2fi2n" path="res://scenes/IntPlateholder.tscn" id="21_8ujqh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4xowi"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -314,9 +315,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 0, 5)
 [node name="counter25" parent="Environnement/Interactible" instance=ExtResource("5_v6ncs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0000005, 0, 5)
 
-[node name="counter26" parent="Environnement/Interactible" instance=ExtResource("5_v6ncs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0000005, 0, 5)
-
 [node name="counter27" parent="Environnement/Interactible" instance=ExtResource("5_v6ncs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0000005, 0, 5)
 
@@ -361,6 +359,10 @@ skeleton = NodePath("../../..")
 
 [node name="Door" parent="Environnement/Interactible" instance=ExtResource("20_n0o6x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="generator5" parent="Environnement/Interactible" instance=ExtResource("21_8ujqh")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -4, 0, 5)
+skeleton = NodePath("../../..")
 
 [node name="Hierarchy" type="Node3D" parent="."]
 script = ExtResource("3_a0tk4")

@@ -1,4 +1,4 @@
-extends MovableCooker
+extends MovableStorage
 class_name Pan
 
 

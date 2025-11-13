@@ -120,24 +120,24 @@ client = NodePath("..")
 animationTree = NodePath("../AnimationTree")
 
 [node name="GeneralSkeleton" parent="Client/Armature" index="0"]
-bones/0/position = Vector3(-1.7625289e-15, 0.42870262, -0.051285226)
+bones/0/position = Vector3(-1.7625289e-15, 0.38104624, -0.051285226)
 bones/0/rotation = Quaternion(5.0487068e-29, 7.1054274e-15, 4.2351647e-22, 1)
-bones/1/rotation = Quaternion(5.8548624e-11, -4.479967e-09, 0.026811732, 0.9996406)
-bones/2/rotation = Quaternion(0.0009929423, -0.043330282, 0.016757594, 0.9989197)
-bones/3/rotation = Quaternion(0.0029705572, 3.9141566e-09, 0.025002481, 0.999683)
+bones/1/rotation = Quaternion(-0.0002406462, -0.00042741778, 0.00012040593, 0.9999999)
+bones/2/rotation = Quaternion(0.11134013, -0.0009934745, -1.6786877e-05, 0.99378186)
+bones/3/rotation = Quaternion(2.4628521e-14, 3.1524505e-12, -9.457314e-12, 1)
 bones/4/rotation = Quaternion(2.4868992e-14, 1.7763567e-14, -1.19209275e-07, 1)
-bones/5/rotation = Quaternion(-0.6816162, -0.04918536, -0.05254408, 0.7281617)
-bones/6/rotation = Quaternion(1.1622689e-08, -1.1428147e-09, 4.656613e-09, 1)
-bones/7/rotation = Quaternion(2.4868992e-14, -3.197442e-14, 1.1920927e-07, 1)
-bones/8/rotation = Quaternion(-0.79311466, 0.057231173, 0.04364273, 0.60480505)
-bones/9/rotation = Quaternion(3.047468e-09, -1.1089218e-09, 9.313225e-10, 1)
-bones/10/rotation = Quaternion(-0.7047058, -0.05822362, 0.058223605, 0.7047055)
-bones/11/rotation = Quaternion(-8.226715e-08, 4.1836756e-09, 9.280688e-10, 1)
-bones/12/rotation = Quaternion(-0.7038629, 0.06765367, -0.06765365, 0.70386297)
-bones/13/rotation = Quaternion(-7.9689116e-08, -4.3801265e-09, 3.1519752e-12, 1)
+bones/5/rotation = Quaternion(0.0003190871, 2.100763e-05, -0.00013981268, 1)
+bones/6/rotation = Quaternion(-2.887864e-10, -1.5910683e-09, -5.3854925e-09, 1)
+bones/7/rotation = Quaternion(-0.22799172, 0.018773794, 0.050694734, 0.9721612)
+bones/8/rotation = Quaternion(-0.43445933, 0.119574346, -0.071586065, 0.88984406)
+bones/9/rotation = Quaternion(-0.08163177, -0.05213003, -0.26525113, 0.9593022)
+bones/10/rotation = Quaternion(-8.0571855e-10, -0.09567672, -2.9856784e-10, 0.9954125)
+bones/11/rotation = Quaternion(-8.224504e-08, 7.908966e-09, -3.2543373e-12, 1)
+bones/12/rotation = Quaternion(-1.8720102e-10, 0.08234062, 4.5099657e-10, 0.99660426)
+bones/13/rotation = Quaternion(-7.969055e-08, -4.147296e-09, -9.281706e-10, 1)
 
 [node name="RhandAttachement" type="BoneAttachment3D" parent="Client/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.98872465, 0.13986671, -0.05348722, 0.043592125, 0.072879255, 0.9963877, 0.14325956, -0.9874847, 0.06596043, -0.4317274, 0.8772073, 0.41048428)
+transform = Transform3D(0.99999964, 3.8736183e-05, -0.000812817, -3.8863807e-05, 1, -0.00015697998, 0.00081281085, 0.00015701145, 0.9999997, -0.35062912, 0.42584187, -0.03936292)
 bone_name = "Hand.R"
 bone_idx = 6
 
@@ -146,7 +146,7 @@ transform = Transform3D(-0.19936794, 0.9799247, -8.742278e-08, 0.9799247, 0.1993
 visible = false
 
 [node name="LhandAttachement2" type="BoneAttachment3D" parent="Client/Armature/GeneralSkeleton" index="2"]
-transform = Transform3D(0.9902535, -0.12932858, -0.051693656, 0.015112617, -0.2691905, 0.96296835, -0.13845475, -0.9543639, -0.26461232, 0.39093453, 1.0704386, 0.39541405)
+transform = Transform3D(0.89011115, 0.43646738, 0.13114204, -0.118857905, -0.055473253, 0.9913606, 0.43997142, -0.89800835, 0.0025002658, 0.37628856, 0.8149709, 0.4090813)
 bone_name = "Hand.L"
 bone_idx = 9
 

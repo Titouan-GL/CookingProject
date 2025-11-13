@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://pvmuoik2fi2n"]
+
+[ext_resource type="Script" uid="uid://d1m42sfuey5sm" path="res://scripts/IntPlateholder.gd" id="1_urugd"]
+[ext_resource type="PackedScene" uid="uid://bnvavykm0ls8k" path="res://assets/blender/Interactibles/StorePlate.blend" id="2_urugd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rc4kf"]
+
+[node name="generator" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
+script = ExtResource("1_urugd")
+storePoint = NodePath("storePoint")
+
+[node name="storePoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0241657, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5010861, 0)
+shape = SubResource("BoxShape3D_rc4kf")
+
+[node name="StorePlate" parent="." instance=ExtResource("2_urugd")]

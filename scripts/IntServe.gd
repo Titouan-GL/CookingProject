@@ -28,7 +28,7 @@ func _init():
 
 func newRecipe():
 	recipeWanted = [Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.CutTomCutSal].pick_random()
-	#recipeWanted = Enum.RecipeNames.BurSteSalTom
+	recipeWanted = Enum.RecipeNames.EmptyPlate
 	timeLeft = initialTime
 	icon.UpdateAppearance(recipeWanted)
 
@@ -69,7 +69,7 @@ func serve(success:bool):
 	
 
 func store(i:Movable) -> bool:
-	if(i is MovableCooker):
+	if(i is MovableStorage):
 		i.empty()
 		serve(true)
 		return true

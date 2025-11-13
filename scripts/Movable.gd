@@ -11,6 +11,7 @@ var progressMaxValues:Dictionary
 @export var recipe:Enum.RecipeNames = Enum.RecipeNames.Empty
 var visibleMesh:Node3D = null
 @export var progressBar:ProgressBar
+var parentOffset:Vector3
 
 func UpdateAppearance():
 	var newMesh = Recipes.recipeToMesh(recipe)
@@ -43,8 +44,8 @@ func _process(_delta):
 		else:
 			progressBar.visible = false
 	if parent:
-		global_position = Vector3(parent.storePoint.global_position)
-		global_rotation = Vector3(parent.storePoint.global_rotation)
+		global_position = Vector3(parent.storePoint.global_position + parentOffset)
+		global_rotation = Vector3(parent.storePoint.global_rotation + parentOffset)
 
 func _enter_tree():
 	add_to_group("movable")

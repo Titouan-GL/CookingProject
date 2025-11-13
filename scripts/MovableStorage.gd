@@ -1,6 +1,6 @@
 extends Movable
 
-class_name MovableCooker
+class_name MovableStorage
 
 
 var groupName:String

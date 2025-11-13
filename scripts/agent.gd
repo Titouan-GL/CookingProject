@@ -57,7 +57,7 @@ func executeTask():
 							if(task.object is Ingredient):
 								task.destination.mix(task.object)
 								task.complete(task.destination)
-							elif(task.object is MovableCooker):
+							elif(task.object is MovableStorage):
 								task.destination.mixRecipe(task.object.empty())
 								task.complete(task.destination)
 			elif task.object:

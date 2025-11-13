@@ -36,8 +36,15 @@ func find_free_interactible(s:String) -> Interactible:
 			return obj
 	return null
 
+
+func find_free_plateHolder() -> Interactible:
+	for obj in get_tree().get_nodes_in_group("GeneratorEmptyPlate"):
+		if(obj.plateList > 0):
+			return obj
+	return null
+
 func dropToNearestCounter(agent:Agent):
-	if(agent.objectInHand is MovableCooker): #permet de reposer les pan ou pot sur les stove
+	if(agent.objectInHand is MovableStorage and not agent.objectInHand is Plate): #permet de reposer les pan ou pot sur les stove
 		var nearestCooker = find_closest_interactible(agent, agent.objectInHand, "IntCOOK")
 		if(nearestCooker):
 			if(agent.task):
@@ -91,6 +98,11 @@ func createTask(taskType:Enum.TaskType, needed:Array) -> bool:
 			var agent = findAgentClosestToObj(dest)
 			var task = Task.new(self, taskType, null, dest)
 			return setAgentTarget(agent, task, dest, Enum.Order.UNSTORE)
+		Enum.TaskType.GENERATE_PLATE:
+			var dest = find_free_plateHolder()
+			var agent = findAgentClosestToObj(dest)
+			var task = Task.new(self, taskType, null, dest)
+			return setAgentTarget(agent, task, dest, Enum.Order.UNSTORE)
 		Enum.TaskType.CUT:
 			var obj = needed[0]
 			var agent = findAgentClosestToObj(obj)
@@ -109,7 +121,7 @@ func createTask(taskType:Enum.TaskType, needed:Array) -> bool:
 		Enum.TaskType.MIX:
 			var obj = needed[0]
 			var dest = needed[1]
-			if(needed[0] is MovableCooker):
+			if(needed[0] is MovableStorage):
 				obj = needed[1]
 				dest = needed[0]
 			var agent = findAgentClosestToObj(obj)

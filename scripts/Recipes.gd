@@ -7,7 +7,6 @@ const meshes:Dictionary = {
 	Enum.RecipeNames.PotCutTomCutTom : preload("res://assets/blender/Recipes/TomSoup2.blend"),
 	Enum.RecipeNames.PotCutTomCutTomCutTom : preload("res://assets/blender/Recipes/TomSoup3.blend"),
 	Enum.RecipeNames.TomatoSoup : preload("res://assets/blender/Recipes/TomSoup.blend"),
-	Enum.RecipeNames.PlateTomatoSoup: preload("res://assets/blender/Recipes/TomSoupPlate.blend"),
 	Enum.RecipeNames.Ste: preload("res://assets/blender/Recipes/Raw_steack.blend"), 
 	Enum.RecipeNames.CutSte: preload("res://assets/blender/Recipes/CutSteak.blend"), 
 	Enum.RecipeNames.PanCutSte: preload("res://assets/blender/Recipes/CutSteak.blend"), 
@@ -24,6 +23,10 @@ const meshes:Dictionary = {
 	Enum.RecipeNames.CutTomCutSal: preload("res://assets/blender/Recipes/CutTomCutSal.blend"),
 }
 
+const meshesInPlateOverride:Dictionary = {
+	Enum.RecipeNames.TomatoSoup : preload("res://assets/blender/Recipes/TomSoupPlate.blend"),
+}
+
 const textures:Dictionary = {
 	Enum.RecipeNames.TomatoSoup : preload("res://assets/textures/TomatoSoupIcon.png"),
 	Enum.RecipeNames.BurSteSal: preload("res://assets/textures/burgerIcon.png"),
@@ -33,13 +36,14 @@ const textures:Dictionary = {
 
 const recipes:Dictionary[Enum.RecipeNames, Array] = { #array where 0 is the tasktype and 1 is an dictionary of recipes
 	Enum.RecipeNames.EmptyPot: [Enum.TaskType.INITAL_MIXER, {}],
+	Enum.RecipeNames.EmptyPlate: [Enum.TaskType.GENERATE_PLATE, {}],
+	Enum.RecipeNames.EmptyPan: [Enum.TaskType.INITAL_MIXER, {}],
 	Enum.RecipeNames.Tom: [Enum.TaskType.GENERATE_TOMATO, {}],
 	Enum.RecipeNames.CutTom: [Enum.TaskType.CUT, {Enum.RecipeNames.Tom:1}],
 	Enum.RecipeNames.PotCutTom: [Enum.TaskType.MIX, {Enum.RecipeNames.CutTom:1, Enum.RecipeNames.EmptyPot:1}],
 	Enum.RecipeNames.PotCutTomCutTom: [Enum.TaskType.MIX, {Enum.RecipeNames.CutTom:2, Enum.RecipeNames.EmptyPot:1}],
 	Enum.RecipeNames.PotCutTomCutTomCutTom: [Enum.TaskType.MIX, {Enum.RecipeNames.CutTom:3, Enum.RecipeNames.EmptyPot:1}],
 	Enum.RecipeNames.TomatoSoup: [Enum.TaskType.COOK, {Enum.RecipeNames.PotCutTomCutTomCutTom:1}],
-	Enum.RecipeNames.EmptyPan: [Enum.TaskType.INITAL_MIXER, {}],
 	Enum.RecipeNames.Bur: [Enum.TaskType.GENERATE_BURGER, {}],
 	Enum.RecipeNames.Ste: [Enum.TaskType.GENERATE_STEAK, {}],
 	Enum.RecipeNames.CutSte: [Enum.TaskType.CUT, {Enum.RecipeNames.Ste:1}],
@@ -103,6 +107,11 @@ static func getTaskType(recipe:Enum.RecipeNames) -> Enum.TaskType:
 		return Enum.TaskType.NONE
 
 static func recipeToMesh(recipe:Enum.RecipeNames) -> PackedScene:
+	if(meshes.has(recipe)): return meshes[recipe]
+	return null
+
+static func recipeToPlateMesh(recipe:Enum.RecipeNames) -> PackedScene:
+	if(meshesInPlateOverride.has(recipe)): return meshesInPlateOverride[recipe]
 	if(meshes.has(recipe)): return meshes[recipe]
 	return null
 

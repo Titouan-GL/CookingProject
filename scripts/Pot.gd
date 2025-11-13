@@ -1,4 +1,4 @@
-extends MovableCooker
+extends MovableStorage
 class_name Pot
 @export var mesh:MeshInstance3D
 
