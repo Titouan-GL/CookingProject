@@ -24,6 +24,7 @@ const meshes:Dictionary = {
 	Enum.RecipeNames.CutTomCutSal: preload("res://assets/blender/Recipes/CutTomCutSal.blend"),
 	Enum.RecipeNames.TomatoSoup : preload("res://assets/blender/Recipes/TomSoupPlate.blend"),
 	Enum.RecipeNames.SteSalTom : preload("res://assets/blender/Recipes/SteSalTom.blend"),
+	Enum.RecipeNames.SteSal : preload("res://assets/blender/Recipes/SteSal.blend"),
 }
 
 const meshesInPlateOverride:Dictionary = {
@@ -67,6 +68,21 @@ const recipes:Dictionary[Enum.RecipeNames, Array] = { #array where 0 is the task
 	Enum.RecipeNames.SteSalTom:[Enum.TaskType.MIX, {Enum.RecipeNames.CutSte:1, Enum.RecipeNames.CutSal:1, Enum.RecipeNames.CutTom:1, Enum.RecipeNames.EmptyPlate:1}],
 }
 
+const scores:Dictionary[Enum.RecipeNames, int] = { 
+	Enum.RecipeNames.TomatoSoup: 200,
+	Enum.RecipeNames.CutTomCutSal: 130,
+	Enum.RecipeNames.BurSteSal: 200,
+	Enum.RecipeNames.BurSteSalTom: 240,
+}
+
+
+static func getScore(recipe:Enum.RecipeNames):
+	if(recipe in scores.keys()):
+		return scores[recipe]
+	else:
+		return -100
+
+
 static func getRecipePrimaryIngredients(recipe:Enum.RecipeNames, nb:int = 1):
 	var arr = {}
 	if(recipe in recipes.keys() and recipes[recipe][0] == Enum.TaskType.MIX):
@@ -75,7 +91,7 @@ static func getRecipePrimaryIngredients(recipe:Enum.RecipeNames, nb:int = 1):
 		return arr
 	else:
 		return {recipe:nb}
-		
+
 static func add_dictionary(dict_a: Dictionary, dict_b: Dictionary):
 	for key in dict_b.keys():
 		if key in dict_a:
@@ -131,6 +147,8 @@ static func recipesMix(recipe:Enum.RecipeNames, ingredient:Enum.RecipeNames, fir
 			match ingredient:
 				Enum.RecipeNames.CutTomCutSal:
 					return Enum.RecipeNames.SteSalTom
+				Enum.RecipeNames.CutSal:
+					return Enum.RecipeNames.SteSal
 		Enum.RecipeNames.EmptyPlate:
 			match ingredient:
 				Enum.RecipeNames.PotTomatoSoup:

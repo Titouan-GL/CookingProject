@@ -41,6 +41,7 @@ func _enter_tree():
 	prevProgress = progress.duplicate()
 	add_to_group(Enum.RecipeNames.keys()[recipe])
 	UpdateAppearance()
+	
 
 func cut():
 	UpdateRecipe(Recipes.recipesCut(recipe))

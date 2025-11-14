@@ -52,3 +52,4 @@ func _enter_tree():
 
 func _ready():
 	prevProgress = progress.duplicate()
+	UpdateAppearance()

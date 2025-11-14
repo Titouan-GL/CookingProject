@@ -1,6 +1,6 @@
 extends CharacterBody3D
 class_name Client
-const SPEED = 3
+const SPEED = 2
 var addedVelocity:Vector3 = Vector3.ZERO
 var friction:float = 40
 var bumpStrength:float = 2

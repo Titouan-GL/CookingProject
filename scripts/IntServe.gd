@@ -13,7 +13,7 @@ var navmesh:Navigation
 @export var recipesOption:Array[Enum.RecipeNames]
 
 var timeLeft = 0
-var initialTime = 30
+var initialTime = 15
 
 func _enter_tree():
 	super._enter_tree()
@@ -38,6 +38,7 @@ func reserved(c:Client):
 	client = c
 
 func clientSat():
+	hierarchy.servePoints.append(self)
 	navmesh.addObstacle(destinationPoint, true)
 
 func clientLeft():
@@ -51,26 +52,31 @@ func _ready():
 	hierarchy = get_tree().get_nodes_in_group("Hierarchy")[0]
 	gameManager = get_tree().get_nodes_in_group("GameManager")[0]
 	
-	hierarchy.servePoints.append(self)
 
 func serve(success:bool):
-	recipeWanted = Enum.RecipeNames.Empty
+	hierarchy.servePoints.erase(self)
 	if(success):
-		gameManager.changeScore(200)
+		gameManager.changeScore(Recipes.getScore(recipeWanted))
 		client.changeState(1)
+		recipeWanted = Enum.RecipeNames.Empty
 		await get_tree().create_timer(3.0).timeout
 		if storedObject is Plate:
 			storedObject.mealFinished()
 	else:
-		gameManager.changeScore(-200)
+		print("clientLeft")
+		add_to_group("freeServePoint")
+		gameManager.changeScore(-Recipes.getScore(recipeWanted))
+		recipeWanted = Enum.RecipeNames.Empty
 		
-	add_to_group("freeServePoint")
-	hierarchy.servePoints.erase(self)
-	hierarchy.servePoints.append(self)
 	client.changeState(2) 
 	client = null
 	clientLeft()
-
+	
+func unstore() ->Movable:
+	add_to_group("freeServePoint")
+	hierarchy.servePoints.erase(self)
+	hierarchy.servePoints.append(self)
+	return super.unstore()
 
 func store(i:Movable) -> bool:
 	if i is Plate:

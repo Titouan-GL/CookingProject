@@ -10,23 +10,24 @@ func _enter_tree():
 	super._enter_tree()
 	add_to_group(groupName)
 	progress = progressMaxValues.duplicate()
-	recipe = emptyName
+	if(recipe == Enum.RecipeNames.Empty):
+		recipe = emptyName
+	UpdateAppearance()
 
 func store(i:Ingredient):
-	var newRecipe = Recipes.recipesMix(recipe, i.recipe)
-	if(newRecipe == Enum.RecipeNames.Empty):
-		recipe = i.recipe
-	else:
-		recipe = newRecipe
+	mixRecipe(i.recipe)
 	i.parent.objectInHand = null
 	i.queue_free()
-	UpdateAppearance()
 
 func mix(i:Ingredient): 
 	store(i)
 
 func mixRecipe(r:Enum.RecipeNames):
-	recipe = Recipes.recipesMix(recipe, r)
+	var newRecipe = Recipes.recipesMix(recipe, r)
+	if(newRecipe == Enum.RecipeNames.Empty):
+		recipe = r
+	else:
+		recipe = newRecipe
 	UpdateAppearance()
 	
 func empty() -> Enum.RecipeNames:

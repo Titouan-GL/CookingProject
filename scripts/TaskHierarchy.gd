@@ -6,7 +6,7 @@ var MovableList:Array[Movable]
 var DirtyPlateList:Array[Movable]
 var RecipeNeededList:Array[Enum.RecipeNames]
 var servePoints:Array = []
-var printNewFrame = true
+var printNewFrame = false
 
 func findAgentClosestToObj(obj:Node3D) -> Agent:
 	if(obj):
@@ -200,7 +200,7 @@ func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] =
 	if(exists) : 
 		return exists
 
-	if(recipe == 18 or recipe == 19 or recipe == 23) : print(recipe, " " , needed.keys().map(func(x):return Enum.RecipeNames.keys()[x]))
+	#if(recipe == 18 or recipe == 19 or recipe == 23) : print(recipe, " " , needed.keys().map(func(x):return Enum.RecipeNames.keys()[x]))
 	if(Recipes.getTaskType(recipe) == Enum.TaskType.MIX):
 		var foundPlate = false
 		var arr:Array[Movable]
@@ -215,7 +215,7 @@ func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] =
 					needed = Recipes.subtract_dictionary(needed, {Enum.RecipeNames.EmptyPlate:1})
 					foundPlate = true
 				MovableList.erase(i)
-	if(recipe == 18 or recipe == 19 or recipe == 23) : print(recipe, " " , needed.keys().map(func(x):return Enum.RecipeNames.keys()[x]))
+	#if(recipe == 18 or recipe == 19 or recipe == 23) : print(recipe, " " , needed.keys().map(func(x):return Enum.RecipeNames.keys()[x]))
 		
 	for i in needed.keys():#if not we try recursively to find if every ingredient needed is present
 		for j in range(needed[i]):
@@ -272,7 +272,7 @@ func initiateProcess():
 			i.occupied = false
 
 func _process(_delta):
-	if(printNewFrame) : print("\n\nnewFrame")
+	if(printNewFrame) : print("\nframe")
 	initiateProcess()
 	for p in DirtyPlateList:
 		var agent = findAgentClosestToObj(p)
@@ -291,12 +291,8 @@ func _process(_delta):
 			else:
 				TestRecipeDoable(p.recipeWanted)
 
-####
-# remettre l'ordre de service dans le bon ordre (le moins de temps restant en premier)
-# tester le comportement des assiettes quand des clients s'en vont avant d'avoir mangé
-
 	for p in MovableList:
-		if p is Plate:
+		if p is Plate and p.recipe == Enum.RecipeNames.EmptyPlate:
 			p.setNeeded(false)
 	
 	for a in AgentList:

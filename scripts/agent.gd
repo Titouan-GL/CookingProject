@@ -11,6 +11,7 @@ var addedVelocity:Vector3 = Vector3.ZERO
 var friction:float = 40
 var bumpStrength:float = 7
 var isCutting:bool = false #used for animation
+var isCleaning:bool = false #used for animation
 var grabTime = 0
 var maxGrabTime = 0.1
 
@@ -25,6 +26,10 @@ func act():
 
 func executeTask():
 	if(task and grabTime <= 0):
+		#if(objectInHand):
+			#print(name, " " , Enum.TaskType.keys()[task.type], " ", Enum.RecipeNames.keys()[objectInHand.recipe])
+		#else:
+			#print(name, " " , Enum.TaskType.keys()[task.type], " nothing in hands")
 		var delta = get_process_delta_time()
 		var target = task.destination
 		if(target):
@@ -64,14 +69,13 @@ func executeTask():
 							elif(task.destination is Ingredient):
 								task.object.mix(task.destination)
 							else: #both are movablestorage
-								if Recipes.getTaskType(task.object.recipe) == Enum.TaskType.INITAL_MIXER and Recipes.recipesMix(task.object.recipe, task.destination.recipe):
-									task.destination.mixRecipe(task.object.empty())
-								elif Recipes.getTaskType(task.destination.recipe) == Enum.TaskType.INITAL_MIXER and Recipes.recipesMix(task.object.recipe, task.destination.recipe):
-									task.object.mixRecipe(task.destination.empty())
-								elif task.object is Plate:
+								if(task.object.emptyName in Recipes.getRecipePrimaryIngredients(Recipes.recipesMix(task.destination.recipe, task.object.recipe))):
 									task.object.mixRecipe(task.destination.empty())
 								else:
-									task.destination.mixRecipe(task.object.empty())
+									if(task.object.recipe == task.object.emptyName):
+										task.object.mixRecipe(task.destination.empty())
+									else:
+										task.destination.mixRecipe(task.object.empty())
 							task.complete()
 			elif task.object:
 				nav_agent.set_target_position(task.object.global_position)

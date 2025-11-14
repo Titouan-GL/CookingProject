@@ -60,6 +60,12 @@ func _process(_delta):
 	super._process(_delta)
 	#print(get_groups(), " " , needed)
 
+func empty() -> Enum.RecipeNames:
+	var prevRecipe = recipe
+	recipe = emptyName
+	UpdateAppearance()
+	return prevRecipe
+
 func _enter_tree():
 	groupName = "EmptyPlate"
 	emptyName = Enum.RecipeNames.EmptyPlate

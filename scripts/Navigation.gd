@@ -143,7 +143,7 @@ func getNextPosition(startNode, endNode, isClient = false):
 	if endNode is Vector3 : endPos3D = endNode
 	var startPos2D = posToGrid(startPos3D)
 	var astarUsed = astarClient if isClient else astarCooks
-	var endPos2D = find_reachable(astarUsed, posToGrid(endPos3D))
+	var endPos2D = find_reachable(astarUsed, posToGrid(endPos3D), startPos2D)
 	if(endPos2D):
 		endPos3D = gridToPos(endPos2D, endPos3D)
 		var path = astarUsed.get_point_path(startPos2D, endPos2D)
@@ -168,29 +168,46 @@ func get_full_path(startNode, endNode, isClient = false):
 	if endNode is Vector3 : endPos3D = endNode
 	var startPos2D = posToGrid(startPos3D)
 	var astarUsed = astarClient if isClient else astarCooks
-	var endPos2D = find_reachable(astarUsed, posToGrid(endPos3D))
+	var endPos2D = find_reachable(astarUsed, posToGrid(endPos3D), startPos2D)
 	if(endPos2D):
 		return astarUsed.get_point_path(startPos2D, endPos2D)
 	else:
 		return null
 	
 
-func find_reachable(astar:AStarGrid2D, current:Vector2i):
+func find_reachable(astar:AStarGrid2D, current:Vector2i, agent:Vector2i):
 	if(not astar.is_point_solid(current)):
 		return current
+	
+	var bestDist = INF
+	var bestCell = null;
 	for x in range(-1, 2, 2):
-		if current.x+x >= 0 and current.x <= gridSize.x+x and not astar.is_point_solid(current + Vector2i(x, 0)):
-			return current+Vector2i(x, 0)
+		var newCell = current + Vector2i(x, 0)
+		if newCell.x >= 0 and newCell.x <= gridSize.x and not astar.is_point_solid(newCell):
+			if (agent - newCell).length() < bestDist:
+				bestDist = (agent - newCell).length()
+				bestCell = newCell
 	for y in range(-1, 2, 2):
-		if current.y+y >= 0 and current.y <= gridSize.y+y and not astar.is_point_solid(current + Vector2i(0, y)):
-			return current+Vector2i(0, y)
+		var newCell = current + Vector2i(0, y)
+		if newCell.y >= 0 and newCell.y <= gridSize.y and not astar.is_point_solid(newCell):
+			if (agent - newCell).length() < bestDist:
+				bestDist = (agent - newCell).length()
+				bestCell = newCell
+	
+	if bestCell: #on évite d'être en diagonale si possible
+		return bestCell
 	
 	for x in range(-1, 2, 2):
 		for y in range(-1, 2, 2):
-			if current.y+y >= 0 and current.y <= gridSize.y+y and \
-			current.x+x >= 0 and current.x <= gridSize.x+x and\
+			var newCell = current + Vector2i(x, y)
+			if newCell.y >= 0 and newCell.y <= gridSize.y and \
+			newCell.x >= 0 and newCell.x <= gridSize.x and\
 			not astar.is_point_solid(current + Vector2i(x, y)):
-				return current+Vector2i(x, y)
+				if (agent - newCell).length() < bestDist:
+					bestDist = (agent - newCell).length()
+					bestCell = newCell
+	
+	return bestCell
 
 #func find_reachable(astar:AStarGrid2D, current:Vector2, origin:Vector2):
 	#if(not astar.is_point_solid(current)):
