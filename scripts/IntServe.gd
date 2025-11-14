@@ -13,7 +13,7 @@ var navmesh:Navigation
 @export var recipesOption:Array[Enum.RecipeNames]
 
 var timeLeft = 0
-var initialTime = 15
+var initialTime = 25
 
 func _enter_tree():
 	super._enter_tree()

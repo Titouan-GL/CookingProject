@@ -6,7 +6,7 @@ var MovableList:Array[Movable]
 var DirtyPlateList:Array[Movable]
 var RecipeNeededList:Array[Enum.RecipeNames]
 var servePoints:Array = []
-var printNewFrame = false
+var printNewFrame = true
 
 func findAgentClosestToObj(obj:Node3D) -> Agent:
 	if(obj):
@@ -270,6 +270,7 @@ func initiateProcess():
 	for i in get_tree().get_nodes_in_group("interactible"):
 		if not i.storedObject:
 			i.occupied = false
+	print(MovableList.map(func(x): return Enum.RecipeNames.keys()[x.recipe]))
 
 func _process(_delta):
 	if(printNewFrame) : print("\nframe")

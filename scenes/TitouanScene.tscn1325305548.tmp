@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://crmjnlgorvsy"]
+[gd_scene load_steps=35 format=3 uid="uid://crmjnlgorvsy"]
 
 [ext_resource type="PackedScene" uid="uid://b67m5mnbrjcmo" path="res://scenes/agent.tscn" id="1_noarx"]
 [ext_resource type="Texture2D" uid="uid://bhajo2s0i6gjk" path="res://assets/textures/05366bde9747af98448947536d59196f.jpg" id="1_tp51g"]
@@ -63,22 +63,16 @@ height = 0.3
 [sub_resource type="PrismMesh" id="PrismMesh_qah37"]
 size = Vector3(0.2, 0.2, 0.2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5bvjv"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rugfo"]
-bg_color = Color(0.6, 0.6, 0.6, 0.21960784)
+bg_color = Color(0.6, 0.6, 0.6, 0.13725491)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emgxq"]
-bg_color = Color(0.8901961, 0, 0.22745098, 0.6745098)
+bg_color = Color(0.88984, 0, 0.22743392, 1)
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("scoreLabel", "scoreLabel2", "timeBar", "gameUI", "gameOverUI")]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("scoreLabel", "timeBar")]
 script = ExtResource("1_vknjm")
-scoreLabel = NodePath("CanvasLayer/Panel2/ProgressBar/Label")
-scoreLabel2 = NodePath("CanvasLayer/Panel/Label")
-timeBar = NodePath("CanvasLayer/Panel2/ProgressBar")
-gameUI = NodePath("CanvasLayer/Panel2")
-gameOverUI = NodePath("CanvasLayer/Panel")
+scoreLabel = NodePath("CanvasLayer/Control/Label")
+timeBar = NodePath("CanvasLayer/Control/ProgressBar")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_noarx")
@@ -402,7 +396,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.620264, 0.7105738, -0.4087
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="agent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.689, 0)
-visible = false
 mesh = SubResource("BoxMesh_rugfo")
 
 [node name="agent2" parent="." instance=ExtResource("1_noarx")]
@@ -410,7 +403,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.446257, 0.7105738, -1.293
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="agent2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.689, 0)
-visible = false
 mesh = SubResource("CapsuleMesh_emgxq")
 
 [node name="agent3" parent="." instance=ExtResource("1_noarx")]
@@ -418,7 +410,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.771089, 0.7105738, 0.4582
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="agent3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4606124, 0)
-visible = false
 mesh = SubResource("CylinderMesh_5bvjv")
 
 [node name="agent4" parent="." instance=ExtResource("1_noarx")]
@@ -426,7 +417,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.677567, 0.7105738, 1.05269
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="agent4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4606124, 0)
-visible = false
 mesh = SubResource("PrismMesh_qah37")
 
 [node name="Pan" parent="." instance=ExtResource("9_v6ncs")]
@@ -437,70 +427,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.79669, 1.0251608, -4.2195
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -575.5
+offset_bottom = -324.5
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2, 2)
 
-[node name="Label" type="Label" parent="CanvasLayer/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -573.0
-offset_top = 242.0
-offset_right = -190.66663
-offset_bottom = 265.0
-grow_horizontal = 2
-scale = Vector2(3, 3)
-text = "Score = 0"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="CanvasLayer/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -575.0
-offset_top = 142.0
-offset_right = -191.33331
-offset_bottom = 165.0
-grow_horizontal = 2
-scale = Vector2(3, 3)
-text = "Fin du temps"
-horizontal_alignment = 1
-
-[node name="Panel2" type="Panel" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_5bvjv")
-
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Panel2"]
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 25.0
+offset_bottom = 27.0
 grow_horizontal = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_rugfo")
 theme_override_styles/fill = SubResource("StyleBoxFlat_emgxq")
-value = 12.77
+max_value = 1.0
+value = 0.58
 show_percentage = false
 
-[node name="Label" type="Label" parent="CanvasLayer/Panel2/ProgressBar"]
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -35.0
-offset_top = -3.9999998
 offset_right = 35.0
-offset_bottom = 21.857143
+offset_bottom = 23.0
 grow_horizontal = 2
-scale = Vector2(1.4, 1.4)
 text = "Score = 0"
-horizontal_alignment = 1

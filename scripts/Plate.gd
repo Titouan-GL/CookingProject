@@ -71,5 +71,9 @@ func _enter_tree():
 	emptyName = Enum.RecipeNames.EmptyPlate
 	progressMaxValues = {Enum.TaskType.CLEAN:3}
 	super._enter_tree()
-	remove_from_group("movable")
-	remove_from_group(groupName)
+
+func _ready():
+	super._ready()
+	if(parent is IntPlateholder):
+		remove_from_group("movable")
+		remove_from_group(groupName)
