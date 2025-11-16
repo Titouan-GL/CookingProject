@@ -17,6 +17,7 @@ func _enter_tree():
 	timeLeft = initialTime
 	gameOverUI.visible = false
 	gameUI.visible = true
+	gameUI.visible = false
 	
 func _process(_delta):
 	timeLeft -= _delta
