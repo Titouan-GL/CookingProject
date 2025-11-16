@@ -16,7 +16,6 @@ func _enter_tree():
 	add_to_group("GameManager")
 	timeLeft = initialTime
 	gameOverUI.visible = false
-	gameUI.visible = true
 	gameUI.visible = false
 	
 func _process(_delta):
