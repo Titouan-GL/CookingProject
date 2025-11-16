@@ -9,7 +9,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://irlbgne2lxkd" path="res://assets/blender/Animations/SkeletonAnimations.res" id="6_qeyy3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noarx"]
-radius = 0.35
+radius = 0.27539063
 height = 1.5112305
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_nkfwj"]
@@ -80,15 +80,15 @@ advance_expression = "not isCleaning"
 states/Clean/node = SubResource("AnimationNodeAnimation_qeyy3")
 states/Clean/position = Vector2(806, 39)
 states/Cut/node = SubResource("AnimationNodeAnimation_52ahs")
-states/Cut/position = Vector2(660, 152)
+states/Cut/position = Vector2(661, 154)
 states/Idle/node = SubResource("AnimationNodeAnimation_y08pw")
-states/Idle/position = Vector2(628, 49)
+states/Idle/position = Vector2(629, 49)
 states/Start/position = Vector2(179, 85)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q3gef"), "Idle", "Cut", SubResource("AnimationNodeStateMachineTransition_f14ir"), "Cut", "Idle", SubResource("AnimationNodeStateMachineTransition_tduqk"), "Idle", "Clean", SubResource("AnimationNodeStateMachineTransition_52ahs"), "Clean", "Idle", SubResource("AnimationNodeStateMachineTransition_y08pw")]
 graph_offset = Vector2(94, -5)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_nkfwj"]
-graph_offset = Vector2(-827, 62)
+graph_offset = Vector2(-696.8843, -19.50415)
 nodes/StaticStateMachine/node = SubResource("AnimationNodeStateMachine_tduqk")
 nodes/StaticStateMachine/position = Vector2(-540, -40)
 nodes/RunningStateMachine/node = SubResource("AnimationNodeStateMachine_q3gef")
@@ -99,6 +99,7 @@ node_connections = [&"output", 0, &"Running", &"Running", 0, &"StaticStateMachin
 
 [node name="agent" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "storePoint")]
 collision_layer = 2
+collision_mask = 11
 script = ExtResource("1_b2pv0")
 nav_agent = NodePath("feet/NavigationAgent")
 storePoint = NodePath("grabPoint")
@@ -136,22 +137,23 @@ sponge = NodePath("Armature/GeneralSkeleton/RightHandAttachment/Sponge")
 [node name="GeneralSkeleton" parent="Skeleton/Armature" index="0"]
 bones/0/position = Vector3(-1.7625289e-15, 0.38104624, -0.051285226)
 bones/0/rotation = Quaternion(5.0487068e-29, 7.1054274e-15, 4.2351647e-22, 1)
-bones/1/rotation = Quaternion(-0.0001468237, -0.00026077728, 7.346239e-05, 0.99999994)
-bones/2/rotation = Quaternion(0.11147129, -0.0010972933, -1.854113e-05, 0.9937671)
-bones/3/rotation = Quaternion(0.18053982, -3.8029397e-05, -0.00039983873, 0.9835676)
+bones/0/scale = Vector3(1, 0.99999994, 0.99999994)
+bones/1/rotation = Quaternion(-0.00029084767, -0.0005165819, 0.00014552394, 0.9999999)
+bones/2/rotation = Quaternion(0.10637371, -0.00024090674, -4.0706345e-06, 0.99432623)
+bones/3/rotation = Quaternion(2.2019243e-14, 2.818463e-12, -8.455324e-12, 1)
 bones/4/rotation = Quaternion(2.4868992e-14, 1.7763567e-14, -1.19209275e-07, 1)
-bones/5/rotation = Quaternion(4.0013947e-05, 2.634385e-06, -1.7532697e-05, 1)
-bones/6/rotation = Quaternion(-3.459678e-10, -1.9061033e-09, -6.2674332e-09, 1)
-bones/7/rotation = Quaternion(-0.21215865, 0.017897181, 0.04583958, 0.97599554)
-bones/8/rotation = Quaternion(-0.36456728, 0.114274286, -0.100600615, 0.9186467)
-bones/9/rotation = Quaternion(-0.07386142, -0.047167867, -0.2400024, 0.96680844)
+bones/5/rotation = Quaternion(0.00046841026, 3.083857e-05, -0.00020524081, 0.9999999)
+bones/6/rotation = Quaternion(-2.581905e-10, -1.4225034e-09, -4.9135944e-09, 1)
+bones/7/rotation = Quaternion(2.4868992e-14, -3.197442e-14, 1.1920927e-07, 1)
+bones/8/rotation = Quaternion(0.00011594895, 1.1288527e-05, -6.803773e-05, 1)
+bones/9/rotation = Quaternion(3.5527133e-15, 9.842087e-15, 1.7870171e-09, 1)
 bones/10/rotation = Quaternion(-8.0571855e-10, -0.09567672, -2.9856784e-10, 0.9954125)
 bones/11/rotation = Quaternion(-8.224504e-08, 7.908966e-09, -3.2543373e-12, 1)
 bones/12/rotation = Quaternion(-1.8720102e-10, 0.08234062, 4.5099657e-10, 0.99660426)
 bones/13/rotation = Quaternion(-7.969055e-08, -4.147296e-09, -9.281706e-10, 1)
 
 [node name="RightHandAttachment" type="BoneAttachment3D" parent="Skeleton/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.9999999, -0.000111573376, -0.0005163008, 0.00011168365, 0.99999994, 0.00021358256, 0.00051627686, -0.00021364019, 0.9999998, -0.35052305, 0.42586964, -0.039014302)
+transform = Transform3D(0.9999995, 0.00011904334, -0.00097149354, -0.00011938851, 0.9999998, -0.00035526976, 0.000971451, 0.00035538565, 0.9999994, -0.35068575, 0.42582703, -0.039549474)
 bone_name = "Hand.R"
 bone_idx = 6
 

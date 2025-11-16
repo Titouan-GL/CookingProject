@@ -13,7 +13,7 @@ func UpdateRecipe(newRecipe:Enum.RecipeNames):
 
 
 func addProgress(s:Enum.TaskType, delta:float) -> bool:
-	if(progress.has(s)):
+	if(progress.has(s) and progress[s] > 0):
 		progress[s] -= delta
 		progressBar.value = 1-(progress[s]/progressMaxValues[s])
 		if(progress[s] <= 0):
@@ -22,12 +22,16 @@ func addProgress(s:Enum.TaskType, delta:float) -> bool:
 			return true
 	return false
 
-func mix(ing:Ingredient): #destroy the ingredient it's beeing mixed with
-	var newRecipe:Enum.RecipeNames = Recipes.recipesMix(recipe, ing.recipe)
-	if(newRecipe != Enum.RecipeNames.Empty):
-		ing.parent.objectInHand = null
-		ing.queue_free()
-		UpdateRecipe(newRecipe)
+func mix(i): #destroy the ingredient it's beeing mixed with
+	if i is Ingredient:
+		var newRecipe:Enum.RecipeNames = Recipes.recipesMix(recipe, i.recipe)
+		if(newRecipe != Enum.RecipeNames.Empty):
+			i.parent.objectInHand = null
+			i.queue_free()
+			UpdateRecipe(newRecipe)
+	elif i is MovableStorage:
+		i.store(self)
+		
 
 func mixRecipe(ingRecipe:Enum.RecipeNames):
 	var newRecipe:Enum.RecipeNames = Recipes.recipesMix(recipe, ingRecipe)
@@ -40,11 +44,14 @@ func _enter_tree():
 	progress = progressMaxValues.duplicate()
 	prevProgress = progress.duplicate()
 	add_to_group(Enum.RecipeNames.keys()[recipe])
+	progressBar.visible = false
 	UpdateAppearance()
 	
 
 func cut():
-	UpdateRecipe(Recipes.recipesCut(recipe))
+	var newRecipe = Recipes.recipesCut(recipe)
+	if newRecipe != Enum.RecipeNames.Empty:
+		UpdateRecipe(newRecipe)
 
 func cook():
 	UpdateRecipe(Recipes.recipesCook(recipe))

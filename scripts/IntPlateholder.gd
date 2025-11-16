@@ -6,6 +6,7 @@ const instantiablePlate = preload("res://scenes/Plate.tscn")
 var plateList = [] #### DOIT RAJOUTER UN FUTUREPLATELIST
 
 func _enter_tree():
+	super._enter_tree()
 	taskType = Enum.TaskType.GENERATE
 	add_to_group("Generator"+Enum.RecipeNames.keys()[Enum.RecipeNames.EmptyPlate])
 	passive = true

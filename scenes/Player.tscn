@@ -1,0 +1,161 @@
+[gd_scene load_steps=26 format=3 uid="uid://c1shi6l6dy3g6"]
+
+[ext_resource type="PackedScene" uid="uid://hs7egtm6cpxe" path="res://assets/blender/Animated/Player.blend" id="1_p0vlq"]
+[ext_resource type="Script" uid="uid://c5ayk6kh2b8ul" path="res://scenes/player.gd" id="1_v6fml"]
+[ext_resource type="Script" uid="uid://c8bil613bq7gi" path="res://scripts/PlayerAnimation.gd" id="3_3li8b"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_nkfwj"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lug0u"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dg1j7"]
+animation = &"RunCarry"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qeyy3"]
+xfade_time = 0.2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nkfwj"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "objectInHand != null"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iuhnp"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "objectInHand == null"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_q3gef"]
+states/Running/node = SubResource("AnimationNodeAnimation_lug0u")
+states/Running/position = Vector2(564, 46)
+states/RunningWithFood/node = SubResource("AnimationNodeAnimation_dg1j7")
+states/RunningWithFood/position = Vector2(584, 126)
+states/Start/position = Vector2(157, 83)
+transitions = ["Start", "Running", SubResource("AnimationNodeStateMachineTransition_qeyy3"), "Running", "RunningWithFood", SubResource("AnimationNodeStateMachineTransition_nkfwj"), "RunningWithFood", "Running", SubResource("AnimationNodeStateMachineTransition_iuhnp")]
+graph_offset = Vector2(-47, 18)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3li8b"]
+animation = &"Carry"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qeyy3"]
+animation = &"Carry"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_52ahs"]
+animation = &"Carry"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y08pw"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q3gef"]
+xfade_time = 0.2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f14ir"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "isCutting"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tduqk"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "not isCutting"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_52ahs"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "isCleaning"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y08pw"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "not isCleaning"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mdl7e"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "objectInHand"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qu4a1"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "objectInHand == null"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tduqk"]
+states/Carry/node = SubResource("AnimationNodeAnimation_3li8b")
+states/Carry/position = Vector2(783, 119)
+states/Clean/node = SubResource("AnimationNodeAnimation_qeyy3")
+states/Clean/position = Vector2(806, 39)
+states/Cut/node = SubResource("AnimationNodeAnimation_52ahs")
+states/Cut/position = Vector2(660, 152)
+states/Idle/node = SubResource("AnimationNodeAnimation_y08pw")
+states/Idle/position = Vector2(629, 49)
+states/Start/position = Vector2(179, 85)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q3gef"), "Idle", "Cut", SubResource("AnimationNodeStateMachineTransition_f14ir"), "Cut", "Idle", SubResource("AnimationNodeStateMachineTransition_tduqk"), "Idle", "Clean", SubResource("AnimationNodeStateMachineTransition_52ahs"), "Clean", "Idle", SubResource("AnimationNodeStateMachineTransition_y08pw"), "Idle", "Carry", SubResource("AnimationNodeStateMachineTransition_mdl7e"), "Carry", "Idle", SubResource("AnimationNodeStateMachineTransition_qu4a1")]
+graph_offset = Vector2(94, -5)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v6fml"]
+graph_offset = Vector2(-777.50165, -16.067215)
+nodes/StaticStateMachine/node = SubResource("AnimationNodeStateMachine_tduqk")
+nodes/StaticStateMachine/position = Vector2(-540, -40)
+nodes/RunningStateMachine/node = SubResource("AnimationNodeStateMachine_q3gef")
+nodes/RunningStateMachine/position = Vector2(-580, 180)
+nodes/Running/node = SubResource("AnimationNodeBlend2_nkfwj")
+nodes/Running/position = Vector2(-120, 80)
+node_connections = [&"output", 0, &"Running", &"Running", 0, &"StaticStateMachine", &"Running", 1, &"RunningStateMachine"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p0vlq"]
+radius = 0.3540039
+height = 1.2807617
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v6fml"]
+radius = 0.35009766
+height = 1.1351318
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("raycaster", "storePoint")]
+collision_layer = 2
+collision_mask = 11
+script = ExtResource("1_v6fml")
+raycaster = NodePath("RayCast3D")
+storePoint = NodePath("grabPoint")
+
+[node name="Mesh" parent="." node_paths=PackedStringArray("player", "animationTree") instance=ExtResource("1_p0vlq")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+script = ExtResource("3_3li8b")
+player = NodePath("..")
+animationTree = NodePath("AnimationTree")
+
+[node name="Skeleton3D" parent="Mesh/Armature" index="0"]
+bones/1/rotation = Quaternion(0, 0.00086579076, 0, 0.9999997)
+bones/6/rotation = Quaternion(-0.009941615, 0.16268806, 0.25287357, 0.9536712)
+bones/7/rotation = Quaternion(0.13366841, 0.61795044, 0.0067033763, 0.77474207)
+bones/8/rotation = Quaternion(0.2631279, -0.3090731, -0.68957347, 0.59977156)
+bones/9/rotation = Quaternion(-0.34099472, -0.2609895, -0.4924752, 0.7570174)
+bones/10/rotation = Quaternion(-7.393013e-09, -5.6313786e-07, 0.001160743, 0.99999934)
+bones/11/rotation = Quaternion(0.7071066, 0.00057419395, -0.00057476154, 0.7071066)
+bones/13/rotation = Quaternion(-3.9609604e-05, 1.1486936e-07, 0.9999818, 0.006027825)
+bones/15/rotation = Quaternion(3.9371163e-05, 1.18938516e-07, 0.9999818, -0.006027825)
+
+[node name="AnimationTree" type="AnimationTree" parent="Mesh"]
+tree_root = SubResource("AnimationNodeBlendTree_v6fml")
+advance_expression_base_node = NodePath("../..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Running/blend_amount = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6262207, 0)
+shape = SubResource("CapsuleShape3D_p0vlq")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0.6362771, 0)
+shape = SubResource("CapsuleShape3D_v6fml")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 1.058)
+
+[node name="grabPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.076, 0.951)
+
+[editable path="Mesh"]

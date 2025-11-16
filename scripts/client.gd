@@ -1,9 +1,5 @@
-extends CharacterBody3D
+extends Character
 class_name Client
-const SPEED = 2
-var addedVelocity:Vector3 = Vector3.ZERO
-var friction:float = 40
-var bumpStrength:float = 2
 var target:Node3D = null
 var eatingState = 0 #1 if currently eating, 2 if already eaten
 @export var navAgent:NavAgent
@@ -12,13 +8,16 @@ var sat:bool = false
 @export var knife:Node3D
 
 
+func updateTarget():
+	if(target):
+		navAgent.set_target_position(target.destinationPoint.global_position)
+		target.reserved(self)
+
 func executeTask():
 	if eatingState == 0 :
 		if target == null:
 			target = get_tree().get_nodes_in_group("freeServePoint").pick_random()
-			if(target):
-				navAgent.set_target_position(target.destinationPoint.global_position)
-				target.reserved(self)
+			updateTarget()
 		elif navAgent.is_navigation_finished() and target.recipeWanted == Enum.RecipeNames.Empty :
 			sat = true
 			target.newRecipe()
@@ -35,16 +34,8 @@ func changeState(v):
 	target = null
 	eatingState = v
 
-func bumpedInto(dir:Vector3):
-	var orthogonal = Vector3(dir.z , 0, -dir.x ).normalized()/2
-	addedVelocity = (orthogonal + Vector3(dir.x, 0, dir.z))*bumpStrength
 
 func _physics_process(delta):
-	if(addedVelocity.length() > 0):
-		var reduction = friction*delta
-		addedVelocity -= addedVelocity.normalized() * reduction
-		if(addedVelocity.length() < reduction ):
-			addedVelocity = Vector3.ZERO
 	
 	var direction:Vector3 = Vector3.ZERO
 	var target_angle:float = rotation.y
@@ -58,13 +49,10 @@ func _physics_process(delta):
 	target_angle = lerpf(target_angle, atan2(-addedVelocity.x, -addedVelocity.z), addedVelocity.length()/50)
 	var new_angle = lerp_angle(rotation.y, target_angle, delta *15)
 	rotation.y = new_angle
-	velocity = Vector3(0, -1, 0) + (direction+ addedVelocity).normalized() * SPEED
+	var planarVelocity = (direction  + addedVelocity).normalized() * SPEED
+	velocity = lerp(velocity, Vector3(0, -gravity, 0) + planarVelocity, ACCELERATION*delta)
 
-	var collision = move_and_collide(velocity * delta, true)
-	if(collision and (collision.get_collider() is Agent or collision.get_collider() is Client)):
-		var dir:Vector3 = (collision.get_collider().global_position-global_position).normalized()
-		collision.get_collider().bumpedInto(dir * 1.3)
-		addedVelocity = dir*-bumpStrength
+	super._physics_process(delta)
 	move_and_slide()
 
 #
@@ -75,3 +63,10 @@ func _process(_delta):
 	
 func _ready():
 	navAgent.isClient = true
+	
+func _init() -> void:
+	SPEED = 2
+	ACCELERATION = 25
+	bumpStrength = 2
+	gravity = 20
+	friction = 40

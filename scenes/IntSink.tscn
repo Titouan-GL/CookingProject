@@ -5,7 +5,7 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bcjnr"]
 
-[node name="counter" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
+[node name="Sink" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_wnr1u")
 storePoint = NodePath("StorePoint")
 

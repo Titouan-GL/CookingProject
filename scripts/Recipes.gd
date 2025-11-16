@@ -25,6 +25,7 @@ const meshes:Dictionary = {
 	Enum.RecipeNames.TomatoSoup : preload("res://assets/blender/Recipes/TomSoupPlate.blend"),
 	Enum.RecipeNames.SteSalTom : preload("res://assets/blender/Recipes/SteSalTom.blend"),
 	Enum.RecipeNames.SteSal : preload("res://assets/blender/Recipes/SteSal.blend"),
+	Enum.RecipeNames.SteTom : preload("res://assets/blender/Recipes/SteTom.blend"),
 }
 
 const meshesInPlateOverride:Dictionary = {
@@ -63,9 +64,9 @@ const recipes:Dictionary[Enum.RecipeNames, Array] = { #array where 0 is the task
 	Enum.RecipeNames.BurSteTom:[Enum.TaskType.MIX, {Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.CutTom:1, Enum.RecipeNames.Bur:1, Enum.RecipeNames.EmptyPlate:1}],
 	Enum.RecipeNames.BurSteSalTom:[Enum.TaskType.MIX, {Enum.RecipeNames.Bur:1, Enum.RecipeNames.CutTom:1, Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.CutSal:1, Enum.RecipeNames.EmptyPlate:1}],
 	Enum.RecipeNames.CutTomCutSal:[Enum.TaskType.MIX, {Enum.RecipeNames.CutTom:1, Enum.RecipeNames.CutSal:1, Enum.RecipeNames.EmptyPlate:1}],
-	Enum.RecipeNames.SteSal:[Enum.TaskType.MIX, {Enum.RecipeNames.CutSte:1, Enum.RecipeNames.CutSal:1, Enum.RecipeNames.EmptyPlate:1}],
-	Enum.RecipeNames.SteTom:[Enum.TaskType.MIX, {Enum.RecipeNames.CutSte:1, Enum.RecipeNames.CutTom:1, Enum.RecipeNames.EmptyPlate:1}],
-	Enum.RecipeNames.SteSalTom:[Enum.TaskType.MIX, {Enum.RecipeNames.CutSte:1, Enum.RecipeNames.CutSal:1, Enum.RecipeNames.CutTom:1, Enum.RecipeNames.EmptyPlate:1}],
+	Enum.RecipeNames.SteSal:[Enum.TaskType.MIX, {Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.CutSal:1, Enum.RecipeNames.EmptyPlate:1}],
+	Enum.RecipeNames.SteTom:[Enum.TaskType.MIX, {Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.CutTom:1, Enum.RecipeNames.EmptyPlate:1}],
+	Enum.RecipeNames.SteSalTom:[Enum.TaskType.MIX, {Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.CutSal:1, Enum.RecipeNames.CutTom:1, Enum.RecipeNames.EmptyPlate:1}],
 }
 
 const scores:Dictionary[Enum.RecipeNames, int] = { 
@@ -163,6 +164,10 @@ static func recipesMix(recipe:Enum.RecipeNames, ingredient:Enum.RecipeNames, fir
 					return Enum.RecipeNames.BurSte
 				Enum.RecipeNames.CutTomCutSal:
 					return Enum.RecipeNames.BurSalTom
+				Enum.RecipeNames.SteTom:
+					return Enum.RecipeNames.BurSteTom
+				Enum.RecipeNames.SteSal:
+					return Enum.RecipeNames.BurSteSal
 		Enum.RecipeNames.BurSte:
 			match ingredient:
 				Enum.RecipeNames.CutSal:
@@ -213,6 +218,14 @@ static func recipesMix(recipe:Enum.RecipeNames, ingredient:Enum.RecipeNames, fir
 			match ingredient:
 				Enum.RecipeNames.PanCookCutSte:
 					return Enum.RecipeNames.BurSteSalTom
+		Enum.RecipeNames.CutSal:
+			match ingredient:
+				Enum.RecipeNames.SteTom:
+					return Enum.RecipeNames.SteSalTom
+					
+	if(recipe == Enum.RecipeNames.EmptyPlate):
+		return ingredient
+		
 	if(first): #on explore dans l'autre sens
 		return recipesMix(ingredient, recipe, false)
 	

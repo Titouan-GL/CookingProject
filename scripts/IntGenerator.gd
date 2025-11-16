@@ -9,6 +9,7 @@ func _enter_tree():
 	add_to_group("Generator"+Enum.RecipeNames.keys()[recipeType])
 	passive = true
 	canBeOccupied = false
+	super._enter_tree()
 
 func store(_i:Movable) -> bool:
 	return false

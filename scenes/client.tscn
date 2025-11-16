@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d4j1smub7rsjq" path="res://assets/blender/Div/eatingFork.blend" id="6_5q6u5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noarx"]
-radius = 0.35
+radius = 0.25097656
 height = 1.5112305
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_nkfwj"]
@@ -123,22 +123,22 @@ animationTree = NodePath("../AnimationTree")
 bones/0/position = Vector3(-1.7625289e-15, 0.38104624, -0.051285226)
 bones/0/rotation = Quaternion(5.0487068e-29, 7.1054274e-15, 4.2351647e-22, 1)
 bones/0/scale = Vector3(1, 0.99999994, 0.99999994)
-bones/1/rotation = Quaternion(-0.030508611, -0.05418734, 0.015264753, 0.9979479)
-bones/2/rotation = Quaternion(-0.10415077, -0.09951252, -0.02996945, 0.98911667)
-bones/3/rotation = Quaternion(1.4790544e-14, 1.8931894e-12, -5.679431e-12, 1)
-bones/4/rotation = Quaternion(2.4868992e-14, 1.7763567e-14, -1.19209275e-07, 1)
-bones/5/rotation = Quaternion(0.013497306, 0.0009364247, -0.006111699, 0.99988985)
-bones/6/rotation = Quaternion(-1.7342795e-10, -9.555131e-10, -3.606254e-09, 1)
-bones/7/rotation = Quaternion(2.4868992e-14, -3.197442e-14, 1.1920926e-07, 1)
-bones/8/rotation = Quaternion(0.016141025, 0.0015714462, -0.009469887, 0.99982363)
-bones/9/rotation = Quaternion(3.5527137e-15, 1.010999e-14, 1.5061011e-09, 1)
+bones/1/rotation = Quaternion(-2.4771537e-06, -4.3997347e-06, 1.2394295e-06, 1)
+bones/2/rotation = Quaternion(-0.001367351, -0.04947256, -2.184172e-06, 0.99877465)
+bones/3/rotation = Quaternion(1.1436305e-13, 3.5399228e-09, -2.9219112e-12, 1)
+bones/4/rotation = Quaternion(-0.012350036, 0.0028682738, -0.0068890965, 0.99989593)
+bones/5/rotation = Quaternion(-0.018704599, -0.0124974195, 0.004745048, 0.9997358)
+bones/6/rotation = Quaternion(0.0005469336, 0.0004596996, 0.013880374, 0.99990344)
+bones/7/rotation = Quaternion(1.2595457e-06, -2.7625917e-06, 1.511804e-05, 1)
+bones/8/rotation = Quaternion(4.1287603e-05, -5.1946604e-06, 9.0208356e-05, 1)
+bones/9/rotation = Quaternion(1.0526169e-14, 1.0658141e-14, 9.313225e-10, 1)
 bones/10/rotation = Quaternion(-8.0571855e-10, -0.09567672, -2.9856784e-10, 0.9954125)
 bones/11/rotation = Quaternion(-8.224504e-08, 7.908966e-09, -3.2543373e-12, 1)
 bones/12/rotation = Quaternion(-1.8720102e-10, 0.08234062, 4.5099657e-10, 0.99660426)
 bones/13/rotation = Quaternion(-7.969055e-08, -4.147296e-09, -9.281706e-10, 1)
 
 [node name="RhandAttachement" type="BoneAttachment3D" parent="Client/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.994139, -0.017921727, -0.10661351, 0.0214813, 0.99924624, 0.032333452, 0.10595367, -0.03443414, 0.9937747, -0.3512411, 0.41481477, -0.08184235)
+transform = Transform3D(0.99956906, -0.023321757, -0.017831245, 0.024372388, 0.99782974, 0.061170176, 0.016365953, -0.061578393, 0.997968, -0.35298055, 0.4298609, -0.008572929)
 bone_name = "Hand.R"
 bone_idx = 6
 
@@ -147,7 +147,7 @@ transform = Transform3D(-0.19936794, 0.9799247, -8.742278e-08, 0.9799247, 0.1993
 visible = false
 
 [node name="LhandAttachement2" type="BoneAttachment3D" parent="Client/Armature/GeneralSkeleton" index="2"]
-transform = Transform3D(0.9943674, -0.011792476, -0.10533021, 0.014721229, 0.99952507, 0.027071413, 0.10496093, -0.02846951, 0.9940687, 0.34255895, 0.43813398, -0.00942341)
+transform = Transform3D(1, -0.00021313512, -2.4703786e-05, 0.00021313314, 0.99999994, -8.014137e-05, 2.4720863e-05, 8.01361e-05, 0.99999994, 0.35061237, 0.4259245, -0.03886424)
 bone_name = "Hand.L"
 bone_idx = 9
 

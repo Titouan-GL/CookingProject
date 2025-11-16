@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends Hoverable
 class_name Movable
 
 var parent:Node3D
@@ -25,7 +25,7 @@ func UpdateAppearance():
 func pickUp(p:Node3D):
 	if(parent is Interactible):
 		parent.unstore()
-	if(parent is Agent):
+	if(parent is Cook):
 		parent.objectInHand = null
 	parent = p
 	
@@ -49,6 +49,7 @@ func _process(_delta):
 
 func _enter_tree():
 	add_to_group("movable")
+	super._enter_tree()
 
 func _ready():
 	prevProgress = progress.duplicate()

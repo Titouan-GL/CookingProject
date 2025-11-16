@@ -74,6 +74,8 @@ func _enter_tree():
 
 func _ready():
 	super._ready()
+	for i in Enum.RecipeNames.values():
+		canBeStored.append(i)
 	if(parent is IntPlateholder):
 		remove_from_group("movable")
 		remove_from_group(groupName)

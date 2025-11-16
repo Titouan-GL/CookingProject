@@ -19,12 +19,12 @@ shape = SubResource("BoxShape3D_vad65")
 [node name="ClientTable" parent="." instance=ExtResource("4_twgb7")]
 
 [node name="servePoint1" parent="." instance=ExtResource("5_2tdio")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1, -0.25)
 available = true
 recipesOption = Array[int]([23, 8, 18, 19])
 
 [node name="servePoint2" parent="." instance=ExtResource("5_2tdio")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.25, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1, 0)
 available = true
 recipesOption = Array[int]([23, 8, 18, 19])
 
@@ -34,6 +34,6 @@ available = true
 recipesOption = Array[int]([23, 8, 18, 19])
 
 [node name="servePoint4" parent="." instance=ExtResource("5_2tdio")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 1, -0.25)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.25, 1, 0)
 available = true
 recipesOption = Array[int]([23, 8, 18, 19])

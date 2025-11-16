@@ -1,4 +1,4 @@
-extends Node3D
+extends Hoverable
 
 class_name Interactible
 @export var storePoint:Node3D
@@ -12,6 +12,7 @@ var canBeOccupied:bool = true
 var obstacle = true
 
 func _enter_tree():
+	super._enter_tree()
 	add_to_group("Int"+Enum.TaskType.keys()[taskType])
 	add_to_group("interactible")
 	if(not storePoint):
@@ -24,12 +25,16 @@ func use(delta:float) -> bool:
 			return true
 	return false
 
+
 func store(i:Movable) -> bool:
 	if(!storedObject):
 		i.parent.objectInHand = null
 		storedObject = i
 		storedObject.pickUp(self)
 		return true
+	elif storedObject is MovableStorage:
+		if storedObject.mix(i):
+			return true
 	return false
 
 func unstore() ->Movable:
@@ -37,11 +42,23 @@ func unstore() ->Movable:
 	storedObject = null
 	storedIngredient = null
 	occupied = false
+	if temp:
+		temp.unhovered()
 	return temp
 
 func _process(_delta):
 	if(passive):
 		use(_delta)
+
+func hovered():
+	super.hovered()
+	if storedObject:
+		storedObject.hovered()
+		
+func unhovered():
+	super.unhovered()
+	if storedObject:
+		storedObject.unhovered()
 
 func _ready():
 	if(obstacle):
@@ -49,3 +66,4 @@ func _ready():
 		navmesh.addObstacle(self)
 	if(storedObject):
 		storedObject.pickUp(self)
+	
