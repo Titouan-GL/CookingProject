@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://c1shi6l6dy3g6"]
 
 [ext_resource type="PackedScene" uid="uid://hs7egtm6cpxe" path="res://assets/blender/Animated/Player.blend" id="1_p0vlq"]
-[ext_resource type="Script" uid="uid://c5ayk6kh2b8ul" path="res://scenes/player.gd" id="1_v6fml"]
+[ext_resource type="Script" uid="uid://c5ayk6kh2b8ul" path="res://scripts/player.gd" id="1_v6fml"]
 [ext_resource type="Script" uid="uid://c8bil613bq7gi" path="res://scripts/PlayerAnimation.gd" id="3_3li8b"]
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_nkfwj"]
@@ -126,13 +126,13 @@ player = NodePath("..")
 animationTree = NodePath("AnimationTree")
 
 [node name="Skeleton3D" parent="Mesh/Armature" index="0"]
-bones/1/rotation = Quaternion(0, 0.00086579076, 0, 0.9999997)
-bones/6/rotation = Quaternion(-0.009941615, 0.16268806, 0.25287357, 0.9536712)
-bones/7/rotation = Quaternion(0.13366841, 0.61795044, 0.0067033763, 0.77474207)
+bones/1/rotation = Quaternion(0, -0.0002681149, 0, 1)
+bones/6/rotation = Quaternion(0.34004733, -0.25349075, 0.18958512, 0.8855325)
+bones/7/rotation = Quaternion(0.13354126, 0.5236903, -0.008882079, 0.8413302)
 bones/8/rotation = Quaternion(0.2631279, -0.3090731, -0.68957347, 0.59977156)
-bones/9/rotation = Quaternion(-0.34099472, -0.2609895, -0.4924752, 0.7570174)
-bones/10/rotation = Quaternion(-7.393013e-09, -5.6313786e-07, 0.001160743, 0.99999934)
-bones/11/rotation = Quaternion(0.7071066, 0.00057419395, -0.00057476154, 0.7071066)
+bones/9/rotation = Quaternion(0.049388155, -0.5533284, -0.38547766, 0.73674655)
+bones/10/rotation = Quaternion(-0.00035446082, 0.30537027, 0.0011052956, 0.952233)
+bones/11/rotation = Quaternion(0.7608174, -0.0150017105, 0.019590192, 0.64849687)
 bones/13/rotation = Quaternion(-3.9609604e-05, 1.1486936e-07, 0.9999818, 0.006027825)
 bones/15/rotation = Quaternion(3.9371163e-05, 1.18938516e-07, 0.9999818, -0.006027825)
 

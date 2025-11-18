@@ -34,14 +34,17 @@ func mix(i):
 		if Recipes.recipesMix(i, recipe) != Enum.RecipeNames.Empty:
 			mixRecipe(i)
 	elif i is MovableStorage:
-		if Recipes.recipesMix(i.recipe, recipe) != Enum.RecipeNames.Empty:
-			if(task.object.emptyName in Recipes.getRecipePrimaryIngredients(Recipes.recipesMix(task.destination.recipe, task.object.recipe))):
-				task.object.mixRecipe(task.destination.empty())
-			else:
-				if(task.object.recipe == task.object.emptyName):
-					task.object.mixRecipe(task.destination.empty())
-				else:
-					task.destination.mixRecipe(task.object.empty())
+		if Recipes.recipesMix(i.recipe, recipe) not in [Enum.RecipeNames.Empty, emptyName, i.emptyName] :
+			var mixed = Recipes.getRecipePrimaryIngredients(Recipes.recipesMix(i.recipe, recipe))
+			if(emptyName in mixed):
+				mixRecipe(i.empty())
+			elif(i.emptyName in mixed):
+				i.mixRecipe(empty())
+			elif(self is Plate):
+				mixRecipe(i.empty())
+			elif(i is Plate):
+				i.mixRecipe(empty())
+				
 
 func mixRecipe(r:Enum.RecipeNames):
 	var newRecipe = Recipes.recipesMix(recipe, r)

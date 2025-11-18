@@ -11,7 +11,11 @@ func _enter_tree():
 	canBeOccupied = false
 	super._enter_tree()
 
-func store(_i:Movable) -> bool:
+func store(i:Movable) -> bool:
+	if i.recipe == recipeType:
+		i.parent.objectInHand = null
+		i.queue_free()
+		return true
 	return false
 	
 	

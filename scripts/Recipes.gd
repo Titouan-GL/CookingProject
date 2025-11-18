@@ -69,6 +69,26 @@ const recipes:Dictionary[Enum.RecipeNames, Array] = { #array where 0 is the task
 	Enum.RecipeNames.SteSalTom:[Enum.TaskType.MIX, {Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.CutSal:1, Enum.RecipeNames.CutTom:1, Enum.RecipeNames.EmptyPlate:1}],
 }
 
+const inverseRecipes:Dictionary[Dictionary, Enum.RecipeNames] = {
+	{Enum.RecipeNames.CutTom:1, Enum.RecipeNames.EmptyPot:1}:Enum.RecipeNames.PotCutTom,
+	{Enum.RecipeNames.CutTom:2, Enum.RecipeNames.EmptyPot:1}:Enum.RecipeNames.PotCutTomCutTom,
+	{Enum.RecipeNames.CutTom:3, Enum.RecipeNames.EmptyPot:1}:Enum.RecipeNames.PotCutTomCutTomCutTom,
+	{Enum.RecipeNames.PotTomatoSoup:1}:Enum.RecipeNames.TomatoSoup,
+	{Enum.RecipeNames.CutSte:1, Enum.RecipeNames.EmptyPan:1}:Enum.RecipeNames.PanCutSte,
+	{Enum.RecipeNames.CutSal:1, Enum.RecipeNames.Bur:1}:Enum.RecipeNames.BurSal,
+	{Enum.RecipeNames.CutTom:1, Enum.RecipeNames.Bur:1}:Enum.RecipeNames.BurTom,
+	{Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.Bur:1}:Enum.RecipeNames.BurSte,
+	{Enum.RecipeNames.CutTom:1, Enum.RecipeNames.CutSal:1, Enum.RecipeNames.Bur:1}:Enum.RecipeNames.BurSalTom,
+	{Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.CutSal:1, Enum.RecipeNames.Bur:1}:Enum.RecipeNames.BurSteSal,
+	{Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.CutTom:1, Enum.RecipeNames.Bur:1}:Enum.RecipeNames.BurSteTom,
+	{Enum.RecipeNames.Bur:1, Enum.RecipeNames.CutTom:1, Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.CutSal:1}:Enum.RecipeNames.BurSteSalTom,
+	{Enum.RecipeNames.CutTom:1, Enum.RecipeNames.CutSal:1}:Enum.RecipeNames.CutTomCutSal,
+	{Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.CutSal:1}:Enum.RecipeNames.SteSal,
+	{Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.CutTom:1}:Enum.RecipeNames.SteTom,
+	{Enum.RecipeNames.PanCookCutSte:1, Enum.RecipeNames.CutSal:1, Enum.RecipeNames.CutTom:1}:Enum.RecipeNames.SteSalTom,
+
+}
+
 const scores:Dictionary[Enum.RecipeNames, int] = { 
 	Enum.RecipeNames.TomatoSoup: 200,
 	Enum.RecipeNames.CutTomCutSal: 130,
@@ -78,7 +98,7 @@ const scores:Dictionary[Enum.RecipeNames, int] = {
 
 
 static func getScore(recipe:Enum.RecipeNames):
-	if(recipe in scores.keys()):
+	if(scores.has(recipe)):
 		return scores[recipe]
 	else:
 		return -100
@@ -86,7 +106,7 @@ static func getScore(recipe:Enum.RecipeNames):
 
 static func getRecipePrimaryIngredients(recipe:Enum.RecipeNames, nb:int = 1):
 	var arr = {}
-	if(recipe in recipes.keys() and recipes[recipe][0] == Enum.TaskType.MIX):
+	if(recipes.has(recipe) and recipes[recipe][0] == Enum.TaskType.MIX):
 		for r in recipes[recipe][1]:
 			arr = add_dictionary(arr, getRecipePrimaryIngredients(r, recipes[recipe][1][r]))
 		return arr
@@ -95,15 +115,18 @@ static func getRecipePrimaryIngredients(recipe:Enum.RecipeNames, nb:int = 1):
 
 static func add_dictionary(dict_a: Dictionary, dict_b: Dictionary):
 	for key in dict_b.keys():
-		if key in dict_a:
-			dict_a[key] += dict_b[key]
+		if dict_a.has(key):
+			if key == Enum.RecipeNames.EmptyPlate:
+				dict_a[key] = 1
+			else:
+				dict_a[key] += dict_b[key]
 		else:
 			dict_a[key] = dict_b[key]
 	return dict_a
 
 static func subtract_dictionary(dict_a: Dictionary, dict_b: Dictionary):
 	for key in dict_b.keys():
-		if key in dict_a:
+		if dict_a.has(key):
 			dict_a[key] -= dict_b[key]
 			if dict_a[key] <= 0:
 				dict_a.erase(key)
@@ -118,13 +141,13 @@ static func dict_contains_keys(dict_a: Dictionary, dict_b: Dictionary) -> bool:
 
 
 static func getNeeded(recipe:Enum.RecipeNames) -> Dictionary: #dictionary of recipes
-	if(recipe in recipes.keys()):
+	if(recipes.has(recipe)):
 		return recipes[recipe][1]
 	else:
 		return {}
 
 static func getTaskType(recipe:Enum.RecipeNames) -> Enum.TaskType:
-	if(recipe in recipes.keys()):
+	if(recipes.has(recipe)):
 		return recipes[recipe][0]
 	else:
 		return Enum.TaskType.NONE
@@ -142,92 +165,101 @@ static func recipeToTexture(recipe:Enum.RecipeNames) -> CompressedTexture2D:
 	if(textures.has(recipe)): return textures[recipe]
 	return null
 
-static func recipesMix(recipe:Enum.RecipeNames, ingredient:Enum.RecipeNames, first:bool = true) -> Enum.RecipeNames:
-	match recipe:
-		Enum.RecipeNames.PanCookCutSte:
-			match ingredient:
-				Enum.RecipeNames.CutTomCutSal:
-					return Enum.RecipeNames.SteSalTom
-				Enum.RecipeNames.CutSal:
-					return Enum.RecipeNames.SteSal
-		Enum.RecipeNames.EmptyPlate:
-			match ingredient:
-				Enum.RecipeNames.PotTomatoSoup:
-					return Enum.RecipeNames.TomatoSoup
-		Enum.RecipeNames.Bur:
-			match ingredient:
-				Enum.RecipeNames.CutSal:
-					return Enum.RecipeNames.BurSal
-				Enum.RecipeNames.CutTom:
-					return Enum.RecipeNames.BurTom
-				Enum.RecipeNames.PanCookCutSte:
-					return Enum.RecipeNames.BurSte
-				Enum.RecipeNames.CutTomCutSal:
-					return Enum.RecipeNames.BurSalTom
-				Enum.RecipeNames.SteTom:
-					return Enum.RecipeNames.BurSteTom
-				Enum.RecipeNames.SteSal:
-					return Enum.RecipeNames.BurSteSal
-		Enum.RecipeNames.BurSte:
-			match ingredient:
-				Enum.RecipeNames.CutSal:
-					return Enum.RecipeNames.BurSteSal
-		Enum.RecipeNames.BurSteTom:
-			match ingredient:
-				Enum.RecipeNames.CutSal:
-					return Enum.RecipeNames.BurSteSalTom
-		Enum.RecipeNames.BurSal:
-			match ingredient:
-				Enum.RecipeNames.PanCookCutSte:
-					return Enum.RecipeNames.BurSteSal
-				Enum.RecipeNames.CutTom:
-					return Enum.RecipeNames.BurSalTom
-		Enum.RecipeNames.BurTom:
-			match ingredient:
-				Enum.RecipeNames.CutSal:
-					return Enum.RecipeNames.BurSalTom
-				Enum.RecipeNames.PanCookCutSte:
-					return Enum.RecipeNames.BurSteTom
-		Enum.RecipeNames.PotCutTom:
-			match ingredient:
-				Enum.RecipeNames.CutTom:
-					return Enum.RecipeNames.PotCutTomCutTom
-		Enum.RecipeNames.PotCutTomCutTom:
-			match ingredient:
-				Enum.RecipeNames.CutTom:
-					return Enum.RecipeNames.PotCutTomCutTomCutTom
-		Enum.RecipeNames.EmptyPot:
-			match ingredient:
-				Enum.RecipeNames.CutTom:
-					return Enum.RecipeNames.PotCutTom
-		Enum.RecipeNames.EmptyPan:
-			match ingredient:
-				Enum.RecipeNames.CutSte:
-					return Enum.RecipeNames.PanCutSte
-		Enum.RecipeNames.Empty:
-			return ingredient
-		Enum.RecipeNames.CutTom:
-			match ingredient:
-				Enum.RecipeNames.CutSal:
-					return Enum.RecipeNames.CutTomCutSal
-				Enum.RecipeNames.BurSteSal:
-					return Enum.RecipeNames.BurSteSalTom
-				Enum.RecipeNames.BurSal:
-					return Enum.RecipeNames.BurSalTom
-		Enum.RecipeNames.BurSalTom:
-			match ingredient:
-				Enum.RecipeNames.PanCookCutSte:
-					return Enum.RecipeNames.BurSteSalTom
-		Enum.RecipeNames.CutSal:
-			match ingredient:
-				Enum.RecipeNames.SteTom:
-					return Enum.RecipeNames.SteSalTom
-					
+static func recipesMix(recipe:Enum.RecipeNames, ingredient:Enum.RecipeNames) -> Enum.RecipeNames:
+	#match recipe:
+		#Enum.RecipeNames.PanCookCutSte:
+			#match ingredient:
+				#Enum.RecipeNames.CutTomCutSal:
+					#return Enum.RecipeNames.SteSalTom
+				#Enum.RecipeNames.CutSal:
+					#return Enum.RecipeNames.SteSal
+		#Enum.RecipeNames.EmptyPlate:
+			#match ingredient:
+				#Enum.RecipeNames.PotTomatoSoup:
+					#return Enum.RecipeNames.TomatoSoup
+		#Enum.RecipeNames.Bur:
+			#match ingredient:
+				#Enum.RecipeNames.CutSal:
+					#return Enum.RecipeNames.BurSal
+				#Enum.RecipeNames.CutTom:
+					#return Enum.RecipeNames.BurTom
+				#Enum.RecipeNames.PanCookCutSte:
+					#return Enum.RecipeNames.BurSte
+				#Enum.RecipeNames.CutTomCutSal:
+					#return Enum.RecipeNames.BurSalTom
+				#Enum.RecipeNames.SteTom:
+					#return Enum.RecipeNames.BurSteTom
+				#Enum.RecipeNames.SteSal:
+					#return Enum.RecipeNames.BurSteSal
+		#Enum.RecipeNames.BurSte:
+			#match ingredient:
+				#Enum.RecipeNames.CutSal:
+					#return Enum.RecipeNames.BurSteSal
+		#Enum.RecipeNames.BurSteTom:
+			#match ingredient:
+				#Enum.RecipeNames.CutSal:
+					#return Enum.RecipeNames.BurSteSalTom
+		#Enum.RecipeNames.BurSal:
+			#match ingredient:
+				#Enum.RecipeNames.PanCookCutSte:
+					#return Enum.RecipeNames.BurSteSal
+				#Enum.RecipeNames.CutTom:
+					#return Enum.RecipeNames.BurSalTom
+		#Enum.RecipeNames.BurTom:
+			#match ingredient:
+				#Enum.RecipeNames.CutSal:
+					#return Enum.RecipeNames.BurSalTom
+				#Enum.RecipeNames.PanCookCutSte:
+					#return Enum.RecipeNames.BurSteTom
+		#Enum.RecipeNames.PotCutTom:
+			#match ingredient:
+				#Enum.RecipeNames.CutTom:
+					#return Enum.RecipeNames.PotCutTomCutTom
+		#Enum.RecipeNames.PotCutTomCutTom:
+			#match ingredient:
+				#Enum.RecipeNames.CutTom:
+					#return Enum.RecipeNames.PotCutTomCutTomCutTom
+		#Enum.RecipeNames.EmptyPot:
+			#match ingredient:
+				#Enum.RecipeNames.CutTom:
+					#return Enum.RecipeNames.PotCutTom
+		#Enum.RecipeNames.EmptyPan:
+			#match ingredient:
+				#Enum.RecipeNames.CutSte:
+					#return Enum.RecipeNames.PanCutSte
+		#Enum.RecipeNames.Empty:
+			#return ingredient
+		#Enum.RecipeNames.CutTom:
+			#match ingredient:
+				#Enum.RecipeNames.CutSal:
+					#return Enum.RecipeNames.CutTomCutSal
+				#Enum.RecipeNames.BurSteSal:
+					#return Enum.RecipeNames.BurSteSalTom
+				#Enum.RecipeNames.PanCookCutSte:
+					#return Enum.RecipeNames.SteTom
+				#Enum.RecipeNames.BurSal:
+					#return Enum.RecipeNames.BurSalTom
+		#Enum.RecipeNames.BurSalTom:
+			#match ingredient:
+				#Enum.RecipeNames.PanCookCutSte:
+					#return Enum.RecipeNames.BurSteSalTom
+		#Enum.RecipeNames.CutSal:
+			#match ingredient:
+				#Enum.RecipeNames.SteTom:
+					#return Enum.RecipeNames.SteSalTom
+	
+	var mixed = add_dictionary(getRecipePrimaryIngredients(recipe), getRecipePrimaryIngredients(ingredient))
+	mixed = subtract_dictionary(mixed, {Enum.RecipeNames.EmptyPlate:1})
+	for r in inverseRecipes.keys():
+		if r == mixed:
+			return inverseRecipes[r]
 	if(recipe == Enum.RecipeNames.EmptyPlate):
 		return ingredient
+	if(ingredient == Enum.RecipeNames.EmptyPlate):
+		return recipe
 		
-	if(first): #on explore dans l'autre sens
-		return recipesMix(ingredient, recipe, false)
+	#if(first): #on explore dans l'autre sens
+		#return recipesMix(ingredient, recipe, false)
 	
 	if(recipe != Enum.RecipeNames.EmptyPlate and ingredient != Enum.RecipeNames.EmptyPlate):
 		printerr("pas de recette trouvée pour ", Enum.RecipeNames.keys()[recipe], " et ", Enum.RecipeNames.keys()[ingredient])
