@@ -21,14 +21,14 @@ func _enter_tree():
 		plateList.append(inst)
 
 func store(i:Movable) -> bool:
-	if(plateList.size() < 4 and i is Plate):
+	if(plateList.size() < 4 and i is Plate and i.recipe == i.emptyName and not i.dirty):
 		i.parent.objectInHand = null
 		i.pickUp(self)
 		i.parentOffset = Vector3(0, plateList.size() * 0.1, 0)
 		i.stored()
 		plateList.append(i)
 	return false
-	
+
 func unstore() -> Movable:
 	if(plateList.size() > 0):
 		var inst = plateList[plateList.size()-1]
@@ -38,6 +38,16 @@ func unstore() -> Movable:
 		inst.parent = null
 		return inst
 	return null
+
+func hovered():
+	super.hovered()
+	if(plateList.size()>0):
+		plateList[plateList.size()-1].hovered()
+		
+func unhovered():
+	super.unhovered()
+	if(plateList.size()>0):
+		plateList[plateList.size()-1].unhovered()
 
 func _process(_delta):
 	super._process(_delta)

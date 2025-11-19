@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://kdkf7dr12rdv" path="res://scripts/IntCutter.gd" id="1_pwcq3"]
 [ext_resource type="PackedScene" uid="uid://d07r3x3nsjtot" path="res://assets/blender/Interactibles/CuttingTable.blend" id="2_lwlp7"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_lwlp7"]
+[ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_0r62y"]
 
 [node name="cuttingtable" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_pwcq3")
@@ -14,8 +13,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0503086, 0)
 
 [node name="CuttingTable" parent="." instance=ExtResource("2_lwlp7")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5010861, 0)
-shape = SubResource("BoxShape3D_lwlp7")
+[node name="StandardCollision" parent="." instance=ExtResource("3_0r62y")]

@@ -9,13 +9,13 @@ rough = true
 absorbent = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
-size = Vector3(1, 0.19519043, 1)
+size = Vector3(1, 0.35882568, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_1kf1o"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Pan" type="RigidBody3D" node_paths=PackedStringArray("progressBar")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_noarx")
 script = ExtResource("1_a768c")
@@ -23,7 +23,7 @@ canBeStored = Array[int]([10])
 progressBar = NodePath("ProgressBar/SubViewport/Panel/ProgressBar")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0018615723, 0.07316202, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0018615723, 0.15497965, 0)
 shape = SubResource("BoxShape3D_noarx")
 
 [node name="FryingPan" parent="." instance=ExtResource("2_a768c")]

@@ -10,6 +10,7 @@ var passive:bool
 var occupied:bool = false
 var canBeOccupied:bool = true
 var obstacle = true
+var usedBy:Player = null
 
 func _enter_tree():
 	super._enter_tree()
@@ -22,6 +23,7 @@ func use(delta:float) -> bool:
 	if(storedObject):
 		if(storedObject.addProgress(taskType, delta*progressSpeed)):
 			occupied = false
+			if ishovered: hovered()
 			return true
 	return false
 
@@ -31,9 +33,11 @@ func store(i:Movable) -> bool:
 		i.parent.objectInHand = null
 		storedObject = i
 		storedObject.pickUp(self)
+		if ishovered : hovered()
 		return true
 	elif storedObject is MovableStorage:
 		if storedObject.mix(i):
+			if ishovered : hovered()
 			return true
 	return false
 
@@ -45,6 +49,7 @@ func unstore() ->Movable:
 	if temp:
 		temp.unhovered()
 	return temp
+
 
 func _process(_delta):
 	if(passive):

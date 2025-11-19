@@ -22,7 +22,7 @@ func store(i:Movable) -> bool:
 func unstore() -> Movable:
 	var inst = ingredient.instantiate()
 	inst.recipe = recipeType
-	add_child(inst)
+	get_tree().current_scene.add_child(inst)
 	inst.set_global_position(position)
 	return inst
 

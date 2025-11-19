@@ -1,20 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dob2epewnhjov"]
+[gd_scene load_steps=5 format=3 uid="uid://dob2epewnhjov"]
 
+[ext_resource type="Script" uid="uid://607pygvfipuu" path="res://scripts/IntClientTable.gd" id="1_viv08"]
+[ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="4_31d8r"]
 [ext_resource type="PackedScene" uid="uid://b7mhw0fjso5k6" path="res://assets/blender/Interactibles/ClientTable.blend" id="4_twgb7"]
 [ext_resource type="PackedScene" uid="uid://b18gckgpqlena" path="res://scenes/servePoint.tscn" id="5_2tdio"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vad65"]
-
-[node name="ClientTable" type="MeshInstance3D"]
+[node name="ClientTable" type="MeshInstance3D" node_paths=PackedStringArray("storePoint", "hoverSearch")]
+script = ExtResource("1_viv08")
+storePoint = NodePath("Node3D")
+hoverSearch = NodePath("ClientTable")
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7103729, 0)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5010861, 0)
-shape = SubResource("BoxShape3D_vad65")
 
 [node name="ClientTable" parent="." instance=ExtResource("4_twgb7")]
 
@@ -37,3 +34,5 @@ recipesOption = Array[int]([23, 8, 18, 19])
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.25, 1, 0)
 available = true
 recipesOption = Array[int]([23, 8, 18, 19])
+
+[node name="StandardCollision" parent="." instance=ExtResource("4_31d8r")]

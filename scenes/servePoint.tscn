@@ -11,12 +11,13 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_rexnx"]
 viewport_path = NodePath("SubViewport")
 
-[node name="servePoint" type="Node3D" node_paths=PackedStringArray("icon", "progressBar", "destinationPoint", "storePoint")]
+[node name="servePoint" type="Node3D" node_paths=PackedStringArray("icon", "progressBar", "destinationPoint", "storePoint", "hoverSearch")]
 script = ExtResource("1_hcvgp")
 icon = NodePath("DestinationPoint/IngredientIcon")
 progressBar = NodePath("DestinationPoint/ProgressBar/SubViewport/Panel/ProgressBar")
 destinationPoint = NodePath("DestinationPoint")
 storePoint = NodePath(".")
+hoverSearch = NodePath("Hovered(dummy)")
 
 [node name="DestinationPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7411835, 0, 0)
@@ -31,3 +32,5 @@ viewPort = SubResource("ViewportTexture_rexnx")
 
 [node name="ClientChair" parent="DestinationPoint" instance=ExtResource("4_j20ak")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Hovered(dummy)" type="Node3D" parent="."]

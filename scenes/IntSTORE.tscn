@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cd7mawawvwplk" path="res://scripts/IntStore.gd" id="1_0ohqm"]
 [ext_resource type="PackedScene" uid="uid://bikr1fnup2pog" path="res://assets/blender/Interactibles/StoreTable.blend" id="2_bcjnr"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_bcjnr"]
+[ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_ul7mi"]
 
 [node name="counter" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_0ohqm")
@@ -14,8 +13,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0028037, 0)
 
 [node name="StoreTable" parent="." instance=ExtResource("2_bcjnr")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5010861, 0)
-shape = SubResource("BoxShape3D_bcjnr")
+[node name="StandardCollision" parent="." instance=ExtResource("3_ul7mi")]

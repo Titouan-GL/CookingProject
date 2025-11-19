@@ -8,7 +8,12 @@ var RecipeNeededList:Array[Enum.RecipeNames]
 var servePoints:Array = []
 var printNewFrame = false
 
-func findAgentClosestToObj(obj:Node3D) -> Agent:
+func findAgentClosestToObj(obj:Node3D) -> Cook:
+	if(obj is Movable):
+		if(obj.parent is Cook):
+			return obj.parent
+		if(obj.parent is Interactible and obj.parent.usedBy != null):
+			return obj.parent.usedBy
 	if(obj):
 		var bestDistance:float = INF
 		var bestAgent:Agent = null
@@ -86,7 +91,9 @@ func dropToNearestCounter(agent:Agent):
 		agent.dropObject()
 
 
-func setAgentTarget(agent:Agent, task:Task, destination:Node3D, order:Enum.Order = Enum.Order.NONE):
+func setAgentTarget(agent:Cook, task:Task, destination:Node3D, order:Enum.Order = Enum.Order.NONE):
+	if agent is Player:
+		return true
 	if(agent and task and destination):
 		task.start(destination, agent)
 		agent.order = order
@@ -303,6 +310,8 @@ func _process(_delta):
 			elif a.task and a.objectInHand != a.task.object:
 				dropToNearestCounter(a)
 
+	for i in get_tree().get_nodes_in_group("interactible"):
+		i.usedBy = null
 
 func _enter_tree():
 	add_to_group("Hierarchy")

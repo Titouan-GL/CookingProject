@@ -12,6 +12,7 @@ var progressMaxValues:Dictionary
 var visibleMesh:Node3D = null
 @export var progressBar:ProgressBar
 var parentOffset:Vector3
+var rb:RigidBody3D
 
 func UpdateAppearance():
 	var newMesh = Recipes.recipeToMesh(recipe)
@@ -21,8 +22,15 @@ func UpdateAppearance():
 		visibleMesh = newMesh.instantiate()
 		add_child(visibleMesh)
 		visibleMesh.set_position(Vector3.ZERO)
+		findMeshInstances(visibleMesh)
+		if ishovered : 
+			unhovered()
+			hovered()
 		
 func pickUp(p:Node3D):
+	rb.set_collision_layer_value(3, false)
+	rb.sleeping = true
+	rb.freeze = true
 	if(parent is Interactible):
 		parent.unstore()
 	if(parent is Cook):
@@ -35,6 +43,9 @@ func assignedToTask(_task:Task):
 	
 func dropped():
 	parent = null
+	rb.sleeping = false
+	rb.freeze = false
+	rb.set_collision_layer_value(3, true)
 
 func _process(_delta):
 	if(progressBar): 
@@ -47,7 +58,9 @@ func _process(_delta):
 		global_position = Vector3(parent.storePoint.global_position + parentOffset)
 		global_rotation = Vector3(parent.storePoint.global_rotation + parentOffset)
 
+
 func _enter_tree():
+	rb = $"."
 	add_to_group("movable")
 	super._enter_tree()
 

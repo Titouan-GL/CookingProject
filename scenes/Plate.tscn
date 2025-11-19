@@ -10,13 +10,13 @@ rough = true
 absorbent = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
-size = Vector3(0.72906494, 0.19519043, 0.7624512)
+size = Vector3(0.72906494, 0.3997345, 0.7624512)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_1kf1o"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Plate" type="RigidBody3D" node_paths=PackedStringArray("dirt", "progressBar")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_noarx")
 script = ExtResource("1_km87r")
@@ -24,7 +24,7 @@ dirt = NodePath("PlateDirty")
 progressBar = NodePath("ProgressBar/SubViewport/Panel/ProgressBar")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1035156e-05, 0.07316202, 0.00012207031)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1035156e-05, 0.17543405, 0.00012207031)
 shape = SubResource("BoxShape3D_noarx")
 
 [node name="ProgressBar" parent="." instance=ExtResource("3_n4jog")]

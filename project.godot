@@ -57,3 +57,11 @@ use={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":75,"key_label":0,"unicode":75,"location":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_physics/layer_1="static"
+3d_physics/layer_2="cooks"
+3d_physics/layer_3="movable"
+3d_physics/layer_4="clients"
+3d_physics/layer_5="movable_on_ground"

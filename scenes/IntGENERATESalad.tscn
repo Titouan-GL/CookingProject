@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cj6wye16kflcp" path="res://scripts/IntGenerator.gd" id="1_i42dv"]
 [ext_resource type="PackedScene" uid="uid://42cwobm5wgfg" path="res://assets/blender/Interactibles/SaladGenerator.blend" id="2_i42dv"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_i42dv"]
+[ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_p86et"]
 
 [node name="generator" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_i42dv")
@@ -15,8 +14,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7103729, 0)
 
 [node name="SaladGenerator" parent="." instance=ExtResource("2_i42dv")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5010861, 0)
-shape = SubResource("BoxShape3D_i42dv")
+[node name="StandardCollision" parent="." instance=ExtResource("3_p86et")]

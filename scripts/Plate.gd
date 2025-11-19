@@ -14,9 +14,13 @@ func UpdateAppearance():
 			visibleMesh = newMesh.instantiate()
 			add_child(visibleMesh)
 			visibleMesh.set_position(Vector3.ZERO)
+			findMeshInstances(visibleMesh)
+			if ishovered : 
+				unhovered()
+				hovered()
 
 func addProgress(s:Enum.TaskType, delta:float) -> bool:
-	if(progress.has(s)):
+	if(progress.has(s) and dirty):
 		progress[s] -= delta
 		progressBar.value = 1-(progress[s]/progressMaxValues[s])
 		if(progress[s] <= 0):
@@ -34,11 +38,15 @@ func mealFinished():
 	recipe = emptyName
 	eatenOn = false
 	dirt.visible = true
+	dirty = true
 	add_to_group("dirtyPlate")
+	availableForStorage = false
 	UpdateAppearance()
 
 func cleaned():
 	dirt.visible = false
+	dirty = false
+	availableForStorage = true
 	remove_from_group("dirtyPlate")
 	add_to_group("movable")
 	add_to_group(groupName)

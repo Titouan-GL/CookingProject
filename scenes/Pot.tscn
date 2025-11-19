@@ -15,7 +15,7 @@ size = Vector3(1, 0.8086548, 1)
 viewport_path = NodePath("SubViewport")
 
 [node name="Pot" type="RigidBody3D" node_paths=PackedStringArray("progressBar")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_noarx")
 script = ExtResource("1_a4utd")

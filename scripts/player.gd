@@ -22,12 +22,21 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	if(raycaster.get_collider()):
-		var newhovered = raycaster.get_collider().get_parent()
-		if(newhovered is Interactible and newhovered != hovered):
+		var newhoveredParent = raycaster.get_collider().get_parent()
+		var newhovered = raycaster.get_collider()
+		if(newhoveredParent is Interactible and newhoveredParent != hovered):
+			if hovered:
+				hovered.unhovered()
+			newhoveredParent.hovered()
+			hovered = newhoveredParent
+		elif(newhovered is Movable and newhovered != hovered):
 			if hovered:
 				hovered.unhovered()
 			newhovered.hovered()
 			hovered = newhovered
+		elif newhoveredParent != hovered and newhovered != hovered and hovered:
+			hovered.unhovered()
+			hovered = null
 	else:
 		if hovered:
 			hovered.unhovered()
@@ -42,7 +51,7 @@ func _init() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("store"):
-		if(hovered is Interactible):
+		if hovered is Interactible:
 			if objectInHand is MovableStorage and hovered.storedObject:
 				hovered.storedObject.mix(objectInHand)
 			elif objectInHand:
@@ -50,7 +59,12 @@ func _process(_delta: float) -> void:
 			else:
 				var obj = hovered.unstore()
 				pickUp(obj)
+		elif hovered is Movable:
+			pickUp(hovered)
+		elif hovered == null and objectInHand:
+			dropObject()
 	if Input.get_action_strength("use"):
 		if(hovered is Interactible and hovered.storedObject):
 			hovered.use(_delta)
+			hovered.usedBy = self
 	

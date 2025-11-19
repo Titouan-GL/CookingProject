@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dt1nlibrjyvsr" path="res://scripts/IntSink.gd" id="1_wnr1u"]
 [ext_resource type="PackedScene" uid="uid://d0mjndq7khowa" path="res://assets/blender/Interactibles/Sink.blend" id="2_wnr1u"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_bcjnr"]
+[ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_clan4"]
 
 [node name="Sink" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_wnr1u")
@@ -12,10 +11,6 @@ storePoint = NodePath("StorePoint")
 [node name="StorePoint" type="Node3D" parent="."]
 transform = Transform3D(0.8050388, 0.4126227, 0.42621014, 0, 0.7184663, -0.69556177, -0.5932222, 0.5599542, 0.5783932, -0.06623578, 0.9856492, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5010861, 0)
-shape = SubResource("BoxShape3D_bcjnr")
-
 [node name="Sink" parent="." instance=ExtResource("2_wnr1u")]
+
+[node name="StandardCollision" parent="." instance=ExtResource("3_clan4")]

@@ -2,8 +2,10 @@ extends Node3D
 
 class_name Hoverable
 
-var defaultMaterials = {}
-var overrideMaterials = {}
+var defaultMaterials:Dictionary[Node3D, Array] = {}
+var overrideMaterials:Dictionary[Node3D, Array] = {}
+@export var hoverSearch:Node3D
+var ishovered = false
 
 func findMeshInstances(parent):
 	for child in parent.get_children():
@@ -18,23 +20,55 @@ func findMeshInstances(parent):
 				var overrideMat = mat.duplicate()
 				overrideMat.emission_enabled = true
 				overrideMat.emission = Color(1, 1, 1)
-				overrideMat.emission_energy_multiplier = 0.3
+				overrideMat.emission_energy_multiplier = 0.03
 				override_materials.append(overrideMat)
 				mat = child.mesh.surface_get_material(i)
 			defaultMaterials[child] = materials
 			overrideMaterials[child] = override_materials
 		findMeshInstances(child)
-		
+
+
 func _enter_tree():
-	findMeshInstances(self)
+	if(hoverSearch):
+		findMeshInstances(hoverSearch)
+	else:
+		findMeshInstances(self)
+
+func resetMeshes():
+	var defaultMaterialsEx = defaultMaterials.duplicate()
+	var overrideMaterialsEx = overrideMaterials.duplicate()
+	defaultMaterials = {}
+	overrideMaterials = {}
+	for mats in defaultMaterialsEx.keys():
+		if is_instance_valid(mats):
+			defaultMaterials[mats] = defaultMaterialsEx[mats]
+	for mats in overrideMaterialsEx.keys():
+		if is_instance_valid(mats):
+			overrideMaterials[mats] = overrideMaterialsEx[mats]
 	
+
 func hovered():
-	for mesh:MeshInstance3D in overrideMaterials.keys():
+	var invalidElements = 0
+	if not ishovered:
 		for mats in overrideMaterials.keys():
-			for i in range(overrideMaterials[mats].size()):
-				mesh.set_surface_override_material(i, overrideMaterials[mats][i])
-				
+			if is_instance_valid(mats):
+				for i in range(overrideMaterials[mats].size()):
+					mats.set_surface_override_material(i, overrideMaterials[mats][i])
+			else:
+				invalidElements += 1
+	ishovered = true
+	if(invalidElements > 0):
+		resetMeshes()
+
 func unhovered():
-	for mats in defaultMaterials.keys():
-		for i in range(defaultMaterials[mats].size()):
-			mats.set_surface_override_material(i, defaultMaterials[mats][i])
+	var invalidElements = 0
+	if ishovered:
+		for mats in defaultMaterials.keys():
+			if is_instance_valid(mats):
+				for i in range(defaultMaterials[mats].size()):
+					mats.set_surface_override_material(i, defaultMaterials[mats][i])
+			else:
+				invalidElements += 1
+	ishovered = false
+	if(invalidElements > 0):
+		resetMeshes()

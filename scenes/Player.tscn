@@ -126,13 +126,13 @@ player = NodePath("..")
 animationTree = NodePath("AnimationTree")
 
 [node name="Skeleton3D" parent="Mesh/Armature" index="0"]
-bones/1/rotation = Quaternion(0, -0.0002681149, 0, 1)
-bones/6/rotation = Quaternion(0.34004733, -0.25349075, 0.18958512, 0.8855325)
-bones/7/rotation = Quaternion(0.13354126, 0.5236903, -0.008882079, 0.8413302)
+bones/1/rotation = Quaternion(0, -0.0003372856, 0, 1)
+bones/6/rotation = Quaternion(0.42493525, -0.3633173, 0.15956584, 0.81361496)
+bones/7/rotation = Quaternion(0.13316011, 0.49465606, -0.013436953, 0.8587219)
 bones/8/rotation = Quaternion(0.2631279, -0.3090731, -0.68957347, 0.59977156)
-bones/9/rotation = Quaternion(0.049388155, -0.5533284, -0.38547766, 0.73674655)
-bones/10/rotation = Quaternion(-0.00035446082, 0.30537027, 0.0011052956, 0.952233)
-bones/11/rotation = Quaternion(0.7608174, -0.0150017105, 0.019590192, 0.64849687)
+bones/9/rotation = Quaternion(0.2199129, -0.6328681, -0.39644897, 0.62764984)
+bones/10/rotation = Quaternion(-0.00045371725, 0.39087552, 0.0010683959, 0.92044276)
+bones/11/rotation = Quaternion(0.77944493, -0.021148443, 0.02743706, 0.6255122)
 bones/13/rotation = Quaternion(-3.9609604e-05, 1.1486936e-07, 0.9999818, 0.006027825)
 bones/15/rotation = Quaternion(3.9371163e-05, 1.18938516e-07, 0.9999818, -0.006027825)
 
@@ -153,7 +153,9 @@ transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0.6362771, 0)
 shape = SubResource("CapsuleShape3D_v6fml")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 1.058)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 1.058)
+target_position = Vector3(0, -1.3, 0)
+collision_mask = 5
 
 [node name="grabPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.076, 0.951)

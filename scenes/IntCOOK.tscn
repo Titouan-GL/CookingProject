@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cc45pwt6qrmuw" path="res://scripts/IntStove.gd" id="1_cpfj2"]
 [ext_resource type="PackedScene" uid="uid://dnf3pe5b5fuhp" path="res://assets/blender/Interactibles/Stove.blend" id="2_khd1q"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_khd1q"]
+[ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_aqjyo"]
 
 [node name="Stove" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
 script = ExtResource("1_cpfj2")
@@ -14,8 +13,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0323083, 0)
 
 [node name="Stove" parent="." instance=ExtResource("2_khd1q")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5010861, 0)
-shape = SubResource("BoxShape3D_khd1q")
+[node name="StandardCollision" parent="." instance=ExtResource("3_aqjyo")]

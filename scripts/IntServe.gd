@@ -12,6 +12,7 @@ var client:Client = null
 var navmesh:Navigation
 @export var recipesOption:Array[Enum.RecipeNames]
 static var override = [Enum.RecipeNames.BurSteSal]#= [Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.CutTomCutSal, Enum.RecipeNames.BurSteSalTom]
+var table:ClientTable
 
 var timeLeft = 0
 var initialTime = 45
@@ -68,6 +69,8 @@ func serve(success:bool):
 		await get_tree().create_timer(3.0).timeout
 		if storedObject is Plate:
 			storedObject.mealFinished()
+			if table.ishovered:
+				table.hovered()
 	else:
 		add_to_group("freeServePoint")
 		gameManager.changeScore(-Recipes.getScore(recipeWanted))

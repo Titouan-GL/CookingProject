@@ -8,19 +8,22 @@ rough = true
 absorbent = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
+size = Vector3(0.7, 0.7, 0.7)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_de0p5"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Ingredient" type="RigidBody3D" node_paths=PackedStringArray("progressBar")]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 7
+mass = 5.0
 physics_material_override = SubResource("PhysicsMaterial_noarx")
+gravity_scale = 1.5
 script = ExtResource("1_11e83")
 progressBar = NodePath("ProgressBar/SubViewport/Panel/ProgressBar")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34786487, 0)
 shape = SubResource("BoxShape3D_noarx")
 
 [node name="ProgressBar" parent="." instance=ExtResource("2_ssx0k")]

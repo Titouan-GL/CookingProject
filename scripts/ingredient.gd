@@ -4,7 +4,6 @@ class_name Ingredient
 
 
 
-
 func UpdateRecipe(newRecipe:Enum.RecipeNames):
 	remove_from_group(Enum.RecipeNames.keys()[recipe])
 	recipe = newRecipe
