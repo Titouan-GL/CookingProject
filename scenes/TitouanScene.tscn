@@ -21,8 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://dc2dvh5ueasee" path="res://scenes/IntSink.tscn" id="19_rugfo"]
 [ext_resource type="PackedScene" uid="uid://bwgsl7tn345w6" path="res://scenes/Door.tscn" id="20_n0o6x"]
 [ext_resource type="PackedScene" uid="uid://pvmuoik2fi2n" path="res://scenes/IntPlateholder.tscn" id="21_8ujqh"]
-[ext_resource type="PackedScene" uid="uid://ds1amirl05t31" path="res://scenes/Plate.tscn" id="23_5bvjv"]
 [ext_resource type="PackedScene" uid="uid://c1shi6l6dy3g6" path="res://scenes/Player.tscn" id="23_emgxq"]
+[ext_resource type="PackedScene" uid="uid://b67m5mnbrjcmo" path="res://scenes/agent.tscn" id="24_5bvjv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4xowi"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -358,9 +358,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 5)
 storedObject = NodePath("../../Pot2")
 
-[node name="counter6" parent="Environnement/Interactible" node_paths=PackedStringArray("storedObject") instance=ExtResource("5_v6ncs")]
+[node name="counter6" parent="Environnement/Interactible" instance=ExtResource("5_v6ncs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 5)
-storedObject = NodePath("../../../Plate")
 
 [node name="cuttingtable2" parent="Environnement/Interactible" instance=ExtResource("2_pm7iv")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -10, 0, 5)
@@ -478,7 +477,14 @@ horizontal_alignment = 1
 [node name="Player" parent="." instance=ExtResource("23_emgxq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.729166, -0.0068730097, 1.0092611)
 
-[node name="Plate" parent="." instance=ExtResource("23_5bvjv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.37183, 1.0023404, 4.9631557)
-canBeStored = null
-recipe = 18
+[node name="agent" parent="." instance=ExtResource("24_5bvjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.048437, 1.2505653, -0.9744005)
+
+[node name="agent2" parent="." instance=ExtResource("24_5bvjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2012568, 1.2505653, 1.875133)
+
+[node name="agent3" parent="." instance=ExtResource("24_5bvjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.363771, 1.2505653, 2.4319618)
+
+[node name="agent4" parent="." instance=ExtResource("24_5bvjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.110633, 1.250565, 1.708663)

@@ -82,19 +82,19 @@ func _physics_process(delta):
 	elif task and task.object:
 		var objDirection = (task.object.global_position - global_position).normalized()
 		target_angle = atan2(objDirection.x, objDirection.z)
-	target_angle = lerpf(target_angle, atan2(-addedVelocity.x, -addedVelocity.z), addedVelocity.length()/50)
+	target_angle = lerp_angle(target_angle, atan2(-addedVelocity.x, -addedVelocity.z), addedVelocity.length()/50)
 	var new_angle = lerp_angle(rotation.y, target_angle, delta *15)
 	rotation.y = new_angle
 	var planarVelocity = (direction  + addedVelocity).normalized() * SPEED
 	velocity = lerp(velocity, Vector3(0, -gravity, 0) + planarVelocity, ACCELERATION*delta)
-	
+
 	super._physics_process(delta)
 	move_and_slide()
 
 func _ready():
 	hierarchy = get_tree().get_nodes_in_group("Hierarchy")[0]
 	hierarchy.AgentList.append(self)
-	
+
 func _enter_tree():
 	add_to_group("freeAgent")
 	super._enter_tree()
