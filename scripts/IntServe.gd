@@ -11,7 +11,7 @@ var gameManager:GameManager
 var client:Client = null
 var navmesh:Navigation
 @export var recipesOption:Array[Enum.RecipeNames]
-static var override = [Enum.RecipeNames.BurSteSal]#= [Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.CutTomCutSal, Enum.RecipeNames.BurSteSalTom]
+static var override #= [Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.CutTomCutSal, Enum.RecipeNames.BurSteSalTom]
 var table:ClientTable
 
 var timeLeft = 0

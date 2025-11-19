@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://j6xa0njjp4mx"]
+
+[ext_resource type="Script" uid="uid://cxgfm0tai04ff" path="res://scripts/IntTrash.gd" id="1_uwust"]
+[ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_d1tln"]
+[ext_resource type="PackedScene" uid="uid://iuothybukeuy" path="res://assets/blender/Interactibles/Trash.blend" id="3_uwust"]
+
+[node name="trash" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
+script = ExtResource("1_uwust")
+storePoint = NodePath("Node3D")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0028037, 0)
+
+[node name="StandardCollision" parent="." instance=ExtResource("3_d1tln")]
+
+[node name="Trash" parent="." instance=ExtResource("3_uwust")]
+transform = Transform3D(0, 0, 1.0000001, 0, 1, 0, -1.0000001, 0, 0, 0, 0, 0)

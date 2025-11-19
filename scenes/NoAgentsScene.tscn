@@ -1,0 +1,608 @@
+[gd_scene load_steps=42 format=3 uid="uid://dicd7ubmyc2v8"]
+
+[ext_resource type="Script" uid="uid://djauehf5a81tl" path="res://scripts/gameManager.gd" id="1_5wfll"]
+[ext_resource type="Script" uid="uid://pltmis4ddkxu" path="res://scripts/Navigation.gd" id="2_bo7u2"]
+[ext_resource type="PackedScene" uid="uid://dr1ea0arqcnag" path="res://scenes/Pot.tscn" id="3_5gciw"]
+[ext_resource type="PackedScene" uid="uid://c5oj2lrpy8m1f" path="res://assets/blender/Deco/SpookyLantern.blend" id="4_u2vf6"]
+[ext_resource type="PackedScene" uid="uid://bd1dt0jxhqgkm" path="res://assets/blender/Deco/Pumpkin.blend" id="5_4tv5k"]
+[ext_resource type="PackedScene" uid="uid://cbowkrh8v3tix" path="res://assets/blender/Deco/Candles.blend" id="6_qlma6"]
+[ext_resource type="Texture2D" uid="uid://bhajo2s0i6gjk" path="res://assets/textures/05366bde9747af98448947536d59196f.jpg" id="7_5s7x1"]
+[ext_resource type="PackedScene" uid="uid://bb80rjlejrxap" path="res://scenes/IntCUT.tscn" id="8_q6wkm"]
+[ext_resource type="PackedScene" uid="uid://cn2qe58h31hii" path="res://scenes/IntCOOK.tscn" id="9_6ujos"]
+[ext_resource type="PackedScene" uid="uid://bl820p48kbd85" path="res://scenes/IntGENERATEtomato.tscn" id="10_jate7"]
+[ext_resource type="PackedScene" uid="uid://df4nudau2nmxb" path="res://scenes/IntSTORE.tscn" id="11_nplmk"]
+[ext_resource type="PackedScene" uid="uid://l0m7ct2x4m62" path="res://scenes/IntGENERATEsteak.tscn" id="12_tgqok"]
+[ext_resource type="PackedScene" uid="uid://d0i43sn0urp0u" path="res://scenes/IntGENERATESalad.tscn" id="13_eqym0"]
+[ext_resource type="PackedScene" uid="uid://c4i5gr3lt5fbq" path="res://scenes/IntGENERATEbread.tscn" id="14_um0ev"]
+[ext_resource type="PackedScene" uid="uid://b0ooessic4rg8" path="res://assets/blender/Deco/LandScape.blend" id="15_46yta"]
+[ext_resource type="PackedScene" uid="uid://dob2epewnhjov" path="res://scenes/clientTable.tscn" id="16_76338"]
+[ext_resource type="PackedScene" uid="uid://bwgsl7tn345w6" path="res://scenes/Door.tscn" id="17_8dt0w"]
+[ext_resource type="PackedScene" uid="uid://pvmuoik2fi2n" path="res://scenes/IntPlateholder.tscn" id="18_gryrk"]
+[ext_resource type="PackedScene" uid="uid://dc2dvh5ueasee" path="res://scenes/IntSink.tscn" id="19_tpj5q"]
+[ext_resource type="PackedScene" uid="uid://j6xa0njjp4mx" path="res://scenes/IntTrash.tscn" id="20_p1snq"]
+[ext_resource type="Script" uid="uid://dg83vouhqgm2u" path="res://scripts/TaskHierarchy.gd" id="21_dy2dx"]
+[ext_resource type="PackedScene" uid="uid://81p0llkphiwe" path="res://scenes/Pan.tscn" id="22_j850x"]
+[ext_resource type="PackedScene" uid="uid://dextpsgg4068r" path="res://scenes/UI/HowToPlay.tscn" id="23_4vfab"]
+[ext_resource type="PackedScene" uid="uid://c1shi6l6dy3g6" path="res://scenes/Player.tscn" id="24_1tiyb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4xowi"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_a202f"]
+sky_material = SubResource("ProceduralSkyMaterial_4xowi")
+
+[sub_resource type="Environment" id="Environment_noarx"]
+background_mode = 2
+sky = SubResource("Sky_a202f")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_jka67"]
+size = Vector3(11, 1, 13)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_giltd"]
+albedo_color = Color(0.63436425, 0.53444916, 0.8069749, 1)
+albedo_texture = ExtResource("7_5s7x1")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i5arm"]
+size = Vector3(10.921417, 1, 12.475607)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukcvp"]
+bg_color = Color(0.7921569, 0.101960786, 1, 1)
+border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ykhv"]
+bg_color = Color(0.6082167, 0.0014824271, 0.77481365, 1)
+border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wh52"]
+bg_color = Color(0.7359452, 0.0022996874, 0.9370591, 1)
+border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ykhv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5bvjv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rugfo"]
+bg_color = Color(0.64, 0.64, 0.64, 0.29411766)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emgxq"]
+bg_color = Color(0.8901961, 0, 0.22745098, 0.6745098)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wfll"]
+bg_color = Color(0.7921569, 0.101960786, 1, 1)
+border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo7u2"]
+bg_color = Color(0.6082167, 0.0014824271, 0.77481365, 1)
+border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5gciw"]
+bg_color = Color(0.7359452, 0.0022996874, 0.9370591, 1)
+border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u2vf6"]
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("scoreLabel", "scoreLabel2", "timeBar", "gameUI", "gameOverUI", "HowToPlay", "Menubutton")]
+script = ExtResource("1_5wfll")
+scoreLabel = NodePath("CanvasLayer/Score/MarginContainer/ProgressBar/Label")
+scoreLabel2 = NodePath("CanvasLayer/EndScreen/VBoxContainer/Label")
+timeBar = NodePath("CanvasLayer/Score/MarginContainer/ProgressBar")
+gameUI = NodePath("CanvasLayer/Score")
+gameOverUI = NodePath("CanvasLayer/EndScreen")
+HowToPlay = NodePath("CanvasLayer/Control2")
+Menubutton = NodePath("CanvasLayer/Control2/MarginContainer/HBoxContainer/MarginContainer2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_noarx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6070153, 0.7946902, 0, -0.7946902, 0.6070153, -7.4640703, 23.345318, 17.66813)
+fov = 20.0
+
+[node name="Environnement" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.908931, 0, 0)
+script = ExtResource("2_bo7u2")
+gridMax = Vector2i(-1, 5)
+gridMin = Vector2i(-12, -4)
+
+[node name="Pot" parent="Environnement" instance=ExtResource("3_5gciw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2130375, 1.2310169, 3.012409)
+
+[node name="Pot2" parent="Environnement" instance=ExtResource("3_5gciw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.030609, 1.6974955, 5.0118456)
+
+[node name="Decorative" type="Node3D" parent="Environnement"]
+
+[node name="SpookyLantern" parent="Environnement/Decorative" instance=ExtResource("4_u2vf6")]
+transform = Transform3D(0.57587504, 0, 1.2760751, 0, 1.4, 0, -1.2760751, 0, 0.57587504, -6.576169, -0.015685946, -3.3339856)
+
+[node name="SpookyLantern2" parent="Environnement/Decorative" instance=ExtResource("4_u2vf6")]
+transform = Transform3D(0.27176023, 0, -1.3733704, 0, 1.4, 0, 1.3733704, 0, 0.27176023, -2.617463, -0.9327891, -0.7976897)
+
+[node name="SpookyLantern3" parent="Environnement/Decorative" instance=ExtResource("4_u2vf6")]
+transform = Transform3D(1.115334, 0, 0.8461858, 0, 1.4000001, 0, -0.8461858, 0, 1.115334, -1.9963961, -0.49178958, 2.2939825)
+
+[node name="SpookyLantern4" parent="Environnement/Decorative" instance=ExtResource("4_u2vf6")]
+transform = Transform3D(0.83971804, 0, -1.5921286, 0, 1.8, 0, 1.5921286, 0, 0.83971804, 4.049, 0.082, 0.476)
+
+[node name="SpookyLantern5" parent="Environnement/Decorative" instance=ExtResource("4_u2vf6")]
+transform = Transform3D(0.8617577, 0, -1.2277514, 0, 1.5, 0, 1.2277514, 0, 0.8617577, 5.511, 0.255, -3.103)
+
+[node name="SpookyLantern6" parent="Environnement/Decorative" instance=ExtResource("4_u2vf6")]
+transform = Transform3D(1.2894828, 0, -0.16502675, 0, 1.3, 0, 0.16502675, 0, 1.2894828, -0.12513447, -0.5483794, -3.5428135)
+
+[node name="Pumpkin" parent="Environnement/Decorative" instance=ExtResource("5_4tv5k")]
+transform = Transform3D(1.083613, 0, 0.71818006, 0, 1.3, 0, -0.71818006, 0, 1.083613, -6.367731, -0.13413036, 3.956802)
+
+[node name="Pumpkin2" parent="Environnement/Decorative" instance=ExtResource("5_4tv5k")]
+transform = Transform3D(0.984835, 0, 0.17349342, 0, 1, 0, -0.17349342, 0, 0.984835, -6.59816, -0.13413012, 3.12999)
+
+[node name="Pumpkin3" parent="Environnement/Decorative" instance=ExtResource("5_4tv5k")]
+transform = Transform3D(-0.66899216, 0, -1.3425533, 0, 1.5, 0, 1.3425533, 0, -0.66899216, 2.915528, -0.134, -3.164)
+
+[node name="Pumpkin8" parent="Environnement/Decorative" instance=ExtResource("5_4tv5k")]
+transform = Transform3D(1.2734575, 0, -0.7926575, 0.13506779, 1.4780629, 0.21699548, 0.78106505, -0.255598, 1.2548335, -3.5082483, 1.5827981, -6.24768)
+
+[node name="Pumpkin9" parent="Environnement/Decorative" instance=ExtResource("5_4tv5k")]
+transform = Transform3D(1.1036632, 0, -0.6869698, 0.11705873, 1.2809877, 0.18806273, 0.67692304, -0.22151826, 1.0875223, -9.902518, 1.6933733, 0.023513079)
+
+[node name="Pumpkin4" parent="Environnement/Decorative" instance=ExtResource("5_4tv5k")]
+transform = Transform3D(1.2770252, 0, -1.5392227, 0, 2, 0, 1.5392227, 0, 1.2770252, 5.119, 0.217, 1.791)
+
+[node name="Pumpkin5" parent="Environnement/Decorative" instance=ExtResource("5_4tv5k")]
+transform = Transform3D(1.1607585, 0, 0.3043677, 0, 1.2, 0, -0.3043677, 0, 1.1607585, 4.649, 0.408, 0.457)
+
+[node name="Pumpkin6" parent="Environnement/Decorative" instance=ExtResource("5_4tv5k")]
+transform = Transform3D(-1.2537541, 0, -0.82346874, 0.2337813, 1.4382817, -0.35593855, 0.78958666, -0.4258473, -1.2021677, -8.379345, 0.39959085, -3.5169492)
+
+[node name="Pumpkin7" parent="Environnement/Decorative" instance=ExtResource("5_4tv5k")]
+transform = Transform3D(-0.5470675, 0, 0.58370984, 0, 0.8, 0, -0.58370984, 0, -0.5470675, -7.943307, -0.13413012, -0.5814452)
+
+[node name="Candles" parent="Environnement/Decorative" instance=ExtResource("6_qlma6")]
+transform = Transform3D(0.6999052, 0, 0.011520386, 0, 0.6999999, 0, -0.011520386, 0, 0.6999052, -7.543354, 1.0063882, -4.3526025)
+
+[node name="Candles3" parent="Environnement/Decorative" instance=ExtResource("6_qlma6")]
+transform = Transform3D(-0.6968863, 0, 0.065948784, 0, 0.6999998, 0, -0.065948784, 0, -0.6968863, -0.6669822, 1.0063882, 5.2546616)
+
+[node name="Candles4" parent="Environnement/Decorative" instance=ExtResource("6_qlma6")]
+transform = Transform3D(0.3658515, 0, 0.93067324, 0, 1, 0, -0.93067324, 0, 0.3658515, 4.488, 0.466, 5.013)
+
+[node name="Candles5" parent="Environnement/Decorative" instance=ExtResource("6_qlma6")]
+transform = Transform3D(-0.39217556, 0, 0.6972792, 0, 0.79999995, 0, -0.6972792, 0, -0.39217556, 5.229, 0.463, 0.814)
+
+[node name="Candles6" parent="Environnement/Decorative" instance=ExtResource("6_qlma6")]
+transform = Transform3D(0.4697834, 0, -1.1042209, 0, 1.2, 0, 1.1042209, 0, 0.4697834, -8.120997, 0.08057451, 4.8099227)
+
+[node name="Candles7" parent="Environnement/Decorative" instance=ExtResource("6_qlma6")]
+transform = Transform3D(0.112785555, 0, -1.0942026, 0, 1.1, 0, 1.0942026, 0, 0.112785555, -8.000567, 0.52967256, -2.5249043)
+
+[node name="Candles8" parent="Environnement/Decorative" instance=ExtResource("6_qlma6")]
+transform = Transform3D(1.0091944, 0, -0.4376376, 0, 1.1, 0, 0.4376376, 0, 1.0091944, 4.538, 0.624, -3.436)
+
+[node name="Candles9" parent="Environnement/Decorative" instance=ExtResource("6_qlma6")]
+transform = Transform3D(-0.043012887, 0, -1.0991588, 0, 1.1, 0, 1.0991588, 0, -0.043012887, -10.203354, 1.6779411, -1.3559393)
+
+[node name="Candles10" parent="Environnement/Decorative" instance=ExtResource("6_qlma6")]
+transform = Transform3D(0.43709198, 0, -1.0094309, 0, 1.1000001, 0, 1.0094309, 0, 0.43709198, -1.1251893, 0.5366198, -6.4201617)
+
+[node name="Candles2" parent="Environnement/Decorative" instance=ExtResource("6_qlma6")]
+transform = Transform3D(0.01884901, 0, -0.69974613, 0, 0.6999998, 0, 0.69974613, 0, 0.01884901, -1.8948636, 0.71721494, -0.17068574)
+
+[node name="Decor" type="Node3D" parent="Environnement"]
+
+[node name="Ground" type="MeshInstance3D" parent="Environnement/Decor"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.164, -0.517, 0.284)
+mesh = SubResource("BoxMesh_jka67")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_giltd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environnement/Decor/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0040456057, 0, 0.000669539)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/Decor/Ground/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050691992, 0, -0.00066947937)
+shape = SubResource("BoxShape3D_i5arm")
+
+[node name="invisiblewalls" type="MeshInstance3D" parent="Environnement/Decor"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 18.160286, 17.371878, -0.000669539)
+visible = false
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environnement/Decor/invisiblewalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0040456057, 0, 0.000669539)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/Decor/invisiblewalls/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.000005, 13.390162, 0.5746796)
+shape = SubResource("BoxShape3D_i5arm")
+
+[node name="invisiblewalls2" type="MeshInstance3D" parent="Environnement/Decor"]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 6.464594, 17.371878, -22.443035)
+visible = false
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environnement/Decor/invisiblewalls2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0040456057, 0, 0.000669539)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/Decor/invisiblewalls2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.520592, 17.441612, -7.71574)
+shape = SubResource("BoxShape3D_i5arm")
+
+[node name="invisiblewalls3" type="MeshInstance3D" parent="Environnement/Decor"]
+transform = Transform3D(4.371139e-08, 1, -8.742278e-08, 1, -4.371139e-08, 0, -3.821371e-15, -8.742278e-08, -1, -19.492733, 17.371878, -0.20257568)
+visible = false
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environnement/Decor/invisiblewalls3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0040456057, 0, 0.000669539)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/Decor/invisiblewalls3/StaticBody3D"]
+transform = Transform3D(1, 3.3407487e-22, 0, 3.3407487e-22, 1, 0, 0, 0, 1, -10.046461, 11.250268, -0.00067052245)
+shape = SubResource("BoxShape3D_i5arm")
+
+[node name="invisiblewalls4" type="MeshInstance3D" parent="Environnement/Decor"]
+transform = Transform3D(-5.7320566e-15, -1.3113416e-07, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, 1.3113416e-07, -7.797044, 17.371878, 22.239788)
+visible = false
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environnement/Decor/invisiblewalls4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0040456057, 0, 0.000669539)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/Decor/invisiblewalls4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.016226, 16.143173, -6.143934)
+shape = SubResource("BoxShape3D_i5arm")
+
+[node name="invisiblewalls5" type="MeshInstance3D" parent="Environnement/Decor"]
+transform = Transform3D(-5.7320566e-15, -1.3113416e-07, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, 1.3113416e-07, 0, 0, 0)
+visible = false
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environnement/Decor/invisiblewalls5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/Decor/invisiblewalls5/StaticBody3D"]
+transform = Transform3D(-4.371139e-08, -1, 1.3113416e-07, 1, -4.371137e-08, 1.3113416e-07, -1.3113416e-07, 1.3113416e-07, 1, 3.0000002, 2.1790953e-07, 1.6617327)
+shape = SubResource("BoxShape3D_i5arm")
+
+[node name="Interactible" type="Node3D" parent="Environnement"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.745033, 0, 0)
+
+[node name="cuttingtable" parent="Environnement/Interactible" instance=ExtResource("8_q6wkm")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -6, 0, 5)
+
+[node name="cuttingtable3" parent="Environnement/Interactible" instance=ExtResource("8_q6wkm")]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -8, 0, -4)
+
+[node name="cuttingtable4" parent="Environnement/Interactible" instance=ExtResource("8_q6wkm")]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -7.0000005, 0, -4)
+
+[node name="Stove2" parent="Environnement/Interactible" instance=ExtResource("9_6ujos")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="Stove5" parent="Environnement/Interactible" instance=ExtResource("9_6ujos")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -1)
+
+[node name="Stove3" parent="Environnement/Interactible" instance=ExtResource("9_6ujos")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 1)
+
+[node name="Stove4" parent="Environnement/Interactible" instance=ExtResource("9_6ujos")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 2)
+
+[node name="generator" parent="Environnement/Interactible" instance=ExtResource("10_jate7")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 0, 5)
+
+[node name="counter" parent="Environnement/Interactible" node_paths=PackedStringArray("storedObject") instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 3)
+storedObject = NodePath("../../Pot")
+
+[node name="counter9" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 5)
+
+[node name="counter2" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 4)
+
+[node name="counter3" parent="Environnement/Interactible" node_paths=PackedStringArray("storedObject") instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -4)
+storedObject = NodePath("../../../Pan2")
+
+[node name="counter13" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -4)
+
+[node name="counter28" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -4)
+
+[node name="counter11" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -4)
+
+[node name="counter15" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0000005, 0, -4)
+
+[node name="counter17" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0000005, 0, -4)
+
+[node name="counter29" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 0, -4)
+
+[node name="counter16" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 0, -1)
+
+[node name="counter31" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 0, -2)
+
+[node name="counter32" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 0, -3)
+
+[node name="counter12" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -3)
+
+[node name="counter10" parent="Environnement/Interactible" node_paths=PackedStringArray("storedObject") instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.027236462, -2)
+storedObject = NodePath("../../../Pan")
+
+[node name="counter18" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0000005, 0, -4)
+
+[node name="counter19" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 0, 0)
+
+[node name="counter20" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 0, 1)
+
+[node name="counter21" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 0, 2)
+
+[node name="counter22" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 0, 3)
+
+[node name="counter23" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 0, 4)
+
+[node name="counter24" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0000005, 0, 5)
+
+[node name="counter30" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0000005, 0, 5)
+
+[node name="counter25" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0000005, 0, 5)
+
+[node name="counter4" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 5)
+
+[node name="counter8" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 2)
+
+[node name="counter7" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 5)
+
+[node name="counter5" parent="Environnement/Interactible" node_paths=PackedStringArray("storedObject") instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 5)
+storedObject = NodePath("../../Pot2")
+
+[node name="counter6" parent="Environnement/Interactible" instance=ExtResource("11_nplmk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 5)
+
+[node name="cuttingtable2" parent="Environnement/Interactible" instance=ExtResource("8_q6wkm")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -10, 0, 5)
+skeleton = NodePath("../../..")
+
+[node name="generator2" parent="Environnement/Interactible" instance=ExtResource("12_tgqok")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 1)
+skeleton = NodePath("../../..")
+
+[node name="generator3" parent="Environnement/Interactible" instance=ExtResource("13_eqym0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0)
+skeleton = NodePath("../../..")
+
+[node name="generator4" parent="Environnement/Interactible" instance=ExtResource("14_um0ev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -1)
+skeleton = NodePath("../../..")
+
+[node name="LandScape" parent="Environnement/Interactible" instance=ExtResource("15_46yta")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.41184497, 0.5)
+
+[node name="ClientTable" parent="Environnement/Interactible" instance=ExtResource("16_76338")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.836102, 0, 0)
+skeleton = NodePath("../../..")
+
+[node name="servePoint2" parent="Environnement/Interactible/ClientTable" index="3"]
+available = false
+
+[node name="servePoint3" parent="Environnement/Interactible/ClientTable" index="4"]
+available = false
+
+[node name="servePoint4" parent="Environnement/Interactible/ClientTable" index="5"]
+available = false
+
+[node name="Door" parent="Environnement/Interactible" instance=ExtResource("17_8dt0w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="generator5" parent="Environnement/Interactible" instance=ExtResource("18_gryrk")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -4, 0, 5)
+skeleton = NodePath("../../..")
+
+[node name="Sink" parent="Environnement/Interactible" instance=ExtResource("19_tpj5q")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3, 0, 5)
+skeleton = NodePath("../../..")
+
+[node name="trash" parent="Environnement/Interactible" instance=ExtResource("20_p1snq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -4)
+
+[node name="Hierarchy" type="Node3D" parent="."]
+script = ExtResource("21_dy2dx")
+
+[node name="Pan" parent="." instance=ExtResource("22_j850x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.133906, 1.3014183, -2.089312)
+
+[node name="Pan2" parent="." instance=ExtResource("22_j850x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.79669, 1.0251608, -4.219519)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EndScreen" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EndScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -118.0
+offset_right = 150.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CanvasLayer/EndScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Score = 0"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/EndScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Fin du temps"
+horizontal_alignment = 1
+
+[node name="Menu" type="Button" parent="CanvasLayer/EndScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+text = "  Menu  "
+
+[node name="Retry" type="Button" parent="CanvasLayer/EndScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+text = "  Retry  "
+
+[node name="Score" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5bvjv")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Score"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Score/MarginContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_rugfo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_emgxq")
+value = 12.77
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/Score/MarginContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_top = -3.9999998
+offset_right = 35.0
+offset_bottom = 21.857143
+grow_horizontal = 2
+scale = Vector2(1.4, 1.4)
+text = "Score = 0"
+horizontal_alignment = 1
+
+[node name="Control2" parent="CanvasLayer" instance=ExtResource("23_4vfab")]
+visible = false
+
+[node name="BackFromHowToPlay" parent="CanvasLayer/Control2/MarginContainer/HBoxContainer/MarginContainer" index="0"]
+theme_override_styles/normal = SubResource("StyleBoxFlat_5wfll")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bo7u2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5gciw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_u2vf6")
+
+[node name="Player" parent="." instance=ExtResource("24_1tiyb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.729166, -0.0068730097, 1.0092611)
+
+[connection signal="pressed" from="CanvasLayer/EndScreen/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/EndScreen/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control2/MarginContainer/HBoxContainer/MarginContainer/BackFromHowToPlay" to="." method="_on_back_from_how_to_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control2/MarginContainer/HBoxContainer/MarginContainer2/Menu" to="." method="_on_menu_pressed"]
+
+[editable path="Environnement/Interactible/ClientTable"]
+[editable path="CanvasLayer/Control2"]

@@ -183,13 +183,13 @@ func find_reachable(astar:AStarGrid2D, current:Vector2i, agent:Vector2i):
 	var bestCell = null;
 	for x in range(-1, 2, 2):
 		var newCell = current + Vector2i(x, 0)
-		if newCell.x >= 0 and newCell.x <= gridSize.x and not astar.is_point_solid(newCell):
+		if newCell.x >= 0 and newCell.x < gridSize.x and not astar.is_point_solid(newCell):
 			if (agent - newCell).length() < bestDist:
 				bestDist = (agent - newCell).length()
 				bestCell = newCell
 	for y in range(-1, 2, 2):
 		var newCell = current + Vector2i(0, y)
-		if newCell.y >= 0 and newCell.y <= gridSize.y and not astar.is_point_solid(newCell):
+		if newCell.y >= 0 and newCell.y < gridSize.y and not astar.is_point_solid(newCell):
 			if (agent - newCell).length() < bestDist:
 				bestDist = (agent - newCell).length()
 				bestCell = newCell

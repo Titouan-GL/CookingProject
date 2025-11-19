@@ -13,16 +13,16 @@ func findMeshInstances(parent):
 			var materials = []
 			var override_materials = []
 			var i = 0
-			var mat:StandardMaterial3D = child.mesh.surface_get_material(i)
-			while mat:
+			var mat:StandardMaterial3D
+			while i < child.mesh.get_surface_count():
+				mat = child.mesh.surface_get_material(i)
 				materials.append(mat)
-				i+=1
 				var overrideMat = mat.duplicate()
 				overrideMat.emission_enabled = true
 				overrideMat.emission = Color(1, 1, 1)
 				overrideMat.emission_energy_multiplier = 0.03
 				override_materials.append(overrideMat)
-				mat = child.mesh.surface_get_material(i)
+				i+=1
 			defaultMaterials[child] = materials
 			overrideMaterials[child] = override_materials
 		findMeshInstances(child)
@@ -35,16 +35,18 @@ func _enter_tree():
 		findMeshInstances(self)
 
 func resetMeshes():
-	var defaultMaterialsEx = defaultMaterials.duplicate()
-	var overrideMaterialsEx = overrideMaterials.duplicate()
-	defaultMaterials = {}
-	overrideMaterials = {}
-	for mats in defaultMaterialsEx.keys():
+	var newDefaultMaterials:Dictionary[Node3D, Array] = {}
+	var newOverrideMaterials:Dictionary[Node3D, Array] = {}
+	
+	for mats in defaultMaterials.keys():
 		if is_instance_valid(mats):
-			defaultMaterials[mats] = defaultMaterialsEx[mats]
-	for mats in overrideMaterialsEx.keys():
+			newDefaultMaterials[mats] = defaultMaterials[mats]
+	for mats in overrideMaterials.keys():
 		if is_instance_valid(mats):
-			overrideMaterials[mats] = overrideMaterialsEx[mats]
+			newOverrideMaterials[mats] = overrideMaterials[mats]
+	defaultMaterials = newDefaultMaterials
+	overrideMaterials = newOverrideMaterials
+	
 	
 
 func hovered():

@@ -3,21 +3,24 @@ extends Interactible
 class_name IntPlateholder
 const instantiablePlate = preload("res://scenes/Plate.tscn")
 @export var plateNbr:int = 4
-var plateList = [] #### DOIT RAJOUTER UN FUTUREPLATELIST
+var plateList = []
 
 func _enter_tree():
-	super._enter_tree()
 	taskType = Enum.TaskType.GENERATE
 	add_to_group("Generator"+Enum.RecipeNames.keys()[Enum.RecipeNames.EmptyPlate])
 	passive = true
 	canBeOccupied = false
+	super._enter_tree()
+
+func _ready():
+	super._ready()
 	for i in range(plateNbr):
 		var inst = instantiablePlate.instantiate()
 		inst.recipe = Enum.RecipeNames.EmptyPlate
-		add_child(inst)
-		inst.set_global_position(storePoint.global_position)
 		inst.parent = self
 		inst.parentOffset = Vector3(0, plateList.size() * 0.1, 0)
+		add_child(inst)
+		inst.set_global_position(storePoint.global_position)
 		plateList.append(inst)
 
 func store(i:Movable) -> bool:

@@ -174,11 +174,12 @@ func presentOnMap(obj:Movable, recipe:Enum.RecipeNames):
 func primaryIngredientsPresentOnMap(obj:Movable, recipe:Enum.RecipeNames):
 	return Recipes.dict_contains_keys(Recipes.getRecipePrimaryIngredients(recipe), Recipes.getRecipePrimaryIngredients(obj.recipe))
 
-func recipeExists(recipe:Enum.RecipeNames):
+func recipeExists(recipe:Enum.RecipeNames, noplate = false):
 	for m in MovableList:
 		if(m.recipe == recipe):
-			MovableList.erase(m)
-			return m
+			if not (noplate and m is Plate):
+				MovableList.erase(m)
+				return m
 
 func dict_value_sum(d: Dictionary) -> int:
 	var total := 0
@@ -200,10 +201,10 @@ func insert_sorted_dict(arr: Array, elem: Movable) -> void:
 			low = mid + 1 
 	arr.insert(low, elem)
 
-func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] = []): #return missing ingredients
+func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] = [], noplate = false): #return missing ingredients
 	var needed = Recipes.getNeeded(recipe).duplicate()
 	var neededIngredient:Array[Movable];
-	var exists = recipeExists(recipe) #we test if the recipe is already present in the world, and return it if so
+	var exists = recipeExists(recipe, noplate) #we test if the recipe is already present in the world, and return it if so
 	if(exists) : 
 		return exists
 
@@ -226,7 +227,7 @@ func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] =
 		
 	for i in needed.keys():#if not we try recursively to find if every ingredient needed is present
 		for j in range(needed[i]):
-			var ing = TestRecipeDoable(i, foundIngredients)
+			var ing = TestRecipeDoable(i, foundIngredients, Recipes.getTaskType(recipe))
 			if(ing):
 				foundIngredients.append(ing)
 

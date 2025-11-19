@@ -13,9 +13,13 @@ func _enter_tree():
 
 func store(i:Movable) -> bool:
 	if i.recipe == recipeType:
-		i.parent.objectInHand = null
-		i.queue_free()
-		return true
+		if i is Ingredient:
+			i.parent.objectInHand = null
+			i.queue_free()
+			return true
+		elif i is MovableStorage:
+			i.empty()
+			return true
 	return false
 	
 	

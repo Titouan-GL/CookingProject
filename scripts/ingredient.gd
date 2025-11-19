@@ -29,7 +29,7 @@ func mix(i): #destroy the ingredient it's beeing mixed with
 			i.queue_free()
 			UpdateRecipe(newRecipe)
 	elif i is MovableStorage:
-		i.store(self)
+		i.mix(self)
 		
 
 func mixRecipe(ingRecipe:Enum.RecipeNames):
@@ -39,7 +39,8 @@ func mixRecipe(ingRecipe:Enum.RecipeNames):
 
 func _enter_tree():
 	super._enter_tree()
-	progressMaxValues = {Enum.TaskType.CUT:3}
+	if recipe != Enum.RecipeNames.Bur:
+		progressMaxValues = {Enum.TaskType.CUT:3}
 	progress = progressMaxValues.duplicate()
 	prevProgress = progress.duplicate()
 	add_to_group(Enum.RecipeNames.keys()[recipe])

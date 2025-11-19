@@ -57,6 +57,8 @@ func _process(_delta):
 	if parent:
 		global_position = Vector3(parent.storePoint.global_position + parentOffset)
 		global_rotation = Vector3(parent.storePoint.global_rotation + parentOffset)
+	if global_position.y < -10:
+		global_position = get_tree().get_first_node_in_group("player").global_position
 
 
 func _enter_tree():

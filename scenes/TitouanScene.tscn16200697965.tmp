@@ -1,7 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://crmjnlgorvsy"]
+[gd_scene load_steps=34 format=3 uid="uid://crmjnlgorvsy"]
 
 [ext_resource type="Texture2D" uid="uid://bhajo2s0i6gjk" path="res://assets/textures/05366bde9747af98448947536d59196f.jpg" id="1_tp51g"]
-[ext_resource type="Script" uid="uid://dur60hwhqrq1l" path="res://scripts/gameManager.gd" id="1_vknjm"]
+[ext_resource type="Script" uid="uid://djauehf5a81tl" path="res://scripts/gameManager.gd" id="1_vknjm"]
 [ext_resource type="PackedScene" uid="uid://bb80rjlejrxap" path="res://scenes/IntCUT.tscn" id="2_pm7iv"]
 [ext_resource type="Script" uid="uid://pltmis4ddkxu" path="res://scripts/Navigation.gd" id="2_rugfo"]
 [ext_resource type="Script" uid="uid://dg83vouhqgm2u" path="res://scripts/TaskHierarchy.gd" id="3_a0tk4"]
@@ -19,10 +19,11 @@
 [ext_resource type="PackedScene" uid="uid://bd1dt0jxhqgkm" path="res://assets/blender/Deco/Pumpkin.blend" id="15_1hx7k"]
 [ext_resource type="PackedScene" uid="uid://cbowkrh8v3tix" path="res://assets/blender/Deco/Candles.blend" id="16_xlpor"]
 [ext_resource type="PackedScene" uid="uid://dc2dvh5ueasee" path="res://scenes/IntSink.tscn" id="19_rugfo"]
+[ext_resource type="PackedScene" uid="uid://j6xa0njjp4mx" path="res://scenes/IntTrash.tscn" id="20_5bvjv"]
 [ext_resource type="PackedScene" uid="uid://bwgsl7tn345w6" path="res://scenes/Door.tscn" id="20_n0o6x"]
 [ext_resource type="PackedScene" uid="uid://pvmuoik2fi2n" path="res://scenes/IntPlateholder.tscn" id="21_8ujqh"]
+[ext_resource type="PackedScene" uid="uid://dextpsgg4068r" path="res://scenes/UI/HowToPlay.tscn" id="22_emgxq"]
 [ext_resource type="PackedScene" uid="uid://c1shi6l6dy3g6" path="res://scenes/Player.tscn" id="23_emgxq"]
-[ext_resource type="PackedScene" uid="uid://b67m5mnbrjcmo" path="res://scenes/agent.tscn" id="24_5bvjv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4xowi"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -47,24 +48,33 @@ uv1_scale = Vector3(0.3, 0.3, 0.3)
 uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i5arm"]
-size = Vector3(13.834595, 1, 12.475607)
+size = Vector3(10.921417, 1, 12.475607)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5bvjv"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rugfo"]
-bg_color = Color(0.6, 0.6, 0.6, 0.21960784)
+bg_color = Color(0.64, 0.64, 0.64, 0.29411766)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emgxq"]
 bg_color = Color(0.8901961, 0, 0.22745098, 0.6745098)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("scoreLabel", "scoreLabel2", "timeBar", "gameUI", "gameOverUI")]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("scoreLabel", "scoreLabel2", "timeBar", "gameUI", "gameOverUI", "HowToPlay")]
 script = ExtResource("1_vknjm")
-scoreLabel = NodePath("CanvasLayer/Panel2/ProgressBar/Label")
-scoreLabel2 = NodePath("CanvasLayer/Panel/Label")
-timeBar = NodePath("CanvasLayer/Panel2/ProgressBar")
-gameUI = NodePath("CanvasLayer/Panel2")
-gameOverUI = NodePath("CanvasLayer/Panel")
+scoreLabel = NodePath("CanvasLayer/Score/MarginContainer/ProgressBar/Label")
+scoreLabel2 = NodePath("CanvasLayer/EndScreen/Label")
+timeBar = NodePath("CanvasLayer/Score/MarginContainer/ProgressBar")
+gameUI = NodePath("CanvasLayer/Score")
+gameOverUI = NodePath("CanvasLayer/EndScreen")
+HowToPlay = NodePath("CanvasLayer/Control2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_noarx")
@@ -107,7 +117,7 @@ transform = Transform3D(0.83971804, 0, -1.5921286, 0, 1.8, 0, 1.5921286, 0, 0.83
 transform = Transform3D(0.8617577, 0, -1.2277514, 0, 1.5, 0, 1.2277514, 0, 0.8617577, 5.511, 0.255, -3.103)
 
 [node name="SpookyLantern6" parent="Environnement/Decorative" instance=ExtResource("11_giltd")]
-transform = Transform3D(1.2894828, 0, -0.16502675, 0, 1.3, 0, 0.16502675, 0, 1.2894828, -0.90185595, -0.5483794, -3.5428135)
+transform = Transform3D(1.2894828, 0, -0.16502675, 0, 1.3, 0, 0.16502675, 0, 1.2894828, -0.12513447, -0.5483794, -3.5428135)
 
 [node name="Pumpkin" parent="Environnement/Decorative" instance=ExtResource("15_1hx7k")]
 transform = Transform3D(1.083613, 0, 0.71818006, 0, 1.3, 0, -0.71818006, 0, 1.083613, -6.367731, -0.13413036, 3.956802)
@@ -178,7 +188,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_giltd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0040456057, 0, 0.000669539)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environnement/Decor/Ground/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0040456057, 0, -0.000669539)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050691992, 0, -0.00066947937)
 shape = SubResource("BoxShape3D_i5arm")
 
 [node name="invisiblewalls" type="MeshInstance3D" parent="Environnement/Decor"]
@@ -290,9 +300,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -4)
 [node name="counter11" parent="Environnement/Interactible" instance=ExtResource("5_v6ncs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -4)
 
-[node name="counter14" parent="Environnement/Interactible" instance=ExtResource("5_v6ncs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0000005, 0, -4)
-
 [node name="counter15" parent="Environnement/Interactible" instance=ExtResource("5_v6ncs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0000005, 0, -4)
 
@@ -395,6 +402,9 @@ skeleton = NodePath("../../..")
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3, 0, 5)
 skeleton = NodePath("../../..")
 
+[node name="trash" parent="Environnement/Interactible" instance=ExtResource("20_5bvjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -4)
+
 [node name="Hierarchy" type="Node3D" parent="."]
 script = ExtResource("3_a0tk4")
 
@@ -406,14 +416,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.79669, 1.0251608, -4.2195
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
+[node name="EndScreen" type="Panel" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Panel"]
+[node name="Label" type="Label" parent="CanvasLayer/EndScreen"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -427,7 +437,7 @@ scale = Vector2(3, 3)
 text = "Score = 0"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="CanvasLayer/Panel"]
+[node name="Label2" type="Label" parent="CanvasLayer/EndScreen"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -441,7 +451,7 @@ scale = Vector2(3, 3)
 text = "Fin du temps"
 horizontal_alignment = 1
 
-[node name="Panel2" type="Panel" parent="CanvasLayer"]
+[node name="Score" type="Panel" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -449,18 +459,26 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5bvjv")
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Panel2"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Score"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 25.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Score/MarginContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_rugfo")
 theme_override_styles/fill = SubResource("StyleBoxFlat_emgxq")
 value = 12.77
 show_percentage = false
 
-[node name="Label" type="Label" parent="CanvasLayer/Panel2/ProgressBar"]
+[node name="Label" type="Label" parent="CanvasLayer/Score/MarginContainer/ProgressBar"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -474,5 +492,12 @@ scale = Vector2(1.4, 1.4)
 text = "Score = 0"
 horizontal_alignment = 1
 
+[node name="Control2" parent="CanvasLayer" instance=ExtResource("22_emgxq")]
+visible = false
+
 [node name="Player" parent="." instance=ExtResource("23_emgxq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.729166, -0.0068730097, 1.0092611)
+
+[connection signal="pressed" from="CanvasLayer/Control2/MarginContainer/HBoxContainer/MarginContainer/BackFromHowToPlay" to="." method="_on_back_from_how_to_play_pressed"]
+
+[editable path="CanvasLayer/Control2"]

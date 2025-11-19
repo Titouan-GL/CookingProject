@@ -68,3 +68,5 @@ func _process(_delta: float) -> void:
 			hovered.use(_delta)
 			hovered.usedBy = self
 	
+func _ready():
+	add_to_group("player")
