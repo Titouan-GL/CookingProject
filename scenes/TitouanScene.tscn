@@ -1,7 +1,7 @@
-[gd_scene load_steps=33 format=3 uid="uid://crmjnlgorvsy"]
+[gd_scene load_steps=32 format=3 uid="uid://crmjnlgorvsy"]
 
 [ext_resource type="Texture2D" uid="uid://bhajo2s0i6gjk" path="res://assets/textures/05366bde9747af98448947536d59196f.jpg" id="1_tp51g"]
-[ext_resource type="Script" uid="uid://djauehf5a81tl" path="res://scripts/gameManager.gd" id="1_vknjm"]
+[ext_resource type="Script" uid="uid://dur60hwhqrq1l" path="res://scripts/gameManager.gd" id="1_vknjm"]
 [ext_resource type="PackedScene" uid="uid://bb80rjlejrxap" path="res://scenes/IntCUT.tscn" id="2_pm7iv"]
 [ext_resource type="Script" uid="uid://pltmis4ddkxu" path="res://scripts/Navigation.gd" id="2_rugfo"]
 [ext_resource type="Script" uid="uid://dg83vouhqgm2u" path="res://scripts/TaskHierarchy.gd" id="3_a0tk4"]
@@ -476,15 +476,3 @@ horizontal_alignment = 1
 
 [node name="Player" parent="." instance=ExtResource("23_emgxq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.729166, -0.0068730097, 1.0092611)
-
-[node name="agent" parent="." instance=ExtResource("24_5bvjv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.048437, 1.2505653, -0.9744005)
-
-[node name="agent2" parent="." instance=ExtResource("24_5bvjv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2012568, 1.2505653, 1.875133)
-
-[node name="agent3" parent="." instance=ExtResource("24_5bvjv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.363771, 1.2505653, 2.4319618)
-
-[node name="agent4" parent="." instance=ExtResource("24_5bvjv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.110633, 1.250565, 1.708663)
