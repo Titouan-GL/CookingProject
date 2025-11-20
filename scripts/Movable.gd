@@ -47,6 +47,13 @@ func dropped():
 	rb.freeze = false
 	rb.set_collision_layer_value(3, true)
 
+func _physics_process(_delta: float):
+	if parent:
+		global_position = Vector3(parent.storePoint.global_position + parentOffset)
+		global_rotation = Vector3(parent.storePoint.global_rotation + parentOffset)
+	if global_position.y < -10:
+		global_position = get_tree().get_first_node_in_group("player").global_position
+
 func _process(_delta):
 	if(progressBar): 
 		if(progress != prevProgress):
@@ -54,11 +61,6 @@ func _process(_delta):
 			prevProgress = progress.duplicate()
 		else:
 			progressBar.visible = false
-	if parent:
-		global_position = Vector3(parent.storePoint.global_position + parentOffset)
-		global_rotation = Vector3(parent.storePoint.global_rotation + parentOffset)
-	if global_position.y < -10:
-		global_position = get_tree().get_first_node_in_group("player").global_position
 
 
 func _enter_tree():

@@ -51,6 +51,3 @@ func unhovered():
 	super.unhovered()
 	if(plateList.size()>0):
 		plateList[plateList.size()-1].unhovered()
-
-func _process(_delta):
-	super._process(_delta)

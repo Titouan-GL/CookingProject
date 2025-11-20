@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 
 class_name GameManager
 @export var scoreLabel:Label
@@ -9,7 +9,7 @@ class_name GameManager
 @export var HowToPlay:Control
 @export var Menubutton:Control
 var timeLeft;
-var initialTime = 120
+var initialTime = 180
 
 var score = 0
 var displayedScore = 0
@@ -31,30 +31,29 @@ func _process(_delta):
 		gameOverUI.visible = true
 		gameUI.visible = false
 		scoreLabel2.text = "Score = " + str(int(roundf(displayedScore)))
-		Engine.time_scale = 0
+		get_tree().paused = true
 	if Input.is_action_just_pressed("Escape"):
 		if HowToPlay.visible :
-			Engine.time_scale = 1
+			get_tree().paused = false
 			HowToPlay.visible = false
 		else:
-			Engine.time_scale = 0
+			get_tree().paused = true
 			HowToPlay.visible = true
-	
 
 func changeScore(val):
 	score = max(0, score + val)
 
 
 func _on_back_from_how_to_play_pressed() -> void:
-	Engine.time_scale = 1
+	get_tree().paused = false
 	HowToPlay.visible = false
 
 
 func _on_retry_pressed() -> void:
-	Engine.time_scale = 1
+	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 
 func _on_menu_pressed() -> void:
-	Engine.time_scale = 1
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")

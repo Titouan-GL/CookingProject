@@ -25,11 +25,13 @@ func _physics_process(delta):
 		var newhoveredParent = raycaster.get_collider().get_parent()
 		var newhovered = raycaster.get_collider()
 		if(newhoveredParent is Interactible and newhoveredParent != hovered):
+			print(newhoveredParent)
 			if hovered:
 				hovered.unhovered()
 			newhoveredParent.hovered()
 			hovered = newhoveredParent
 		elif(newhovered is Movable and newhovered != hovered):
+			print(newhovered)
 			if hovered:
 				hovered.unhovered()
 			newhovered.hovered()
