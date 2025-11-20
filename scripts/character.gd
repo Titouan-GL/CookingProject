@@ -10,8 +10,8 @@ var gravity:float
 var friction:float
 var space:PhysicsDirectSpaceState3D
 
-func bumpedInto(dir:Vector3):
-	var right = -get_global_transform().basis.x*dir.length()*bumpStrength/3
+func bumpedInto(dir:Vector3, rightVector:Vector3):
+	var right = rightVector*dir.length()*bumpStrength/3
 	if right.dot(dir) > 0:
 		addedVelocity = dir*bumpStrength + right
 	else:
@@ -30,5 +30,5 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(Vector3(velocity.x, 0, velocity.z)*delta, true)
 	if(collision and collision.get_collider() is Character):
 		var dir:Vector3 = (collision.get_collider().global_position-global_position).normalized()
-		collision.get_collider().bumpedInto(dir * 1.5)
-		bumpedInto(-dir)
+		collision.get_collider().bumpedInto(dir * 1.5, -get_global_transform().basis.x)
+		bumpedInto(-dir, -get_global_transform().basis.x)

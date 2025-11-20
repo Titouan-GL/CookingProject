@@ -566,10 +566,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.729166, -0.0068730097, 1.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.420726, 0.8419051, 0.08180971)
 
 [node name="agent2" parent="." instance=ExtResource("25_5a81h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.288063, 0.8419051, -2.0176144)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.213952, 0.8419051, 1.3154423)
 
 [node name="agent3" parent="." instance=ExtResource("25_5a81h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.52582, 0.8419051, -1.5545237)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.552343, 0.8419051, -1.6203396)
 
 [connection signal="pressed" from="CanvasLayer/EndScreen/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndScreen/VBoxContainer/Retry" to="." method="_on_retry_pressed"]

@@ -207,30 +207,28 @@ func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] =
 	var exists = recipeExists(recipe, noplate) #we test if the recipe is already present in the world, and return it if so
 	if(exists) : 
 		return exists
-
+		
 	#if(recipe in [8, 18, 19, 23]) : print(Enum.RecipeNames.keys()[recipe], " " , needed.keys().map(func(x):return Enum.RecipeNames.keys()[x]))
 	if(Recipes.getTaskType(recipe) == Enum.TaskType.MIX):
-		var foundPlate = false
 		var arr:Array[Movable]
 		for i in MovableList:
 			if Recipes.dict_contains_keys(needed, Recipes.getRecipePrimaryIngredients(i.recipe)):
 				insert_sorted_dict(arr, i)#we order them to check the biggest first (this avoid most conflicts)
 		for i in arr:
-			if Recipes.dict_contains_keys(needed, Recipes.getRecipePrimaryIngredients(i.recipe)) and not (foundPlate and i is Plate):
+			if Recipes.dict_contains_keys(needed, Recipes.getRecipePrimaryIngredients(i.recipe)):
 				needed = Recipes.subtract_dictionary(needed, Recipes.getRecipePrimaryIngredients(i.recipe))
 				neededIngredient.append(i)
 				if(i is Plate):
 					needed = Recipes.subtract_dictionary(needed, {Enum.RecipeNames.EmptyPlate:1})
-					foundPlate = true
 				MovableList.erase(i)
 	#if(recipe in [8, 18, 19, 23]) : print(Enum.RecipeNames.keys()[recipe], " " , needed.keys().map(func(x):return Enum.RecipeNames.keys()[x]))
-		
+	
 	for i in needed.keys():#if not we try recursively to find if every ingredient needed is present
 		for j in range(needed[i]):
 			var ing = TestRecipeDoable(i, foundIngredients, Recipes.getTaskType(recipe))
 			if(ing):
 				foundIngredients.append(ing)
-
+	
 	for i in needed.keys():#then we try to assemble the recipe with all the foundIngredients not used by the children
 		for j in range(needed[i]):
 			var foundIndex = -1
@@ -244,10 +242,11 @@ func TestRecipeDoable(recipe:Enum.RecipeNames, foundIngredients:Array[Movable] =
 				if foundIndex != -1:
 					neededIngredient.append(foundIngredients[foundIndex])
 					needed = Recipes.subtract_dictionary(needed, {i:1})
-
+					
+	
 	if Recipes.getTaskType(recipe) == Enum.TaskType.MIX and neededIngredient.size() > 1:
 		var k = 0
-		while k < neededIngredient.size()-1 and not neededIngredient[k] is MovableStorage:
+		while k < neededIngredient.size()-1 and not (neededIngredient[k] is MovableStorage and neededIngredient[k].emptyName in Recipes.getNeeded(recipe)):
 			k += 1
 		if neededIngredient[k] is MovableStorage:
 			for i in range(0, neededIngredient.size(), 1):
