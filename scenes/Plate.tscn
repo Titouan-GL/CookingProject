@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ds1amirl05t31"]
+[gd_scene load_steps=9 format=3 uid="uid://ds1amirl05t31"]
 
 [ext_resource type="Script" uid="uid://bj1c07tr1xeax" path="res://scripts/Plate.gd" id="1_km87r"]
 [ext_resource type="PackedScene" uid="uid://cmaejml7ie8xb" path="res://assets/blender/Div/Plate1.blend" id="3_km87r"]
 [ext_resource type="PackedScene" uid="uid://cytd1w5m4iwdk" path="res://scenes/UI/ProgressBar.tscn" id="3_n4jog"]
 [ext_resource type="PackedScene" uid="uid://7rftmvaa1w1u" path="res://assets/blender/Div/PlateDirty.blend" id="4_21swg"]
+[ext_resource type="PackedScene" uid="uid://cgpm2ygkwo432" path="res://scenes/VFX/MixedEffect.tscn" id="5_n4jog"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_noarx"]
 rough = true
@@ -15,12 +16,13 @@ size = Vector3(0.72906494, 0.3997345, 0.7624512)
 [sub_resource type="ViewportTexture" id="ViewportTexture_1kf1o"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Plate" type="RigidBody3D" node_paths=PackedStringArray("dirt", "progressBar")]
+[node name="Plate" type="RigidBody3D" node_paths=PackedStringArray("dirt", "mixParticles", "progressBar")]
 collision_layer = 0
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_noarx")
 script = ExtResource("1_km87r")
 dirt = NodePath("PlateDirty")
+mixParticles = NodePath("Mixed")
 progressBar = NodePath("ProgressBar/SubViewport/Panel/ProgressBar")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -35,3 +37,6 @@ viewPort = SubResource("ViewportTexture_1kf1o")
 
 [node name="PlateDirty" parent="." instance=ExtResource("4_21swg")]
 visible = false
+
+[node name="Mixed" parent="." instance=ExtResource("5_n4jog")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21560824, 0)

@@ -4,13 +4,21 @@
 [ext_resource type="PackedScene" uid="uid://dnf3pe5b5fuhp" path="res://assets/blender/Interactibles/Stove.blend" id="2_khd1q"]
 [ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_aqjyo"]
 
-[node name="Stove" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
+[node name="Stove" type="MeshInstance3D" node_paths=PackedStringArray("light", "storePoint")]
 script = ExtResource("1_cpfj2")
+light = NodePath("SpotLight3D")
 storePoint = NodePath("StoveStore")
 
 [node name="StoveStore" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0323083, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0738801, 0)
 
 [node name="Stove" parent="." instance=ExtResource("2_khd1q")]
 
 [node name="StandardCollision" parent="." instance=ExtResource("3_aqjyo")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.0223558, 0)
+visible = false
+light_color = Color(18.892157, 9.931043, 0, 1)
+spot_range = 0.4
+spot_angle = 90.0

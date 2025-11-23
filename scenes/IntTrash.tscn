@@ -4,8 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_d1tln"]
 [ext_resource type="PackedScene" uid="uid://iuothybukeuy" path="res://assets/blender/Interactibles/Trash.blend" id="3_uwust"]
 
-[node name="trash" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
+[node name="trash" type="MeshInstance3D" node_paths=PackedStringArray("anim", "storePoint")]
 script = ExtResource("1_uwust")
+anim = NodePath("Trash/AnimationPlayer")
 storePoint = NodePath("Node3D")
 
 [node name="Node3D" type="Node3D" parent="."]
@@ -15,3 +16,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0028037, 0)
 
 [node name="Trash" parent="." instance=ExtResource("3_uwust")]
 transform = Transform3D(0, 0, 1.0000001, 0, 1, 0, -1.0000001, 0, 0, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Trash/Armature" index="0"]
+bones/0/rotation = Quaternion(0.002424964, -0.002524817, 0.69271225, 0.72120565)
+
+[editable path="Trash"]

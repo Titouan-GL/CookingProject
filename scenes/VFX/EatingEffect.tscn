@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://d31hqm5cj7k08"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ijf3k"]
+albedo_color = Color(0.77621436, 0.37877214, 0, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ce84r"]
+particle_flag_align_y = true
+emission_shape = 3
+emission_box_extents = Vector3(0.3, 0.3, 0.3)
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+scale_min = 0.59999996
+scale_max = 1.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_5x4mv"]
+radius = 0.04
+height = 0.08
+radial_segments = 6
+rings = 3
+
+[node name="EatingEffect" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_ijf3k")
+emitting = false
+amount = 3
+lifetime = 0.4
+process_material = SubResource("ParticleProcessMaterial_ce84r")
+draw_pass_1 = SubResource("SphereMesh_5x4mv")

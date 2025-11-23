@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b18gckgpqlena"]
+[gd_scene load_steps=8 format=3 uid="uid://b18gckgpqlena"]
 
 [ext_resource type="Script" uid="uid://dwyxvdi05cpek" path="res://scripts/IntServe.gd" id="1_hcvgp"]
 [ext_resource type="PackedScene" uid="uid://c5jewike8l5y6" path="res://scenes/UI/IngredientIcon.tscn" id="2_hcvgp"]
 [ext_resource type="PackedScene" uid="uid://cytd1w5m4iwdk" path="res://scenes/UI/ProgressBar.tscn" id="3_j20ak"]
 [ext_resource type="PackedScene" uid="uid://c74ow82bpaefb" path="res://assets/blender/Interactibles/ClientChair.blend" id="4_j20ak"]
+[ext_resource type="PackedScene" uid="uid://d31hqm5cj7k08" path="res://scenes/VFX/EatingEffect.tscn" id="5_xfah1"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xfah1"]
 viewport_path = NodePath("SubViewport")
@@ -11,11 +12,12 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_rexnx"]
 viewport_path = NodePath("SubViewport")
 
-[node name="servePoint" type="Node3D" node_paths=PackedStringArray("icon", "progressBar", "destinationPoint", "storePoint", "hoverSearch")]
+[node name="servePoint" type="Node3D" node_paths=PackedStringArray("icon", "progressBar", "destinationPoint", "particles", "storePoint", "hoverSearch")]
 script = ExtResource("1_hcvgp")
 icon = NodePath("DestinationPoint/IngredientIcon")
 progressBar = NodePath("DestinationPoint/ProgressBar/SubViewport/Panel/ProgressBar")
 destinationPoint = NodePath("DestinationPoint")
+particles = NodePath("EatingEffect")
 storePoint = NodePath(".")
 hoverSearch = NodePath("Hovered(dummy)")
 
@@ -34,3 +36,5 @@ viewPort = SubResource("ViewportTexture_rexnx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="Hovered(dummy)" type="Node3D" parent="."]
+
+[node name="EatingEffect" parent="." instance=ExtResource("5_xfah1")]

@@ -1,11 +1,98 @@
-[gd_scene load_steps=4 format=3 uid="uid://dc2dvh5ueasee"]
+[gd_scene load_steps=8 format=3 uid="uid://dc2dvh5ueasee"]
 
 [ext_resource type="Script" uid="uid://dt1nlibrjyvsr" path="res://scripts/IntSink.gd" id="1_wnr1u"]
 [ext_resource type="PackedScene" uid="uid://d0mjndq7khowa" path="res://assets/blender/Interactibles/Sink.blend" id="2_wnr1u"]
 [ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_clan4"]
+[ext_resource type="PackedScene" uid="uid://d161vmjdffxh0" path="res://scenes/VFX/CleaningEffect.tscn" id="4_j2xk6"]
 
-[node name="Sink" type="MeshInstance3D" node_paths=PackedStringArray("storePoint")]
+[sub_resource type="Animation" id="Animation_j2xk6"]
+resource_name = "Empty"
+length = 0.8333333
+tracks/0/type = "scale_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D:BottomWater")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 0.99637234, 0.99999994, 0.033333335, 1, 1, 0.99637234, 0.99999994, 0.06666667, 1, 1, 0.99014276, 0.99999994, 0.1, 1, 1, 0.97943497, 0.99999994, 0.13333334, 1, 1, 0.9652746, 0.99999994, 0.16666667, 1, 1, 0.94796187, 0.99999994, 0.2, 1, 1, 0.9270465, 0.99999994, 0.23333333, 1, 1, 0.9038795, 0.99999994, 0.26666668, 1, 1, 0.8787611, 0.99999994, 0.3, 1, 1, 0.8519915, 0.99999994, 0.33333334, 1, 1, 0.82387084, 0.99999994, 0.36666667, 1, 1, 0.79454935, 0.99999994, 0.46666667, 1, 1, 0.7050837, 0.99999994, 0.5, 1, 1, 0.67576224, 0.99999994, 0.53333336, 1, 1, 0.6476416, 0.99999994, 0.56666666, 1, 1, 0.62087196, 0.99999994, 0.6, 1, 1, 0.59575355, 0.99999994, 0.6333333, 1, 1, 0.5725866, 0.99999994, 0.6666667, 1, 1, 0.55167127, 0.99999994, 0.7, 1, 1, 0.5343585, 0.99999994, 0.73333335, 1, 1, 0.5201981, 0.99999994, 0.76666665, 1, 1, 0.5094903, 0.99999994, 0.8, 1, 1, 0.5025352, 0.99999994, 0.8333333, 1, 1, 0.49963313, 0.99999994)
+tracks/1/type = "position_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D:Flow")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -3.9496968e-17, 1.1829667, -0.06929851, 0.033333335, 1, -3.9496968e-17, 1.1829667, -0.06929851, 0.06666667, 1, -3.949697e-17, 1.1430349, -0.06929851, 0.1, 1, -3.9496978e-17, 1.0787768, -0.06929851, 0.13333334, 1, -3.9496988e-17, 1.0007492, -0.06929851, 0.2, 1, -3.9497e-17, 0.82817054, -0.06929851, 0.23333333, 1, -3.949701e-17, 0.7501429, -0.06929851, 0.26666668, 1, -3.9497017e-17, 0.6858849, -0.06929851, 0.3, 1, -3.949702e-17, 0.6409043, -0.06929851, 0.33333334, 1, -3.9497024e-17, 0.62070894, -0.06929851, 0.8333333, 1, -3.9497024e-17, 0.62070894, -0.06929851)
+tracks/2/type = "scale_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("Armature/Skeleton3D:Flow")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 1, 1.2638041, 1)
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.8333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"setIsFilled"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_m230y"]
+resource_name = "Fill"
+length = 0.8333333
+tracks/0/type = "scale_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D:BottomWater")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 0.53080577, 0.99999994, 0.033333335, 1, 1, 0.53080577, 0.99999994, 0.06666667, 1, 1, 0.5366899, 0.99999994, 0.1, 1, 1, 0.546804, 0.99999994, 0.13333334, 1, 1, 0.5601792, 0.99999994, 0.16666667, 1, 1, 0.5765318, 0.99999994, 0.2, 1, 1, 0.59628737, 0.99999994, 0.23333333, 1, 1, 0.61816967, 0.99999994, 0.26666668, 1, 1, 0.64189523, 0.99999994, 0.3, 1, 1, 0.6671805, 0.99999994, 0.33333334, 1, 1, 0.69374174, 0.99999994, 0.36666667, 1, 1, 0.72143734, 0.99999994, 0.46666667, 1, 1, 0.80594194, 0.99999994, 0.5, 1, 1, 0.83363754, 0.99999994, 0.53333336, 1, 1, 0.8601988, 0.99999994, 0.56666666, 1, 1, 0.88548404, 0.99999994, 0.6, 1, 1, 0.90920967, 0.99999994, 0.6333333, 1, 1, 0.9310919, 0.99999994, 0.6666667, 1, 1, 0.95084745, 0.99999994, 0.7, 1, 1, 0.9672001, 0.99999994, 0.73333335, 1, 1, 0.9805753, 0.99999994, 0.76666665, 1, 1, 0.9906894, 0.99999994, 0.8, 1, 1, 0.9972587, 0.99999994, 0.8333333, 1, 1, 0.99999994, 0.99999994)
+tracks/1/type = "position_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("Armature/Skeleton3D:Flow")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -3.9496964e-17, 1.187401, -0.06929851)
+tracks/2/type = "scale_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("Armature/Skeleton3D:Flow")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 1, 0.12138114, 1, 0.033333335, 1, 1, 0.12138114, 1, 0.06666667, 1, 1, 0.2025165, 1, 0.1, 1, 1, 0.33307913, 1, 0.13333334, 1, 1, 0.4916195, 1, 0.2, 1, 1, 0.8422734, 1, 0.23333333, 1, 1, 1.0008137, 1, 0.26666668, 1, 1, 1.1313763, 1, 0.3, 1, 1, 1.2227701, 1, 0.33333334, 1, 1, 1.2638041, 1, 0.8333333, 1, 1, 1.2638041, 1)
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.76666665),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [true],
+"method": &"setIsFilled"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_86tbi"]
+_data = {
+&"Empty": SubResource("Animation_j2xk6"),
+&"Fill": SubResource("Animation_m230y")
+}
+
+[node name="Sink" type="MeshInstance3D" node_paths=PackedStringArray("particles", "anim", "storePoint")]
 script = ExtResource("1_wnr1u")
+particles = NodePath("CleaningEffect")
+anim = NodePath("Sink/AnimationPlayer")
 storePoint = NodePath("StorePoint")
 
 [node name="StorePoint" type="Node3D" parent="."]
@@ -13,4 +100,20 @@ transform = Transform3D(0.8050388, 0.4126227, 0.42621014, 0, 0.7184663, -0.69556
 
 [node name="Sink" parent="." instance=ExtResource("2_wnr1u")]
 
+[node name="Skeleton3D" parent="Sink/Armature" index="0"]
+bones/0/scale = Vector3(1, 0.53080577, 0.99999994)
+bones/1/position = Vector3(-3.9496964e-17, 1.187401, -0.06929851)
+bones/1/scale = Vector3(1, 0.12138116, 1)
+
+[node name="AnimationPlayer" parent="Sink" index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_86tbi")
+}
+
 [node name="StandardCollision" parent="." instance=ExtResource("3_clan4")]
+
+[node name="CleaningEffect" parent="." instance=ExtResource("4_j2xk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941285, 0)
+emitting = false
+
+[editable path="Sink"]

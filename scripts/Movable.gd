@@ -13,6 +13,8 @@ var visibleMesh:Node3D = null
 @export var progressBar:ProgressBar
 var parentOffset:Vector3
 var rb:RigidBody3D
+var inUse:bool = false
+@export var recipePlacement:Node3D
 
 func UpdateAppearance():
 	var newMesh = Recipes.recipeToMesh(recipe)
@@ -20,7 +22,10 @@ func UpdateAppearance():
 		visibleMesh.queue_free()
 	if(newMesh):
 		visibleMesh = newMesh.instantiate()
-		add_child(visibleMesh)
+		if recipePlacement:
+			recipePlacement.add_child(visibleMesh)
+		else:
+			add_child(visibleMesh)
 		visibleMesh.set_position(Vector3.ZERO)
 		findMeshInstances(visibleMesh)
 		if ishovered : 
@@ -57,9 +62,11 @@ func _physics_process(_delta: float):
 func _process(_delta):
 	if(progressBar): 
 		if(progress != prevProgress):
+			inUse = true
 			progressBar.visible = true
 			prevProgress = progress.duplicate()
 		else:
+			inUse = false
 			progressBar.visible = false
 
 

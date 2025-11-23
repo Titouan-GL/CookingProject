@@ -1,6 +1,7 @@
 extends MovableStorage
 class_name Pot
 @export var mesh:MeshInstance3D
+@export var particles:GPUParticles3D
 
 	
 func addProgress(s:Enum.TaskType, delta:float) -> bool:
@@ -10,6 +11,7 @@ func addProgress(s:Enum.TaskType, delta:float) -> bool:
 			progress[s] -= delta
 			if(progress[s] <= 0):
 				if(s == Enum.TaskType.COOK):
+					particles.emitting = true
 					cook()
 				return true
 	return false

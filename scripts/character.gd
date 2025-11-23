@@ -10,12 +10,15 @@ var gravity:float
 var friction:float
 var space:PhysicsDirectSpaceState3D
 
-func bumpedInto(dir:Vector3, rightVector:Vector3):
-	var right = rightVector*dir.length()*bumpStrength/3
-	if right.dot(dir) > 0:
-		addedVelocity = dir*bumpStrength + right
+func bumpedInto(dir:Vector3, rightVector:Vector3 = Vector3(0,0,0)):
+	if rightVector != Vector3(0,0,0):
+		var right = rightVector*dir.length()*bumpStrength/3
+		if right.dot(dir) > 0:
+			addedVelocity = dir*bumpStrength + right
+		else:
+			addedVelocity = dir*bumpStrength - right
 	else:
-		addedVelocity = dir*bumpStrength - right
+		addedVelocity = dir*bumpStrength
 
 func _enter_tree() -> void:
 	space = get_world_3d().direct_space_state

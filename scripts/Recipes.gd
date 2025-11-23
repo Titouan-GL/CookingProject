@@ -32,10 +32,10 @@ const meshesInPlateOverride:Dictionary = {
 }
 
 const textures:Dictionary = {
-	Enum.RecipeNames.TomatoSoup : preload("res://assets/textures/TomatoSoupIcon.png"),
-	Enum.RecipeNames.BurSteSal: preload("res://assets/textures/burgerIcon.png"),
-	Enum.RecipeNames.CutTomCutSal: preload("res://assets/textures/TomatoSaladIcon.png"),
-	Enum.RecipeNames.BurSteSalTom: preload("res://assets/textures/BurgSteSalTomIcon.png"),
+	Enum.RecipeNames.TomatoSoup : preload("res://assets/textures/Icons/TomatoSoupIcon.png"),
+	Enum.RecipeNames.BurSteSal: preload("res://assets/textures/Icons/burgerIcon.png"),
+	Enum.RecipeNames.CutTomCutSal: preload("res://assets/textures/Icons/TomatoSaladIcon.png"),
+	Enum.RecipeNames.BurSteSalTom: preload("res://assets/textures/Icons/BurgSteSalTomIcon.png"),
 }
 
 const recipes:Dictionary[Enum.RecipeNames, Array] = { #array where 0 is the tasktype and 1 is an dictionary of recipes

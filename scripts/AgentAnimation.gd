@@ -7,7 +7,11 @@ class_name PlayerAnimation
 @export var knife: Node3D
 @export var sponge: Node3D
 var runningPath:String = "parameters/Running/blend_amount"
+@export var particles:GPUParticles3D 
 
+func cutImpact():
+	particles.emitting = false
+	particles.emitting = true
 
 func _process(_delta):
 	animationTree.set(runningPath, lerp(animationTree.get(runningPath), agent.velocity.length()/agent.SPEED, _delta * 10))

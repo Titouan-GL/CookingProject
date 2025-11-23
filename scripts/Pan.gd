@@ -1,6 +1,8 @@
 extends MovableStorage
 class_name Pan
 
+@export var particles:GPUParticles3D 
+
 
 func addProgress(s:Enum.TaskType, delta:float) -> bool:
 	if(recipe == Enum.RecipeNames.PanCutSte):
@@ -9,6 +11,7 @@ func addProgress(s:Enum.TaskType, delta:float) -> bool:
 			progressBar.value = 1-(progress[s]/progressMaxValues[s])
 			if(progress[s] <= 0):
 				if(s == Enum.TaskType.COOK):
+					particles.emitting = true
 					cook()
 				return true
 	return false

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c5jewike8l5y6"]
 
 [ext_resource type="Script" uid="uid://yuwcc733oxsa" path="res://scripts/IngredientIcon.gd" id="1_xy0do"]
-[ext_resource type="Texture2D" uid="uid://cnrk1bhiyocvc" path="res://assets/textures/burgerIcon.png" id="2_oilkw"]
+[ext_resource type="Texture2D" uid="uid://cnrk1bhiyocvc" path="res://assets/textures/Icons/burgerIcon.png" id="2_oilkw"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xy0do"]
 viewport_path = NodePath("SubViewport")

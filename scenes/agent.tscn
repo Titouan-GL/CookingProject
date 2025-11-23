@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://b67m5mnbrjcmo"]
+[gd_scene load_steps=27 format=3 uid="uid://b67m5mnbrjcmo"]
 
 [ext_resource type="Script" uid="uid://dtnxd4krtryr3" path="res://scripts/agent.gd" id="1_b2pv0"]
 [ext_resource type="Script" uid="uid://ddsrukse8lcsu" path="res://scripts/navAgent.gd" id="2_dg1j7"]
 [ext_resource type="PackedScene" uid="uid://bjpcpftxbnhw3" path="res://assets/blender/Animated/Skeleton.blend" id="2_umeaf"]
 [ext_resource type="Script" uid="uid://dls0esx18alxy" path="res://scripts/AgentAnimation.gd" id="3_yc63n"]
 [ext_resource type="PackedScene" uid="uid://1iydcxqvs7te" path="res://assets/blender/Div/Knife.blend" id="4_dg1j7"]
+[ext_resource type="PackedScene" uid="uid://0ua7kdsxlmxp" path="res://scenes/VFX/CutImpact.tscn" id="6_iuhnp"]
 [ext_resource type="PackedScene" uid="uid://chbkdp0cdpoye" path="res://assets/blender/Div/Sponge.blend" id="6_nkfwj"]
 [ext_resource type="AnimationLibrary" uid="uid://irlbgne2lxkd" path="res://assets/blender/Animations/SkeletonAnimations.res" id="6_qeyy3"]
 
@@ -120,46 +121,44 @@ target_desired_distance = 0.5
 [node name="NavigationAgent" type="Node3D" parent="feet"]
 script = ExtResource("2_dg1j7")
 
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, -0.030419052, 0)
-shape = SubResource("CapsuleShape3D_noarx")
-
-[node name="Skeleton" parent="." node_paths=PackedStringArray("agent", "animationTree", "knife", "sponge") instance=ExtResource("2_umeaf")]
+[node name="Skeleton" parent="." node_paths=PackedStringArray("agent", "animationTree", "knife", "sponge", "particles") instance=ExtResource("2_umeaf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.74930227, 0)
 script = ExtResource("3_yc63n")
 agent = NodePath("..")
 animationTree = NodePath("../AnimationTree")
 knife = NodePath("Armature/GeneralSkeleton/RightHandAttachment/Knife2")
 sponge = NodePath("Armature/GeneralSkeleton/RightHandAttachment/Sponge")
+particles = NodePath("Armature/GeneralSkeleton/RightHandAttachment/Knife2/CutImpact")
 
 [node name="GeneralSkeleton" parent="Skeleton/Armature" index="0"]
 bones/0/position = Vector3(-1.7625289e-15, 0.38104624, -0.051285226)
 bones/0/rotation = Quaternion(5.0487068e-29, 7.1054274e-15, 4.2351647e-22, 1)
 bones/0/scale = Vector3(1, 0.99999994, 0.99999994)
-bones/1/rotation = Quaternion(-0.00029084767, -0.0005165819, 0.00014552394, 0.9999999)
-bones/2/rotation = Quaternion(0.10637371, -0.00024090674, -4.0706345e-06, 0.99432623)
-bones/3/rotation = Quaternion(2.2019243e-14, 2.818463e-12, -8.455324e-12, 1)
+bones/1/rotation = Quaternion(-0.00017330065, -0.00030780365, 8.670997e-05, 1)
+bones/2/rotation = Quaternion(0.11143427, -0.0010679953, -1.8046076e-05, 0.99377126)
+bones/3/rotation = Quaternion(2.8128883e-14, 3.6004969e-12, -1.0801489e-11, 1)
 bones/4/rotation = Quaternion(2.4868992e-14, 1.7763567e-14, -1.19209275e-07, 1)
-bones/5/rotation = Quaternion(0.00046841026, 3.083857e-05, -0.00020524081, 0.9999999)
-bones/6/rotation = Quaternion(-2.581905e-10, -1.4225034e-09, -4.9135944e-09, 1)
-bones/7/rotation = Quaternion(2.4868992e-14, -3.197442e-14, 1.1920927e-07, 1)
-bones/8/rotation = Quaternion(0.00011594895, 1.1288527e-05, -6.803773e-05, 1)
-bones/9/rotation = Quaternion(3.5527133e-15, 9.842087e-15, 1.7870171e-09, 1)
+bones/5/rotation = Quaternion(0.00011876906, 7.819359e-06, -5.20404e-05, 1)
+bones/6/rotation = Quaternion(-3.298311e-10, -1.8171997e-09, -6.018547e-09, 1)
+bones/7/rotation = Quaternion(-0.38858765, 0.031998005, 0.086403735, 0.9167934)
+bones/8/rotation = Quaternion(-0.817798, 0.25341746, -0.10785949, 0.5053241)
+bones/9/rotation = Quaternion(-0.13780089, -0.08799965, -0.44776505, 0.87907547)
 bones/10/rotation = Quaternion(-8.0571855e-10, -0.09567672, -2.9856784e-10, 0.9954125)
 bones/11/rotation = Quaternion(-8.224504e-08, 7.908966e-09, -3.2543373e-12, 1)
 bones/12/rotation = Quaternion(-1.8720102e-10, 0.08234062, 4.5099657e-10, 0.99660426)
 bones/13/rotation = Quaternion(-7.969055e-08, -4.147296e-09, -9.281706e-10, 1)
 
 [node name="RightHandAttachment" type="BoneAttachment3D" parent="Skeleton/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.9999995, 0.00011904334, -0.00097149354, -0.00011938851, 0.9999998, -0.00035526976, 0.000971451, 0.00035538565, 0.9999994, -0.35068575, 0.42582703, -0.039549474)
+transform = Transform3D(0.9999998, -6.912639e-05, -0.0005999734, 6.9191796e-05, 0.9999999, 0.00010901233, 0.00059996586, -0.00010905381, 0.9999998, -0.35055304, 0.4258618, -0.039112672)
 bone_name = "Hand.R"
 bone_idx = 6
 
 [node name="Knife2" parent="Skeleton/Armature/GeneralSkeleton/RightHandAttachment" instance=ExtResource("4_dg1j7")]
 transform = Transform3D(0.036159188, 0.99892133, -0.029170584, 0.994415, -0.03306912, 0.10023168, 0.09915814, -0.032632105, -0.9945374, 0.05468826, -0.069840014, 0.0029979944)
 visible = false
+
+[node name="CutImpact" parent="Skeleton/Armature/GeneralSkeleton/RightHandAttachment/Knife2" instance=ExtResource("6_iuhnp")]
+transform = Transform3D(0.9992017, 0.029654086, -0.026771255, -0.026897065, 0.9948184, 0.09804407, 0.029539898, -0.09724576, 0.9948219, -0.47608173, 0.017517626, -0.015507735)
 
 [node name="Sponge" parent="Skeleton/Armature/GeneralSkeleton/RightHandAttachment" instance=ExtResource("6_nkfwj")]
 transform = Transform3D(0.041311793, -0.9932491, -0.10839667, 0.12716725, 0.11283393, -0.9854427, 0.991021, 0.026925892, 0.13097012, 0.15077196, -0.12380886, 0.007554777)

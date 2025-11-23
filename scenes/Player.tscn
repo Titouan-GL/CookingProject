@@ -1,51 +1,80 @@
-[gd_scene load_steps=26 format=3 uid="uid://c1shi6l6dy3g6"]
+[gd_scene load_steps=50 format=3 uid="uid://c1shi6l6dy3g6"]
 
 [ext_resource type="PackedScene" uid="uid://hs7egtm6cpxe" path="res://assets/blender/Animated/Player.blend" id="1_p0vlq"]
 [ext_resource type="Script" uid="uid://c5ayk6kh2b8ul" path="res://scripts/player.gd" id="1_v6fml"]
 [ext_resource type="Script" uid="uid://c8bil613bq7gi" path="res://scripts/PlayerAnimation.gd" id="3_3li8b"]
+[ext_resource type="ArrayMesh" uid="uid://b2o3vj8odkcmg" path="res://assets/blender/VFX/Beam.tres" id="4_mdl7e"]
+[ext_resource type="Material" uid="uid://duh6svb48cptf" path="res://assets/materials/EvilEyes.tres" id="4_qu4a1"]
+[ext_resource type="Material" uid="uid://b5lci1a88dr4p" path="res://assets/shaders/powerShader.tres" id="5_bruh7"]
+[ext_resource type="Material" uid="uid://1q3tx5jpglnw" path="res://assets/materials/BeamMaterial.tres" id="6_6eyey"]
+[ext_resource type="PackedScene" uid="uid://1iydcxqvs7te" path="res://assets/blender/Div/Knife.blend" id="6_70d11"]
+[ext_resource type="Material" uid="uid://dx86bdcus8tf0" path="res://assets/materials/PowerMaterial.tres" id="7_cw2d6"]
+[ext_resource type="PackedScene" uid="uid://chbkdp0cdpoye" path="res://assets/blender/Div/Sponge.blend" id="8_khinc"]
+[ext_resource type="PackedScene" uid="uid://0ua7kdsxlmxp" path="res://scenes/VFX/CutImpact.tscn" id="10_d3wef"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6eyey"]
+material = ExtResource("6_6eyey")
+radius = 0.3
+height = 0.6
+radial_segments = 16
+rings = 8
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_nkfwj"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lug0u"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o4126"]
+animation = &"Punch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lkdrv"]
 animation = &"Run"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dg1j7"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p7iby"]
 animation = &"RunCarry"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qeyy3"]
-xfade_time = 0.2
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0rnld"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nkfwj"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_srp4u"]
 xfade_time = 0.2
 advance_mode = 2
 advance_expression = "objectInHand != null"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iuhnp"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jfpux"]
 xfade_time = 0.2
 advance_mode = 2
 advance_expression = "objectInHand == null"
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_q3gef"]
-states/Running/node = SubResource("AnimationNodeAnimation_lug0u")
-states/Running/position = Vector2(564, 46)
-states/RunningWithFood/node = SubResource("AnimationNodeAnimation_dg1j7")
-states/RunningWithFood/position = Vector2(584, 126)
-states/Start/position = Vector2(157, 83)
-transitions = ["Start", "Running", SubResource("AnimationNodeStateMachineTransition_qeyy3"), "Running", "RunningWithFood", SubResource("AnimationNodeStateMachineTransition_nkfwj"), "RunningWithFood", "Running", SubResource("AnimationNodeStateMachineTransition_iuhnp")]
-graph_offset = Vector2(-47, 18)
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_61ith"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "isPunching"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3li8b"]
-animation = &"Carry"
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ebwui"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_sfy4j"]
+states/Punch/node = SubResource("AnimationNodeAnimation_o4126")
+states/Punch/position = Vector2(596, 61)
+states/Run/node = SubResource("AnimationNodeAnimation_lkdrv")
+states/Run/position = Vector2(363, 53)
+states/RunCarry/node = SubResource("AnimationNodeAnimation_p7iby")
+states/RunCarry/position = Vector2(421, 135)
+states/Start/position = Vector2(174, 100)
+transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_0rnld"), "Run", "RunCarry", SubResource("AnimationNodeStateMachineTransition_srp4u"), "RunCarry", "Run", SubResource("AnimationNodeStateMachineTransition_jfpux"), "Run", "Punch", SubResource("AnimationNodeStateMachineTransition_61ith"), "Punch", "Run", SubResource("AnimationNodeStateMachineTransition_ebwui")]
+graph_offset = Vector2(8, -30)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qeyy3"]
 animation = &"Carry"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_52ahs"]
-animation = &"Carry"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y08pw"]
 animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d3wef"]
+animation = &"Punch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_52ahs"]
+animation = &"use"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q3gef"]
 xfade_time = 0.2
@@ -54,103 +83,371 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f14ir"]
 xfade_time = 0.2
 advance_mode = 2
-advance_expression = "isCutting"
+advance_expression = "inAction"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tduqk"]
 xfade_time = 0.2
 advance_mode = 2
-advance_expression = "not isCutting"
+advance_expression = "not inAction"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_52ahs"]
 xfade_time = 0.2
 advance_mode = 2
-advance_expression = "isCleaning"
+advance_expression = "objectInHand != null"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y08pw"]
 xfade_time = 0.2
 advance_mode = 2
-advance_expression = "not isCleaning"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mdl7e"]
-xfade_time = 0.2
-advance_mode = 2
-advance_expression = "objectInHand"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qu4a1"]
-xfade_time = 0.2
-advance_mode = 2
 advance_expression = "objectInHand == null"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o4126"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "isPunching"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lkdrv"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tduqk"]
-states/Carry/node = SubResource("AnimationNodeAnimation_3li8b")
-states/Carry/position = Vector2(783, 119)
-states/Clean/node = SubResource("AnimationNodeAnimation_qeyy3")
-states/Clean/position = Vector2(806, 39)
-states/Cut/node = SubResource("AnimationNodeAnimation_52ahs")
-states/Cut/position = Vector2(660, 152)
+states/Holding/node = SubResource("AnimationNodeAnimation_qeyy3")
+states/Holding/position = Vector2(796, 49)
 states/Idle/node = SubResource("AnimationNodeAnimation_y08pw")
 states/Idle/position = Vector2(629, 49)
+states/Punch/node = SubResource("AnimationNodeAnimation_d3wef")
+states/Punch/position = Vector2(722, 191)
 states/Start/position = Vector2(179, 85)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q3gef"), "Idle", "Cut", SubResource("AnimationNodeStateMachineTransition_f14ir"), "Cut", "Idle", SubResource("AnimationNodeStateMachineTransition_tduqk"), "Idle", "Clean", SubResource("AnimationNodeStateMachineTransition_52ahs"), "Clean", "Idle", SubResource("AnimationNodeStateMachineTransition_y08pw"), "Idle", "Carry", SubResource("AnimationNodeStateMachineTransition_mdl7e"), "Carry", "Idle", SubResource("AnimationNodeStateMachineTransition_qu4a1")]
-graph_offset = Vector2(94, -5)
+states/Use/node = SubResource("AnimationNodeAnimation_52ahs")
+states/Use/position = Vector2(522, 209)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_q3gef"), "Idle", "Use", SubResource("AnimationNodeStateMachineTransition_f14ir"), "Use", "Idle", SubResource("AnimationNodeStateMachineTransition_tduqk"), "Idle", "Holding", SubResource("AnimationNodeStateMachineTransition_52ahs"), "Holding", "Idle", SubResource("AnimationNodeStateMachineTransition_y08pw"), "Idle", "Punch", SubResource("AnimationNodeStateMachineTransition_o4126"), "Punch", "Idle", SubResource("AnimationNodeStateMachineTransition_lkdrv")]
+graph_offset = Vector2(141, 7)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v6fml"]
-graph_offset = Vector2(-777.50165, -16.067215)
+graph_offset = Vector2(-792.0818, 46.553852)
+nodes/output/position = Vector2(660, 100)
 nodes/StaticStateMachine/node = SubResource("AnimationNodeStateMachine_tduqk")
-nodes/StaticStateMachine/position = Vector2(-540, -40)
-nodes/RunningStateMachine/node = SubResource("AnimationNodeStateMachine_q3gef")
-nodes/RunningStateMachine/position = Vector2(-580, 180)
+nodes/StaticStateMachine/position = Vector2(-840, 20)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_sfy4j")
+nodes/StateMachine/position = Vector2(-1020, 260)
 nodes/Running/node = SubResource("AnimationNodeBlend2_nkfwj")
-nodes/Running/position = Vector2(-120, 80)
-node_connections = [&"output", 0, &"Running", &"Running", 0, &"StaticStateMachine", &"Running", 1, &"RunningStateMachine"]
+nodes/Running/position = Vector2(-100, 100)
+node_connections = [&"output", 0, &"Running", &"Running", 0, &"StaticStateMachine", &"Running", 1, &"StateMachine"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p0vlq"]
 radius = 0.3540039
 height = 1.2807617
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v6fml"]
-radius = 0.35009766
-height = 1.1351318
+[sub_resource type="Shader" id="Shader_3li8b"]
+code = "shader_type particles;
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("raycaster", "storePoint")]
+uniform vec3 points[3];
+uniform sampler2D alpha;
+uniform sampler2D size;
+
+vec3 getInterpolation(float i, vec3 p1, vec3 p2)
+{
+	vec3 dif = p2 - p1;
+	return p1 + dif * i;
+}
+
+vec3 getBezier(float i, vec3 p1, vec3 p2, vec3 p3)
+{
+	vec3 ip1 = getInterpolation(i, p1, p2);
+	vec3 ip2 = getInterpolation(i, p2, p3);
+	vec3 ip3 = getInterpolation(i, ip1, ip2);
+	
+	return ip3;
+}
+
+mat4 getRotationY(float a)
+{;
+	mat4 m = mat4(
+		vec4( cos(a), 0.0, -sin(a), 0.0 ),
+		vec4( 0.0,    1.0, 0.0,     0.0 ),
+		vec4( sin(a), 0.0, cos(a),  0.0 ),
+		vec4( 0.0,    0.0, 0.0,     1.0 )
+	);
+	
+	return m;
+}
+
+mat4 getRotationX(float a)
+{;
+	mat4 m = mat4(
+		vec4( 1.0,     0.0,    0.0, 0.0 ),
+		vec4( 0.0,  cos(a), sin(a), 0.0 ),
+		vec4( 0.0, -sin(a), cos(a), 0.0 ),
+		vec4( 0.0,     0.0,    0.0, 1.0 )
+	);
+	
+	return m;
+}
+
+void start() {
+	if (RESTART_POSITION)
+	{
+		TRANSFORM = getRotationY(PI);
+		TRANSFORM = TRANSFORM * EMISSION_TRANSFORM;
+	}
+	if (RESTART_VELOCITY)
+		VELOCITY = EMITTER_VELOCITY;
+	COLOR.rgb = vec3(0.6, 0.8, 2.5);
+}
+
+float getAngle(vec2 v)
+{
+	v = normalize(v);
+	float a = atan(v.y, v.x);
+	return a;
+}
+
+void process() {
+	if (RESTART)
+		CUSTOM.y = 0.0;
+	
+	vec3 position1 = getBezier(CUSTOM.y, points[0], points[1], points[2]);
+	CUSTOM.y += DELTA / LIFETIME;
+	vec3 position2 = getBezier(CUSTOM.y, points[0], points[1], points[2]);
+	vec3 velocity = position2 - position1;
+	
+	TRANSFORM = getRotationY(getAngle(velocity.zx) + PI);
+	vec2 pitch = vec2(length(velocity.xz), velocity.y);
+	TRANSFORM *= getRotationX(getAngle(pitch));
+	
+	TRANSFORM[3].xyz += position2;
+	
+	if (CUSTOM.y < 1.0){
+		COLOR.a = texture(alpha, vec2(CUSTOM.y)).r;
+		TRANSFORM[0].xyz *= texture(size, vec2(CUSTOM.y)).r;
+		TRANSFORM[1].xyz *= texture(size, vec2(CUSTOM.y)).r;
+		TRANSFORM[2].xyz *= texture(size, vec2(CUSTOM.y)).r;
+	}
+	else{
+		COLOR.a = 0.0;
+	}
+}
+"
+
+[sub_resource type="Curve" id="Curve_3li8b"]
+_data = [Vector2(0, 0), 0.0, 1.7984556, 0, 0, Vector2(0.5025381, 0.49438208), 0.0, 0.0, 0, 0, Vector2(1, 0.011235952), -2.2134836, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_mdl7e"]
+curve = SubResource("Curve_3li8b")
+
+[sub_resource type="Curve" id="Curve_mdl7e"]
+_data = [Vector2(0, 0.24719107), 0.0, 0.38495353, 0, 0, Vector2(1, 1), 0.590262, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qu4a1"]
+curve = SubResource("Curve_mdl7e")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qu4a1"]
+shader = SubResource("Shader_3li8b")
+shader_parameter/points = PackedVector3Array(0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0)
+shader_parameter/alpha = SubResource("CurveTexture_mdl7e")
+shader_parameter/size = SubResource("CurveTexture_qu4a1")
+
+[sub_resource type="Animation" id="Animation_bruh7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Knife:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-8.351872e-23, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Knife:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.25216043, 1.2597447e-08, 0.036035657)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Knife/CutImpact:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_khinc"]
+resource_name = "knifeCut"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Knife:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.40000004, 0.70000005, 0.8000001, 1.1000001, 1.2, 1.5, 1.6000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.5707964, 1.5707964, 0), Vector3(0.76462877, -6.057235e-08, -1.5707964), Vector3(1.5707964, 1.5707964, 0), Vector3(0.76462877, -6.057235e-08, -1.5707964), Vector3(1.5707964, 1.5707964, 0), Vector3(0.76462877, -6.057235e-08, -1.5707964), Vector3(1.5707964, 1.5707964, 0), Vector3(0.76462877, -6.057235e-08, -1.5707964), Vector3(1.5707964, 1.5707964, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Knife:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.40000004, 0.70000005, 0.8000001, 1.1, 1.2, 1.5000001, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.252, 0.35, -0.426), Vector3(-0.336, 0.35, -0.426), Vector3(-0.336, 0.2, -0.426), Vector3(-0.189, 0.35, -0.426), Vector3(-0.189, 0.2, -0.426), Vector3(-0.024, 0.35, -0.426), Vector3(-0.024, 0.2, -0.426), Vector3(0.252, 0.35, -0.426), Vector3(0.252, 0.1, -0.426)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Knife/CutImpact:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6eyey"]
+_data = {
+&"RESET": SubResource("Animation_bruh7"),
+&"knifeCut": SubResource("Animation_khinc")
+}
+
+[sub_resource type="Animation" id="Animation_d3wef"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6eyey"]
+resource_name = "SpongeAnim"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.15, 0.1, 0), Vector3(0, 0.1, 0.15), Vector3(0.15, 0.1, 0), Vector3(0, 0.1, -0.15), Vector3(-0.15, 0.1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d3wef"]
+_data = {
+&"RESET": SubResource("Animation_d3wef"),
+&"SpongeAnim": SubResource("Animation_6eyey")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d3wef"]
+size = Vector3(1.0604858, 0.39208984, 0.84973145)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("raycaster", "idealGrabPoint", "hitArea", "storePoint")]
 collision_layer = 2
 collision_mask = 11
 script = ExtResource("1_v6fml")
 raycaster = NodePath("RayCast3D")
+idealGrabPoint = NodePath("idealGrabPoint")
+hitArea = NodePath("Area3D")
 storePoint = NodePath("grabPoint")
 
-[node name="Mesh" parent="." node_paths=PackedStringArray("player", "animationTree") instance=ExtResource("1_p0vlq")]
+[node name="Mesh" parent="." node_paths=PackedStringArray("player", "animationTree", "beamParticles", "powerParticles", "impactParticles", "grabPoint", "staffPoint", "knifeAnimation", "knife", "spongeAnimation", "sponge") instance=ExtResource("1_p0vlq")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 script = ExtResource("3_3li8b")
 player = NodePath("..")
 animationTree = NodePath("AnimationTree")
+beamParticles = NodePath("../Beam/GPUParticles3D")
+powerParticles = NodePath("Armature/Skeleton3D/BoneAttachment3D/StaffPoint/Power/GPUParticles3D")
+impactParticles = NodePath("../Knife2/Knife/CutImpact")
+grabPoint = NodePath("../grabPoint")
+staffPoint = NodePath("Armature/Skeleton3D/BoneAttachment3D/StaffPoint")
+knifeAnimation = NodePath("../Knife2/AnimationPlayer")
+knife = NodePath("../Knife2")
+spongeAnimation = NodePath("../Sponge/AnimationPlayer")
+sponge = NodePath("../Sponge")
 
 [node name="Skeleton3D" parent="Mesh/Armature" index="0"]
-bones/1/rotation = Quaternion(0, -0.060196564, 0, 0.9981866)
-bones/6/rotation = Quaternion(0.29716375, -0.13637301, 0.23720056, 0.91478527)
-bones/7/rotation = Quaternion(0.13379386, 0.55792236, -0.0033703314, 0.8190302)
+bones/1/rotation = Quaternion(1.3648465e-09, -1.1742192e-07, -0.011449162, 0.9999345)
+bones/1/scale = Vector3(1, 1.0115855, 1)
+bones/2/rotation = Quaternion(0, 5.540273e-17, 0, 1)
+bones/3/position = Vector3(2.2441498e-09, 0.33866206, 1.6301482e-09)
+bones/3/rotation = Quaternion(-3.469447e-18, 1.1920929e-07, 4.135903e-25, 1)
+bones/4/rotation = Quaternion(-0.11927503, -0.00807785, -0.0017251457, 0.99282694)
+bones/6/rotation = Quaternion(-0.450892, 0.13252503, 0.43836674, 0.76613843)
+bones/7/rotation = Quaternion(-1.6529992e-08, 1.02979214e-07, -0.0011607563, 0.99999934)
 bones/8/rotation = Quaternion(0.2631279, -0.3090731, -0.68957347, 0.59977156)
-bones/9/rotation = Quaternion(-0.1413475, -0.47775555, -0.3761493, 0.7812057)
-bones/10/rotation = Quaternion(-0.00023061775, 0.19866839, 0.0011376035, 0.9800661)
-bones/11/rotation = Quaternion(0.7820265, -0.022560216, 0.029091392, 0.62215704)
-bones/13/rotation = Quaternion(-3.9609604e-05, 1.1486936e-07, 0.9999818, 0.006027825)
-bones/15/rotation = Quaternion(3.9371163e-05, 1.18938516e-07, 0.9999818, -0.006027825)
+bones/9/rotation = Quaternion(-0.17020471, -0.41801548, -0.31286386, 0.83570904)
+bones/10/rotation = Quaternion(2.6680604e-09, -5.736329e-07, 0.0011607328, 0.99999934)
+bones/11/rotation = Quaternion(0.7071068, -2.84119e-07, -2.84119e-07, 0.7071068)
+bones/12/position = Vector3(2.9230595e-08, -0.26511127, -0.122602)
+bones/13/rotation = Quaternion(-0.0006189903, 0.09614647, 0.995349, 0.005996112)
+bones/15/rotation = Quaternion(3.9371163e-05, 1.18938516e-07, 0.9999819, -0.006027826)
+
+[node name="NurbsPath" parent="Mesh/Armature/Skeleton3D" index="2"]
+material_override = ExtResource("4_qu4a1")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Mesh/Armature/Skeleton3D" index="7"]
+transform = Transform3D(-0.87646234, -0.47010267, -0.10406686, 0.48656783, -0.8638524, -0.20075925, 0.0044278344, -0.22399834, 0.97457945, -0.56978637, 0.48935914, 0.13298695)
+bone_name = "Hand.R"
+bone_idx = 7
+
+[node name="StaffPoint" type="Node3D" parent="Mesh/Armature/Skeleton3D/BoneAttachment3D"]
+transform = Transform3D(0.9878154, 0.14717154, 0.05060407, -0.1444658, 0.98805994, -0.053542495, -0.05787994, 0.045579374, 0.99728256, -0.24652016, 0.3012617, 0.38817)
+
+[node name="Power" type="Node3D" parent="Mesh/Armature/Skeleton3D/BoneAttachment3D/StaffPoint"]
+transform = Transform3D(-1.1602306, 0.31326798, -0.34384277, -0.44483486, -0.47716153, 1.0662735, 0.13596843, 1.1120608, 0.55437607, 0, 0, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Mesh/Armature/Skeleton3D/BoneAttachment3D/StaffPoint/Power"]
+emitting = false
+amount = 2
+fixed_fps = 20
+local_coords = true
+process_material = ExtResource("5_bruh7")
+draw_pass_1 = SubResource("SphereMesh_6eyey")
 
 [node name="AnimationTree" type="AnimationTree" parent="Mesh"]
 tree_root = SubResource("AnimationNodeBlendTree_v6fml")
 advance_expression_base_node = NodePath("../..")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Running/blend_amount = 0.0
+parameters/Running/blend_amount = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6262207, 0)
 shape = SubResource("CapsuleShape3D_p0vlq")
-
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0.6362771, 0)
-shape = SubResource("CapsuleShape3D_v6fml")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 1.058)
@@ -160,4 +457,61 @@ collision_mask = 5
 [node name="grabPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.076, 0.951)
 
+[node name="idealGrabPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.076, 1.2492453)
+
+[node name="Beam" type="Node3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Beam"]
+emitting = false
+amount = 10
+lifetime = 1.5
+speed_scale = 4.0
+fixed_fps = 20
+local_coords = true
+process_material = SubResource("ShaderMaterial_qu4a1")
+draw_pass_1 = ExtResource("4_mdl7e")
+
+[node name="Knife2" parent="." instance=ExtResource("6_70d11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.299023, 1.1768789)
+visible = false
+
+[node name="Knife" parent="Knife2" index="0"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 8.3518705e-23, 0, -8.351872e-23, 0.9999999, 0.25216043, 1.2597447e-08, 0.036035657)
+surface_material_override/0 = ExtResource("7_cw2d6")
+surface_material_override/1 = ExtResource("7_cw2d6")
+surface_material_override/2 = ExtResource("7_cw2d6")
+
+[node name="CutImpact" parent="Knife2/Knife" index="0" instance=ExtResource("10_d3wef")]
+transform = Transform3D(1, 2.3283064e-10, 1.8626451e-09, 0, 1, -4.182766e-09, -1.8626451e-09, 1.08921085e-08, 1, -0.5263617, 7.510185e-05, 0.0016160011)
+emitting = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Knife2"]
+libraries = {
+&"": SubResource("AnimationLibrary_6eyey")
+}
+
+[node name="Sponge" parent="." instance=ExtResource("8_khinc")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -0.2426514, 1.0377185, 0.80075884)
+visible = false
+
+[node name="Cube" parent="Sponge" index="0"]
+transform = Transform3D(0.5985747, 2.9923727e-10, -7.450581e-09, 0, 0.5985748, 0, -7.450581e-09, 3.1329665e-11, 0.5985748, 0, 0, 0)
+material_override = ExtResource("7_cw2d6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sponge"]
+libraries = {
+&"": SubResource("AnimationLibrary_d3wef")
+}
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.8966642, 0.39686415, -0.19619417, -0.44271126, 0.80380577, -0.39737028, 0, 0.4431651, 0.89644015, -0.10092681, 0.6518623, 0.6183453)
+shape = SubResource("BoxShape3D_d3wef")
+
 [editable path="Mesh"]
+[editable path="Knife2"]
+[editable path="Sponge"]

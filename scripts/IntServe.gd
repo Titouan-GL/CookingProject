@@ -11,6 +11,7 @@ var gameManager:GameManager
 var client:Client = null
 var navmesh:Navigation
 @export var recipesOption:Array[Enum.RecipeNames]
+@export var particles:GPUParticles3D
 static var override = [Enum.RecipeNames.BurSteSal]#= [Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.CutTomCutSal, Enum.RecipeNames.BurSteSalTom]
 var table:ClientTable
 
@@ -49,6 +50,7 @@ func clientSat():
 	navmesh.addObstacle(destinationPoint, true)
 
 func clientLeft():
+	particles.emitting = false
 	navmesh.removeObstacle(destinationPoint)
 
 
@@ -63,6 +65,7 @@ func _ready():
 func serve(success:bool):
 	hierarchy.servePoints.erase(self)
 	if(success):
+		particles.emitting = true
 		gameManager.changeScore(Recipes.getScore(recipeWanted))
 		client.changeState(1)
 		recipeWanted = Enum.RecipeNames.Empty
@@ -72,6 +75,7 @@ func serve(success:bool):
 			if table.ishovered:
 				table.hovered()
 	else:
+		particles.emitting = false
 		add_to_group("freeServePoint")
 		gameManager.changeScore(-Recipes.getScore(recipeWanted))
 		recipeWanted = Enum.RecipeNames.Empty

@@ -2,6 +2,7 @@ extends Movable
 
 class_name MovableStorage
 
+@export var mixParticles:GPUParticles3D 
 
 var groupName:String
 var emptyName:Enum.RecipeNames
@@ -50,6 +51,8 @@ func mix(i):
 				
 
 func mixRecipe(r:Enum.RecipeNames):
+	if mixParticles:
+		mixParticles.emitting = true
 	var newRecipe = Recipes.recipesMix(recipe, r)
 	if(newRecipe == Enum.RecipeNames.Empty):
 		recipe = r
