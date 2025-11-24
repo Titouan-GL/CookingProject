@@ -5,6 +5,8 @@ class_name Player
 @export var raycaster:RayCast3D
 @export var idealGrabPoint:Node3D
 @export var hitArea:Area3D
+@export var staffPoint:Node3D
+@export var punchEffect:GPUParticles3D
 var prevObjectInHand:Node3D
 var hovered:Node3D
 var inAction:bool = false
@@ -75,6 +77,9 @@ func _process(_delta: float) -> void:
 			if b is Agent:
 				var dir:Vector3 = (b.global_position-global_position).normalized()
 				b.bumpedInto(dir*3)
+				if punchEffect:
+					punchEffect.global_position = staffPoint.global_position
+					punchEffect.emitting = true
 	
 	if Input.is_action_just_pressed("store"):
 		if hovered is Interactible:
@@ -97,7 +102,7 @@ func _process(_delta: float) -> void:
 			hovered.usedBy = self
 		elif Input.is_action_just_pressed("use") and not objectInHand:
 			isPunching = true
-			await get_tree().create_timer(0.2).timeout
+			await get_tree().create_timer(0.4).timeout
 			punchHitbox = true
 			await get_tree().create_timer(0.1).timeout
 			isPunching = false

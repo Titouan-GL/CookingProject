@@ -3,7 +3,7 @@ extends Character
 class_name Cook
 
 var objectInHand:Movable
-@export var storePoint: Node3D  
+@export var storePoint: Node3D
 
 func pickUp(obj:Movable):
 	if(objectInHand):

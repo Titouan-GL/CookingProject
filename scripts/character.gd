@@ -9,6 +9,7 @@ var bumpStrength:float
 var gravity:float
 var friction:float
 var space:PhysicsDirectSpaceState3D
+@export var pushEffect:GPUParticles3D
 
 func bumpedInto(dir:Vector3, rightVector:Vector3 = Vector3(0,0,0)):
 	if rightVector != Vector3(0,0,0):
@@ -30,8 +31,12 @@ func _physics_process(delta: float) -> void:
 		if(addedVelocity.length() < reduction ):
 			addedVelocity = Vector3.ZERO
 			
-	var collision = move_and_collide(Vector3(velocity.x, 0, velocity.z)*delta, true)
+	var collision:KinematicCollision3D = move_and_collide(Vector3(velocity.x, 0, velocity.z)*delta, true)
 	if(collision and collision.get_collider() is Character):
 		var dir:Vector3 = (collision.get_collider().global_position-global_position).normalized()
 		collision.get_collider().bumpedInto(dir * 1.5, -get_global_transform().basis.x)
 		bumpedInto(-dir, -get_global_transform().basis.x)
+		
+		if pushEffect:
+			pushEffect.global_position = collision.get_position()
+			pushEffect.emitting = true

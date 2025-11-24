@@ -1,12 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://0ua7kdsxlmxp"]
+[gd_scene load_steps=12 format=3 uid="uid://d14de8jjj35ef"]
 
-[ext_resource type="Shader" uid="uid://do10curcfx1f7" path="res://assets/shaders/CutImpact.tres" id="1_cmei6"]
-[ext_resource type="Texture2D" uid="uid://dwmvkumy5h57q" path="res://assets/textures/T_flare81.png" id="2_b7g11"]
+[ext_resource type="Shader" uid="uid://do10curcfx1f7" path="res://assets/shaders/CutImpact.tres" id="1_m5cmk"]
+[ext_resource type="Texture2D" uid="uid://b3wsiywxuda4g" path="res://assets/textures/T_flare12.png" id="2_m5cmk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b7g11"]
 render_priority = 0
-shader = ExtResource("1_cmei6")
-shader_parameter/HitTexture = ExtResource("2_b7g11")
+shader = ExtResource("1_m5cmk")
+shader_parameter/HitTexture = ExtResource("2_m5cmk")
 
 [sub_resource type="Curve" id="Curve_bf86s"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5027027, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -23,32 +23,31 @@ gradient = SubResource("Gradient_s7brg")
 use_hdr = true
 
 [sub_resource type="Curve" id="Curve_woq2p"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_5fnn6"]
 curve = SubResource("Curve_woq2p")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bf86s"]
-emission_shape = 3
-emission_box_extents = Vector3(0.31, 0.085, 0.09)
 angle_min = -179.99998
 angle_max = 180.00002
 gravity = Vector3(0, 0, 0)
-scale_min = 0.79999995
-scale_max = 1.5
+scale_min = 0.9
+scale_max = 1.1
 scale_curve = SubResource("CurveTexture_5fnn6")
+color = Color(0.36282945, 0.36282948, 0.36282936, 1)
 color_ramp = SubResource("GradientTexture1D_rub1f")
 alpha_curve = SubResource("CurveTexture_qofxi")
 
 [sub_resource type="QuadMesh" id="QuadMesh_qofxi"]
-size = Vector2(0.6, 0.6)
+size = Vector2(1.2, 1.2)
 
-[node name="CutImpact" type="GPUParticles3D"]
+[node name="PushEffect" type="GPUParticles3D"]
 material_override = SubResource("ShaderMaterial_b7g11")
 emitting = false
 amount = 1
-lifetime = 0.09999999999999999
+lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_bf86s")

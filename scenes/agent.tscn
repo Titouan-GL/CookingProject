@@ -1,13 +1,14 @@
-[gd_scene load_steps=27 format=3 uid="uid://b67m5mnbrjcmo"]
+[gd_scene load_steps=28 format=3 uid="uid://b67m5mnbrjcmo"]
 
 [ext_resource type="Script" uid="uid://dtnxd4krtryr3" path="res://scripts/agent.gd" id="1_b2pv0"]
 [ext_resource type="Script" uid="uid://ddsrukse8lcsu" path="res://scripts/navAgent.gd" id="2_dg1j7"]
 [ext_resource type="PackedScene" uid="uid://bjpcpftxbnhw3" path="res://assets/blender/Animated/Skeleton.blend" id="2_umeaf"]
 [ext_resource type="Script" uid="uid://dls0esx18alxy" path="res://scripts/AgentAnimation.gd" id="3_yc63n"]
 [ext_resource type="PackedScene" uid="uid://1iydcxqvs7te" path="res://assets/blender/Div/Knife.blend" id="4_dg1j7"]
-[ext_resource type="PackedScene" uid="uid://0ua7kdsxlmxp" path="res://scenes/VFX/CutImpact.tscn" id="6_iuhnp"]
+[ext_resource type="PackedScene" uid="uid://0ua7kdsxlmxp" path="res://scenes/VFX/CutEffect.tscn" id="6_iuhnp"]
 [ext_resource type="PackedScene" uid="uid://chbkdp0cdpoye" path="res://assets/blender/Div/Sponge.blend" id="6_nkfwj"]
 [ext_resource type="AnimationLibrary" uid="uid://irlbgne2lxkd" path="res://assets/blender/Animations/SkeletonAnimations.res" id="6_qeyy3"]
+[ext_resource type="PackedScene" uid="uid://d14de8jjj35ef" path="res://scenes/VFX/PushEffect.tscn" id="9_52ahs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noarx"]
 radius = 0.27539063
@@ -98,12 +99,13 @@ nodes/Running/node = SubResource("AnimationNodeBlend2_nkfwj")
 nodes/Running/position = Vector2(-120, 80)
 node_connections = [&"output", 0, &"Running", &"Running", 0, &"StaticStateMachine", &"Running", 1, &"RunningStateMachine"]
 
-[node name="agent" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "storePoint")]
+[node name="agent" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "storePoint", "pushEffect")]
 collision_layer = 2
 collision_mask = 11
 script = ExtResource("1_b2pv0")
 nav_agent = NodePath("feet/NavigationAgent")
 storePoint = NodePath("grabPoint")
+pushEffect = NodePath("PushEffect")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_noarx")
@@ -134,22 +136,22 @@ particles = NodePath("Armature/GeneralSkeleton/RightHandAttachment/Knife2/CutImp
 bones/0/position = Vector3(-1.7625289e-15, 0.38104624, -0.051285226)
 bones/0/rotation = Quaternion(5.0487068e-29, 7.1054274e-15, 4.2351647e-22, 1)
 bones/0/scale = Vector3(1, 0.99999994, 0.99999994)
-bones/1/rotation = Quaternion(-0.00017330065, -0.00030780365, 8.670997e-05, 1)
-bones/2/rotation = Quaternion(0.11143427, -0.0010679953, -1.8046076e-05, 0.99377126)
-bones/3/rotation = Quaternion(2.8128883e-14, 3.6004969e-12, -1.0801489e-11, 1)
+bones/1/rotation = Quaternion(-0.00028354322, -0.00050360826, 0.00014186921, 0.9999999)
+bones/2/rotation = Quaternion(0.10874398, -0.00044456712, -7.5119156e-06, 0.9940697)
+bones/3/rotation = Quaternion(2.23989e-14, 2.867059e-12, -8.601117e-12, 1)
 bones/4/rotation = Quaternion(2.4868992e-14, 1.7763567e-14, -1.19209275e-07, 1)
-bones/5/rotation = Quaternion(0.00011876906, 7.819359e-06, -5.20404e-05, 1)
-bones/6/rotation = Quaternion(-3.298311e-10, -1.8171997e-09, -6.018547e-09, 1)
-bones/7/rotation = Quaternion(-0.38858765, 0.031998005, 0.086403735, 0.9167934)
-bones/8/rotation = Quaternion(-0.817798, 0.25341746, -0.10785949, 0.5053241)
-bones/9/rotation = Quaternion(-0.13780089, -0.08799965, -0.44776505, 0.87907547)
+bones/5/rotation = Quaternion(0.00044668338, 2.9408144e-05, -0.00019572086, 0.99999994)
+bones/6/rotation = Quaternion(-2.626423e-10, -1.44703e-09, -4.9822564e-09, 1)
+bones/7/rotation = Quaternion(2.4868992e-14, -3.197442e-14, 1.1920927e-07, 1)
+bones/8/rotation = Quaternion(9.332894e-05, 9.086295e-06, -5.476452e-05, 1)
+bones/9/rotation = Quaternion(3.5527133e-15, 9.828016e-15, 1.801771e-09, 1)
 bones/10/rotation = Quaternion(-8.0571855e-10, -0.09567672, -2.9856784e-10, 0.9954125)
 bones/11/rotation = Quaternion(-8.224504e-08, 7.908966e-09, -3.2543373e-12, 1)
 bones/12/rotation = Quaternion(-1.8720102e-10, 0.08234062, 4.5099657e-10, 0.99660426)
 bones/13/rotation = Quaternion(-7.969055e-08, -4.147296e-09, -9.281706e-10, 1)
 
 [node name="RightHandAttachment" type="BoneAttachment3D" parent="Skeleton/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.9999998, -6.912639e-05, -0.0005999734, 6.9191796e-05, 0.9999999, 0.00010901233, 0.00059996586, -0.00010905381, 0.9999998, -0.35055304, 0.4258618, -0.039112672)
+transform = Transform3D(0.9999996, 0.000107363594, -0.0009484048, -0.00010767319, 0.9999999, -0.00032641756, 0.00094836956, 0.00032651948, 0.9999994, -0.35067755, 0.42582917, -0.03952233)
 bone_name = "Hand.R"
 bone_idx = 6
 
@@ -175,5 +177,7 @@ tree_root = SubResource("AnimationNodeBlendTree_nkfwj")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../Skeleton/AnimationPlayer")
 parameters/Running/blend_amount = 0.0
+
+[node name="PushEffect" parent="." instance=ExtResource("9_52ahs")]
 
 [editable path="Skeleton"]
