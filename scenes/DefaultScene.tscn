@@ -1,11 +1,15 @@
-[gd_scene load_steps=39 format=3 uid="uid://crmjnlgorvsy"]
+[gd_scene load_steps=42 format=3 uid="uid://crmjnlgorvsy"]
 
-[ext_resource type="Script" uid="uid://djauehf5a81tl" path="res://scripts/gameManager.gd" id="1_vf6b6"]
-[ext_resource type="Script" uid="uid://pltmis4ddkxu" path="res://scripts/Navigation.gd" id="2_5a81h"]
+[ext_resource type="Script" uid="uid://djauehf5a81tl" path="res://scripts/Managers/gameManager.gd" id="1_vf6b6"]
+[ext_resource type="Script" uid="uid://pltmis4ddkxu" path="res://scripts/Managers/Navigation.gd" id="2_5a81h"]
+[ext_resource type="PackedScene" uid="uid://bmfu35b75uv04" path="res://scenes/UI/PauseMenu.tscn" id="2_d826a"]
 [ext_resource type="PackedScene" uid="uid://dr1ea0arqcnag" path="res://scenes/Pot.tscn" id="3_itfbi"]
 [ext_resource type="PackedScene" uid="uid://c5oj2lrpy8m1f" path="res://assets/blender/Deco/SpookyLantern.blend" id="4_73p6g"]
+[ext_resource type="Resource" uid="uid://d22mj86xlfnmq" path="res://resources/DefaultGlasses.tres" id="5_82aft"]
 [ext_resource type="PackedScene" uid="uid://bd1dt0jxhqgkm" path="res://assets/blender/Deco/Pumpkin.blend" id="5_d826a"]
 [ext_resource type="PackedScene" uid="uid://cbowkrh8v3tix" path="res://assets/blender/Deco/Candles.blend" id="6_82aft"]
+[ext_resource type="Resource" uid="uid://f51pdnf50ru8" path="res://resources/DefaultMoustache.tres" id="6_ruotm"]
+[ext_resource type="Resource" uid="uid://bdsw3tv77f5ki" path="res://resources/DefaultPiercings.tres" id="7_c3wxk"]
 [ext_resource type="Texture2D" uid="uid://bhajo2s0i6gjk" path="res://assets/textures/05366bde9747af98448947536d59196f.jpg" id="7_ruotm"]
 [ext_resource type="PackedScene" uid="uid://bb80rjlejrxap" path="res://scenes/IntCUT.tscn" id="8_c3wxk"]
 [ext_resource type="PackedScene" uid="uid://cn2qe58h31hii" path="res://scenes/IntCOOK.tscn" id="9_yk57h"]
@@ -20,9 +24,8 @@
 [ext_resource type="PackedScene" uid="uid://pvmuoik2fi2n" path="res://scenes/IntPlateholder.tscn" id="18_1pb1d"]
 [ext_resource type="PackedScene" uid="uid://dc2dvh5ueasee" path="res://scenes/IntSink.tscn" id="19_e5eje"]
 [ext_resource type="PackedScene" uid="uid://j6xa0njjp4mx" path="res://scenes/IntTrash.tscn" id="20_4xkxt"]
-[ext_resource type="Script" uid="uid://dg83vouhqgm2u" path="res://scripts/TaskHierarchy.gd" id="21_pt5ui"]
+[ext_resource type="Script" uid="uid://dg83vouhqgm2u" path="res://scripts/Managers/TaskHierarchy.gd" id="21_pt5ui"]
 [ext_resource type="PackedScene" uid="uid://81p0llkphiwe" path="res://scenes/Pan.tscn" id="22_h1hf0"]
-[ext_resource type="PackedScene" uid="uid://dextpsgg4068r" path="res://scenes/UI/HowToPlay.tscn" id="23_54rso"]
 [ext_resource type="PackedScene" uid="uid://c1shi6l6dy3g6" path="res://scenes/Player.tscn" id="24_6oirp"]
 [ext_resource type="PackedScene" uid="uid://b67m5mnbrjcmo" path="res://scenes/agent.tscn" id="25_5a81h"]
 
@@ -97,17 +100,18 @@ uv1_triplanar = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_i5arm"]
 size = Vector3(10.921417, 1, 12.475607)
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("scoreLabel", "scoreLabel2", "timeBar", "gameUI", "gameOverUI", "HowToPlay", "Menubutton")]
-script = ExtResource("1_vf6b6")
-scoreLabel = NodePath("CanvasLayer/Score/MarginContainer/ProgressBar/Label")
-scoreLabel2 = NodePath("CanvasLayer/EndScreen/VBoxContainer/Label")
-timeBar = NodePath("CanvasLayer/Score/MarginContainer/ProgressBar")
-gameUI = NodePath("CanvasLayer/Score")
-gameOverUI = NodePath("CanvasLayer/EndScreen")
-HowToPlay = NodePath("CanvasLayer/Control2")
-Menubutton = NodePath("CanvasLayer/Control2/MarginContainer/HBoxContainer/MarginContainer2")
+[node name="Node3D" type="Node3D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("scoreLabel", "scoreLabel2", "timeBar", "gameUI", "gameOverUI", "HowToPlay", "pauseMenu")]
+process_mode = 3
+script = ExtResource("1_vf6b6")
+scoreLabel = NodePath("Score/MarginContainer/ProgressBar/Label")
+scoreLabel2 = NodePath("EndScreen/VBoxContainer/Label")
+timeBar = NodePath("Score/MarginContainer/ProgressBar")
+gameUI = NodePath("Score")
+gameOverUI = NodePath("EndScreen")
+HowToPlay = NodePath("PauseMenu")
+pauseMenu = NodePath("PauseMenu")
 
 [node name="EndScreen" type="Panel" parent="CanvasLayer"]
 anchors_preset = 15
@@ -212,28 +216,39 @@ scale = Vector2(1.4, 1.4)
 text = "Score = 0"
 horizontal_alignment = 1
 
-[node name="Control2" parent="CanvasLayer" instance=ExtResource("23_54rso")]
-visible = false
-
-[node name="BackFromHowToPlay" parent="CanvasLayer/Control2/MarginContainer/HBoxContainer/MarginContainer" index="0"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_5wfll")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bo7u2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_5gciw")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_u2vf6")
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_d826a")]
 
 [node name="World" type="Node3D" parent="."]
 
 [node name="Player" parent="World" instance=ExtResource("24_6oirp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.729166, -0.0068730097, 1.0092611)
 
-[node name="agent" parent="World" instance=ExtResource("25_5a81h")]
+[node name="agent" parent="World" node_paths=PackedStringArray("customOption") instance=ExtResource("25_5a81h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.420726, 0.8419051, 0.08180971)
+characterName = "Johnny McSkeleton"
+customOption = {
+ExtResource("5_82aft"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
+ExtResource("6_ruotm"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
+ExtResource("7_c3wxk"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
+}
 
-[node name="agent2" parent="World" instance=ExtResource("25_5a81h")]
+[node name="agent2" parent="World" node_paths=PackedStringArray("customOption") instance=ExtResource("25_5a81h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.213952, 0.8419051, 1.3154423)
+characterName = "Boneman the 5th"
+customOption = {
+ExtResource("5_82aft"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
+ExtResource("6_ruotm"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
+ExtResource("7_c3wxk"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
+}
 
-[node name="agent3" parent="World" instance=ExtResource("25_5a81h")]
+[node name="agent3" parent="World" node_paths=PackedStringArray("customOption") instance=ExtResource("25_5a81h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.552343, 0.8419051, -1.6203396)
+characterName = "Steve"
+customOption = {
+ExtResource("5_82aft"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
+ExtResource("6_ruotm"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
+ExtResource("7_c3wxk"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
+}
 
 [node name="Pan" parent="World" instance=ExtResource("22_h1hf0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.133906, 1.3014183, -2.089312)
@@ -256,6 +271,7 @@ shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 0.71216077, 0.70201635, 0, -0.70201635, 0.71216077, -6.749874, 17.869822, 17.66813)
+cull_mask = 524287
 fov = 20.0
 
 [node name="Environnement" type="Node3D" parent="World"]
@@ -572,7 +588,5 @@ script = ExtResource("21_pt5ui")
 
 [connection signal="pressed" from="CanvasLayer/EndScreen/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndScreen/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control2/MarginContainer/HBoxContainer/MarginContainer/BackFromHowToPlay" to="." method="_on_back_from_how_to_play_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control2/MarginContainer/HBoxContainer/MarginContainer2/Menu" to="." method="_on_menu_pressed"]
 
-[editable path="CanvasLayer/Control2"]
+[editable path="CanvasLayer/PauseMenu"]

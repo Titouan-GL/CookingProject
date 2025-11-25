@@ -4,10 +4,11 @@ class_name PlayerAnimation
 
 @export var agent: Agent
 @export var animationTree: AnimationTree
-@export var knife: Node3D
-@export var sponge: Node3D
+@onready var knife: Node3D = $Armature/GeneralSkeleton/RightHandAttachment/Knife2
+@onready var sponge: Node3D = $Armature/GeneralSkeleton/RightHandAttachment/Sponge
 var runningPath:String = "parameters/Running/blend_amount"
 @export var particles:GPUParticles3D 
+	
 
 func cutImpact():
 	particles.emitting = false

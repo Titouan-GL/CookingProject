@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0i43sn0urp0u"]
 
-[ext_resource type="Script" uid="uid://cj6wye16kflcp" path="res://scripts/IntGenerator.gd" id="1_i42dv"]
+[ext_resource type="Script" uid="uid://cj6wye16kflcp" path="res://scripts/World/IntGenerator.gd" id="1_i42dv"]
 [ext_resource type="PackedScene" uid="uid://42cwobm5wgfg" path="res://assets/blender/Interactibles/SaladGenerator.blend" id="2_i42dv"]
 [ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_p86et"]
 

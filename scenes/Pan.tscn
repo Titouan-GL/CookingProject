@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://81p0llkphiwe"]
 
-[ext_resource type="Script" uid="uid://dxhf41fsiss72" path="res://scripts/Pan.gd" id="1_a768c"]
+[ext_resource type="Script" uid="uid://dxhf41fsiss72" path="res://scripts/World/Pan.gd" id="1_a768c"]
 [ext_resource type="PackedScene" uid="uid://bb0ulpkdjrcme" path="res://assets/blender/Div/Pan.blend" id="2_a768c"]
 [ext_resource type="PackedScene" uid="uid://cytd1w5m4iwdk" path="res://scenes/UI/ProgressBar.tscn" id="3_1kf1o"]
 [ext_resource type="PackedScene" uid="uid://b86egj3tfs8rj" path="res://scenes/VFX/CookedEffect.tscn" id="4_hb1qy"]
@@ -39,4 +39,4 @@ viewPort = SubResource("ViewportTexture_1kf1o")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17336953, 0)
 
 [node name="recipePlacemet" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11793116, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.030687198, 0)

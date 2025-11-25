@@ -28,9 +28,6 @@ const meshes:Dictionary = {
 	Enum.RecipeNames.SteTom : preload("res://assets/blender/Recipes/SteTom.blend"),
 }
 
-const meshesInPlateOverride:Dictionary = {
-}
-
 const textures:Dictionary = {
 	Enum.RecipeNames.TomatoSoup : preload("res://assets/textures/Icons/TomatoSoupIcon.png"),
 	Enum.RecipeNames.BurSteSal: preload("res://assets/textures/Icons/burgerIcon.png"),
@@ -157,7 +154,6 @@ static func recipeToMesh(recipe:Enum.RecipeNames) -> PackedScene:
 	return null
 
 static func recipeToPlateMesh(recipe:Enum.RecipeNames) -> PackedScene:
-	if(meshesInPlateOverride.has(recipe)): return meshesInPlateOverride[recipe]
 	if(meshes.has(recipe)): return meshes[recipe]
 	return null
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ds1amirl05t31"]
 
-[ext_resource type="Script" uid="uid://bj1c07tr1xeax" path="res://scripts/Plate.gd" id="1_km87r"]
+[ext_resource type="Script" uid="uid://bj1c07tr1xeax" path="res://scripts/World/Plate.gd" id="1_km87r"]
 [ext_resource type="PackedScene" uid="uid://cmaejml7ie8xb" path="res://assets/blender/Div/Plate1.blend" id="3_km87r"]
 [ext_resource type="PackedScene" uid="uid://cytd1w5m4iwdk" path="res://scenes/UI/ProgressBar.tscn" id="3_n4jog"]
 [ext_resource type="PackedScene" uid="uid://7rftmvaa1w1u" path="res://assets/blender/Div/PlateDirty.blend" id="4_21swg"]

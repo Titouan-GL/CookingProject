@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=3 uid="uid://dswe17xd8g7qy"]
+
+[ext_resource type="PackedScene" uid="uid://dngis7dqmg01l" path="res://scenes/UI/AgentInUI.tscn" id="1_7irsn"]
+[ext_resource type="Script" uid="uid://bp13w4uomrund" path="res://scripts/UI/AgentIcon.gd" id="1_jvxcd"]
+[ext_resource type="ButtonGroup" uid="uid://bh1cy1350cipl" path="res://resources/ButtonGroups/AgentButtonGroup.tres" id="1_ud4ea"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7irsn"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ud4ea"]
+bg_color = Color(0.29586652, 0.29586652, 0.29586637, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvxcd"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gqiv"]
+bg_color = Color(0.3854925, 0.3854925, 0.38549235, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="AgentButton" type="Button" node_paths=PackedStringArray("agentInUI", "nameDisplay")]
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = -1
+anchor_right = 0.162
+anchor_bottom = 0.27800003
+offset_right = 0.95999146
+offset_bottom = -37.24002
+size_flags_horizontal = 0
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_7irsn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ud4ea")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jvxcd")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1gqiv")
+toggle_mode = true
+button_group = ExtResource("1_ud4ea")
+script = ExtResource("1_jvxcd")
+agentInUI = NodePath("SubViewportContainer/SubViewport/AgentInUi")
+nameDisplay = NodePath("Panel/Label")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(312, 300)
+render_target_update_mode = 4
+
+[node name="AgentInUi" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_7irsn")]
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -84.0
+offset_top = 12.0
+offset_right = 84.0
+offset_bottom = 52.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.5
+offset_top = -11.5
+offset_right = 53.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "John Skeleton"
+horizontal_alignment = 1
+vertical_alignment = 1

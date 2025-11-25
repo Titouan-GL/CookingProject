@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dr1ea0arqcnag"]
 
-[ext_resource type="Script" uid="uid://cgmr5wih6wj4d" path="res://scripts/Pot.gd" id="1_a4utd"]
+[ext_resource type="Script" uid="uid://cgmr5wih6wj4d" path="res://scripts/World/Pot.gd" id="1_a4utd"]
 [ext_resource type="PackedScene" uid="uid://bis3ebm0h626q" path="res://assets/blender/Div/Pot.blend" id="2_gpnl5"]
 [ext_resource type="PackedScene" uid="uid://cytd1w5m4iwdk" path="res://scenes/UI/ProgressBar.tscn" id="3_38hye"]
 [ext_resource type="PackedScene" uid="uid://b86egj3tfs8rj" path="res://scenes/VFX/CookedEffect.tscn" id="4_2decf"]

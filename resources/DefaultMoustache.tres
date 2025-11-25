@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CustomizationResource" load_steps=2 format=3 uid="uid://f51pdnf50ru8"]
+
+[ext_resource type="Script" uid="uid://dyk8aysyl7bgx" path="res://scripts/Utility/CustomizationResource.gd" id="1_6apy5"]
+
+[resource]
+script = ExtResource("1_6apy5")
+dic = Dictionary[int, float]({
+0: 0.4,
+6: 0.1,
+7: 0.1,
+8: 0.1,
+9: 0.1
+})
+metadata/_custom_type_script = "uid://dyk8aysyl7bgx"

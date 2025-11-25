@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bwgsl7tn345w6"]
 
 [ext_resource type="PackedScene" uid="uid://qk5wk11gkvtb" path="res://assets/blender/Interactibles/Door.blend" id="1_eyv6f"]
-[ext_resource type="Script" uid="uid://t3tw2xm47k4b" path="res://scripts/IntDoor.gd" id="2_mg2as"]
+[ext_resource type="Script" uid="uid://t3tw2xm47k4b" path="res://scripts/World/IntDoor.gd" id="2_mg2as"]
 [ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_mg2as"]
 
 [node name="Door" type="Node3D" node_paths=PackedStringArray("storePoint")]

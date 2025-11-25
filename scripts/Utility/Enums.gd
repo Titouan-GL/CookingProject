@@ -10,3 +10,9 @@ Tom, CutTom, PotCutTom, PotCutTomCutTom, PotCutTomCutTomCutTom, TomatoSoup, #8
 Ste, CutSte, PanCutSte, PanCookCutSte, Sal, CutSal, Bur, BurSal, BurSte, BurSteSal, #18
 BurSteSalTom, BurSalTom, BurTom, BurSteTom, CutTomCutSal, EmptyPlate, PotTomatoSoup, #25
 SteSal, SteTom, SteSalTom}
+
+enum CustomizationNames {
+	None,
+	GlassesRound, GlassesRectangle, GlassesCat, PiercingMiddle, PiercingSide,
+	MoustacheChevron, MoustachePencil, MoustacheEnglish, MoustacheHorseshoe
+}

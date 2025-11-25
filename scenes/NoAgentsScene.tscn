@@ -1,7 +1,7 @@
 [gd_scene load_steps=42 format=3 uid="uid://dicd7ubmyc2v8"]
 
-[ext_resource type="Script" uid="uid://djauehf5a81tl" path="res://scripts/gameManager.gd" id="1_5wfll"]
-[ext_resource type="Script" uid="uid://pltmis4ddkxu" path="res://scripts/Navigation.gd" id="2_bo7u2"]
+[ext_resource type="Script" uid="uid://djauehf5a81tl" path="res://scripts/Managers/gameManager.gd" id="1_5wfll"]
+[ext_resource type="Script" uid="uid://pltmis4ddkxu" path="res://scripts/Managers/Navigation.gd" id="2_bo7u2"]
 [ext_resource type="PackedScene" uid="uid://dr1ea0arqcnag" path="res://scenes/Pot.tscn" id="3_5gciw"]
 [ext_resource type="PackedScene" uid="uid://c5oj2lrpy8m1f" path="res://assets/blender/Deco/SpookyLantern.blend" id="4_u2vf6"]
 [ext_resource type="PackedScene" uid="uid://bd1dt0jxhqgkm" path="res://assets/blender/Deco/Pumpkin.blend" id="5_4tv5k"]
@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://pvmuoik2fi2n" path="res://scenes/IntPlateholder.tscn" id="18_gryrk"]
 [ext_resource type="PackedScene" uid="uid://dc2dvh5ueasee" path="res://scenes/IntSink.tscn" id="19_tpj5q"]
 [ext_resource type="PackedScene" uid="uid://j6xa0njjp4mx" path="res://scenes/IntTrash.tscn" id="20_p1snq"]
-[ext_resource type="Script" uid="uid://dg83vouhqgm2u" path="res://scripts/TaskHierarchy.gd" id="21_dy2dx"]
+[ext_resource type="Script" uid="uid://dg83vouhqgm2u" path="res://scripts/Managers/TaskHierarchy.gd" id="21_dy2dx"]
 [ext_resource type="PackedScene" uid="uid://81p0llkphiwe" path="res://scenes/Pan.tscn" id="22_j850x"]
 [ext_resource type="PackedScene" uid="uid://dextpsgg4068r" path="res://scenes/UI/HowToPlay.tscn" id="23_4vfab"]
 [ext_resource type="PackedScene" uid="uid://c1shi6l6dy3g6" path="res://scenes/Player.tscn" id="24_1tiyb"]

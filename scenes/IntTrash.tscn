@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://j6xa0njjp4mx"]
 
-[ext_resource type="Script" uid="uid://cxgfm0tai04ff" path="res://scripts/IntTrash.gd" id="1_uwust"]
+[ext_resource type="Script" uid="uid://cxgfm0tai04ff" path="res://scripts/World/IntTrash.gd" id="1_uwust"]
 [ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_d1tln"]
 [ext_resource type="PackedScene" uid="uid://iuothybukeuy" path="res://assets/blender/Interactibles/Trash.blend" id="3_uwust"]
 

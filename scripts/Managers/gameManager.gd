@@ -6,8 +6,8 @@ class_name GameManager
 @export var timeBar:ProgressBar
 @export var gameUI:Control
 @export var gameOverUI:Control
-@export var HowToPlay:Control
 @export var Menubutton:Control
+@export var pauseMenu:PauseMenu
 var timeLeft;
 var initialTime = 180
 
@@ -19,11 +19,16 @@ func _enter_tree():
 	timeLeft = initialTime
 	gameOverUI.visible = false
 	gameUI.visible = true
-	HowToPlay.visible = false
-	Menubutton.visible = true
-	
+	pauseMenu.close()
+	if Menubutton:
+		Menubutton.visible = true
+
+func addAgentIcon(mesh:Node3D, charName:String = "John Doe"):
+	pauseMenu.addAgentIcon(mesh, charName)
+
 func _process(_delta):
-	timeLeft -= _delta
+	if not get_tree().paused:
+		timeLeft -= _delta
 	displayedScore = displayedScore + (score - displayedScore) * _delta * 5
 	scoreLabel.text = "Score = " + str(int(roundf(displayedScore)))
 	timeBar.value = 100*timeLeft/initialTime
@@ -33,12 +38,12 @@ func _process(_delta):
 		scoreLabel2.text = "Score = " + str(int(roundf(displayedScore)))
 		get_tree().paused = true
 	if Input.is_action_just_pressed("Escape"):
-		if HowToPlay.visible :
+		if pauseMenu.visible :
 			get_tree().paused = false
-			HowToPlay.visible = false
+			pauseMenu.close()
 		else:
 			get_tree().paused = true
-			HowToPlay.visible = true
+			pauseMenu.open()
 
 func changeScore(val):
 	score = max(0, score + val)
@@ -46,7 +51,7 @@ func changeScore(val):
 
 func _on_back_from_how_to_play_pressed() -> void:
 	get_tree().paused = false
-	HowToPlay.visible = false
+	pauseMenu.close()
 
 
 func _on_retry_pressed() -> void:

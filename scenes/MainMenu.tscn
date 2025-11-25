@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://casimfksataxa"]
 
-[ext_resource type="Script" uid="uid://bdflealo8laxw" path="res://scripts/main_menu.gd" id="1_2wh52"]
+[ext_resource type="Script" uid="uid://bdflealo8laxw" path="res://scripts/UI/main_menu.gd" id="1_2wh52"]
 [ext_resource type="Texture2D" uid="uid://sd67wfkiyj00" path="res://assets/textures/TitleMenu.png" id="1_yqorp"]
 [ext_resource type="FontFile" uid="uid://dpl72736p21ts" path="res://assets/fonts/Spicy Sale.ttf" id="2_0ykhv"]
 [ext_resource type="PackedScene" uid="uid://dextpsgg4068r" path="res://scenes/UI/HowToPlay.tscn" id="4_ow34m"]

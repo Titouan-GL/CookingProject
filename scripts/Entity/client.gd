@@ -63,6 +63,8 @@ func _process(_delta):
 	
 func _ready():
 	navAgent.isClient = true
+	CreateAppearance()
+	UpdateAppearance()
 	
 func _init() -> void:
 	SPEED = 2

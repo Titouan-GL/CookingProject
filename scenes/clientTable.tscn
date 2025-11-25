@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dob2epewnhjov"]
 
-[ext_resource type="Script" uid="uid://607pygvfipuu" path="res://scripts/IntClientTable.gd" id="1_viv08"]
+[ext_resource type="Script" uid="uid://607pygvfipuu" path="res://scripts/World/IntClientTable.gd" id="1_viv08"]
 [ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="4_31d8r"]
 [ext_resource type="PackedScene" uid="uid://b7mhw0fjso5k6" path="res://assets/blender/Interactibles/ClientTable.blend" id="4_twgb7"]
 [ext_resource type="PackedScene" uid="uid://b18gckgpqlena" path="res://scenes/servePoint.tscn" id="5_2tdio"]

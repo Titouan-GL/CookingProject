@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dc2dvh5ueasee"]
 
-[ext_resource type="Script" uid="uid://dt1nlibrjyvsr" path="res://scripts/IntSink.gd" id="1_wnr1u"]
+[ext_resource type="Script" uid="uid://dt1nlibrjyvsr" path="res://scripts/World/IntSink.gd" id="1_wnr1u"]
 [ext_resource type="PackedScene" uid="uid://d0mjndq7khowa" path="res://assets/blender/Interactibles/Sink.blend" id="2_wnr1u"]
 [ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_clan4"]
 [ext_resource type="PackedScene" uid="uid://d161vmjdffxh0" path="res://scenes/VFX/CleaningEffect.tscn" id="4_j2xk6"]

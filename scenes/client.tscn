@@ -1,9 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://c13jhhr13jjrl"]
+[gd_scene load_steps=26 format=3 uid="uid://c13jhhr13jjrl"]
 
-[ext_resource type="Script" uid="uid://uqp0n1go46pa" path="res://scripts/client.gd" id="1_1t5vp"]
+[ext_resource type="Script" uid="uid://uqp0n1go46pa" path="res://scripts/Entity/client.gd" id="1_1t5vp"]
 [ext_resource type="PackedScene" uid="uid://ekx2v3o8sjmk" path="res://assets/blender/Animated/Client.blend" id="2_1t5vp"]
-[ext_resource type="Script" uid="uid://ddsrukse8lcsu" path="res://scripts/navAgent.gd" id="2_r26j7"]
-[ext_resource type="Script" uid="uid://bkvhnqh6vp1la" path="res://scripts/ClientAnimation.gd" id="3_4tr0r"]
+[ext_resource type="Resource" uid="uid://d22mj86xlfnmq" path="res://resources/DefaultGlasses.tres" id="2_7rsog"]
+[ext_resource type="Script" uid="uid://ddsrukse8lcsu" path="res://scripts/Entity/navAgent.gd" id="2_r26j7"]
+[ext_resource type="Script" uid="uid://bkvhnqh6vp1la" path="res://scripts/Entity/ClientAnimation.gd" id="3_4tr0r"]
+[ext_resource type="Resource" uid="uid://f51pdnf50ru8" path="res://resources/DefaultMoustache.tres" id="3_dueaf"]
+[ext_resource type="Resource" uid="uid://bdsw3tv77f5ki" path="res://resources/DefaultPiercings.tres" id="4_ik056"]
 [ext_resource type="PackedScene" uid="uid://djkr3jadx2lqp" path="res://assets/blender/Div/eatingKnife.blend" id="5_dipmf"]
 [ext_resource type="AnimationLibrary" uid="uid://irlbgne2lxkd" path="res://assets/blender/Animations/SkeletonAnimations.res" id="5_t0ykn"]
 [ext_resource type="PackedScene" uid="uid://d4j1smub7rsjq" path="res://assets/blender/Div/eatingFork.blend" id="6_5q6u5"]
@@ -79,13 +82,18 @@ nodes/Running/node = SubResource("AnimationNodeBlend2_nkfwj")
 nodes/Running/position = Vector2(-120, 80)
 node_connections = [&"output", 0, &"Running", &"Running", 0, &"StaticStateMachine", &"Running", 1, &"RunningStateMachine"]
 
-[node name="client" type="CharacterBody3D" node_paths=PackedStringArray("navAgent", "fork", "knife")]
+[node name="client" type="CharacterBody3D" node_paths=PackedStringArray("navAgent", "fork", "knife", "customOption")]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_1t5vp")
 navAgent = NodePath("feet")
 fork = NodePath("Client/Armature/GeneralSkeleton/LhandAttachement2/eatingFork")
 knife = NodePath("Client/Armature/GeneralSkeleton/RhandAttachement/eatingKnife")
+customOption = {
+ExtResource("2_7rsog"): NodePath("Client/Armature/GeneralSkeleton/BoneAttachment3D/MoustacheAttachement"),
+ExtResource("3_dueaf"): NodePath("Client/Armature/GeneralSkeleton/BoneAttachment3D/MoustacheAttachement"),
+ExtResource("4_ik056"): NodePath("Client/Armature/GeneralSkeleton/BoneAttachment3D/MoustacheAttachement")
+}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_noarx")
@@ -100,12 +108,6 @@ script = ExtResource("2_r26j7")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="feet"]
 target_desired_distance = 0.3
 
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, -0.030419052, 0)
-shape = SubResource("CapsuleShape3D_noarx")
-
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../Client")
 tree_root = SubResource("AnimationNodeBlendTree_nkfwj")
@@ -119,26 +121,8 @@ script = ExtResource("3_4tr0r")
 client = NodePath("..")
 animationTree = NodePath("../AnimationTree")
 
-[node name="GeneralSkeleton" parent="Client/Armature" index="0"]
-bones/0/position = Vector3(-1.7625289e-15, 0.38104624, -0.051285226)
-bones/0/rotation = Quaternion(5.0487068e-29, 7.1054274e-15, 4.2351647e-22, 1)
-bones/0/scale = Vector3(1, 0.99999994, 0.99999994)
-bones/1/rotation = Quaternion(-2.4771537e-06, -4.3997347e-06, 1.2394295e-06, 1)
-bones/2/rotation = Quaternion(-0.001367351, -0.04947256, -2.184172e-06, 0.99877465)
-bones/3/rotation = Quaternion(1.1436305e-13, 3.5399228e-09, -2.9219112e-12, 1)
-bones/4/rotation = Quaternion(-0.012350036, 0.0028682738, -0.0068890965, 0.99989593)
-bones/5/rotation = Quaternion(-0.018704599, -0.0124974195, 0.004745048, 0.9997358)
-bones/6/rotation = Quaternion(0.0005469336, 0.0004596996, 0.013880374, 0.99990344)
-bones/7/rotation = Quaternion(1.2595457e-06, -2.7625917e-06, 1.511804e-05, 1)
-bones/8/rotation = Quaternion(4.1287603e-05, -5.1946604e-06, 9.0208356e-05, 1)
-bones/9/rotation = Quaternion(1.0526169e-14, 1.0658141e-14, 9.313225e-10, 1)
-bones/10/rotation = Quaternion(-8.0571855e-10, -0.09567672, -2.9856784e-10, 0.9954125)
-bones/11/rotation = Quaternion(-8.224504e-08, 7.908966e-09, -3.2543373e-12, 1)
-bones/12/rotation = Quaternion(-1.8720102e-10, 0.08234062, 4.5099657e-10, 0.99660426)
-bones/13/rotation = Quaternion(-7.969055e-08, -4.147296e-09, -9.281706e-10, 1)
-
 [node name="RhandAttachement" type="BoneAttachment3D" parent="Client/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.99956906, -0.023321757, -0.017831245, 0.024372388, 0.99782974, 0.061170176, 0.016365953, -0.061578393, 0.997968, -0.35298055, 0.4298609, -0.008572929)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35051513, 0.42591542, -0.038830347)
 bone_name = "Hand.R"
 bone_idx = 6
 
@@ -147,13 +131,21 @@ transform = Transform3D(-0.19936794, 0.9799247, -8.742278e-08, 0.9799247, 0.1993
 visible = false
 
 [node name="LhandAttachement2" type="BoneAttachment3D" parent="Client/Armature/GeneralSkeleton" index="2"]
-transform = Transform3D(1, -0.00021313512, -2.4703786e-05, 0.00021313314, 0.99999994, -8.014137e-05, 2.4720863e-05, 8.01361e-05, 0.99999994, 0.35061237, 0.4259245, -0.03886424)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35051513, 0.42591542, -0.038830347)
 bone_name = "Hand.L"
 bone_idx = 9
 
 [node name="eatingFork" parent="Client/Armature/GeneralSkeleton/LhandAttachement2" instance=ExtResource("6_5q6u5")]
 transform = Transform3D(0.21643965, -0.976296, 0, 0.976296, 0.21643965, 0, 0, 0, 1, -0.05, 0, 0)
 visible = false
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Client/Armature/GeneralSkeleton" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.516849e-15, 0.93298733, -0.05714641)
+bone_name = "Head"
+bone_idx = 2
+
+[node name="MoustacheAttachement" type="Node3D" parent="Client/Armature/GeneralSkeleton/BoneAttachment3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.929, 0.055)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Client")

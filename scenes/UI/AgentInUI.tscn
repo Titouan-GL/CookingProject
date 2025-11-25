@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dngis7dqmg01l"]
+
+[node name="AgentInUi" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.255335, 2.6188548)
+cull_mask = 524288
+fov = 30.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.93414223, -6.959902e-09, -0.35690102, 0.0804552, 0.97426003, 0.21058106, 0.3477144, -0.2254272, 0.9100974, -1.5771598, 1.6680995, 3.1311457)
+layers = 524288
+light_energy = 2.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(0.91664636, -0.15530223, 0.36829418, 0.08045519, 0.97426015, 0.21058108, -0.39151803, -0.16339718, 0.9055468, 1.4345318, 1.6680995, 3.1311457)
+layers = 524288
+light_energy = 0.5

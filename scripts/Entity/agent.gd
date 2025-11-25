@@ -1,6 +1,7 @@
 extends Cook
 class_name Agent
 @export var nav_agent: NavAgent
+@export var mesh: Node3D
 var order: Enum.Order
 var hierarchy:Hierarchy
 var task:Task
@@ -8,6 +9,8 @@ var isCutting:bool = false #used for animation
 var isCleaning:bool = false #used for animation
 var grabTime = 0
 var maxGrabTime = 0.1
+var gameManager:GameManager
+
 
 func act():
 	grabTime = maxGrabTime
@@ -92,8 +95,12 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _ready():
-	hierarchy = get_tree().get_nodes_in_group("Hierarchy")[0]
+	hierarchy = get_tree().get_first_node_in_group("Hierarchy")
+	gameManager = get_tree().get_first_node_in_group("GameManager")
 	hierarchy.AgentList.append(self)
+	CreateAppearance()
+	UpdateAppearance()
+	gameManager.addAgentIcon(mesh, characterName)
 
 func _enter_tree():
 	add_to_group("freeAgent")

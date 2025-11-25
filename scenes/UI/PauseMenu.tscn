@@ -1,0 +1,230 @@
+[gd_scene load_steps=10 format=3 uid="uid://bmfu35b75uv04"]
+
+[ext_resource type="Script" uid="uid://cvny6fbmkw5c1" path="res://scripts/UI/PauseMenu.gd" id="1_fsae6"]
+[ext_resource type="ButtonGroup" uid="uid://bh1cy1350cipl" path="res://resources/ButtonGroups/AgentButtonGroup.tres" id="2_4r2wj"]
+[ext_resource type="ButtonGroup" uid="uid://cjv3udoqdikky" path="res://resources/ButtonGroups/PauseMenuButtonGroup.tres" id="2_6q0ex"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yj2n7"]
+bg_color = Color(0.42144388, 0.37753037, 0.37776121, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6q0ex"]
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73e60"]
+bg_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avwb0"]
+bg_color = Color(0.55295557, 0.55295557, 0.55295545, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsae6"]
+bg_color = Color(0.87478733, 0.84950423, 0.84990543, 1)
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fsae6"]
+
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("AgentIcons", "MinionsPanel", "RecipesPanel", "OptionsPanel", "AgentButton")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fsae6")
+AgentIcons = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer")
+MinionsPanel = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel")
+RecipesPanel = NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel")
+OptionsPanel = NodePath("MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel")
+AgentButton = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer/MinionsButton")
+agentButtonGroup = ExtResource("2_4r2wj")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 90
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 90
+theme_override_constants/margin_bottom = 30
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_yj2n7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel"]
+layout_mode = 0
+offset_right = 1740.0
+offset_bottom = 1020.0
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="MinionsButton" type="Button" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_right = NodePath("../RecipesButton")
+focus_next = NodePath("../RecipesButton")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_6q0ex")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_73e60")
+theme_override_styles/hover = SubResource("StyleBoxFlat_avwb0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_73e60")
+toggle_mode = true
+button_group = ExtResource("2_6q0ex")
+text = "  Minions  "
+
+[node name="RecipesButton" type="Button" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../MinionsButton")
+focus_neighbor_right = NodePath("../OptionsButton")
+focus_next = NodePath("../OptionsButton")
+focus_previous = NodePath("../MinionsButton")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_6q0ex")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_73e60")
+theme_override_styles/hover = SubResource("StyleBoxFlat_avwb0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_73e60")
+toggle_mode = true
+button_group = ExtResource("2_6q0ex")
+text = "  Recipe  "
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../RecipesButton")
+focus_previous = NodePath("../RecipesButton")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_6q0ex")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_73e60")
+theme_override_styles/hover = SubResource("StyleBoxFlat_avwb0")
+theme_override_styles/focus = SubResource("StyleBoxFlat_73e60")
+toggle_mode = true
+button_group = ExtResource("2_6q0ex")
+text = "  Options  "
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_fsae6")
+
+[node name="MinionsPanel" type="Control" parent="MarginContainer/Panel/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/MarginContainer/ScrollContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fsae6")
+
+[node name="RecipesPanel" type="Control" parent="MarginContainer/Panel/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fsae6")
+
+[node name="OptionsPanel" type="Control" parent="MarginContainer/Panel/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "OPTIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/MinionsButton" to="." method="_on_minions_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/RecipesButton" to="." method="_on_recipes_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]

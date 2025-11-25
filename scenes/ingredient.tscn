@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b61tgd4qbr8h3"]
 
-[ext_resource type="Script" uid="uid://cqxbq00n0ntk6" path="res://scripts/ingredient.gd" id="1_11e83"]
+[ext_resource type="Script" uid="uid://cqxbq00n0ntk6" path="res://scripts/World/ingredient.gd" id="1_11e83"]
 [ext_resource type="PackedScene" uid="uid://cytd1w5m4iwdk" path="res://scenes/UI/ProgressBar.tscn" id="2_ssx0k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_noarx"]

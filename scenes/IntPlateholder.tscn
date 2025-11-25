@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://pvmuoik2fi2n"]
 
-[ext_resource type="Script" uid="uid://d1m42sfuey5sm" path="res://scripts/IntPlateholder.gd" id="1_urugd"]
+[ext_resource type="Script" uid="uid://d1m42sfuey5sm" path="res://scripts/World/IntPlateholder.gd" id="1_urugd"]
 [ext_resource type="PackedScene" uid="uid://bnvavykm0ls8k" path="res://assets/blender/Interactibles/StorePlate.blend" id="2_urugd"]
 [ext_resource type="PackedScene" uid="uid://x3ytorw52vdx" path="res://scenes/StandardCollision.tscn" id="3_oh3ai"]
 
