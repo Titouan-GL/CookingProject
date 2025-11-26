@@ -49,7 +49,7 @@ func _physics_process(delta):
 	target_angle = lerpf(target_angle, atan2(-addedVelocity.x, -addedVelocity.z), addedVelocity.length()/50)
 	var new_angle = lerp_angle(rotation.y, target_angle, delta *15)
 	rotation.y = new_angle
-	var planarVelocity = (direction  + addedVelocity).normalized() * SPEED
+	var planarVelocity = (direction  + addedVelocity).normalized() * speed
 	velocity = lerp(velocity, Vector3(0, -gravity, 0) + planarVelocity, ACCELERATION*delta)
 
 	super._physics_process(delta)
@@ -67,7 +67,7 @@ func _ready():
 	UpdateAppearance()
 	
 func _init() -> void:
-	SPEED = 2
+	speed = 2
 	ACCELERATION = 25
 	bumpStrength = 2
 	gravity = 20

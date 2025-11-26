@@ -77,7 +77,7 @@ func empty() -> Enum.RecipeNames:
 func _enter_tree():
 	groupName = "EmptyPlate"
 	emptyName = Enum.RecipeNames.EmptyPlate
-	progressMaxValues = {Enum.TaskType.CLEAN:3}
+	progressMaxValues = {Enum.TaskType.CLEAN:4}
 	super._enter_tree()
 
 func _ready():

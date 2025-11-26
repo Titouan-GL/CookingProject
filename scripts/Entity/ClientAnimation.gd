@@ -8,4 +8,4 @@ var runningPath:String = "parameters/Running/blend_amount"
 
 
 func _process(_delta):
-	animationTree.set(runningPath, lerp(animationTree.get(runningPath), client.velocity.length()/client.SPEED, _delta * 10))
+	animationTree.set(runningPath, lerp(animationTree.get(runningPath), client.velocity.length()/client.speed, _delta * 10))

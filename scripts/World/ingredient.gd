@@ -40,7 +40,7 @@ func mixRecipe(ingRecipe:Enum.RecipeNames):
 func _enter_tree():
 	super._enter_tree()
 	if recipe != Enum.RecipeNames.Bur:
-		progressMaxValues = {Enum.TaskType.CUT:3}
+		progressMaxValues = {Enum.TaskType.CUT:4}
 	progress = progressMaxValues.duplicate()
 	prevProgress = progress.duplicate()
 	add_to_group(Enum.RecipeNames.keys()[recipe])

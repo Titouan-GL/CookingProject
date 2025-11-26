@@ -8,16 +8,21 @@ class_name PauseMenu
 @export var OptionsPanel:Control
 @export var AgentButton:Button
 @export var agentButtonGroup:ButtonGroup
+@export var skeletonNameLabel:Label
+@export var speedBar:ProgressBar
+@export var dishesBar:ProgressBar
+@export var cuttingBar:ProgressBar
+@export var checkButtons:Dictionary[Enum.TaskType, CheckBox]
 const inUI = preload("res://scenes/UI/AgentIcon.tscn")
-var AgentIconsArray:Array[AgentIcon] = []
+var AgentIconsArray:Dictionary[AgentIcon, Agent]
+var currentIcon:AgentIcon
 
 func open():
 	visible = true
 	AgentButton.button_pressed = true
 	_on_minions_button_pressed()
 	if AgentIconsArray.size() > 0:
-		AgentIconsArray[0].button_pressed = true
-	
+		openAgentIcon(AgentIconsArray.keys()[0])
 	
 func close():
 	visible = false
@@ -27,12 +32,30 @@ func _ready() -> void:
 	RecipesPanel.visible = false
 	OptionsPanel.visible = false
 
-func addAgentIcon(mesh:Node3D, charName:String = "John Doe"):
+func addAgentIcon(agent:Agent, mesh:Node3D, charName:String = "John Doe"):
 	var newIcon:AgentIcon = inUI.instantiate()
 	AgentIcons.add_child(newIcon)
 	newIcon.init(mesh, charName, AgentIconsArray.size())
 	newIcon.button_group = agentButtonGroup
-	AgentIconsArray.append(newIcon)
+	AgentIconsArray[newIcon] = agent
+
+func updateAgentDisplay():
+	var agent = AgentIconsArray[currentIcon]
+	for task in checkButtons.keys():
+		if task in agent.prohibitedTasks:
+			checkButtons[task].button_pressed = false
+		else:
+			checkButtons[task].button_pressed = true
+
+func openAgentIcon(icon:AgentIcon):
+	currentIcon = icon
+	var agent = AgentIconsArray[icon]
+	icon.button_pressed = true
+	skeletonNameLabel.text = agent.characterName
+	speedBar.value = 100*(agent.speed - agent.speedRange.x)/(agent.speedRange.z-agent.speedRange.x)
+	dishesBar.value = 100*(agent.dishesSpeed - agent.dishesRange.x)/(agent.dishesRange.z-agent.dishesRange.x)
+	cuttingBar.value = 100*(agent.cuttingSpeed - agent.cuttingRange.x)/(agent.cuttingRange.z - agent.cuttingRange.x)
+	updateAgentDisplay()
 
 
 func _on_minions_button_pressed() -> void:
@@ -40,14 +63,57 @@ func _on_minions_button_pressed() -> void:
 	RecipesPanel.visible = false
 	OptionsPanel.visible = false
 
-
 func _on_recipes_button_pressed() -> void:
 	MinionsPanel.visible = false
 	RecipesPanel.visible = true
 	OptionsPanel.visible = false
 
-
 func _on_options_button_pressed() -> void:
 	MinionsPanel.visible = false
 	RecipesPanel.visible = false
 	OptionsPanel.visible = true
+
+func _process(_delta: float):
+	if agentButtonGroup.get_pressed_button() and agentButtonGroup.get_pressed_button() != currentIcon:
+		openAgentIcon(agentButtonGroup.get_pressed_button())
+
+
+func _on_cut_box_toggled(toggled_on: bool) -> void:
+	var agent = AgentIconsArray[currentIcon]
+	if toggled_on:
+		agent.allowTask(Enum.TaskType.CUT)
+	else:
+		agent.prohibitTask(Enum.TaskType.CUT)
+		
+
+
+func _on_clean_box_toggled(toggled_on: bool) -> void:
+	var agent = AgentIconsArray[currentIcon]
+	if toggled_on:
+		agent.allowTask(Enum.TaskType.CLEAN)
+	else:
+		agent.prohibitTask(Enum.TaskType.CLEAN)
+
+
+func _on_mix_box_toggled(toggled_on: bool) -> void:
+	var agent = AgentIconsArray[currentIcon]
+	if toggled_on:
+		agent.allowTask(Enum.TaskType.MIX)
+	else:
+		agent.prohibitTask(Enum.TaskType.MIX)
+
+
+func _on_cook_box_toggled(toggled_on: bool) -> void:
+	var agent = AgentIconsArray[currentIcon]
+	if toggled_on:
+		agent.allowTask(Enum.TaskType.COOK)
+	else:
+		agent.prohibitTask(Enum.TaskType.COOK)
+
+
+func _on_serve_box_toggled(toggled_on: bool) -> void:
+	var agent = AgentIconsArray[currentIcon]
+	if toggled_on:
+		agent.allowTask(Enum.TaskType.EMPTY)
+	else:
+		agent.prohibitTask(Enum.TaskType.EMPTY)

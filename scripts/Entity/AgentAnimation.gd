@@ -15,7 +15,7 @@ func cutImpact():
 	particles.emitting = true
 
 func _process(_delta):
-	animationTree.set(runningPath, lerp(animationTree.get(runningPath), agent.velocity.length()/agent.SPEED, _delta * 10))
+	animationTree.set(runningPath, lerp(animationTree.get(runningPath), agent.velocity.length()/agent.speed, _delta * 10))
 
 	agent.isCutting = false
 	agent.isCleaning = false

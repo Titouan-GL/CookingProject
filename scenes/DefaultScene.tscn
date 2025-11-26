@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://crmjnlgorvsy"]
+[gd_scene load_steps=44 format=3 uid="uid://crmjnlgorvsy"]
 
 [ext_resource type="Script" uid="uid://djauehf5a81tl" path="res://scripts/Managers/gameManager.gd" id="1_vf6b6"]
 [ext_resource type="Script" uid="uid://pltmis4ddkxu" path="res://scripts/Managers/Navigation.gd" id="2_5a81h"]
@@ -75,6 +75,10 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_d826a"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_82aft"]
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4xowi"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -102,7 +106,7 @@ size = Vector3(10.921417, 1, 12.475607)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("scoreLabel", "scoreLabel2", "timeBar", "gameUI", "gameOverUI", "HowToPlay", "pauseMenu")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("scoreLabel", "scoreLabel2", "timeBar", "gameUI", "gameOverUI", "pauseMenu")]
 process_mode = 3
 script = ExtResource("1_vf6b6")
 scoreLabel = NodePath("Score/MarginContainer/ProgressBar/Label")
@@ -110,7 +114,6 @@ scoreLabel2 = NodePath("EndScreen/VBoxContainer/Label")
 timeBar = NodePath("Score/MarginContainer/ProgressBar")
 gameUI = NodePath("Score")
 gameOverUI = NodePath("EndScreen")
-HowToPlay = NodePath("PauseMenu")
 pauseMenu = NodePath("PauseMenu")
 
 [node name="EndScreen" type="Panel" parent="CanvasLayer"]
@@ -217,6 +220,16 @@ text = "Score = 0"
 horizontal_alignment = 1
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_d826a")]
+agentButtonGroup = SubResource("ButtonGroup_d826a")
+
+[node name="MinionsButton" parent="CanvasLayer/PauseMenu/MarginContainer/Panel/VBoxContainer/HBoxContainer" index="0"]
+button_group = SubResource("ButtonGroup_82aft")
+
+[node name="RecipesButton" parent="CanvasLayer/PauseMenu/MarginContainer/Panel/VBoxContainer/HBoxContainer" index="1"]
+button_group = SubResource("ButtonGroup_82aft")
+
+[node name="OptionsButton" parent="CanvasLayer/PauseMenu/MarginContainer/Panel/VBoxContainer/HBoxContainer" index="2"]
+button_group = SubResource("ButtonGroup_82aft")
 
 [node name="World" type="Node3D" parent="."]
 

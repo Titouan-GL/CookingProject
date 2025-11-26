@@ -3,6 +3,8 @@ extends Character
 class_name Cook
 
 var objectInHand:Movable
+var dishesSpeed
+var cuttingSpeed
 @export var storePoint: Node3D
 
 func pickUp(obj:Movable):

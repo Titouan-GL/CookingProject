@@ -20,7 +20,7 @@ func _physics_process(delta):
 	var target_angle:float = rotation.y
 	if direction:
 		target_angle = atan2(direction.x, direction.z)
-	var planarVelocity = (direction  + addedVelocity).normalized() * SPEED
+	var planarVelocity = (direction  + addedVelocity).normalized() * speed
 	velocity = lerp(velocity, Vector3(0, -gravity, 0) + planarVelocity, ACCELERATION*delta)
 	target_angle = lerpf(target_angle, atan2(-addedVelocity.x, -addedVelocity.z), addedVelocity.length()/50)
 	var new_angle = lerp_angle(rotation.y, target_angle, delta *15)
@@ -53,11 +53,13 @@ func _physics_process(delta):
 			hovered = null
 
 func _init() -> void:
-	SPEED = 5
+	speed = 5
 	ACCELERATION = 25
 	bumpStrength = 7
 	gravity = 20
 	friction = 40
+	dishesSpeed = 1.5
+	cuttingSpeed = 1.5
 	
 func pickUp(obj:Movable):
 	if obj:
@@ -98,7 +100,12 @@ func _process(_delta: float) -> void:
 	if Input.get_action_strength("use"):
 		if(not objectInHand and hovered is Interactible and hovered.storedObject):
 			inAction = true
-			hovered.use(_delta)
+			if hovered is IntSink:
+				hovered.use(_delta * dishesSpeed)
+			elif hovered is IntCutter:
+				hovered.use(_delta * cuttingSpeed)
+			else:
+				hovered.use(_delta)
 			hovered.usedBy = self
 		elif Input.is_action_just_pressed("use") and not objectInHand:
 			isPunching = true

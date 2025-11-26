@@ -23,8 +23,8 @@ func _enter_tree():
 	if Menubutton:
 		Menubutton.visible = true
 
-func addAgentIcon(mesh:Node3D, charName:String = "John Doe"):
-	pauseMenu.addAgentIcon(mesh, charName)
+func addAgentIcon(agent:Agent, mesh:Node3D, charName:String = "John Doe"):
+	pauseMenu.addAgentIcon(agent, mesh, charName)
 
 func _process(_delta):
 	if not get_tree().paused:

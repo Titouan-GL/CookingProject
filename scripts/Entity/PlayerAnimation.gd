@@ -41,7 +41,7 @@ func cutImpact():
 
 func _process(_delta):
 	inAction = player.inAction
-	animationTree.set(runningPath, lerp(animationTree.get(runningPath), player.velocity.length()/player.SPEED, _delta * 10))
+	animationTree.set(runningPath, lerp(animationTree.get(runningPath), player.velocity.length()/player.speed, _delta * 10))
 	setBeamPos()
 	if player.objectInHand:
 		beamParticles.emitting = true

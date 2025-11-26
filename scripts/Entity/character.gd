@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 class_name Character
 
-var SPEED
+var speed
 var ACCELERATION
 var addedVelocity = Vector3.ZERO
 var bumpStrength:float

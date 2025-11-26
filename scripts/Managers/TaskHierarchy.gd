@@ -8,7 +8,7 @@ var RecipeNeededList:Array[Enum.RecipeNames]
 var servePoints:Array = []
 var printNewFrame = false
 
-func findAgentClosestToObj(obj:Node3D) -> Cook:
+func findAgentClosestToObj(obj:Node3D, task:Enum.TaskType) -> Cook:
 	if(obj is Movable):
 		if(obj.parent is Cook):
 			return obj.parent
@@ -21,7 +21,7 @@ func findAgentClosestToObj(obj:Node3D) -> Cook:
 			if(agent.objectInHand == obj):
 				return agent
 			var distance:float = agent.storePoint.global_position.distance_to(obj.global_position)
-			if(agent.objectInHand == null and agent.task == null and distance < bestDistance):
+			if(not task in agent.prohibitedTasks and agent.objectInHand == null and agent.task == null and distance < bestDistance):
 				bestDistance = distance
 				bestAgent = agent;
 		return bestAgent
@@ -107,38 +107,38 @@ func createTask(taskType:Enum.TaskType, needed:Array) -> bool:
 	match taskType:
 		Enum.TaskType.PICKUP:
 			var obj = needed[0]
-			var agent = findAgentClosestToObj(obj)
+			var agent = findAgentClosestToObj(obj, taskType)
 			var task = Task.new(self, taskType, obj)
 			return setAgentTarget(agent, task, obj, Enum.Order.PICKUP)
 		Enum.TaskType.GENERATE_TOMATO:
 			var dest = find_free_interactible("GeneratorTom")
-			var agent = findAgentClosestToObj(dest)
+			var agent = findAgentClosestToObj(dest, taskType)
 			var task = Task.new(self, taskType, null, dest)
 			return setAgentTarget(agent, task, dest, Enum.Order.UNSTORE)
 		Enum.TaskType.GENERATE_BURGER:
 			var dest = find_free_interactible("GeneratorBur")
-			var agent = findAgentClosestToObj(dest)
+			var agent = findAgentClosestToObj(dest, taskType)
 			var task = Task.new(self, taskType, null, dest)
 			return setAgentTarget(agent, task, dest, Enum.Order.UNSTORE)
 		Enum.TaskType.GENERATE_STEAK:
 			var dest = find_free_interactible("GeneratorSte")
-			var agent = findAgentClosestToObj(dest)
+			var agent = findAgentClosestToObj(dest, taskType)
 			var task = Task.new(self, taskType, null, dest)
 			return setAgentTarget(agent, task, dest, Enum.Order.UNSTORE)
 		Enum.TaskType.GENERATE_SALAD:
 			var dest = find_free_interactible("GeneratorSal")
-			var agent = findAgentClosestToObj(dest)
+			var agent = findAgentClosestToObj(dest, taskType)
 			var task = Task.new(self, taskType, null, dest)
 			return setAgentTarget(agent, task, dest, Enum.Order.UNSTORE)
 		Enum.TaskType.GENERATE_PLATE:
 			var dest = find_free_plateHolder()
-			var agent = findAgentClosestToObj(dest)
+			var agent = findAgentClosestToObj(dest, taskType)
 			if(agent):
 				var task = Task.new(self, taskType, null, dest)
 				return setAgentTarget(agent, task, dest, Enum.Order.UNSTORE)
 		Enum.TaskType.CUT:
 			var obj = needed[0]
-			var agent = findAgentClosestToObj(obj)
+			var agent = findAgentClosestToObj(obj, taskType)
 			if(agent):
 				var dest = find_closest_interactible(agent, obj, "IntCUT")
 				var task = Task.new(self, taskType, obj, dest)
@@ -146,7 +146,7 @@ func createTask(taskType:Enum.TaskType, needed:Array) -> bool:
 		Enum.TaskType.COOK:
 			var obj = needed[0]
 			if not (obj.parent and obj.parent is IntStove):
-				var agent = findAgentClosestToObj(obj)
+				var agent = findAgentClosestToObj(obj, taskType)
 				if(agent):
 					var dest = find_closest_interactible(agent, obj, "IntCOOK")
 					var task = Task.new(self, taskType, obj, dest)
@@ -157,13 +157,14 @@ func createTask(taskType:Enum.TaskType, needed:Array) -> bool:
 			if(needed[0] is MovableStorage):
 				obj = needed[1]
 				dest = needed[0]
-			var agent = findAgentClosestToObj(obj)
+			var agent = findAgentClosestToObj(obj, taskType)
 			var task = Task.new(self, taskType, obj, dest)
 			return setAgentTarget(agent, task, dest, Enum.Order.MIX)
 		Enum.TaskType.EMPTY:
+			printerr("empty in a weird place")
 			var dest = find_free_interactible("IntEMPTY")
 			var obj = needed[0]
-			var agent = findAgentClosestToObj(obj)
+			var agent = findAgentClosestToObj(obj, taskType)
 			var task = Task.new(self, taskType, obj, dest)
 			return setAgentTarget(agent, task, dest, Enum.Order.STORE)
 	return false
@@ -283,7 +284,7 @@ func _process(_delta):
 	if(printNewFrame) : print("\nnew frame")
 	initiateProcess()
 	for p in DirtyPlateList:
-		var agent = findAgentClosestToObj(p)
+		var agent = findAgentClosestToObj(p, Enum.TaskType.CLEAN)
 		if(agent):
 			var dest = find_closest_interactible(agent, p, "IntCLEAN")
 			var task = Task.new(self, Enum.TaskType.CLEAN, p, dest)
@@ -293,7 +294,7 @@ func _process(_delta):
 		if(p.recipeWanted != Enum.RecipeNames.Empty):
 			var recipeFinished = recipeExists(p.recipeWanted)
 			if(recipeFinished):
-				var agent = findAgentClosestToObj(recipeFinished)
+				var agent = findAgentClosestToObj(recipeFinished, Enum.TaskType.EMPTY)
 				var task = Task.new(self, Enum.TaskType.EMPTY, recipeFinished, p)
 				setAgentTarget(agent, task, p, Enum.Order.STORE)
 			else:
