@@ -28,7 +28,7 @@ func use(delta:float) -> bool:
 	return false
 
 
-func store(i:Movable) -> bool:
+func store(i:Movable, proba:float = 0) -> bool:
 	if(!storedObject):
 		i.parent.objectInHand = null
 		storedObject = i
@@ -36,7 +36,7 @@ func store(i:Movable) -> bool:
 		if ishovered : hovered()
 		return true
 	elif storedObject is MovableStorage:
-		if storedObject.mix(i):
+		if storedObject.mix(i, proba):
 			if ishovered : hovered()
 			return true
 	return false

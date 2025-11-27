@@ -1,66 +1,58 @@
-[gd_scene load_steps=6 format=3 uid="uid://cytd1w5m4iwdk"]
+[gd_scene load_steps=8 format=3 uid="uid://cytd1w5m4iwdk"]
 
 [ext_resource type="Script" uid="uid://cxsiyxf5asncl" path="res://scripts/UI/progress_bar.gd" id="1_xbb2e"]
+[ext_resource type="Texture2D" uid="uid://dq81va5x8y4u5" path="res://assets/textures/Icons/star.png" id="2_ocv40"]
+[ext_resource type="PackedScene" uid="uid://o32gjilfnlhs" path="res://scenes/VFX/UpgradedEffect.tscn" id="3_bf126"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_xbb2e"]
-viewport_path = NodePath("SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_ocv40"]
+viewport_path = NodePath("progressViewport")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7lutx"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_bf126"]
+viewport_path = NodePath("qualityViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lutx"]
 bg_color = Color(0.23529412, 0.23529412, 0.23529412, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
 border_color = Color(0, 0, 0, 1)
 border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbb2e"]
 bg_color = Color(0.85337317, 0.2534156, 1.92523e-07, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_bottom = 3
+border_width_left = 12
+border_width_top = 12
+border_width_bottom = 12
 border_color = Color(0, 0, 0, 1)
 border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+corner_radius_top_left = 20
+corner_radius_bottom_left = 20
 anti_aliasing = false
 anti_aliasing_size = 4.195
 
-[node name="ProgressBar" type="Node3D" node_paths=PackedStringArray("sprite")]
+[node name="ProgressBar" type="Node3D" node_paths=PackedStringArray("progressSprite", "qualitySprite", "bar", "star")]
 script = ExtResource("1_xbb2e")
-viewPort = SubResource("ViewportTexture_xbb2e")
-sprite = NodePath("Sprite3D")
+progressViewPort = SubResource("ViewportTexture_ocv40")
+qualityViewPort = SubResource("ViewportTexture_bf126")
+progressSprite = NodePath("progressSprite")
+qualitySprite = NodePath("qualitySprite")
+bar = NodePath("progressViewport/ProgressBar")
+star = NodePath("qualityViewport/TextureRect")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="progressViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(100, 20)
+size = Vector2i(400, 240)
 
-[node name="Panel" type="Panel" parent="SubViewport"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxEmpty_7lutx")
-
-[node name="ProgressBar" type="ProgressBar" parent="SubViewport/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ProgressBar" type="ProgressBar" parent="progressViewport"]
+custom_minimum_size = Vector2(400, 80)
+offset_right = 400.0
+offset_bottom = 80.0
 scale = Vector2(0.99763566, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_7lutx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xbb2e")
@@ -68,5 +60,29 @@ max_value = 1.0
 step = 0.001
 show_percentage = false
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="qualityViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(400, 240)
+
+[node name="TextureRect" type="TextureRect" parent="qualityViewport"]
+modulate = Color(0.981399, 0.817182, 0, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 65.0
+offset_right = 100.0
+offset_bottom = 265.0
+grow_horizontal = 2
+texture = ExtResource("2_ocv40")
+expand_mode = 3
+
+[node name="progressSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 billboard = 1
+
+[node name="qualitySprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+billboard = 1
+
+[node name="UpgradeEffect" parent="." instance=ExtResource("3_bf126")]

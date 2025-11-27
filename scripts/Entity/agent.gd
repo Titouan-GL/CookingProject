@@ -14,7 +14,10 @@ var prohibitedTasks:Array[Enum.TaskType]
 static var speedRange = Vector3(3, 5, 7)
 static var dishesRange = Vector3(0.5, 1.5, 3)
 static var cuttingRange = Vector3(0.5, 1.5, 3)
+static var mixingRange = Vector3(0, 0.2, 0.5)
+static var servingRange = Vector3(0, 0.4, 1)
 
+var recipesDisplay:Dictionary
 
 func act():
 	grabTime = maxGrabTime
@@ -45,14 +48,15 @@ func executeTask():
 							else:
 								finished = target.use(delta)
 							if finished:
+								act()
 								if(task.type == Enum.TaskType.CLEAN):
-									act()
 									var obj = target.unstore()
 									pickUp(obj)
 								task.complete()
-									
 						Enum.Order.STORE:
 							act()
+							if task.destination is IntServe:
+									task.object.increaseQuality(servingProficiency)
 							target.store(objectInHand) 
 							task.complete()
 						Enum.Order.UNSTORE:
@@ -67,17 +71,17 @@ func executeTask():
 						Enum.Order.MIX:
 							act()
 							if(task.object is Ingredient): 
-								task.destination.mix(task.object)
+								task.destination.mix(task.object, mixingProficiency)
 							elif(task.destination is Ingredient):
-								task.object.mix(task.destination)
+								task.object.mix(task.destination, mixingProficiency)
 							else: #both are movablestorage
 								if(task.object.emptyName in Recipes.getRecipePrimaryIngredients(Recipes.recipesMix(task.destination.recipe, task.object.recipe))):
-									task.object.mixRecipe(task.destination.empty())
+									task.object.mix(task.destination, mixingProficiency)
 								else:
 									if(task.object.recipe == task.object.emptyName):
-										task.object.mixRecipe(task.destination.empty())
+										task.object.mix(task.destination, mixingProficiency)
 									else:
-										task.destination.mixRecipe(task.object.empty())
+										task.destination.mix(task.object, mixingProficiency)
 							task.complete()
 			elif task.object:
 				nav_agent.set_target_position(task.object.global_position)
@@ -170,6 +174,8 @@ func initRandomStats():
 	speed = randMaxAvgMin(speedRange.x, speedRange.y, speedRange.z)
 	cuttingSpeed = randMaxAvgMin(cuttingRange.x, cuttingRange.y, cuttingRange.z)
 	dishesSpeed = randMaxAvgMin(dishesRange.x, dishesRange.y, dishesRange.z)
+	mixingProficiency = randMaxAvgMin(mixingRange.x, mixingRange.y, mixingRange.z)
+	servingProficiency = randMaxAvgMin(servingRange.x, servingRange.y, servingRange.z)
 
 func _init() -> void:
 	ACCELERATION = 25

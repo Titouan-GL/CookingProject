@@ -4,7 +4,7 @@ class_name IntServe
 var hierarchy:Hierarchy
 var recipeWanted:Enum.RecipeNames = Enum.RecipeNames.Empty
 @export var icon:IngredientIcon
-@export var progressBar:ProgressBar
+@export var progressBar:MovableUI
 @export var destinationPoint:Node3D
 @export var available:bool
 var gameManager:GameManager
@@ -12,8 +12,9 @@ var client:Client = null
 var navmesh:Navigation
 @export var recipesOption:Array[Enum.RecipeNames]
 @export var particles:GPUParticles3D
-static var override = [Enum.RecipeNames.BurSteSal]#= [Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.CutTomCutSal, Enum.RecipeNames.BurSteSalTom]
+static var override = [Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.CutTomCutSal, Enum.RecipeNames.BurSteSalTom]
 var table:ClientTable
+var qualityMultiplier:Dictionary = {0:1, 1:1.2, 2:1.5, 3:2}
 
 var timeLeft = 0
 var initialTime = 45
@@ -62,11 +63,11 @@ func _ready():
 	gameManager = get_tree().get_nodes_in_group("GameManager")[0]
 
 
-func serve(success:bool):
+func serve(success:bool, quality:int = 0):
 	hierarchy.servePoints.erase(self)
 	if(success):
 		particles.emitting = true
-		gameManager.changeScore(Recipes.getScore(recipeWanted))
+		gameManager.changeScore(Recipes.getScore(recipeWanted) * qualityMultiplier[quality])
 		client.changeState(1)
 		recipeWanted = Enum.RecipeNames.Empty
 		await get_tree().create_timer(3.0).timeout
@@ -88,25 +89,25 @@ func unstore() ->Movable:
 	add_to_group("freeServePoint")
 	return super.unstore()
 
-func store(i:Movable) -> bool:
+func store(i:Movable, _proba:float = 0) -> bool:
 	if i is Plate:
 		i.served()
 	i.parent.objectInHand = null
 	i.parent = self
 	storedObject = i
-	serve(true)
+	serve(true, i.quality)
 	return true
 
 func _process(_delta):
 	if(recipeWanted == Enum.RecipeNames.Empty):
-		progressBar.visible = false
+		progressBar.setVisibility(false)
 		icon.visible = false
 	else:
-		progressBar.visible = true
+		progressBar.setVisibility(true)
 		icon.visible = true
 		timeLeft -= _delta
 		if(timeLeft < 0):
 			serve(false)
 		else:
-			progressBar.value = (timeLeft/initialTime)
-			progressBar.visible = true
+			progressBar.updateBar(timeLeft/initialTime)
+			progressBar.setVisibility(true)

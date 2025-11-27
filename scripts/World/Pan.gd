@@ -3,12 +3,16 @@ class_name Pan
 
 @export var particles:GPUParticles3D 
 
+func increaseQualityCooking(_proba:float):
+	if recipe == Enum.RecipeNames.PanCutSte and not cookingImproved:
+		cookingImproved = false
+		increaseQuality(_proba)
 
 func addProgress(s:Enum.TaskType, delta:float) -> bool:
 	if(recipe == Enum.RecipeNames.PanCutSte):
 		if(progress.has(s)):
 			progress[s] -= delta
-			progressBar.value = 1-(progress[s]/progressMaxValues[s])
+			progressBar.updateBar(1-(progress[s]/progressMaxValues[s]))
 			if(progress[s] <= 0):
 				if(s == Enum.TaskType.COOK):
 					particles.emitting = true

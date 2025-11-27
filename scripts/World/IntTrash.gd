@@ -2,7 +2,7 @@ extends Interactible
 
 @export var anim:AnimationPlayer
 
-func store(i:Movable) -> bool:
+func store(i:Movable, _proba:float= 0) -> bool:
 	if i is MovableStorage:
 		i.empty()
 		anim.play("Trash")

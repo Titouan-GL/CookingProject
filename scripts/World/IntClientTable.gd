@@ -3,7 +3,7 @@ extends Interactible
 class_name ClientTable
 var servePoints:Array[IntServe]
 
-func store(i:Movable) -> bool:
+func store(i:Movable, _proba:float=0) -> bool:
 	var shortest_time = null
 	for s in servePoints:
 		if s.recipeWanted == i.recipe and s.available:

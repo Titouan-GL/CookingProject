@@ -3,11 +3,15 @@ class_name Pot
 @export var mesh:MeshInstance3D
 @export var particles:GPUParticles3D
 
-	
+func increaseQualityCooking(_proba:float):
+	if recipe == Enum.RecipeNames.PotCutTomCutTomCutTom and not cookingImproved:
+		cookingImproved = false
+		increaseQuality(_proba)
+
 func addProgress(s:Enum.TaskType, delta:float) -> bool:
 	if(recipe == Enum.RecipeNames.PotCutTomCutTomCutTom):
 		if(progress.has(s)):
-			progressBar.value = 1-(progress[s]/progressMaxValues[s])
+			progressBar.updateBar(1-(progress[s]/progressMaxValues[s]))
 			progress[s] -= delta
 			if(progress[s] <= 0):
 				if(s == Enum.TaskType.COOK):

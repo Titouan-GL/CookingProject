@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b61tgd4qbr8h3"]
+[gd_scene load_steps=8 format=3 uid="uid://b61tgd4qbr8h3"]
 
 [ext_resource type="Script" uid="uid://cqxbq00n0ntk6" path="res://scripts/World/ingredient.gd" id="1_11e83"]
 [ext_resource type="PackedScene" uid="uid://cytd1w5m4iwdk" path="res://scenes/UI/ProgressBar.tscn" id="2_ssx0k"]
+[ext_resource type="PackedScene" uid="uid://o32gjilfnlhs" path="res://scenes/VFX/UpgradedEffect.tscn" id="3_de0p5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_noarx"]
 rough = true
@@ -10,22 +11,30 @@ absorbent = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 size = Vector3(0.7, 0.7, 0.7)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_de0p5"]
-viewport_path = NodePath("SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_ssx0k"]
+viewport_path = NodePath("progressViewport")
 
-[node name="Ingredient" type="RigidBody3D" node_paths=PackedStringArray("progressBar")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_de0p5"]
+viewport_path = NodePath("qualityViewport")
+
+[node name="Ingredient" type="RigidBody3D" node_paths=PackedStringArray("progressBar", "upgradeParticles")]
 collision_layer = 0
 collision_mask = 7
 mass = 5.0
 physics_material_override = SubResource("PhysicsMaterial_noarx")
 gravity_scale = 1.5
 script = ExtResource("1_11e83")
-progressBar = NodePath("ProgressBar/SubViewport/Panel/ProgressBar")
+progressBar = NodePath("ProgressBar")
+upgradeParticles = NodePath("UpgradeEffect")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34786487, 0)
 shape = SubResource("BoxShape3D_noarx")
 
 [node name="ProgressBar" parent="." instance=ExtResource("2_ssx0k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1082611, 0)
-viewPort = SubResource("ViewportTexture_de0p5")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+progressViewPort = SubResource("ViewportTexture_ssx0k")
+qualityViewPort = SubResource("ViewportTexture_de0p5")
+
+[node name="UpgradeEffect" parent="." instance=ExtResource("3_de0p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1763069, 0)

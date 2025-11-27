@@ -23,7 +23,7 @@ func _ready():
 		inst.set_global_position(storePoint.global_position)
 		plateList.append(inst)
 
-func store(i:Movable) -> bool:
+func store(i:Movable, _proba:float = 0) -> bool:
 	if(plateList.size() < 4 and i is Plate and i.recipe == i.emptyName and not i.dirty):
 		i.parent.objectInHand = null
 		i.pickUp(self)

@@ -1,15 +1,12 @@
-[gd_scene load_steps=44 format=3 uid="uid://crmjnlgorvsy"]
+[gd_scene load_steps=40 format=3 uid="uid://crmjnlgorvsy"]
 
 [ext_resource type="Script" uid="uid://djauehf5a81tl" path="res://scripts/Managers/gameManager.gd" id="1_vf6b6"]
 [ext_resource type="Script" uid="uid://pltmis4ddkxu" path="res://scripts/Managers/Navigation.gd" id="2_5a81h"]
 [ext_resource type="PackedScene" uid="uid://bmfu35b75uv04" path="res://scenes/UI/PauseMenu.tscn" id="2_d826a"]
 [ext_resource type="PackedScene" uid="uid://dr1ea0arqcnag" path="res://scenes/Pot.tscn" id="3_itfbi"]
 [ext_resource type="PackedScene" uid="uid://c5oj2lrpy8m1f" path="res://assets/blender/Deco/SpookyLantern.blend" id="4_73p6g"]
-[ext_resource type="Resource" uid="uid://d22mj86xlfnmq" path="res://resources/DefaultGlasses.tres" id="5_82aft"]
 [ext_resource type="PackedScene" uid="uid://bd1dt0jxhqgkm" path="res://assets/blender/Deco/Pumpkin.blend" id="5_d826a"]
 [ext_resource type="PackedScene" uid="uid://cbowkrh8v3tix" path="res://assets/blender/Deco/Candles.blend" id="6_82aft"]
-[ext_resource type="Resource" uid="uid://f51pdnf50ru8" path="res://resources/DefaultMoustache.tres" id="6_ruotm"]
-[ext_resource type="Resource" uid="uid://bdsw3tv77f5ki" path="res://resources/DefaultPiercings.tres" id="7_c3wxk"]
 [ext_resource type="Texture2D" uid="uid://bhajo2s0i6gjk" path="res://assets/textures/05366bde9747af98448947536d59196f.jpg" id="7_ruotm"]
 [ext_resource type="PackedScene" uid="uid://bb80rjlejrxap" path="res://scenes/IntCUT.tscn" id="8_c3wxk"]
 [ext_resource type="PackedScene" uid="uid://cn2qe58h31hii" path="res://scenes/IntCOOK.tscn" id="9_yk57h"]
@@ -27,7 +24,6 @@
 [ext_resource type="Script" uid="uid://dg83vouhqgm2u" path="res://scripts/Managers/TaskHierarchy.gd" id="21_pt5ui"]
 [ext_resource type="PackedScene" uid="uid://81p0llkphiwe" path="res://scenes/Pan.tscn" id="22_h1hf0"]
 [ext_resource type="PackedScene" uid="uid://c1shi6l6dy3g6" path="res://scenes/Player.tscn" id="24_6oirp"]
-[ext_resource type="PackedScene" uid="uid://b67m5mnbrjcmo" path="res://scenes/agent.tscn" id="25_5a81h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wfll"]
 bg_color = Color(0.7921569, 0.101960786, 1, 1)
@@ -575,33 +571,6 @@ skeleton = NodePath("../../../..")
 
 [node name="trash" parent="World/Environnement/Interactible" instance=ExtResource("20_4xkxt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -4)
-
-[node name="agent" parent="World/Environnement/Interactible" node_paths=PackedStringArray("customOption") instance=ExtResource("25_5a81h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.757668, 0.6980016, -0.80517197)
-characterName = "Johnny McSkeleton"
-customOption = {
-ExtResource("5_82aft"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
-ExtResource("6_ruotm"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
-ExtResource("7_c3wxk"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
-}
-
-[node name="agent2" parent="World/Environnement/Interactible" node_paths=PackedStringArray("customOption") instance=ExtResource("25_5a81h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.649004, 0.6980016, -0.39073324)
-characterName = "Boneman the 5th"
-customOption = {
-ExtResource("5_82aft"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
-ExtResource("6_ruotm"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
-ExtResource("7_c3wxk"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
-}
-
-[node name="agent3" parent="World/Environnement/Interactible" node_paths=PackedStringArray("customOption") instance=ExtResource("25_5a81h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.579531, 0.69800186, -2.45209)
-characterName = "Steve"
-customOption = {
-ExtResource("5_82aft"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
-ExtResource("6_ruotm"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
-ExtResource("7_c3wxk"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
-}
 
 [node name="Hierarchy" type="Node3D" parent="World"]
 script = ExtResource("21_pt5ui")

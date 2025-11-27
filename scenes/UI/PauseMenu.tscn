@@ -54,7 +54,7 @@ border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 20
 corner_radius_bottom_left = 20
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("AgentIcons", "MinionsPanel", "RecipesPanel", "OptionsPanel", "AgentButton", "skeletonNameLabel", "speedBar", "dishesBar", "cuttingBar", "checkButtons")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("AgentIcons", "MinionsPanel", "RecipesPanel", "OptionsPanel", "AgentButton", "skeletonNameLabel", "speedBar", "dishesBar", "cuttingBar", "MixingBar", "ServingBar", "checkButtons")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -73,6 +73,8 @@ skeletonNameLabel = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsP
 speedBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/SpeedBar")
 dishesBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/DishesBar")
 cuttingBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/CuttingBar")
+MixingBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/MixingBar")
+ServingBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/ServingBar")
 checkButtons = {
 1: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CutLabel/CutBox"),
 2: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CookLabel/CookBox"),
@@ -217,8 +219,8 @@ theme_override_constants/margin_bottom = 30
 layout_mode = 2
 
 [node name="SkeletonName" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer"]
-custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
+size_flags_vertical = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "SKELETON NAME"
@@ -226,8 +228,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Skills" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_vertical = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 35
 text = "Skills"
@@ -238,7 +240,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 50
-theme_override_constants/v_separation = 50
+theme_override_constants/v_separation = 30
 columns = 2
 
 [node name="WalkSpeedLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer"]
@@ -286,9 +288,39 @@ theme_override_styles/background = SubResource("StyleBoxFlat_4r2wj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_onjwa")
 show_percentage = false
 
-[node name="Allowed" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+[node name="MixingLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Mixing Proficiency"
+horizontal_alignment = 2
+
+[node name="MixingBar" type="ProgressBar" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_4r2wj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_onjwa")
+show_percentage = false
+
+[node name="ServingLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Serving Proficiency"
+horizontal_alignment = 2
+
+[node name="ServingBar" type="ProgressBar" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_4r2wj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_onjwa")
+show_percentage = false
+
+[node name="Allowed" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 35
 text = "Tasks Allowed"
@@ -299,13 +331,13 @@ vertical_alignment = 1
 layout_mode = 2
 
 [node name="CutLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Cutting"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="CutBox" type="CheckBox" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CutLabel"]
 layout_mode = 1
@@ -315,9 +347,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -12.0
-offset_top = 48.0
+offset_top = 11.0
 offset_right = 12.0
-offset_bottom = 72.0
+offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 3)
@@ -325,13 +357,13 @@ pivot_offset = Vector2(12, 12)
 icon_alignment = 1
 
 [node name="CleanLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Clean dishes"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="CleanBox" type="CheckBox" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CleanLabel"]
 layout_mode = 1
@@ -341,9 +373,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -12.0
-offset_top = 48.0
+offset_top = 11.0
 offset_right = 12.0
-offset_bottom = 72.0
+offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 3)
@@ -351,13 +383,13 @@ pivot_offset = Vector2(12, 12)
 icon_alignment = 1
 
 [node name="MixLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Mix ingredients"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="MixBox" type="CheckBox" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/MixLabel"]
 layout_mode = 1
@@ -367,9 +399,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -12.0
-offset_top = 48.0
+offset_top = 11.0
 offset_right = 12.0
-offset_bottom = 72.0
+offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 3)
@@ -377,13 +409,13 @@ pivot_offset = Vector2(12, 12)
 icon_alignment = 1
 
 [node name="CookLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Cook"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="CookBox" type="CheckBox" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CookLabel"]
 layout_mode = 1
@@ -393,9 +425,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -12.0
-offset_top = 48.0
+offset_top = 11.0
 offset_right = 12.0
-offset_bottom = 72.0
+offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 3)
@@ -403,13 +435,13 @@ pivot_offset = Vector2(12, 12)
 icon_alignment = 1
 
 [node name="ServeLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Serve to clients"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ServeBox" type="CheckBox" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/ServeLabel"]
 layout_mode = 1
@@ -419,9 +451,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -12.0
-offset_top = 48.0
+offset_top = 11.0
 offset_right = 12.0
-offset_bottom = 72.0
+offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 3)
@@ -457,7 +489,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer"]
-custom_minimum_size = Vector2(300, 300)
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 theme_override_constants/separation = 10
 

@@ -6,6 +6,7 @@ var needed = false
 @export var dirt:Node3D
 
 func UpdateAppearance():
+	updateStar()
 	if(visibleMesh):
 		visibleMesh.queue_free()
 	if(recipe != Enum.RecipeNames.EmptyPlate):
@@ -22,7 +23,7 @@ func UpdateAppearance():
 func addProgress(s:Enum.TaskType, delta:float) -> bool:
 	if(progress.has(s) and dirty):
 		progress[s] -= delta
-		progressBar.value = 1-(progress[s]/progressMaxValues[s])
+		progressBar.updateBar(1-(progress[s]/progressMaxValues[s]))
 		if(progress[s] <= 0):
 			if(s == Enum.TaskType.CLEAN):
 				cleaned()
@@ -41,6 +42,7 @@ func mealFinished():
 	dirty = true
 	add_to_group("dirtyPlate")
 	availableForStorage = false
+	quality = 0
 	UpdateAppearance()
 
 func cleaned():
@@ -71,6 +73,7 @@ func _process(_delta):
 func empty() -> Enum.RecipeNames:
 	var prevRecipe = recipe
 	recipe = emptyName
+	quality = 0
 	UpdateAppearance()
 	return prevRecipe
 

@@ -12,7 +12,7 @@ func _init():
 	taskType = Enum.TaskType.CLEAN
 	passive = false
 
-func store(i:Movable) -> bool:
+func store(i:Movable, _proba:float = 0) -> bool:
 	if(!storedObject and i is Plate and i.dirty):
 		i.parent.objectInHand = null
 		storedObject = i

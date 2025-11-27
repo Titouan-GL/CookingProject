@@ -10,13 +10,25 @@ var prevProgress:Dictionary
 var progressMaxValues:Dictionary
 @export var recipe:Enum.RecipeNames = Enum.RecipeNames.Empty
 var visibleMesh:Node3D = null
-@export var progressBar:ProgressBar
+@export var progressBar:MovableUI
 var parentOffset:Vector3
 var rb:RigidBody3D
 var inUse:bool = false
 @export var recipePlacement:Node3D
+@export var upgradeParticles:GPUParticles3D
+var quality = 0
+
+func increaseQuality(proba:float):
+	if randf() < proba :
+		if quality < 3:
+			upgradeParticles.emitting = true
+			quality += 1
+			updateStar()
+
 
 func UpdateAppearance():
+	updateStar()
+	progressBar.updateStarLevel(quality)
 	var newMesh = Recipes.recipeToMesh(recipe)
 	if(visibleMesh) : 
 		visibleMesh.queue_free()
@@ -63,17 +75,20 @@ func _process(_delta):
 	if(progressBar): 
 		if(progress != prevProgress):
 			inUse = true
-			progressBar.visible = true
+			progressBar.setVisibility(true)
 			prevProgress = progress.duplicate()
 		else:
 			inUse = false
-			progressBar.visible = false
+			progressBar.setVisibility(false)
 
 
 func _enter_tree():
 	rb = $"."
 	add_to_group("movable")
 	super._enter_tree()
+
+func updateStar():
+	progressBar.updateStarLevel(quality)
 
 func _ready():
 	prevProgress = progress.duplicate()

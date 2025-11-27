@@ -5,6 +5,8 @@ class_name Cook
 var objectInHand:Movable
 var dishesSpeed
 var cuttingSpeed
+var mixingProficiency
+var servingProficiency
 @export var storePoint: Node3D
 
 func pickUp(obj:Movable):

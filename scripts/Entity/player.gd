@@ -60,6 +60,8 @@ func _init() -> void:
 	friction = 40
 	dishesSpeed = 1.5
 	cuttingSpeed = 1.5
+	mixingProficiency = 0.3
+	servingProficiency = 0.5
 	
 func pickUp(obj:Movable):
 	if obj:
@@ -86,9 +88,11 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("store"):
 		if hovered is Interactible:
 			if objectInHand is MovableStorage and hovered.storedObject:
-				hovered.storedObject.mix(objectInHand)
+				hovered.storedObject.mix(objectInHand, mixingProficiency)
 			elif objectInHand:
-				hovered.store(objectInHand)
+				if hovered is ClientTable:
+					objectInHand.increaseQuality(servingProficiency)
+				hovered.store(objectInHand, mixingProficiency)
 			else:
 				var obj = hovered.unstore()
 				pickUp(obj)

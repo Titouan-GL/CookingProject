@@ -9,6 +9,7 @@ var emptyName:Enum.RecipeNames
 @export var canBeStored:Array[Enum.RecipeNames]
 var availableForStorage = true
 var dirty = false
+var cookingImproved = false
 
 func _enter_tree():
 	super._enter_tree()
@@ -18,8 +19,10 @@ func _enter_tree():
 		recipe = emptyName
 	UpdateAppearance()
 
-func store(i:Ingredient) -> bool:
+func store2(i:Ingredient) -> bool:
 	if(i.recipe in canBeStored and availableForStorage):
+		quality += i.quality
+		updateStar()
 		mixRecipe(i.recipe)
 		if i.parent is Cook:
 			i.parent.objectInHand = null
@@ -29,24 +32,36 @@ func store(i:Ingredient) -> bool:
 		return true
 	return false
 
-func mix(i): 
+func mix(i, proba:float): 
 	if i is Ingredient:
 		if Recipes.recipesMix(i.recipe, recipe) != Enum.RecipeNames.Empty:
-			store(i)
+			quality += i.quality
+			if recipe != emptyName : increaseQuality(proba)
+			store2(i)
 	elif i is Enum.RecipeNames:
 		if Recipes.recipesMix(i, recipe) != Enum.RecipeNames.Empty:
+			print("but... ", Enum.RecipeNames.keys()[i])
+			if recipe != emptyName : increaseQuality(proba)
 			mixRecipe(i)
 	elif i is MovableStorage:
 		if not (dirty or i.dirty):
 			if Recipes.recipesMix(i.recipe, recipe) not in [Enum.RecipeNames.Empty, emptyName, i.emptyName] :
 				var mixed = Recipes.getRecipePrimaryIngredients(Recipes.recipesMix(i.recipe, recipe))
 				if(emptyName in mixed):
+					quality += i.quality
+					if recipe != emptyName : increaseQuality(proba)
 					mixRecipe(i.empty())
 				elif(i.emptyName in mixed):
+					quality += i.quality
+					if i.recipe != emptyName : i.increaseQuality(proba)
 					i.mixRecipe(empty())
 				elif(self is Plate):
+					quality += i.quality
+					if recipe != emptyName : increaseQuality(proba)
 					mixRecipe(i.empty())
 				elif(i is Plate):
+					quality += i.quality
+					if i.recipe != emptyName : i.increaseQuality(proba)
 					i.mixRecipe(empty())
 				
 
@@ -67,7 +82,9 @@ func empty() -> Enum.RecipeNames:
 	recipe = emptyName
 	progress = progressMaxValues.duplicate()
 	prevProgress = progressMaxValues.duplicate()
+	quality = 0
 	UpdateAppearance()
+	cookingImproved = false
 	return prevRecipe
 	
 func cook():

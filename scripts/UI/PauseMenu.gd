@@ -12,6 +12,8 @@ class_name PauseMenu
 @export var speedBar:ProgressBar
 @export var dishesBar:ProgressBar
 @export var cuttingBar:ProgressBar
+@export var MixingBar:ProgressBar
+@export var ServingBar:ProgressBar
 @export var checkButtons:Dictionary[Enum.TaskType, CheckBox]
 const inUI = preload("res://scenes/UI/AgentIcon.tscn")
 var AgentIconsArray:Dictionary[AgentIcon, Agent]
@@ -55,6 +57,8 @@ func openAgentIcon(icon:AgentIcon):
 	speedBar.value = 100*(agent.speed - agent.speedRange.x)/(agent.speedRange.z-agent.speedRange.x)
 	dishesBar.value = 100*(agent.dishesSpeed - agent.dishesRange.x)/(agent.dishesRange.z-agent.dishesRange.x)
 	cuttingBar.value = 100*(agent.cuttingSpeed - agent.cuttingRange.x)/(agent.cuttingRange.z - agent.cuttingRange.x)
+	MixingBar.value = 100*(agent.mixingProficiency - agent.mixingRange.x)/(agent.mixingRange.z-agent.mixingRange.x)
+	ServingBar.value = 100*(agent.servingProficiency - agent.servingRange.x)/(agent.servingRange.z - agent.servingRange.x)
 	updateAgentDisplay()
 
 
