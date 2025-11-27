@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://crmjnlgorvsy"]
+[gd_scene load_steps=43 format=3 uid="uid://crmjnlgorvsy"]
 
 [ext_resource type="Script" uid="uid://djauehf5a81tl" path="res://scripts/Managers/gameManager.gd" id="1_vf6b6"]
 [ext_resource type="Script" uid="uid://pltmis4ddkxu" path="res://scripts/Managers/Navigation.gd" id="2_5a81h"]
@@ -76,8 +76,6 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_d826a"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_82aft"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4xowi"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -223,20 +221,10 @@ horizontal_alignment = 1
 agentButtonGroup = SubResource("ButtonGroup_d826a")
 checkButtons = {
 1: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CutLabel/CutBox"),
-2: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CookLabel/CookBox"),
 5: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/ServeLabel/ServeBox"),
 7: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/MixLabel/MixBox"),
 8: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CleanLabel/CleanBox")
 }
-
-[node name="MinionsButton" parent="CanvasLayer/PauseMenu/MarginContainer/Panel/VBoxContainer/HBoxContainer" index="0"]
-button_group = SubResource("ButtonGroup_82aft")
-
-[node name="RecipesButton" parent="CanvasLayer/PauseMenu/MarginContainer/Panel/VBoxContainer/HBoxContainer" index="1"]
-button_group = SubResource("ButtonGroup_82aft")
-
-[node name="OptionsButton" parent="CanvasLayer/PauseMenu/MarginContainer/Panel/VBoxContainer/HBoxContainer" index="2"]
-button_group = SubResource("ButtonGroup_82aft")
 
 [node name="World" type="Node3D" parent="."]
 
@@ -608,5 +596,3 @@ script = ExtResource("21_pt5ui")
 
 [connection signal="pressed" from="CanvasLayer/EndScreen/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/EndScreen/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
-
-[editable path="CanvasLayer/PauseMenu"]

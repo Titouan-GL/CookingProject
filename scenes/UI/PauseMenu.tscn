@@ -54,7 +54,7 @@ border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 20
 corner_radius_bottom_left = 20
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("AgentIcons", "MinionsPanel", "RecipesPanel", "OptionsPanel", "AgentButton", "skeletonNameLabel", "speedBar", "dishesBar", "cuttingBar", "MixingBar", "ServingBar", "checkButtons")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("AgentIcons", "MinionsPanel", "RecipesPanel", "OptionsPanel", "AgentButton", "skeletonNameLabel", "speedBar", "dishesBar", "cuttingBar", "MixingBar", "ServingBar")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -75,13 +75,6 @@ dishesBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBo
 cuttingBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/CuttingBar")
 MixingBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/MixingBar")
 ServingBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/ServingBar")
-checkButtons = {
-1: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CutLabel/CutBox"),
-2: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CookLabel/CookBox"),
-5: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/ServeLabel/ServeBox"),
-7: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/MixLabel/MixBox"),
-8: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CleanLabel/CleanBox")
-}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -144,7 +137,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_avwb0")
 theme_override_styles/focus = SubResource("StyleBoxFlat_73e60")
 toggle_mode = true
 button_group = ExtResource("2_6q0ex")
-text = "  Recipe  "
+text = "  Recipes  "
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(400, 0)
@@ -167,6 +160,7 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_fsae6")
 
 [node name="MinionsPanel" type="Control" parent="MarginContainer/Panel/VBoxContainer/Panel"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -408,32 +402,6 @@ scale = Vector2(3, 3)
 pivot_offset = Vector2(12, 12)
 icon_alignment = 1
 
-[node name="CookLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_horizontal = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "Cook"
-horizontal_alignment = 1
-
-[node name="CookBox" type="CheckBox" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CookLabel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -12.0
-offset_top = 11.0
-offset_right = 12.0
-offset_bottom = 35.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(3, 3)
-pivot_offset = Vector2(12, 12)
-icon_alignment = 1
-
 [node name="ServeLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
@@ -461,7 +429,6 @@ pivot_offset = Vector2(12, 12)
 icon_alignment = 1
 
 [node name="RecipesPanel" type="Control" parent="MarginContainer/Panel/VBoxContainer/Panel"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -507,26 +474,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "OPTIONS"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/MinionsButton" to="." method="_on_minions_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/RecipesButton" to="." method="_on_recipes_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CutLabel/CutBox" to="." method="_on_cut_box_toggled"]
 [connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CleanLabel/CleanBox" to="." method="_on_clean_box_toggled"]
 [connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/MixLabel/MixBox" to="." method="_on_mix_box_toggled"]
-[connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CookLabel/CookBox" to="." method="_on_cook_box_toggled"]
 [connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/ServeLabel/ServeBox" to="." method="_on_serve_box_toggled"]

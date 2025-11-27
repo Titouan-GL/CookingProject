@@ -18,6 +18,13 @@ class_name PauseMenu
 const inUI = preload("res://scenes/UI/AgentIcon.tscn")
 var AgentIconsArray:Dictionary[AgentIcon, Agent]
 var currentIcon:AgentIcon
+const recipesDisplay:Array = [
+	preload("res://assets/textures/BurSteSalTomRecipe.png"),
+	preload("res://assets/textures/BurSteSalRecipe.png"),
+	preload("res://assets/textures/tomatoSoupRecipe.png"),
+	preload("res://assets/textures/tomatoSaladRecipe.png"),
+]
+
 
 func open():
 	visible = true
@@ -105,14 +112,6 @@ func _on_mix_box_toggled(toggled_on: bool) -> void:
 		agent.allowTask(Enum.TaskType.MIX)
 	else:
 		agent.prohibitTask(Enum.TaskType.MIX)
-
-
-func _on_cook_box_toggled(toggled_on: bool) -> void:
-	var agent = AgentIconsArray[currentIcon]
-	if toggled_on:
-		agent.allowTask(Enum.TaskType.COOK)
-	else:
-		agent.prohibitTask(Enum.TaskType.COOK)
 
 
 func _on_serve_box_toggled(toggled_on: bool) -> void:
