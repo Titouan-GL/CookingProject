@@ -1,14 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://bmfu35b75uv04"]
+[gd_scene load_steps=12 format=3 uid="uid://bmfu35b75uv04"]
 
 [ext_resource type="Script" uid="uid://cvny6fbmkw5c1" path="res://scripts/UI/PauseMenu.gd" id="1_fsae6"]
 [ext_resource type="ButtonGroup" uid="uid://bh1cy1350cipl" path="res://resources/ButtonGroups/AgentButtonGroup.tres" id="2_4r2wj"]
 [ext_resource type="ButtonGroup" uid="uid://cjv3udoqdikky" path="res://resources/ButtonGroups/PauseMenuButtonGroup.tres" id="2_6q0ex"]
-[ext_resource type="ButtonGroup" uid="uid://dldfgv502kkc6" path="res://resources/ButtonGroups/RecipesButtonGroup.tres" id="4_73e60"]
-[ext_resource type="Texture2D" uid="uid://br81fkxfvnsiv" path="res://assets/textures/Icons/BurgSteSalTomIcon.png" id="5_onjwa"]
-[ext_resource type="Texture2D" uid="uid://cnrk1bhiyocvc" path="res://assets/textures/Icons/burgerIcon.png" id="6_77ihb"]
-[ext_resource type="Texture2D" uid="uid://m1gnjyjdq2p" path="res://assets/textures/Icons/TomatoSoupIcon.png" id="7_2tp5j"]
-[ext_resource type="Texture2D" uid="uid://dn4vt4e57bwj1" path="res://assets/textures/Icons/TomatoSaladIcon.png" id="8_rgmlj"]
-[ext_resource type="Texture2D" uid="uid://cdleyyupc72e2" path="res://assets/textures/BurSteSalTomRecipe.png" id="9_2tp5j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yj2n7"]
 bg_color = Color(0.42144388, 0.37753037, 0.37776121, 1)
@@ -61,66 +55,6 @@ corner_radius_top_left = 20
 corner_radius_bottom_left = 20
 
 [node name="PauseMenu" type="Control" node_paths=PackedStringArray("AgentIcons", "MinionsPanel", "RecipesPanel", "OptionsPanel", "AgentButton", "skeletonNameLabel", "speedBar", "dishesBar", "cuttingBar", "MixingBar", "ServingBar", "checkButtons")]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3m1qe"]
-bg_color = Color(0.700926, 0.6026536, 0.503327, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77ihb"]
-bg_color = Color(0.5339073, 0.4449017, 0.35158092, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tp5j"]
-bg_color = Color(0.6269082, 0.5303342, 0.42945617, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgmlj"]
-bg_color = Color(0.5339073, 0.4449017, 0.35158092, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slthy"]
-bg_color = Color(0.7921569, 0.101960786, 1, 1)
-border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-shadow_size = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ecia5"]
-bg_color = Color(0.6082167, 0.0014824271, 0.77481365, 1)
-border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-shadow_size = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adhrm"]
-bg_color = Color(0.7359452, 0.0022996874, 0.9370591, 1)
-border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-shadow_size = 10
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ibie"]
-
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("AgentIcons", "MinionsPanel", "RecipesPanel", "OptionsPanel", "AgentButton", "skeletonNameLabel", "speedBar", "dishesBar", "cuttingBar", "MixingBar", "ServingBar", "recipeTexture", "recipeNameLabel", "defaultRecipeButton")]
-
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -141,18 +75,12 @@ dishesBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBo
 cuttingBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/CuttingBar")
 MixingBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/MixingBar")
 ServingBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/ServingBar")
-
 checkButtons = {
 1: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CutLabel/CutBox"),
 5: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/ServeLabel/ServeBox"),
 7: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/MixLabel/MixBox"),
 8: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CleanLabel/CleanBox")
 }
-
-recipeTexture = NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/Panel/MarginContainer/RecipeTexture")
-recipeNameLabel = NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/Panel/RecipeNameLabel")
-defaultRecipeButton = NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/BurSteSalTomButton")
-
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -507,7 +435,6 @@ pivot_offset = Vector2(12, 12)
 icon_alignment = 1
 
 [node name="RecipesPanel" type="Control" parent="MarginContainer/Panel/VBoxContainer/Panel"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -524,14 +451,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -540,181 +466,19 @@ custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="BurSteSalTomButton" type="Button" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_3m1qe")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_77ihb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_2tp5j")
-theme_override_styles/focus = SubResource("StyleBoxFlat_rgmlj")
-toggle_mode = true
-button_group = ExtResource("4_73e60")
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/BurSteSalTomButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -77.77779
-offset_right = 77.77777
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_onjwa")
-expand_mode = 3
-
-[node name="BurSteSalButton" type="Button" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_3m1qe")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_77ihb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_2tp5j")
-theme_override_styles/focus = SubResource("StyleBoxFlat_rgmlj")
-toggle_mode = true
-button_group = ExtResource("4_73e60")
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/BurSteSalButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -77.77779
-offset_right = 77.77777
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_77ihb")
-expand_mode = 3
-
-[node name="TomatoSoupButton" type="Button" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_3m1qe")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_77ihb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_2tp5j")
-theme_override_styles/focus = SubResource("StyleBoxFlat_rgmlj")
-toggle_mode = true
-button_group = ExtResource("4_73e60")
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TomatoSoupButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -77.77779
-offset_right = 77.77777
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_2tp5j")
-expand_mode = 3
-
-[node name="TomatoSaladButton" type="Button" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_3m1qe")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_77ihb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_2tp5j")
-theme_override_styles/focus = SubResource("StyleBoxFlat_rgmlj")
-toggle_mode = true
-button_group = ExtResource("4_73e60")
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TomatoSaladButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -77.77779
-offset_right = 77.77777
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_rgmlj")
-expand_mode = 3
-
 [node name="Panel" type="Panel" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_fsae6")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 80
-theme_override_constants/margin_right = 80
-theme_override_constants/margin_bottom = 80
-
-[node name="RecipeTexture" type="TextureRect" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/Panel/MarginContainer"]
-layout_mode = 2
-texture = ExtResource("9_2tp5j")
-expand_mode = 3
-
-[node name="RecipeNameLabel" type="Label" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "RECIPE NAME"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="OptionsPanel" type="Control" parent="MarginContainer/Panel/VBoxContainer/Panel"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -116.5
-offset_top = -47.0
-offset_right = 116.5
-offset_bottom = 47.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 24
-
-[node name="Retry" type="Button" parent="MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_slthy")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ecia5")
-theme_override_styles/hover = SubResource("StyleBoxFlat_adhrm")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0ibie")
-text = "  Retry level  "
-
-[node name="Menu" type="Button" parent="MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_slthy")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ecia5")
-theme_override_styles/hover = SubResource("StyleBoxFlat_adhrm")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0ibie")
-text = "  To Menu  "
 
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/MinionsButton" to="." method="_on_minions_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/RecipesButton" to="." method="_on_recipes_button_pressed"]
@@ -723,9 +487,3 @@ text = "  To Menu  "
 [connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CleanLabel/CleanBox" to="." method="_on_clean_box_toggled"]
 [connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/MixLabel/MixBox" to="." method="_on_mix_box_toggled"]
 [connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/ServeLabel/ServeBox" to="." method="_on_serve_box_toggled"]
-[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/BurSteSalTomButton" to="." method="_on_bur_ste_sal_tom_button_pressed"]
-[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/BurSteSalButton" to="." method="_on_bur_ste_sal_button_pressed"]
-[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TomatoSoupButton" to="." method="_on_tomato_soup_button_pressed"]
-[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TomatoSaladButton" to="." method="_on_tomato_salad_button_pressed"]
-[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
-[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
