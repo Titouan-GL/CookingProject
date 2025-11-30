@@ -33,13 +33,11 @@ func _physics_process(delta):
 		var newhoveredParent = raycaster.get_collider().get_parent()
 		var newhovered = raycaster.get_collider()
 		if(newhoveredParent is Interactible and newhoveredParent != hovered):
-			#print(newhoveredParent)
 			if hovered:
 				hovered.unhovered()
 			newhoveredParent.hovered()
 			hovered = newhoveredParent
 		elif(newhovered is Movable and newhovered != hovered):
-			#print(newhovered)
 			if hovered:
 				hovered.unhovered()
 			newhovered.hovered()
@@ -68,7 +66,9 @@ func pickUp(obj:Movable):
 		prevObjectInHand = obj
 		storePoint.global_position = obj.global_position
 		super.pickUp(obj)
-		
+
+
+
 func _process(_delta: float) -> void:
 	if(objectInHand):
 		storePoint.global_position = lerp(storePoint.global_position, idealGrabPoint.global_position, _delta*10)

@@ -6,37 +6,42 @@ class_name GameManager
 @export var timeBar:ProgressBar
 @export var gameUI:Control
 @export var gameOverUI:Control
-@export var Menubutton:Control
 @export var pauseMenu:PauseMenu
+@export var clientsPatience:bool = false
+@export var recipeOverride:Array[Enum.RecipeNames] #= [Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.CutTomCutSal, Enum.RecipeNames.BurSteSalTom]
+@export var timerEnabled:bool = true
+
 var timeLeft;
 var initialTime = 180
 
 var score = 0
 var displayedScore = 0
+	
 
 func _enter_tree():
 	add_to_group("GameManager")
 	timeLeft = initialTime
 	gameOverUI.visible = false
-	gameUI.visible = true
+	gameUI.visible = timerEnabled
 	pauseMenu.close()
-	if Menubutton:
-		Menubutton.visible = true
 
 func addAgentIcon(agent:Agent, mesh:Node3D, charName:String = "John Doe"):
 	pauseMenu.addAgentIcon(agent, mesh, charName)
 
+func endGame():
+	gameOverUI.visible = true
+	gameUI.visible = false
+	scoreLabel2.text = "Score = " + str(int(roundf(displayedScore)))
+	get_tree().paused = true
+	
 func _process(_delta):
-	if not get_tree().paused:
+	if not get_tree().paused and timerEnabled:
 		timeLeft -= _delta
 	displayedScore = displayedScore + (score - displayedScore) * _delta * 5
 	scoreLabel.text = "Score = " + str(int(roundf(displayedScore)))
 	timeBar.value = 100*timeLeft/initialTime
 	if(timeLeft < 0):
-		gameOverUI.visible = true
-		gameUI.visible = false
-		scoreLabel2.text = "Score = " + str(int(roundf(displayedScore)))
-		get_tree().paused = true
+		endGame()
 	if Input.is_action_just_pressed("Escape"):
 		if pauseMenu.visible :
 			get_tree().paused = false

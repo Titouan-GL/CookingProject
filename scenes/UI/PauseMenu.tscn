@@ -54,7 +54,7 @@ border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 20
 corner_radius_bottom_left = 20
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("AgentIcons", "MinionsPanel", "RecipesPanel", "OptionsPanel", "AgentButton", "skeletonNameLabel", "speedBar", "dishesBar", "cuttingBar", "MixingBar", "ServingBar")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("AgentIcons", "MinionsPanel", "RecipesPanel", "OptionsPanel", "AgentButton", "skeletonNameLabel", "speedBar", "dishesBar", "cuttingBar", "MixingBar", "ServingBar", "checkButtons")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -75,6 +75,12 @@ dishesBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBo
 cuttingBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/CuttingBar")
 MixingBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/MixingBar")
 ServingBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/ServingBar")
+checkButtons = {
+1: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CutLabel/CutBox"),
+5: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/ServeLabel/ServeBox"),
+7: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/MixLabel/MixBox"),
+8: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CleanLabel/CleanBox")
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

@@ -1,0 +1,174 @@
+[gd_scene load_steps=11 format=3 uid="uid://b3ob4otxsi0r1"]
+
+[ext_resource type="Script" uid="uid://djauehf5a81tl" path="res://scripts/Managers/gameManager.gd" id="1_h4gv2"]
+[ext_resource type="PackedScene" uid="uid://bmfu35b75uv04" path="res://scenes/UI/PauseMenu.tscn" id="2_dfsol"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5wfll"]
+bg_color = Color(0.7921569, 0.101960786, 1, 1)
+border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo7u2"]
+bg_color = Color(0.6082167, 0.0014824271, 0.77481365, 1)
+border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5gciw"]
+bg_color = Color(0.7359452, 0.0022996874, 0.9370591, 1)
+border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u2vf6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5bvjv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rugfo"]
+bg_color = Color(0.64, 0.64, 0.64, 0.29411766)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emgxq"]
+bg_color = Color(0.8901961, 0, 0.22745098, 0.6745098)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_h4gv2"]
+
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("scoreLabel", "scoreLabel2", "timeBar", "gameUI", "gameOverUI", "pauseMenu")]
+process_mode = 3
+script = ExtResource("1_h4gv2")
+scoreLabel = NodePath("Score/MarginContainer/ProgressBar/Label")
+scoreLabel2 = NodePath("EndScreen/VBoxContainer/Label")
+timeBar = NodePath("Score/MarginContainer/ProgressBar")
+gameUI = NodePath("Score")
+gameOverUI = NodePath("EndScreen")
+pauseMenu = NodePath("PauseMenu")
+
+[node name="EndScreen" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -118.0
+offset_right = 150.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="EndScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Score = 0"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="EndScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Fin du temps"
+horizontal_alignment = 1
+
+[node name="Menu" type="Button" parent="EndScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_5wfll")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bo7u2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5gciw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_u2vf6")
+text = "  Menu  "
+
+[node name="Retry" type="Button" parent="EndScreen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_5wfll")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bo7u2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5gciw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_u2vf6")
+text = "  Retry  "
+
+[node name="Score" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5bvjv")
+
+[node name="MarginContainer" type="MarginContainer" parent="Score"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+
+[node name="ProgressBar" type="ProgressBar" parent="Score/MarginContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_rugfo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_emgxq")
+value = 12.77
+show_percentage = false
+
+[node name="Label" type="Label" parent="Score/MarginContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_top = -3.9999998
+offset_right = 35.0
+offset_bottom = 21.857143
+grow_horizontal = 2
+scale = Vector2(1.4, 1.4)
+text = "Score = 0"
+horizontal_alignment = 1
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("checkButtons") instance=ExtResource("2_dfsol")]
+agentButtonGroup = SubResource("ButtonGroup_h4gv2")
+checkButtons = {
+1: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CutLabel/CutBox"),
+5: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/ServeLabel/ServeBox"),
+7: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/MixLabel/MixBox"),
+8: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CleanLabel/CleanBox")
+}

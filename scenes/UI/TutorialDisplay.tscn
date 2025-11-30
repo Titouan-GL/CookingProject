@@ -1,0 +1,104 @@
+[gd_scene load_steps=7 format=3 uid="uid://oqbxxefaqmei"]
+
+[ext_resource type="Script" uid="uid://cu0b3bk4hjhe8" path="res://scripts/UI/tutorialDisplay.gd" id="1_lfa3s"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rfocf"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfocf"]
+bg_color = Color(0, 0, 0, 0.78431374)
+corner_radius_top_left = 120
+corner_radius_top_right = 120
+corner_radius_bottom_right = 120
+corner_radius_bottom_left = 120
+shadow_color = Color(0, 0, 0, 0.39215687)
+shadow_size = 10
+
+[sub_resource type="Animation" id="Animation_rfocf"]
+resource_name = "hover"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("progressSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.0062732, 0), Vector3(0, 1.07, 0), Vector3(0, 1.0062732, 0), Vector3(0, 0.93, 0), Vector3(0, 1.0062732, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lfa3s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("progressSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.0062732, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dyhgq"]
+_data = {
+&"RESET": SubResource("Animation_lfa3s"),
+&"hover": SubResource("Animation_rfocf")
+}
+
+[node name="TutorialDisplay" type="Node3D" node_paths=PackedStringArray("sprite", "label", "animPlayer")]
+script = ExtResource("1_lfa3s")
+sprite = NodePath("progressSprite")
+viewport = SubResource("ViewportTexture_rfocf")
+label = NodePath("progressViewport/Panel/MarginContainer/Label")
+animPlayer = NodePath("AnimationPlayer")
+
+[node name="progressViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(300, 300)
+
+[node name="Panel" type="Panel" parent="progressViewport"]
+custom_minimum_size = Vector2(300, 300)
+offset_right = 300.0
+offset_bottom = 300.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_rfocf")
+
+[node name="MarginContainer" type="MarginContainer" parent="progressViewport/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="progressViewport/Panel/MarginContainer"]
+custom_minimum_size = Vector2(280, 280)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.8456518, 0.0012498593, 0.93825626, 1)
+theme_override_font_sizes/font_size = 40
+text = "lorem ipsum"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="progressSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 1.0062732, 0)
+billboard = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dyhgq")
+}

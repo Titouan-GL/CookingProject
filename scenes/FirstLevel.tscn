@@ -1,0 +1,125 @@
+[gd_scene load_steps=15 format=3 uid="uid://b3w6px4miuqlw"]
+
+[ext_resource type="PackedScene" uid="uid://b3ob4otxsi0r1" path="res://scenes/UI/MainUI.tscn" id="1_qkh5s"]
+[ext_resource type="PackedScene" uid="uid://b82lmmp4ei04d" path="res://scenes/defaultWorld.tscn" id="2_tgokq"]
+[ext_resource type="PackedScene" uid="uid://oqbxxefaqmei" path="res://scenes/UI/TutorialDisplay.tscn" id="3_3r0yy"]
+[ext_resource type="PackedScene" uid="uid://c1shi6l6dy3g6" path="res://scenes/Player.tscn" id="3_s6dwg"]
+[ext_resource type="PackedScene" uid="uid://81p0llkphiwe" path="res://scenes/Pan.tscn" id="4_t4fd6"]
+[ext_resource type="PackedScene" uid="uid://dr1ea0arqcnag" path="res://scenes/Pot.tscn" id="5_xrjct"]
+[ext_resource type="Script" uid="uid://bvxccpt785iys" path="res://scripts/Managers/Tutorial.gd" id="6_8rnct"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_s6dwg"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qkh5s"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tgokq"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3r0yy"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_t4fd6"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_r6rcy"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xrjct"]
+viewport_path = NodePath("progressViewport")
+
+[node name="TutoLevel1" type="Node3D"]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("1_qkh5s")]
+clientsPatience = true
+recipeOverride = Array[int]([23])
+timerEnabled = false
+
+[node name="World" parent="." instance=ExtResource("2_tgokq")]
+
+[node name="tutorial4" parent="World/Environnement/Interactible" index="7" instance=ExtResource("3_3r0yy")]
+viewport = SubResource("ViewportTexture_s6dwg")
+text = "Store the ingredients in the plate with RMB/L"
+
+[node name="tutorial2" parent="World/Environnement/Interactible/generator" index="3" instance=ExtResource("3_3r0yy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9347416, 0)
+viewport = SubResource("ViewportTexture_qkh5s")
+text = "Pickup tomato from box with RMB/L"
+
+[node name="counter" parent="World/Environnement/Interactible" index="9" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pot")
+
+[node name="counter3" parent="World/Environnement/Interactible" index="12" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pan2")
+
+[node name="counter10" parent="World/Environnement/Interactible" index="23" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pan")
+
+[node name="counter5" parent="World/Environnement/Interactible" index="35" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pot2")
+
+[node name="tutorial3" parent="World/Environnement/Interactible/cuttingtable2" index="3" instance=ExtResource("3_3r0yy")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.9242574, 0)
+viewport = SubResource("ViewportTexture_tgokq")
+text = "Store the ingredients with RMB/L Then cut it with LMB/K"
+
+[node name="tutorial0" parent="World/Environnement/Interactible/generator3" index="3" instance=ExtResource("3_3r0yy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.88242257, 0)
+viewport = SubResource("ViewportTexture_3r0yy")
+text = "Pickup a salad from the box with RMB/L"
+
+[node name="servePoint2" parent="World/Environnement/Interactible/ClientTable" index="3"]
+visible = false
+available = false
+
+[node name="servePoint3" parent="World/Environnement/Interactible/ClientTable" index="4"]
+visible = false
+available = false
+
+[node name="servePoint4" parent="World/Environnement/Interactible/ClientTable" index="5"]
+visible = false
+available = false
+
+[node name="tutorial5" parent="World/Environnement/Interactible/ClientTable" index="7" instance=ExtResource("3_3r0yy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86582303, 0)
+viewport = SubResource("ViewportTexture_t4fd6")
+text = "Serve the client with RMB/L"
+
+[node name="Door" parent="World/Environnement/Interactible" index="43"]
+timer = 5
+
+[node name="generator5" parent="World/Environnement/Interactible" index="44"]
+plateNbr = 2
+
+[node name="tutorial1" parent="World/Environnement/Interactible/generator5" index="3" instance=ExtResource("3_3r0yy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75323176, 0)
+viewport = SubResource("ViewportTexture_r6rcy")
+text = "Pickup a plate from the plate holder with RMB/L"
+
+[node name="tutorial6" parent="World/Environnement/Interactible/Sink" index="4" instance=ExtResource("3_3r0yy")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.9539761, 0)
+viewport = SubResource("ViewportTexture_xrjct")
+text = "Store the plate here then clean it with LMB/K"
+
+[node name="Player" parent="." instance=ExtResource("3_s6dwg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.729166, -0.0068730097, 1.0092611)
+
+[node name="Pan" parent="." instance=ExtResource("4_t4fd6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.133906, 1.3014183, -2.089312)
+
+[node name="Pan2" parent="." instance=ExtResource("4_t4fd6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.79669, 1.0251608, -4.219519)
+
+[node name="Pot" parent="." instance=ExtResource("5_xrjct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.121968, 1.2310169, 3.012409)
+
+[node name="Pot2" parent="." instance=ExtResource("5_xrjct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.93954, 1.6974955, 5.0118456)
+
+[node name="Tutorial" type="Node3D" parent="." node_paths=PackedStringArray("displayList")]
+script = ExtResource("6_8rnct")
+displayList = [NodePath("../World/Environnement/Interactible/generator3/tutorial0"), NodePath("../World/Environnement/Interactible/generator5/tutorial1"), NodePath("../World/Environnement/Interactible/generator/tutorial2"), NodePath("../World/Environnement/Interactible/cuttingtable2/tutorial3"), NodePath("../World/Environnement/Interactible/tutorial4"), NodePath("../World/Environnement/Interactible/ClientTable/tutorial5"), NodePath("../World/Environnement/Interactible/Sink/tutorial6")]
+
+[editable path="World"]
+[editable path="World/Environnement/Interactible/ClientTable"]

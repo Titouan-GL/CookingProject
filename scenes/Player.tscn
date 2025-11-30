@@ -406,27 +406,27 @@ spongeAnimation = NodePath("../Sponge/AnimationPlayer")
 sponge = NodePath("../Sponge")
 
 [node name="Skeleton3D" parent="Mesh/Armature" index="0"]
-bones/1/rotation = Quaternion(-1.3420104e-09, -1.1775609e-07, 0.011257599, 0.99993664)
-bones/1/scale = Vector3(1, 1.0112914, 1)
+bones/1/rotation = Quaternion(-1.4331631e-09, -1.1802345e-07, 0.012022244, 0.9999278)
+bones/1/scale = Vector3(1, 1.0126415, 1)
 bones/2/rotation = Quaternion(0, 5.540273e-17, 0, 1)
-bones/3/position = Vector3(-2.2287716e-09, 0.33793044, 9.788106e-10)
+bones/3/position = Vector3(-2.2594466e-09, 0.34128714, 1.4554425e-09)
 bones/3/rotation = Quaternion(-3.469447e-18, 1.1920929e-07, 4.135903e-25, 1)
-bones/4/rotation = Quaternion(-0.12037929, 0.003989672, 0.001076427, 0.9927194)
-bones/6/rotation = Quaternion(-0.17268619, 0.41593617, 0.31409943, 0.835774)
+bones/4/rotation = Quaternion(-0.115327455, 0.0054402966, 0.001318093, 0.99331176)
+bones/6/rotation = Quaternion(-0.16274063, 0.42422876, 0.30892065, 0.83553195)
 bones/7/rotation = Quaternion(-1.6529992e-08, 1.02979214e-07, -0.0011607563, 0.99999934)
 bones/8/rotation = Quaternion(0.2631279, -0.3090731, -0.68957347, 0.59977156)
-bones/9/rotation = Quaternion(-0.4490965, -0.13479382, -0.43728465, 0.7674146)
+bones/9/rotation = Quaternion(-0.45711657, -0.12480935, -0.44018236, 0.76269686)
 bones/10/rotation = Quaternion(2.6680604e-09, -5.736329e-07, 0.0011607328, 0.99999934)
 bones/11/rotation = Quaternion(0.7071068, -2.84119e-07, -2.84119e-07, 0.7071068)
-bones/12/position = Vector3(2.9043377e-08, -0.26511127, -0.121816754)
-bones/13/rotation = Quaternion(-3.9609604e-05, 1.1486936e-07, 0.9999818, 0.006027825)
-bones/15/rotation = Quaternion(0.0006040528, 0.09370632, 0.9955816, -0.005997588)
+bones/12/position = Vector3(2.990229e-08, -0.26511127, -0.12541929)
+bones/13/rotation = Quaternion(-3.9609607e-05, 1.1486937e-07, 0.9999819, 0.006027826)
+bones/15/rotation = Quaternion(0.0006713315, 0.10487476, 0.99446714, -0.0059904265)
 
 [node name="NurbsPath" parent="Mesh/Armature/Skeleton3D" index="2"]
 material_override = ExtResource("4_qu4a1")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Mesh/Armature/Skeleton3D" index="7"]
-transform = Transform3D(-0.91429585, -0.40420285, -0.026372813, 0.31391218, -0.7481812, 0.6036414, -0.26078075, 0.53755814, 0.80188835, -0.55542016, 0.5243665, 0.47334725)
+transform = Transform3D(-0.9155883, -0.40131462, -0.0256887, 0.30505607, -0.7345701, 0.6267184, -0.26700604, 0.5589139, 0.7850625, -0.55463487, 0.53032243, 0.4828905)
 bone_name = "Hand.R"
 bone_idx = 7
 

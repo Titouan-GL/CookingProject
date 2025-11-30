@@ -39,6 +39,7 @@ func unstore() -> Movable:
 		inst.parentOffset = Vector3.ZERO
 		inst.unstored()
 		inst.parent = null
+		inst.reparent(get_tree().current_scene)
 		return inst
 	return null
 

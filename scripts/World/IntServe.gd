@@ -12,7 +12,6 @@ var client:Client = null
 var navmesh:Navigation
 @export var recipesOption:Array[Enum.RecipeNames]
 @export var particles:GPUParticles3D
-static var override = [Enum.RecipeNames.BurSteSal, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.TomatoSoup, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.BurSteSalTom, Enum.RecipeNames.CutTomCutSal, Enum.RecipeNames.BurSteSalTom]
 var table:ClientTable
 var qualityMultiplier:Dictionary = {0:1, 1:1.2, 2:1.5, 3:2}
 
@@ -33,9 +32,9 @@ func _init():
 	obstacle = false
 
 func newRecipe():
-	if(override and override.size() > 0):
-		recipeWanted = override[0]
-		override.remove_at(0)
+	if(gameManager.recipeOverride and gameManager.recipeOverride.size() > 0):
+		recipeWanted = gameManager.recipeOverride[0]
+		gameManager.recipeOverride.remove_at(0)
 	else:
 		recipeWanted = recipesOption.pick_random()
 		#recipeWanted = Enum.RecipeNames.TomatoSoup
@@ -103,11 +102,13 @@ func _process(_delta):
 		progressBar.setVisibility(false)
 		icon.visible = false
 	else:
-		progressBar.setVisibility(true)
 		icon.visible = true
-		timeLeft -= _delta
+		if not gameManager.clientsPatience:
+			progressBar.setVisibility(true)
+			timeLeft -= _delta
 		if(timeLeft < 0):
 			serve(false)
 		else:
-			progressBar.updateBar(timeLeft/initialTime)
-			progressBar.setVisibility(true)
+			if not gameManager.clientsPatience:
+				progressBar.updateBar(timeLeft/initialTime)
+				progressBar.setVisibility(true)
