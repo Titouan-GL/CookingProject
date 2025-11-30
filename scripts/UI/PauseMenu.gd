@@ -15,15 +15,18 @@ class_name PauseMenu
 @export var MixingBar:ProgressBar
 @export var ServingBar:ProgressBar
 @export var checkButtons:Dictionary[Enum.TaskType, CheckBox]
+@export var recipeTexture:TextureRect
+@export var recipeNameLabel:Label
+@export var defaultRecipeButton:Button
 const inUI = preload("res://scenes/UI/AgentIcon.tscn")
 var AgentIconsArray:Dictionary[AgentIcon, Agent]
 var currentIcon:AgentIcon
-const recipesDisplay:Array = [
-	preload("res://assets/textures/BurSteSalTomRecipe.png"),
-	preload("res://assets/textures/BurSteSalRecipe.png"),
-	preload("res://assets/textures/tomatoSoupRecipe.png"),
-	preload("res://assets/textures/tomatoSaladRecipe.png"),
-]
+const recipesDisplay:Dictionary = {
+	Enum.RecipeNames.BurSteSalTom:["Tomato Burger", preload("res://assets/textures/BurSteSalTomRecipe.png")],
+	Enum.RecipeNames.BurSteSal:["Burger", preload("res://assets/textures/BurSteSalRecipe.png")],
+	Enum.RecipeNames.TomatoSoup:["Tomato Soup", preload("res://assets/textures/tomatoSoupRecipe.png")],
+	Enum.RecipeNames.CutTomCutSal:["Tomato Salad", preload("res://assets/textures/tomatoSaladRecipe.png")],
+}
 
 
 func open():
@@ -32,6 +35,8 @@ func open():
 	_on_minions_button_pressed()
 	if AgentIconsArray.size() > 0:
 		openAgentIcon(AgentIconsArray.keys()[0])
+	_on_bur_ste_sal_tom_button_pressed()
+	defaultRecipeButton.button_pressed = true
 	
 func close():
 	visible = false
@@ -120,3 +125,33 @@ func _on_serve_box_toggled(toggled_on: bool) -> void:
 		agent.allowTask(Enum.TaskType.EMPTY)
 	else:
 		agent.prohibitTask(Enum.TaskType.EMPTY)
+
+func changeDisplayedRecipe(recipe:Enum.RecipeNames):
+	recipeTexture.texture = recipesDisplay[recipe][1]
+	recipeNameLabel.text = recipesDisplay[recipe][0]
+	
+
+func _on_bur_ste_sal_tom_button_pressed() -> void:
+	changeDisplayedRecipe(Enum.RecipeNames.BurSteSalTom)
+
+
+func _on_bur_ste_sal_button_pressed() -> void:
+	changeDisplayedRecipe(Enum.RecipeNames.BurSteSal)
+
+
+func _on_tomato_soup_button_pressed() -> void:
+	changeDisplayedRecipe(Enum.RecipeNames.TomatoSoup)
+
+
+func _on_tomato_salad_button_pressed() -> void:
+	changeDisplayedRecipe(Enum.RecipeNames.CutTomCutSal)
+
+
+func _on_retry_pressed() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()
+
+
+func _on_menu_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
