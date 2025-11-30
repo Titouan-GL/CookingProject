@@ -10,7 +10,6 @@ var recipeWanted:Enum.RecipeNames = Enum.RecipeNames.Empty
 var gameManager:GameManager
 var client:Client = null
 var navmesh:Navigation
-@export var recipesOption:Array[Enum.RecipeNames]
 @export var particles:GPUParticles3D
 var table:ClientTable
 var qualityMultiplier:Dictionary = {0:1, 1:1.2, 2:1.5, 3:2}
@@ -36,7 +35,7 @@ func newRecipe():
 		recipeWanted = gameManager.recipeOverride[0]
 		gameManager.recipeOverride.remove_at(0)
 	else:
-		recipeWanted = recipesOption.pick_random()
+		recipeWanted = gameManager.recipesOption.pick_random()
 		#recipeWanted = Enum.RecipeNames.TomatoSoup
 	timeLeft = initialTime
 	icon.UpdateAppearance(recipeWanted)
@@ -66,6 +65,7 @@ func serve(success:bool, quality:int = 0):
 	hierarchy.servePoints.erase(self)
 	if(success):
 		particles.emitting = true
+		gameManager.clientServed += 1
 		gameManager.changeScore(Recipes.getScore(recipeWanted) * qualityMultiplier[quality])
 		client.changeState(1)
 		recipeWanted = Enum.RecipeNames.Empty
@@ -89,6 +89,7 @@ func unstore() ->Movable:
 	return super.unstore()
 
 func store(i:Movable, _proba:float = 0) -> bool:
+	i.increaseQuality(_proba)
 	if i is Plate:
 		i.served()
 	i.parent.objectInHand = null

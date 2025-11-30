@@ -22,6 +22,12 @@ func distance_to_target():
 
 func get_target_on_grid():
 	return navmesh.posToGrid(target_position)
+	
+func is_target_reachable():
+	return navmesh.get_full_path(global_position, target_position, isClient).size() > 0
+
+func try_target_reachable(global_pos, target_pos, isclient):
+	return navmesh.get_full_path(global_pos, target_pos, isclient).size() > 0
 
 func get_next_path_position():
 	var nextPos = navmesh.getNextPosition(global_position, target_position, isClient)

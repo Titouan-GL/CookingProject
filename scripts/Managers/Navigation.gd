@@ -46,6 +46,7 @@ func _enter_tree():
 		for j in range(gridSize.x):
 			grid[i].append(null)
 	
+	
 	for astar in [astarClient, astarCooks] :
 		astar.region = Rect2i(Vector2i(0, 0), Vector2i(gridSize.x, gridSize.y))
 		astar.cell_size = Vector2i(1, 1)
@@ -131,7 +132,8 @@ func line_is_clear(astar:AStarGrid2D, start: Vector2, end: Vector2) -> bool:
 		if astar.is_point_solid(p):
 			return false
 	return true
-	
+
+
 func getNextPosition(startNode, endNode, isClient = false):
 	if(not startNode or not endNode):
 		return
@@ -200,8 +202,8 @@ func find_reachable(astar:AStarGrid2D, current:Vector2i, agent:Vector2i):
 	for x in range(-1, 2, 2):
 		for y in range(-1, 2, 2):
 			var newCell = current + Vector2i(x, y)
-			if newCell.y >= 0 and newCell.y <= gridSize.y and \
-			newCell.x >= 0 and newCell.x <= gridSize.x and\
+			if newCell.y >= 0 and newCell.y < gridSize.y and \
+			newCell.x >= 0 and newCell.x < gridSize.x and\
 			not astar.is_point_solid(current + Vector2i(x, y)):
 				if (agent - newCell).length() < bestDist:
 					bestDist = (agent - newCell).length()
@@ -209,20 +211,6 @@ func find_reachable(astar:AStarGrid2D, current:Vector2i, agent:Vector2i):
 	
 	return bestCell
 
-#func find_reachable(astar:AStarGrid2D, current:Vector2, origin:Vector2):
-	#if(not astar.is_point_solid(current)):
-		#return current
-	#
-	#var closest = current + Vector2(-1, 0)
-	#for x in range(-1, 1, 2):
-		#for y in range(-1, 1, 2):
-			#if current.y+y >= 0 and current.y <= gridSize.y+y and \
-			#current.x+x >= 0 and current.x <= gridSize.x+x and\
-			#not astar.is_point_solid(current + Vector2(x, y)):
-				#if (closest-origin).length() <  (origin-(current+Vector2(x, y))).length():
-					#closest = current+Vector2(x, y)
-	#if not astar.is_point_solid(closest):
-		#return closest
 
 func printGrid():
 	for y in gridSize.y:

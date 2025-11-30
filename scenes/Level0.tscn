@@ -1,0 +1,225 @@
+[gd_scene load_steps=23 format=3 uid="uid://b3w6px4miuqlw"]
+
+[ext_resource type="PackedScene" uid="uid://b3ob4otxsi0r1" path="res://scenes/UI/MainUI.tscn" id="1_tw76y"]
+[ext_resource type="PackedScene" uid="uid://b82lmmp4ei04d" path="res://scenes/defaultWorld.tscn" id="2_5a2uh"]
+[ext_resource type="PackedScene" uid="uid://oqbxxefaqmei" path="res://scenes/UI/TutorialDisplay.tscn" id="3_xuf1b"]
+[ext_resource type="PackedScene" uid="uid://c1shi6l6dy3g6" path="res://scenes/Player.tscn" id="4_uxrqx"]
+[ext_resource type="PackedScene" uid="uid://dr1ea0arqcnag" path="res://scenes/Pot.tscn" id="6_oxm3q"]
+[ext_resource type="Script" uid="uid://bvxccpt785iys" path="res://scripts/Managers/Tutorial.gd" id="7_bbv6a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npxhf"]
+bg_color = Color(0, 0, 0, 0.78431374)
+corner_radius_top_left = 120
+corner_radius_top_right = 120
+corner_radius_bottom_right = 120
+corner_radius_bottom_left = 120
+shadow_color = Color(0, 0, 0, 0.39215687)
+shadow_size = 10
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3r0yy"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tgokq"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_s6dwg"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_t4fd6"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xrjct"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_yehrk"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_r6rcy"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_o1nsf"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_k2phh"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_62qj0"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qkh5s"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_84m4n"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tw76y"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_npxhf"]
+viewport_path = NodePath("progressViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5a2uh"]
+viewport_path = NodePath("progressViewport")
+
+[node name="TutoLevel0" type="Node3D"]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 180.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 240
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 240
+theme_override_constants/margin_bottom = 80
+
+[node name="Panel" type="Panel" parent="CanvasLayer2/MarginContainer"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_npxhf")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="CanvasLayer2/MarginContainer/Panel/MarginContainer"]
+custom_minimum_size = Vector2(280, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.8456518, 0.0012498593, 0.93825626, 1)
+theme_override_font_sizes/font_size = 30
+text = "Use ZQSD to move around, LMB or K to use an object and RMB or L to pick up or drop an object"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CanvasLayer" parent="." instance=ExtResource("1_tw76y")]
+clientsPatience = true
+recipeOverride = Array[int]([23, 8])
+timerEnabled = false
+displayFinalScore = false
+
+[node name="World" parent="." instance=ExtResource("2_5a2uh")]
+
+[node name="tuto0" parent="World/Environnement/Interactible/generator" index="3" instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+viewport = SubResource("ViewportTexture_3r0yy")
+text = "Grab a tomato with RMB or L"
+
+[node name="tuto1" parent="World/Environnement/Interactible/generator" index="4" instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+viewport = SubResource("ViewportTexture_tgokq")
+text = "Store the tomato here with RMB or L"
+
+[node name="tuto2" parent="World/Environnement/Interactible/generator" index="5" instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+viewport = SubResource("ViewportTexture_s6dwg")
+text = "Chop the tomato with LMB or K"
+
+[node name="counter5" parent="World/Environnement/Interactible" index="34" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pot2")
+
+[node name="tuto3" parent="World/Environnement/Interactible/generator3" index="3" instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+viewport = SubResource("ViewportTexture_t4fd6")
+text = "Grab a salad with RMB or L"
+
+[node name="tuto4" parent="World/Environnement/Interactible/generator3" index="4" instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+viewport = SubResource("ViewportTexture_xrjct")
+text = "Store the salad here with RMB or L"
+
+[node name="tuto5" parent="World/Environnement/Interactible/generator3" index="5" instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+viewport = SubResource("ViewportTexture_yehrk")
+text = "Chop the salad with LMB or K"
+
+[node name="tuto9" parent="World/Environnement/Interactible/ClientTable/ClientTable" index="2" instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+viewport = SubResource("ViewportTexture_r6rcy")
+text = "Serve the client with RMB or L"
+
+[node name="servePoint1" parent="World/Environnement/Interactible/ClientTable" index="2"]
+visible = false
+available = false
+
+[node name="servePoint3" parent="World/Environnement/Interactible/ClientTable" index="4"]
+visible = false
+available = false
+
+[node name="servePoint4" parent="World/Environnement/Interactible/ClientTable" index="5"]
+visible = false
+available = false
+
+[node name="Door" parent="World/Environnement/Interactible" index="42"]
+timer = 5
+clientLimit = 2
+
+[node name="generator5" parent="World/Environnement/Interactible" index="43"]
+plateNbr = 1
+
+[node name="tuto6" parent="World/Environnement/Interactible/generator5" index="3" instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+viewport = SubResource("ViewportTexture_o1nsf")
+text = "Grab a plate with RMB or L"
+
+[node name="tuto7" parent="World/Environnement/Interactible/generator5" index="4" instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+viewport = SubResource("ViewportTexture_k2phh")
+text = "Put ingredients in the plate with RMB or L"
+
+[node name="tuto8" parent="World/Environnement/Interactible/generator5" index="5" instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+viewport = SubResource("ViewportTexture_62qj0")
+text = "Put ingredients in the plate with RMB or L"
+
+[node name="tuto10" parent="World/Environnement/Interactible/Sink" index="4" instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+viewport = SubResource("ViewportTexture_qkh5s")
+text = "Store the dirty plate here with RMB or L"
+
+[node name="tuto11" parent="World/Environnement/Interactible/Sink" index="5" instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+viewport = SubResource("ViewportTexture_84m4n")
+text = "Clean the plate with LMB or K"
+
+[node name="Player" parent="." instance=ExtResource("4_uxrqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.729166, -0.0068730097, 1.0092611)
+
+[node name="Pot2" parent="." instance=ExtResource("6_oxm3q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.93954, 1.6974955, 5.0118456)
+
+[node name="Tutorial" type="Node3D" parent="." node_paths=PackedStringArray("displayList")]
+script = ExtResource("7_bbv6a")
+displayList = [NodePath("../World/Environnement/Interactible/generator/tuto0"), NodePath("../World/Environnement/Interactible/generator/tuto1"), NodePath("../World/Environnement/Interactible/generator/tuto2"), NodePath("../World/Environnement/Interactible/generator3/tuto3"), NodePath("../World/Environnement/Interactible/generator3/tuto4"), NodePath("../World/Environnement/Interactible/generator3/tuto5"), NodePath("../World/Environnement/Interactible/generator5/tuto6"), NodePath("../World/Environnement/Interactible/generator5/tuto7"), NodePath("../World/Environnement/Interactible/generator5/tuto8"), NodePath("../World/Environnement/Interactible/ClientTable/ClientTable/tuto9"), NodePath("../World/Environnement/Interactible/Sink/tuto10"), NodePath("../World/Environnement/Interactible/Sink/tuto11"), NodePath("../tuto12"), NodePath("../tuto13"), NodePath("../tuto14")]
+
+[node name="tuto12" parent="." instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.479601, 4, 5.2706814)
+viewport = SubResource("ViewportTexture_tw76y")
+text = "Chop then store three tomatoes in the pot"
+
+[node name="tuto13" parent="." instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.479601, 4, 5.2706814)
+viewport = SubResource("ViewportTexture_npxhf")
+text = "Put the pot on the stove"
+
+[node name="tuto14" parent="." instance=ExtResource("3_xuf1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.479601, 4, 5.2706814)
+viewport = SubResource("ViewportTexture_5a2uh")
+text = "Put the soup in a plate"
+
+[editable path="World"]
+[editable path="World/Environnement/Interactible/ClientTable"]

@@ -13,7 +13,6 @@ var inAction:bool = false
 var isPunching:bool = false
 var punchHitbox:bool = false
 
-
 func _physics_process(delta):
 	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
@@ -50,16 +49,6 @@ func _physics_process(delta):
 			hovered.unhovered()
 			hovered = null
 
-func _init() -> void:
-	speed = 5
-	ACCELERATION = 25
-	bumpStrength = 7
-	gravity = 20
-	friction = 40
-	dishesSpeed = 1.5
-	cuttingSpeed = 1.5
-	mixingProficiency = 0.3
-	servingProficiency = 0.5
 	
 func pickUp(obj:Movable):
 	if obj:
@@ -91,8 +80,9 @@ func _process(_delta: float) -> void:
 				hovered.storedObject.mix(objectInHand, mixingProficiency)
 			elif objectInHand:
 				if hovered is ClientTable:
-					objectInHand.increaseQuality(servingProficiency)
-				hovered.store(objectInHand, mixingProficiency)
+					hovered.store(objectInHand, servingProficiency)
+				else:
+					hovered.store(objectInHand, mixingProficiency)
 			else:
 				var obj = hovered.unstore()
 				pickUp(obj)
@@ -134,3 +124,7 @@ func check_sphere_collision(pos: Vector3, radius: float):
 func _ready():
 	add_to_group("player")
 	storePoint.call_deferred("reparent", get_tree().current_scene)
+	ACCELERATION = 25
+	bumpStrength = 7
+	gravity = 20
+	friction = 40

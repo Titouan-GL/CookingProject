@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpuvxfaeldjuf"]
+
+[ext_resource type="PackedScene" uid="uid://b3ob4otxsi0r1" path="res://scenes/UI/MainUI.tscn" id="1_s7lbv"]
+[ext_resource type="PackedScene" uid="uid://b82lmmp4ei04d" path="res://scenes/defaultWorld.tscn" id="2_4uwkd"]
+[ext_resource type="PackedScene" uid="uid://c1shi6l6dy3g6" path="res://scenes/Player.tscn" id="3_5crjr"]
+[ext_resource type="PackedScene" uid="uid://81p0llkphiwe" path="res://scenes/Pan.tscn" id="4_t6sfl"]
+[ext_resource type="PackedScene" uid="uid://dr1ea0arqcnag" path="res://scenes/Pot.tscn" id="5_a4hw4"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("1_s7lbv")]
+
+[node name="World" parent="." instance=ExtResource("2_4uwkd")]
+
+[node name="counter" parent="World/Environnement/Interactible" index="8" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pot")
+
+[node name="counter3" parent="World/Environnement/Interactible" index="11" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pan2")
+
+[node name="counter10" parent="World/Environnement/Interactible" index="22" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pan")
+
+[node name="counter5" parent="World/Environnement/Interactible" index="34" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pot2")
+
+[node name="Player" parent="." instance=ExtResource("3_5crjr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.729166, -0.0068730097, 1.0092611)
+
+[node name="Pan" parent="." instance=ExtResource("4_t6sfl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.133906, 1.3014183, -2.089312)
+
+[node name="Pan2" parent="." instance=ExtResource("4_t6sfl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.79669, 1.0251608, -4.219519)
+
+[node name="Pot" parent="." instance=ExtResource("5_a4hw4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.121968, 1.2310169, 3.012409)
+
+[node name="Pot2" parent="." instance=ExtResource("5_a4hw4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.93954, 1.6974955, 5.0118456)
+
+[editable path="World"]

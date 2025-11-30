@@ -3,11 +3,12 @@ extends Character
 class_name Cook
 
 var objectInHand:Movable
-var dishesSpeed
-var cuttingSpeed
-var mixingProficiency
-var servingProficiency
+@export var dishesSpeed:float = -1
+@export var cuttingSpeed:float = -1
+@export var mixingProficiency:float = -1
+@export var servingProficiency:float = -1
 @export var storePoint: Node3D
+
 
 func pickUp(obj:Movable):
 	if(objectInHand):

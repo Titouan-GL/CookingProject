@@ -11,7 +11,7 @@ func store(i:Movable, _proba:float=0) -> bool:
 				shortest_time = s
 	if shortest_time:
 		if ishovered : hovered()
-		return shortest_time.store(i)
+		return shortest_time.store(i, _proba)
 	return false
 
 func hovered():

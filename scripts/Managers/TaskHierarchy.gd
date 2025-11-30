@@ -21,7 +21,7 @@ func findAgentClosestToObj(obj:Node3D, task:Enum.TaskType) -> Cook:
 			if(agent.objectInHand == obj):
 				return agent
 			var distance:float = agent.storePoint.global_position.distance_to(obj.global_position)
-			if(not task in agent.prohibitedTasks and agent.objectInHand == null and agent.task == null and distance < bestDistance):
+			if(not task in agent.prohibitedTasks and agent.objectInHand == null and agent.task == null and distance < bestDistance and agent.try_target_reachable(obj)):
 				bestDistance = distance
 				bestAgent = agent;
 		return bestAgent
@@ -34,7 +34,7 @@ func find_closest_interactible(agent:Node3D, object:Node3D, s:String) -> Interac
 		var distance:float = obj.global_position.distance_to(agent.global_position)
 		if(obj.storedObject == object):
 			return obj
-		elif(not obj.occupied and not obj.storedObject and distance < bestDistance):
+		elif(not obj.occupied and not obj.storedObject and distance < bestDistance and (agent is Player or agent.try_target_reachable(obj))):
 			bestDistance = distance
 			bestObj = obj;
 	return bestObj

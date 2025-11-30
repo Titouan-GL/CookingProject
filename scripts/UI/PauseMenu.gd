@@ -7,6 +7,7 @@ class_name PauseMenu
 @export var RecipesPanel:Control
 @export var OptionsPanel:Control
 @export var AgentButton:Button
+@export var RecipesButton:Button
 @export var agentButtonGroup:ButtonGroup
 @export var skeletonNameLabel:Label
 @export var speedBar:ProgressBar
@@ -31,10 +32,14 @@ const recipesDisplay:Dictionary = {
 
 func open():
 	visible = true
-	AgentButton.button_pressed = true
-	_on_minions_button_pressed()
 	if AgentIconsArray.size() > 0:
+		AgentButton.button_pressed = true
+		_on_minions_button_pressed()
 		openAgentIcon(AgentIconsArray.keys()[0])
+	else:
+		AgentButton.visible = false
+		RecipesButton.button_pressed = true
+		_on_recipes_button_pressed()
 	_on_bur_ste_sal_tom_button_pressed()
 	defaultRecipeButton.button_pressed = true
 	
@@ -66,11 +71,11 @@ func openAgentIcon(icon:AgentIcon):
 	var agent = AgentIconsArray[icon]
 	icon.button_pressed = true
 	skeletonNameLabel.text = agent.characterName
-	speedBar.value = 100*(agent.speed - agent.speedRange.x)/(agent.speedRange.z-agent.speedRange.x)
-	dishesBar.value = 100*(agent.dishesSpeed - agent.dishesRange.x)/(agent.dishesRange.z-agent.dishesRange.x)
-	cuttingBar.value = 100*(agent.cuttingSpeed - agent.cuttingRange.x)/(agent.cuttingRange.z - agent.cuttingRange.x)
-	MixingBar.value = 100*(agent.mixingProficiency - agent.mixingRange.x)/(agent.mixingRange.z-agent.mixingRange.x)
-	ServingBar.value = 100*(agent.servingProficiency - agent.servingRange.x)/(agent.servingRange.z - agent.servingRange.x)
+	speedBar.value = min(100,100*(agent.speed - agent.speedRange.x)/(agent.speedRange.z-agent.speedRange.x))
+	dishesBar.value = min(100,100*(agent.dishesSpeed - agent.dishesRange.x)/(agent.dishesRange.z-agent.dishesRange.x))
+	cuttingBar.value = min(100,100*(agent.cuttingSpeed - agent.cuttingRange.x)/(agent.cuttingRange.z - agent.cuttingRange.x))
+	MixingBar.value = min(100,100*(agent.mixingProficiency - agent.mixingRange.x)/(agent.mixingRange.z-agent.mixingRange.x))
+	ServingBar.value = min(100,100*(agent.servingProficiency - agent.servingRange.x)/(agent.servingRange.z - agent.servingRange.x))
 	updateAgentDisplay()
 
 

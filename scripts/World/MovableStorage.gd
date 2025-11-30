@@ -52,16 +52,16 @@ func mix(i, proba:float):
 					if recipe != emptyName : increaseQuality(proba)
 					mixRecipe(i.empty())
 				elif(i.emptyName in mixed):
-					quality += i.quality
-					if i.recipe != emptyName : i.increaseQuality(proba)
+					i.quality += quality
+					if i.recipe != i.emptyName : i.increaseQuality(proba)
 					i.mixRecipe(empty())
 				elif(self is Plate):
 					quality += i.quality
 					if recipe != emptyName : increaseQuality(proba)
 					mixRecipe(i.empty())
 				elif(i is Plate):
-					quality += i.quality
-					if i.recipe != emptyName : i.increaseQuality(proba)
+					i.quality += quality
+					if i.recipe != i.emptyName : i.increaseQuality(proba)
 					i.mixRecipe(empty())
 				
 

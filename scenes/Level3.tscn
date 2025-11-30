@@ -1,0 +1,140 @@
+[gd_scene load_steps=11 format=3 uid="uid://ds6ea21onvbnp"]
+
+[ext_resource type="PackedScene" uid="uid://b3ob4otxsi0r1" path="res://scenes/UI/MainUI.tscn" id="1_fxntt"]
+[ext_resource type="PackedScene" uid="uid://b82lmmp4ei04d" path="res://scenes/defaultWorld.tscn" id="2_3iwpl"]
+[ext_resource type="PackedScene" uid="uid://b67m5mnbrjcmo" path="res://scenes/agent.tscn" id="3_thei6"]
+[ext_resource type="Resource" uid="uid://d22mj86xlfnmq" path="res://resources/DefaultGlasses.tres" id="4_iw2mh"]
+[ext_resource type="PackedScene" uid="uid://81p0llkphiwe" path="res://scenes/Pan.tscn" id="4_thei6"]
+[ext_resource type="PackedScene" uid="uid://dr1ea0arqcnag" path="res://scenes/Pot.tscn" id="5_iw2mh"]
+[ext_resource type="Resource" uid="uid://f51pdnf50ru8" path="res://resources/DefaultMoustache.tres" id="5_opw0y"]
+[ext_resource type="Resource" uid="uid://bdsw3tv77f5ki" path="res://resources/DefaultPiercings.tres" id="6_g7sqe"]
+[ext_resource type="Script" uid="uid://bvxccpt785iys" path="res://scripts/Managers/Tutorial.gd" id="6_opw0y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svatc"]
+bg_color = Color(0, 0, 0, 0.78431374)
+corner_radius_top_left = 120
+corner_radius_top_right = 120
+corner_radius_bottom_right = 120
+corner_radius_bottom_left = 120
+shadow_color = Color(0, 0, 0, 0.39215687)
+shadow_size = 10
+
+[node name="TutoLevel3" type="Node3D"]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 180.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 80
+
+[node name="Panel" type="Panel" parent="CanvasLayer2/MarginContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_svatc")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="CanvasLayer2/MarginContainer/Panel/MarginContainer"]
+custom_minimum_size = Vector2(280, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.8456518, 0.0012498593, 0.93825626, 1)
+theme_override_font_sizes/font_size = 30
+text = "The quality of a meal can increase depending on the proficiency of the cook preparing it. Open the pause menu with ESCAPE and assign agents to different tasks to create a golden star meal."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CanvasLayer" parent="." instance=ExtResource("1_fxntt")]
+clientsPatience = true
+timerEnabled = false
+displayFinalScore = false
+recipesOption = Array[int]([18])
+
+[node name="World" parent="." instance=ExtResource("2_3iwpl")]
+
+[node name="Camera3D" parent="World" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.7121608, 0.7020164, 0, -0.7020164, 0.7121608, -6.749874, 20.78834, 19.686356)
+
+[node name="Ground" parent="World/Environnement/Decor" index="0"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.2247686, -0.52816135, 0.3001965)
+
+[node name="counter" parent="World/Environnement/Interactible" index="8" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pot")
+
+[node name="counter10" parent="World/Environnement/Interactible" index="22" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pan")
+
+[node name="servePoint1" parent="World/Environnement/Interactible/ClientTable" index="2"]
+visible = false
+available = false
+
+[node name="servePoint3" parent="World/Environnement/Interactible/ClientTable" index="4"]
+visible = false
+available = false
+
+[node name="Door" parent="World/Environnement/Interactible" index="42"]
+timer = 2
+
+[node name="generator5" parent="World/Environnement/Interactible" index="43"]
+plateNbr = 2
+
+[node name="agent" parent="World/Environnement/Interactible" index="46" node_paths=PackedStringArray("customOption") instance=ExtResource("3_thei6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.836102, 0.80356824, 1)
+dishesSpeed = 1.5
+cuttingSpeed = 1.5
+mixingProficiency = 0.0
+servingProficiency = 1.0
+speed = 5.0
+characterName = "Flash McSkeleton"
+customOption = {
+ExtResource("4_iw2mh"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
+ExtResource("5_opw0y"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
+ExtResource("6_g7sqe"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
+}
+
+[node name="agent2" parent="World/Environnement/Interactible" index="47" node_paths=PackedStringArray("customOption") instance=ExtResource("3_thei6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.140024, 0.80356824, 1.8979917)
+dishesSpeed = 1.5
+cuttingSpeed = 1.5
+mixingProficiency = 1.0
+servingProficiency = 0.0
+speed = 5.0
+characterName = "Skeletor"
+customOption = {
+ExtResource("4_iw2mh"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
+ExtResource("5_opw0y"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
+ExtResource("6_g7sqe"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
+}
+
+[node name="Pan" parent="." instance=ExtResource("4_thei6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.133906, 1.3014183, -2.089312)
+
+[node name="Pot" parent="." instance=ExtResource("5_iw2mh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.121968, 1.2310169, 3.012409)
+
+[node name="Tutorial" type="Node3D" parent="."]
+script = ExtResource("6_opw0y")
+level = 3
+
+[editable path="World"]
+[editable path="World/Environnement/Interactible/ClientTable"]

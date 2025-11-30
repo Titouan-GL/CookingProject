@@ -387,7 +387,12 @@ idealGrabPoint = NodePath("idealGrabPoint")
 hitArea = NodePath("Area3D")
 staffPoint = NodePath("Mesh/Armature/Skeleton3D/BoneAttachment3D/StaffPoint")
 punchEffect = NodePath("PunchEffect")
+dishesSpeed = 1.5
+cuttingSpeed = 1.5
+mixingProficiency = 0.3
+servingProficiency = 0.5
 storePoint = NodePath("grabPoint")
+speed = 5.0
 pushEffect = NodePath("PushEffect")
 
 [node name="Mesh" parent="." node_paths=PackedStringArray("player", "animationTree", "beamParticles", "powerParticles", "impactParticles", "grabPoint", "staffPoint", "knifeAnimation", "knife", "spongeAnimation", "sponge") instance=ExtResource("1_p0vlq")]
@@ -406,27 +411,27 @@ spongeAnimation = NodePath("../Sponge/AnimationPlayer")
 sponge = NodePath("../Sponge")
 
 [node name="Skeleton3D" parent="Mesh/Armature" index="0"]
-bones/1/rotation = Quaternion(-1.4331631e-09, -1.1802345e-07, 0.012022244, 0.9999278)
-bones/1/scale = Vector3(1, 1.0126415, 1)
+bones/1/rotation = Quaternion(-3.6636135e-11, -1.174296e-07, 0.00030732623, 1)
+bones/1/scale = Vector3(0.99999994, 1.0018847, 1)
 bones/2/rotation = Quaternion(0, 5.540273e-17, 0, 1)
-bones/3/position = Vector3(-2.2594466e-09, 0.34128714, 1.4554425e-09)
+bones/3/position = Vector3(-3.1432235e-10, 0.31454444, -1.2942303e-09)
 bones/3/rotation = Quaternion(-3.469447e-18, 1.1920929e-07, 4.135903e-25, 1)
-bones/4/rotation = Quaternion(-0.115327455, 0.0054402966, 0.001318093, 0.99331176)
-bones/6/rotation = Quaternion(-0.16274063, 0.42422876, 0.30892065, 0.83553195)
+bones/4/rotation = Quaternion(-0.16192627, -0.007981753, -0.0012406787, 0.9867698)
+bones/6/rotation = Quaternion(-0.3139501, 0.28563786, 0.382647, 0.8206264)
 bones/7/rotation = Quaternion(-1.6529992e-08, 1.02979214e-07, -0.0011607563, 0.99999934)
 bones/8/rotation = Quaternion(0.2631279, -0.3090731, -0.68957347, 0.59977156)
-bones/9/rotation = Quaternion(-0.45711657, -0.12480935, -0.44018236, 0.76269686)
+bones/9/rotation = Quaternion(-0.3216853, -0.27777353, -0.38603342, 0.8187422)
 bones/10/rotation = Quaternion(2.6680604e-09, -5.736329e-07, 0.0011607328, 0.99999934)
 bones/11/rotation = Quaternion(0.7071068, -2.84119e-07, -2.84119e-07, 0.7071068)
-bones/12/position = Vector3(2.990229e-08, -0.26511127, -0.12541929)
-bones/13/rotation = Quaternion(-3.9609607e-05, 1.1486937e-07, 0.9999819, 0.006027826)
-bones/15/rotation = Quaternion(0.0006713315, 0.10487476, 0.99446714, -0.0059904265)
+bones/12/position = Vector3(2.3059368e-08, -0.26511127, -0.096718)
+bones/13/rotation = Quaternion(-3.9609604e-05, 1.1486938e-07, 0.9999819, 0.006027826)
+bones/15/rotation = Quaternion(4.6816094e-05, 0.0012351965, 0.99998105, -0.0060277716)
 
 [node name="NurbsPath" parent="Mesh/Armature/Skeleton3D" index="2"]
 material_override = ExtResource("4_qu4a1")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Mesh/Armature/Skeleton3D" index="7"]
-transform = Transform3D(-0.9155883, -0.40131462, -0.0256887, 0.30505607, -0.7345701, 0.6267184, -0.26700604, 0.5589139, 0.7850625, -0.55463487, 0.53032243, 0.4828905)
+transform = Transform3D(-0.89486796, -0.44341016, -0.050980676, 0.42213702, -0.8785702, 0.23170616, -0.14725347, 0.18547599, 0.97155297, -0.56576025, 0.47108826, 0.3160016)
 bone_name = "Hand.R"
 bone_idx = 7
 

@@ -22,6 +22,9 @@ var recipesDisplay:Dictionary
 func act():
 	grabTime = maxGrabTime
 
+func try_target_reachable(target_pos):
+	return nav_agent.try_target_reachable(global_position, target_pos, false)
+
 func executeTask():
 	if(task and grabTime <= 0):
 		#if(objectInHand):
@@ -34,7 +37,6 @@ func executeTask():
 			#if target is IntServe : print(objectInHand, " " , task.object)
 			if((target is Interactible and target.storedObject == task.object and not target is IntGenerator) or objectInHand == task.object):
 				nav_agent.set_target_position(target.global_position)
-				#if target is IntServe : print("ok c'est valide")
 				if(nav_agent.is_navigation_finished()):
 					match order:
 						Enum.Order.USE:
@@ -171,11 +173,11 @@ func randMaxAvgMin(minVal:float, avg:float, maxVal:float):
 
 
 func initRandomStats():
-	speed = randMaxAvgMin(speedRange.x, speedRange.y, speedRange.z)
-	cuttingSpeed = randMaxAvgMin(cuttingRange.x, cuttingRange.y, cuttingRange.z)
-	dishesSpeed = randMaxAvgMin(dishesRange.x, dishesRange.y, dishesRange.z)
-	mixingProficiency = randMaxAvgMin(mixingRange.x, mixingRange.y, mixingRange.z)
-	servingProficiency = randMaxAvgMin(servingRange.x, servingRange.y, servingRange.z)
+	if speed < 0: speed = randMaxAvgMin(speedRange.x, speedRange.y, speedRange.z)
+	if cuttingSpeed < 0 :cuttingSpeed = randMaxAvgMin(cuttingRange.x, cuttingRange.y, cuttingRange.z)
+	if dishesSpeed < 0 : dishesSpeed = randMaxAvgMin(dishesRange.x, dishesRange.y, dishesRange.z)
+	if mixingProficiency < 0 : mixingProficiency = randMaxAvgMin(mixingRange.x, mixingRange.y, mixingRange.z)
+	if servingProficiency < 0 : servingProficiency = randMaxAvgMin(servingRange.x, servingRange.y, servingRange.z)
 
 func _init() -> void:
 	ACCELERATION = 25

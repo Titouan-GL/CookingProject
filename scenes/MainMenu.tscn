@@ -79,7 +79,63 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
 
-[node name="Start" type="Button" parent="Control/VBoxContainer"]
+[node name="Tutorial" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+text = "  Tutorial 1  "
+
+[node name="Tutorial2" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+text = "  Tutorial 2  "
+
+[node name="Tutorial3" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+text = "  Tutorial 3  "
+
+[node name="Tutorial4" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+text = "  Tutorial 4  "
+
+[node name="StartNoAgent" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -93,7 +149,21 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
 text = "  Start (without agents)  "
 
-[node name="StartAgents" type="Button" parent="Control/VBoxContainer"]
+[node name="StartNoPlayer" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+text = "  Start (without player)  "
+
+[node name="StartRegular" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -106,20 +176,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
 text = "Start (with agents)"
-
-[node name="HowToPlay" type="Button" parent="Control/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
-theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
-text = "How To Play"
 
 [node name="Exit" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
@@ -143,9 +199,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -279.0
-offset_top = -208.0
+offset_top = -376.0
 offset_right = 279.0
-offset_bottom = -142.0
+offset_bottom = -310.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.79066235, 0.1035481, 0.99999994, 1)
@@ -162,9 +218,13 @@ vertical_alignment = 1
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="Control/VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/StartAgents" to="." method="_on_start_agents_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/HowToPlay" to="." method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Tutorial2" to="." method="_on_tutorial_2_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Tutorial3" to="." method="_on_tutorial_3_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Tutorial4" to="." method="_on_tutorial_4_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/StartNoAgent" to="." method="_on_start_no_agent_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/StartNoPlayer" to="." method="_on_start_no_player_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/StartRegular" to="." method="_on_start_regular_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Control2/MarginContainer/HBoxContainer/MarginContainer/BackFromHowToPlay" to="." method="_on_back_from_how_to_play_pressed"]
 

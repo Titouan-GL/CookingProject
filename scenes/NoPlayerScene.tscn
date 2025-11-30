@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://bavjlnup5pg4g"]
+
+[ext_resource type="PackedScene" uid="uid://b3ob4otxsi0r1" path="res://scenes/UI/MainUI.tscn" id="1_ihyuw"]
+[ext_resource type="PackedScene" uid="uid://b82lmmp4ei04d" path="res://scenes/defaultWorld.tscn" id="2_v317f"]
+[ext_resource type="PackedScene" uid="uid://81p0llkphiwe" path="res://scenes/Pan.tscn" id="4_67gsb"]
+[ext_resource type="PackedScene" uid="uid://dr1ea0arqcnag" path="res://scenes/Pot.tscn" id="5_avokb"]
+[ext_resource type="PackedScene" uid="uid://b67m5mnbrjcmo" path="res://scenes/agent.tscn" id="6_idwq5"]
+[ext_resource type="Resource" uid="uid://d22mj86xlfnmq" path="res://resources/DefaultGlasses.tres" id="7_h4yma"]
+[ext_resource type="Resource" uid="uid://f51pdnf50ru8" path="res://resources/DefaultMoustache.tres" id="8_yp81d"]
+[ext_resource type="Resource" uid="uid://bdsw3tv77f5ki" path="res://resources/DefaultPiercings.tres" id="9_u5nf0"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("1_ihyuw")]
+
+[node name="World" parent="." instance=ExtResource("2_v317f")]
+
+[node name="counter" parent="World/Environnement/Interactible" index="8" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pot")
+
+[node name="counter3" parent="World/Environnement/Interactible" index="11" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pan2")
+
+[node name="counter10" parent="World/Environnement/Interactible" index="22" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pan")
+
+[node name="counter5" parent="World/Environnement/Interactible" index="34" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pot2")
+
+[node name="Pan" parent="." instance=ExtResource("4_67gsb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.133906, 1.3014183, -2.089312)
+
+[node name="Pan2" parent="." instance=ExtResource("4_67gsb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.79669, 1.0251608, -4.219519)
+
+[node name="Pot" parent="." instance=ExtResource("5_avokb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.121968, 1.2310169, 3.012409)
+
+[node name="Pot2" parent="." instance=ExtResource("5_avokb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.93954, 1.6974955, 5.0118456)
+
+[node name="agent" parent="." node_paths=PackedStringArray("customOption") instance=ExtResource("6_idwq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.921566, 0.6980016, -0.80517197)
+characterName = "Johnny McSkeleton"
+customOption = {
+ExtResource("7_h4yma"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
+ExtResource("8_yp81d"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
+ExtResource("9_u5nf0"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
+}
+
+[node name="agent2" parent="." node_paths=PackedStringArray("customOption") instance=ExtResource("6_idwq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.812902, 0.6980016, -0.39073324)
+characterName = "Boneman the 5th"
+customOption = {
+ExtResource("7_h4yma"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
+ExtResource("8_yp81d"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
+ExtResource("9_u5nf0"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
+}
+
+[node name="agent3" parent="." node_paths=PackedStringArray("customOption") instance=ExtResource("6_idwq5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.743429, 0.69800186, -2.45209)
+characterName = "Steve"
+customOption = {
+ExtResource("7_h4yma"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
+ExtResource("8_yp81d"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
+ExtResource("9_u5nf0"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
+}
+
+[editable path="World"]

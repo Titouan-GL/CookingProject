@@ -3,7 +3,10 @@ extends Interactible
 @export var anim:AnimationPlayer
 
 func store(i:Movable, _proba:float= 0) -> bool:
-	if i is MovableStorage:
+	if i is Plate:
+		i.mealFinished()
+		anim.play("Trash")
+	elif i is MovableStorage:
 		i.empty()
 		anim.play("Trash")
 	else:

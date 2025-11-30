@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 class_name Character
 
-var speed
+@export var speed:float = -1
 var ACCELERATION
 var addedVelocity = Vector3.ZERO
 var bumpStrength:float
@@ -49,11 +49,16 @@ func _physics_process(delta: float) -> void:
 			addedVelocity = Vector3.ZERO
 			
 	var collision:KinematicCollision3D = move_and_collide(Vector3(velocity.x, 0, velocity.z)*delta, true)
-	if(collision and collision.get_collider() is Character):
+	if collision :
 		var dir:Vector3 = (collision.get_collider().global_position-global_position).normalized()
-		collision.get_collider().bumpedInto(dir * 1.5, -get_global_transform().basis.x)
-		bumpedInto(-dir, -get_global_transform().basis.x)
-		
-		if pushEffect:
-			pushEffect.global_position = collision.get_position()
-			pushEffect.emitting = true
+		if collision.get_collider() is Character:
+			collision.get_collider().bumpedInto(dir * 1.5, -get_global_transform().basis.x)
+			bumpedInto(-dir, -get_global_transform().basis.x)
+			
+			if pushEffect:
+				pushEffect.global_position = collision.get_position()
+				pushEffect.emitting = true
+		elif collision.get_collider().get_collision_layer() == 1:
+			var reflected = (dir-2*dir.dot(collision.get_normal()) * collision.get_normal()).normalized()
+			addedVelocity = reflected * addedVelocity.length()
+			

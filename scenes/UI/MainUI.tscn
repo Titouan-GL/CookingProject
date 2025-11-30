@@ -51,15 +51,9 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_h4gv2"]
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("scoreLabel", "scoreLabel2", "timeBar", "gameUI", "gameOverUI", "pauseMenu")]
+[node name="CanvasLayer" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_h4gv2")
-scoreLabel = NodePath("Score/MarginContainer/ProgressBar/Label")
-scoreLabel2 = NodePath("EndScreen/VBoxContainer/Label")
-timeBar = NodePath("Score/MarginContainer/ProgressBar")
-gameUI = NodePath("Score")
-gameOverUI = NodePath("EndScreen")
-pauseMenu = NodePath("PauseMenu")
 
 [node name="EndScreen" type="Panel" parent="."]
 anchors_preset = 15
@@ -83,7 +77,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="EndScreen/VBoxContainer"]
+[node name="FinalScoreLabel" type="Label" parent="EndScreen/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Score = 0"
@@ -150,7 +144,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_emgxq")
 value = 12.77
 show_percentage = false
 
-[node name="Label" type="Label" parent="Score/MarginContainer/ProgressBar"]
+[node name="MainScoreLabel" type="Label" parent="Score/MarginContainer/ProgressBar"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -165,6 +159,7 @@ text = "Score = 0"
 horizontal_alignment = 1
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("checkButtons") instance=ExtResource("2_dfsol")]
+visible = false
 agentButtonGroup = SubResource("ButtonGroup_h4gv2")
 checkButtons = {
 1: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CutLabel/CutBox"),
@@ -172,3 +167,6 @@ checkButtons = {
 7: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/MixLabel/MixBox"),
 8: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CleanLabel/CleanBox")
 }
+
+[connection signal="pressed" from="EndScreen/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="EndScreen/VBoxContainer/Retry" to="." method="_on_retry_pressed"]

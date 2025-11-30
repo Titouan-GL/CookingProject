@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=3 uid="uid://ityt47irj4np"]
+
+[ext_resource type="PackedScene" uid="uid://b3ob4otxsi0r1" path="res://scenes/UI/MainUI.tscn" id="1_svatc"]
+[ext_resource type="PackedScene" uid="uid://b82lmmp4ei04d" path="res://scenes/defaultWorld.tscn" id="2_ecr63"]
+[ext_resource type="PackedScene" uid="uid://c1shi6l6dy3g6" path="res://scenes/Player.tscn" id="4_kbo48"]
+[ext_resource type="PackedScene" uid="uid://81p0llkphiwe" path="res://scenes/Pan.tscn" id="5_4dyl1"]
+[ext_resource type="PackedScene" uid="uid://dr1ea0arqcnag" path="res://scenes/Pot.tscn" id="6_jxjwb"]
+[ext_resource type="Script" uid="uid://bvxccpt785iys" path="res://scripts/Managers/Tutorial.gd" id="7_2meft"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svatc"]
+bg_color = Color(0, 0, 0, 0.78431374)
+corner_radius_top_left = 120
+corner_radius_top_right = 120
+corner_radius_bottom_right = 120
+corner_radius_bottom_left = 120
+shadow_color = Color(0, 0, 0, 0.39215687)
+shadow_size = 10
+
+[node name="TutoLevel1" type="Node3D"]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 180.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 80
+
+[node name="Panel" type="Panel" parent="CanvasLayer2/MarginContainer"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_svatc")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="CanvasLayer2/MarginContainer/Panel/MarginContainer"]
+custom_minimum_size = Vector2(280, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.8456518, 0.0012498593, 0.93825626, 1)
+theme_override_font_sizes/font_size = 30
+text = "Press ESCAPE to check the recipes and use them to prepare the meals"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CanvasLayer" parent="." instance=ExtResource("1_svatc")]
+clientsPatience = true
+recipeOverride = Array[int]([23, 18, 8, 19])
+timerEnabled = false
+displayFinalScore = false
+
+[node name="World" parent="." instance=ExtResource("2_ecr63")]
+
+[node name="Ground" parent="World/Environnement/Decor" index="0"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.2247686, -0.52816135, 0.3001965)
+
+[node name="counter" parent="World/Environnement/Interactible" index="8" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pot")
+
+[node name="counter10" parent="World/Environnement/Interactible" index="22" node_paths=PackedStringArray("storedObject")]
+storedObject = NodePath("../../../../Pan")
+
+[node name="servePoint2" parent="World/Environnement/Interactible/ClientTable" index="3"]
+visible = false
+available = false
+
+[node name="servePoint4" parent="World/Environnement/Interactible/ClientTable" index="5"]
+visible = false
+available = false
+
+[node name="Door" parent="World/Environnement/Interactible" index="42"]
+timer = 2
+clientLimit = 4
+
+[node name="generator5" parent="World/Environnement/Interactible" index="43"]
+plateNbr = 2
+
+[node name="Player" parent="." instance=ExtResource("4_kbo48")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.729166, -0.0068730097, 1.0092611)
+
+[node name="Pan" parent="." instance=ExtResource("5_4dyl1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.133906, 1.3014183, -2.089312)
+
+[node name="Pot" parent="." instance=ExtResource("6_jxjwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.121968, 1.2310169, 3.012409)
+
+[node name="Tutorial" type="Node3D" parent="."]
+script = ExtResource("7_2meft")
+level = 1
+
+[editable path="World"]
+[editable path="World/Environnement/Interactible/ClientTable"]
