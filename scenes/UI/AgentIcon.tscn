@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dswe17xd8g7qy"]
+[gd_scene load_steps=7 format=3 uid="uid://dswe17xd8g7qy"]
 
 [ext_resource type="PackedScene" uid="uid://dngis7dqmg01l" path="res://scenes/UI/AgentInUI.tscn" id="1_7irsn"]
 [ext_resource type="Script" uid="uid://bp13w4uomrund" path="res://scripts/UI/AgentIcon.gd" id="1_jvxcd"]
@@ -11,13 +11,6 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ud4ea"]
-bg_color = Color(0.29586652, 0.29586652, 0.29586637, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvxcd"]
 corner_radius_top_left = 20
 corner_radius_top_right = 20
@@ -25,7 +18,7 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1gqiv"]
-bg_color = Color(0.3854925, 0.3854925, 0.38549235, 1)
+bg_color = Color(0.29803923, 0.29803923, 0.29803923, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -41,7 +34,7 @@ offset_bottom = -37.24002
 size_flags_horizontal = 0
 mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_7irsn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ud4ea")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jvxcd")
 theme_override_styles/hover = SubResource("StyleBoxFlat_jvxcd")
 theme_override_styles/focus = SubResource("StyleBoxFlat_1gqiv")
 toggle_mode = true

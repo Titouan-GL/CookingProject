@@ -8,6 +8,7 @@ class_name PauseMenu
 @export var OptionsPanel:Control
 @export var AgentButton:Button
 @export var RecipesButton:Button
+@export var OptionsButton:Button
 @export var agentButtonGroup:ButtonGroup
 @export var skeletonNameLabel:Label
 @export var speedBar:ProgressBar
@@ -19,6 +20,8 @@ class_name PauseMenu
 @export var recipeTexture:TextureRect
 @export var recipeNameLabel:Label
 @export var defaultRecipeButton:Button
+@export var firstOptionButton:Button
+@export var recipesButtons:Dictionary[Button,Enum.RecipeNames]
 const inUI = preload("res://scenes/UI/AgentIcon.tscn")
 var AgentIconsArray:Dictionary[AgentIcon, Agent]
 var currentIcon:AgentIcon
@@ -29,33 +32,39 @@ const recipesDisplay:Dictionary = {
 	Enum.RecipeNames.CutTomCutSal:["Tomato Salad", preload("res://assets/textures/tomatoSaladRecipe.png")],
 }
 
+func _ready() -> void:
+	MinionsPanel.visible = true
+	RecipesPanel.visible = false
+	OptionsPanel.visible = false
+	for b in recipesButtons.keys():
+		b.focus_entered.connect(Callable(self, "_on_recipe_selected").bind(b))
+		b.pressed.connect(Callable(self, "_on_recipe_selected").bind(b))
+
 
 func open():
 	visible = true
 	if AgentIconsArray.size() > 0:
 		AgentButton.button_pressed = true
-		_on_minions_button_pressed()
+		_on_minions_button_focus_entered()
 		openAgentIcon(AgentIconsArray.keys()[0])
+		AgentButton.grab_focus()
 	else:
 		AgentButton.visible = false
 		RecipesButton.button_pressed = true
-		_on_recipes_button_pressed()
-	_on_bur_ste_sal_tom_button_pressed()
+		_on_recipes_button_focus_entered()
+		RecipesButton.grab_focus()
+	changeDisplayedRecipe(Enum.RecipeNames.BurSteSalTom)
 	defaultRecipeButton.button_pressed = true
 	
 func close():
 	visible = false
-
-func _ready() -> void:
-	MinionsPanel.visible = true
-	RecipesPanel.visible = false
-	OptionsPanel.visible = false
 
 func addAgentIcon(agent:Agent, mesh:Node3D, charName:String = "John Doe"):
 	var newIcon:AgentIcon = inUI.instantiate()
 	AgentIcons.add_child(newIcon)
 	newIcon.init(mesh, charName, AgentIconsArray.size())
 	newIcon.button_group = agentButtonGroup
+	newIcon.focus_entered.connect(Callable(self, "_on_agent_focus_entered").bind(newIcon))
 	AgentIconsArray[newIcon] = agent
 
 func updateAgentDisplay():
@@ -67,6 +76,7 @@ func updateAgentDisplay():
 			checkButtons[task].button_pressed = true
 
 func openAgentIcon(icon:AgentIcon):
+	icon.grab_focus()
 	currentIcon = icon
 	var agent = AgentIconsArray[icon]
 	icon.button_pressed = true
@@ -80,19 +90,13 @@ func openAgentIcon(icon:AgentIcon):
 
 
 func _on_minions_button_pressed() -> void:
-	MinionsPanel.visible = true
-	RecipesPanel.visible = false
-	OptionsPanel.visible = false
+	currentIcon.grab_focus()
 
 func _on_recipes_button_pressed() -> void:
-	MinionsPanel.visible = false
-	RecipesPanel.visible = true
-	OptionsPanel.visible = false
+	defaultRecipeButton.grab_focus()
 
 func _on_options_button_pressed() -> void:
-	MinionsPanel.visible = false
-	RecipesPanel.visible = false
-	OptionsPanel.visible = true
+	firstOptionButton.grab_focus()
 
 func _process(_delta: float):
 	if agentButtonGroup.get_pressed_button() and agentButtonGroup.get_pressed_button() != currentIcon:
@@ -136,22 +140,6 @@ func changeDisplayedRecipe(recipe:Enum.RecipeNames):
 	recipeNameLabel.text = recipesDisplay[recipe][0]
 	
 
-func _on_bur_ste_sal_tom_button_pressed() -> void:
-	changeDisplayedRecipe(Enum.RecipeNames.BurSteSalTom)
-
-
-func _on_bur_ste_sal_button_pressed() -> void:
-	changeDisplayedRecipe(Enum.RecipeNames.BurSteSal)
-
-
-func _on_tomato_soup_button_pressed() -> void:
-	changeDisplayedRecipe(Enum.RecipeNames.TomatoSoup)
-
-
-func _on_tomato_salad_button_pressed() -> void:
-	changeDisplayedRecipe(Enum.RecipeNames.CutTomCutSal)
-
-
 func _on_retry_pressed() -> void:
 	get_tree().paused = false
 	get_tree().reload_current_scene()
@@ -160,3 +148,31 @@ func _on_retry_pressed() -> void:
 func _on_menu_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+
+
+func _on_minions_button_focus_entered() -> void:
+	AgentButton.button_pressed = true
+	MinionsPanel.visible = true
+	RecipesPanel.visible = false
+	OptionsPanel.visible = false
+
+func _on_recipes_button_focus_entered() -> void:
+	RecipesButton.button_pressed = true
+	MinionsPanel.visible = false
+	RecipesPanel.visible = true
+	OptionsPanel.visible = false
+	
+func _on_options_button_focus_entered() -> void:
+	OptionsButton.button_pressed = true
+	MinionsPanel.visible = false
+	RecipesPanel.visible = false
+	OptionsPanel.visible = true
+
+func _on_agent_focus_entered(icon):
+	openAgentIcon(icon)
+
+func _on_recipe_selected(button:Button):
+	var recipe = recipesButtons[button]
+	changeDisplayedRecipe(recipe)
+	button.button_pressed = true
+	button.grab_focus()

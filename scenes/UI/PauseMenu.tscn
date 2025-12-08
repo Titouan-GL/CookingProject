@@ -21,13 +21,18 @@ corner_radius_bottom_left = 50
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73e60"]
-bg_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tp5j"]
+bg_color = Color(0.36282945, 0.36282948, 0.36282936, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avwb0"]
 bg_color = Color(0.55295557, 0.55295557, 0.55295545, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73e60"]
+bg_color = Color(0.29803923, 0.29803923, 0.29803923, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 
@@ -67,13 +72,6 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wclpb"]
-bg_color = Color(0.5339073, 0.4449017, 0.35158092, 1)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjydx"]
 bg_color = Color(0.6269082, 0.5303342, 0.42945617, 1)
 corner_radius_top_left = 50
@@ -81,7 +79,7 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dviva"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slthy"]
 bg_color = Color(0.5339073, 0.4449017, 0.35158092, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -117,14 +115,26 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 shadow_size = 10
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a2ayh"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgmlj"]
+bg_color = Color(0.6479912, 0.0038269723, 0.9721467, 1)
+border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
 
-[node name="PauseMenu" type="Control" node_paths=PackedStringArray("AgentIcons", "MinionsPanel", "RecipesPanel", "OptionsPanel", "AgentButton", "RecipesButton", "skeletonNameLabel", "speedBar", "dishesBar", "cuttingBar", "MixingBar", "ServingBar", "checkButtons", "recipeTexture", "recipeNameLabel", "defaultRecipeButton")]
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("AgentIcons", "MinionsPanel", "RecipesPanel", "OptionsPanel", "AgentButton", "RecipesButton", "OptionsButton", "skeletonNameLabel", "speedBar", "dishesBar", "cuttingBar", "MixingBar", "ServingBar", "checkButtons", "recipeTexture", "recipeNameLabel", "defaultRecipeButton", "firstOptionButton", "recipesButtons")]
 process_mode = 3
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fsae6")
@@ -134,6 +144,7 @@ RecipesPanel = NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel"
 OptionsPanel = NodePath("MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel")
 AgentButton = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer/MinionsButton")
 RecipesButton = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer/RecipesButton")
+OptionsButton = NodePath("MarginContainer/Panel/VBoxContainer/HBoxContainer/OptionsButton")
 agentButtonGroup = ExtResource("2_4r2wj")
 skeletonNameLabel = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/SkeletonName")
 speedBar = NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/GridContainer/SpeedBar")
@@ -150,6 +161,13 @@ checkButtons = {
 recipeTexture = NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/Panel/MarginContainer/RecipeTexture")
 recipeNameLabel = NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/Panel/RecipeNameLabel")
 defaultRecipeButton = NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/BurSteSalTomButton")
+firstOptionButton = NodePath("MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel/VBoxContainer/Retry")
+recipesButtons = {
+NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/BurSteSalTomButton"): 19,
+NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/BurSteSalButton"): 18,
+NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TomatoSoupButton"): 8,
+NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TomatoSaladButton"): 23
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -190,7 +208,7 @@ focus_neighbor_right = NodePath("../RecipesButton")
 focus_next = NodePath("../RecipesButton")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_6q0ex")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_73e60")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2tp5j")
 theme_override_styles/hover = SubResource("StyleBoxFlat_avwb0")
 theme_override_styles/focus = SubResource("StyleBoxFlat_73e60")
 toggle_mode = true
@@ -207,7 +225,7 @@ focus_next = NodePath("../OptionsButton")
 focus_previous = NodePath("../MinionsButton")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_6q0ex")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_73e60")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2tp5j")
 theme_override_styles/hover = SubResource("StyleBoxFlat_avwb0")
 theme_override_styles/focus = SubResource("StyleBoxFlat_73e60")
 toggle_mode = true
@@ -222,7 +240,7 @@ focus_neighbor_left = NodePath("../RecipesButton")
 focus_previous = NodePath("../RecipesButton")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = SubResource("StyleBoxFlat_6q0ex")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_73e60")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2tp5j")
 theme_override_styles/hover = SubResource("StyleBoxFlat_avwb0")
 theme_override_styles/focus = SubResource("StyleBoxFlat_73e60")
 toggle_mode = true
@@ -539,10 +557,11 @@ theme_override_constants/separation = 10
 [node name="BurSteSalTomButton" type="Button" parent="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../../../../../HBoxContainer/RecipesButton")
 theme_override_styles/normal = SubResource("StyleBoxFlat_h3ho0")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_wclpb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xjydx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xjydx")
-theme_override_styles/focus = SubResource("StyleBoxFlat_dviva")
+theme_override_styles/focus = SubResource("StyleBoxFlat_slthy")
 toggle_mode = true
 button_group = ExtResource("4_2tp5j")
 
@@ -562,9 +581,9 @@ expand_mode = 3
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_h3ho0")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_wclpb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xjydx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xjydx")
-theme_override_styles/focus = SubResource("StyleBoxFlat_dviva")
+theme_override_styles/focus = SubResource("StyleBoxFlat_slthy")
 toggle_mode = true
 button_group = ExtResource("4_2tp5j")
 
@@ -584,9 +603,9 @@ expand_mode = 3
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_h3ho0")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_wclpb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xjydx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xjydx")
-theme_override_styles/focus = SubResource("StyleBoxFlat_dviva")
+theme_override_styles/focus = SubResource("StyleBoxFlat_slthy")
 toggle_mode = true
 button_group = ExtResource("4_2tp5j")
 
@@ -606,9 +625,9 @@ expand_mode = 3
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_h3ho0")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_wclpb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xjydx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_xjydx")
-theme_override_styles/focus = SubResource("StyleBoxFlat_dviva")
+theme_override_styles/focus = SubResource("StyleBoxFlat_slthy")
 toggle_mode = true
 button_group = ExtResource("4_2tp5j")
 
@@ -688,6 +707,7 @@ theme_override_constants/separation = 24
 [node name="Retry" type="Button" parent="MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
+focus_neighbor_top = NodePath("../../../../HBoxContainer/OptionsButton")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -696,7 +716,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_tmgk4")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_1aao1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6dtaj")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_a2ayh")
+theme_override_styles/focus = SubResource("StyleBoxFlat_rgmlj")
 text = "  Retry level  "
 
 [node name="Menu" type="Button" parent="MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel/VBoxContainer"]
@@ -710,19 +730,18 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_tmgk4")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_1aao1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6dtaj")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_a2ayh")
+theme_override_styles/focus = SubResource("StyleBoxFlat_rgmlj")
 text = "  To Menu  "
 
+[connection signal="focus_entered" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/MinionsButton" to="." method="_on_minions_button_focus_entered"]
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/MinionsButton" to="." method="_on_minions_button_pressed"]
+[connection signal="focus_entered" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/RecipesButton" to="." method="_on_recipes_button_focus_entered"]
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/RecipesButton" to="." method="_on_recipes_button_pressed"]
+[connection signal="focus_entered" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/OptionsButton" to="." method="_on_options_button_focus_entered"]
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CutLabel/CutBox" to="." method="_on_cut_box_toggled"]
 [connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CleanLabel/CleanBox" to="." method="_on_clean_box_toggled"]
 [connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/MixLabel/MixBox" to="." method="_on_mix_box_toggled"]
 [connection signal="toggled" from="MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/ServeLabel/ServeBox" to="." method="_on_serve_box_toggled"]
-[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/BurSteSalTomButton" to="." method="_on_bur_ste_sal_tom_button_pressed"]
-[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/BurSteSalButton" to="." method="_on_bur_ste_sal_button_pressed"]
-[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TomatoSoupButton" to="." method="_on_tomato_soup_button_pressed"]
-[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TomatoSaladButton" to="." method="_on_tomato_salad_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/Panel/OptionsPanel/VBoxContainer/Menu" to="." method="_on_menu_pressed"]

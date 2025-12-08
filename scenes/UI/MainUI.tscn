@@ -51,9 +51,10 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_h4gv2"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("finalScoreLabel")]
 process_mode = 3
 script = ExtResource("1_h4gv2")
+finalScoreLabel = NodePath("EndScreen/VBoxContainer/FinalScoreLabel")
 
 [node name="EndScreen" type="Panel" parent="."]
 anchors_preset = 15
@@ -158,7 +159,7 @@ scale = Vector2(1.4, 1.4)
 text = "Score = 0"
 horizontal_alignment = 1
 
-[node name="PauseMenu" parent="." node_paths=PackedStringArray("checkButtons") instance=ExtResource("2_dfsol")]
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("checkButtons", "recipesButtons") instance=ExtResource("2_dfsol")]
 visible = false
 agentButtonGroup = SubResource("ButtonGroup_h4gv2")
 checkButtons = {
@@ -166,6 +167,12 @@ checkButtons = {
 5: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/ServeLabel/ServeBox"),
 7: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/MixLabel/MixBox"),
 8: NodePath("MarginContainer/Panel/VBoxContainer/Panel/MinionsPanel/HBoxContainer/Panel/MarginContainer2/VBoxContainer/HBoxContainer/CleanLabel/CleanBox")
+}
+recipesButtons = {
+NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/BurSteSalTomButton"): 19,
+NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/BurSteSalButton"): 18,
+NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TomatoSoupButton"): 8,
+NodePath("MarginContainer/Panel/VBoxContainer/Panel/RecipesPanel/HBoxContainer/MarginContainer/ScrollContainer/VBoxContainer/TomatoSaladButton"): 23
 }
 
 [connection signal="pressed" from="EndScreen/VBoxContainer/Menu" to="." method="_on_menu_pressed"]

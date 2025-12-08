@@ -43,7 +43,7 @@ func addAgentIcon(agent:Agent, mesh:Node3D, charName:String = "John Doe"):
 func endGame():
 	gameOverUI.visible = true
 	gameUI.visible = false
-	mainScoreLabel.text = "Score = " + str(int(roundf(displayedScore)))
+	finalScoreLabel.text = "Score = " + str(int(roundf(displayedScore)))
 	get_tree().paused = true
 	
 func _process(_delta):

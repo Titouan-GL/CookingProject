@@ -13,6 +13,7 @@
 [node name="Node3D" type="Node3D"]
 
 [node name="CanvasLayer" parent="." instance=ExtResource("1_o4kly")]
+recipesOption = Array[int]([8, 23, 19, 18])
 
 [node name="World" parent="." instance=ExtResource("2_len5r")]
 
@@ -53,21 +54,21 @@ ExtResource("7_c3wxk"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachme
 }
 
 [node name="agent2" parent="." node_paths=PackedStringArray("customOption") instance=ExtResource("25_5a81h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.812902, 0.6980016, -0.39073324)
-characterName = "Boneman the 5th"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.950857, 0.7900423, -0.43851733)
+characterName = "Steve"
 customOption = {
-ExtResource("5_82aft"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
-ExtResource("6_ruotm"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
-ExtResource("7_c3wxk"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
+ExtResource("5_82aft"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
+ExtResource("6_ruotm"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
+ExtResource("7_c3wxk"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
 }
 
 [node name="agent3" parent="." node_paths=PackedStringArray("customOption") instance=ExtResource("25_5a81h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.743429, 0.69800186, -2.45209)
-characterName = "Steve"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.713281, 0.6503396, 0.55624473)
+characterName = "Boneman the 5th"
 customOption = {
-ExtResource("5_82aft"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
-ExtResource("6_ruotm"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
-ExtResource("7_c3wxk"): NodePath("../agent/Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
+ExtResource("5_82aft"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/GlassesDecorations"),
+ExtResource("6_ruotm"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations"),
+ExtResource("7_c3wxk"): NodePath("Skeleton/Armature/GeneralSkeleton/BoneAttachment3D/MoustachesDecorations")
 }
 
 [editable path="World"]

@@ -9,6 +9,7 @@
 [node name="Node3D" type="Node3D"]
 
 [node name="CanvasLayer" parent="." instance=ExtResource("1_s7lbv")]
+recipesOption = Array[int]([8, 18, 23, 19])
 
 [node name="World" parent="." instance=ExtResource("2_4uwkd")]
 

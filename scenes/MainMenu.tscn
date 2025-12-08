@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://casimfksataxa"]
+[gd_scene load_steps=9 format=3 uid="uid://casimfksataxa"]
 
 [ext_resource type="Script" uid="uid://bdflealo8laxw" path="res://scripts/UI/main_menu.gd" id="1_2wh52"]
 [ext_resource type="Texture2D" uid="uid://sd67wfkiyj00" path="res://assets/textures/TitleMenu.png" id="1_yqorp"]
@@ -28,15 +28,13 @@ corner_radius_bottom_left = 20
 shadow_size = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wh52"]
-bg_color = Color(0.7359452, 0.0022996874, 0.9370591, 1)
+bg_color = Color(0.6479912, 0.0038269723, 0.9721467, 1)
 border_color = Color(0.4313402, 0.4313403, 0.43134, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 shadow_size = 10
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ykhv"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -82,6 +80,7 @@ theme_override_constants/separation = 30
 [node name="Tutorial" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+focus_neighbor_top = NodePath("../Exit")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -90,7 +89,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_2wh52")
 text = "  Tutorial 1  "
 
 [node name="Tutorial2" type="Button" parent="Control/VBoxContainer"]
@@ -104,7 +103,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_2wh52")
 text = "  Tutorial 2  "
 
 [node name="Tutorial3" type="Button" parent="Control/VBoxContainer"]
@@ -118,7 +117,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_2wh52")
 text = "  Tutorial 3  "
 
 [node name="Tutorial4" type="Button" parent="Control/VBoxContainer"]
@@ -132,7 +131,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_2wh52")
 text = "  Tutorial 4  "
 
 [node name="StartNoAgent" type="Button" parent="Control/VBoxContainer"]
@@ -146,7 +145,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_2wh52")
 text = "  Start (without agents)  "
 
 [node name="StartNoPlayer" type="Button" parent="Control/VBoxContainer"]
@@ -160,7 +159,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_2wh52")
 text = "  Start (without player)  "
 
 [node name="StartRegular" type="Button" parent="Control/VBoxContainer"]
@@ -174,12 +173,13 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
-text = "Start (with agents)"
+theme_override_styles/focus = SubResource("StyleBoxFlat_2wh52")
+text = "Start"
 
 [node name="Exit" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+focus_neighbor_bottom = NodePath("../Tutorial")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
@@ -188,7 +188,7 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_ukcvp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0ykhv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_2wh52")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_0ykhv")
+theme_override_styles/focus = SubResource("StyleBoxFlat_2wh52")
 text = "Exit"
 
 [node name="Label" type="Label" parent="Control"]

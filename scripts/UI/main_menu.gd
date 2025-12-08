@@ -1,6 +1,10 @@
 extends Control
 
+var firstButton:Button
 
+func _ready() -> void:
+	firstButton = $Control/VBoxContainer/Tutorial
+	firstButton.grab_focus()
 
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/NoAgentsScene.tscn")
